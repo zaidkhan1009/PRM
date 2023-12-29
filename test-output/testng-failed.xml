@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="utils.ExtentReportListener"/>
+  </listeners>
+  <test name="Test(failed)">
+    <classes>
+      <class name="tests.AppointmentAddEConsultTestCase">
+        <methods>
+          <include name="bookNewAppointmentEConsult"/>
+          <include name="editAppointmentWithInvaidHours"/>
+          <include name="configReport"/>
+          <include name="tearDown"/>
+          <include name="deleteAppointment"/>
+          <include name="editAppointment"/>
+          <include name="testSetup"/>
+          <include name="mandatoryFields"/>
+          <include name="setup"/>
+          <include name="appointmentEConsultPage"/>
+          <include name="validateAutoSelectPatientFromSuggestion"/>
+          <include name="verifyAlreadyBookedDoctorSlot"/>
+        </methods>
+      </class> <!-- tests.AppointmentAddEConsultTestCase -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
