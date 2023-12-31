@@ -1,0 +1,2 @@
+INFO    2023-11-20 13:32:56,510 [main] utils.TestLogs  - This is the information log
+ERROR   2023-11-20 13:32:56,510 [main] utils.TestLogs  - Here the error logs will be printed
