@@ -247,12 +247,13 @@ public class WorkDoneHistoryPageActions extends BaseClass{
 				By.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div/table/tbody/tr"));
 		boolean flag;
 		for (int i = 1; webElements.size() > i; i++) {
-			flag = driver.findElement(By.xpath("(//span[contains(text(),'" + treatment
-					+ "')]/../../following-sibling::div/table/tbody/tr[" + i + "]//td[@class='ng-binding'])[2]"))
+			flag = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
+					+ "')]/../../following-sibling::div/table/tbody/tr[" + i + "]/td[5]"))
 					.getText().trim().contains(clinic);
 			Assert.assertTrue(flag);
 		}
 	}
+	//span[contains(text(),'Pedo - Restoration - GIC/COMPOSITE- Small')]/../../following-sibling::div/table/tbody/tr[1]/td[5]
 
 	public static void checkSpentTime(String treatment, String timeSpent) {
 		BaseClass.waitForPageLoad();
@@ -263,8 +264,7 @@ public class WorkDoneHistoryPageActions extends BaseClass{
 
 	public static void checkStageTreatment(String treatment, String stages) {
 		BaseClass.waitForPageLoad();
-		WebElement web = driver.findElement(By.xpath("(//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//td[@class='ng-binding'])[3]"));
+		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'"+treatment+"')]/../../following-sibling::div//td[@class='ng-binding']"));
 		Assert.assertTrue(web.getText().trim().contains(stages));
 	}
 

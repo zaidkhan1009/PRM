@@ -181,7 +181,7 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		try {
 			Thread.sleep(4000);
-			WebElement web = driver.findElement(By.xpath("//a[contains(text(),'" + patient + "')]"));
+			WebElement web = driver.findElement(By.xpath("//a/span/strong[contains(text(),'"+patient+"')]"));
 			BaseClass.hoverOnElement(web);
 			web.click();
 		} catch (InterruptedException e) {
@@ -191,6 +191,7 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void covidStatusUpdate() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getCovidUpdateSuccessMsg());
 		Assert.assertTrue(checkWebElementDisplayed(appointmentPage.getCovidUpdateSuccessMsg()));
 	}
@@ -199,6 +200,7 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getGreenCovidPatient());
 		Assert.assertTrue(checkWebElementDisplayed(appointmentPage.getGreenCovidPatient()));
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 	public static void patientCovidRed() {
@@ -208,6 +210,7 @@ public class AppointmentAddPageActions extends BaseClass {
 	}
 
 	public static void openCovidForm() {
+		BaseClass.waitForModalOverlayToDisappear();
 		try {
 			BaseClass.waitForElementToBeClickable(appointmentPage.getCovidFormBtn());
 			appointmentPage.getCovidFormBtn().click();
@@ -243,8 +246,16 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getCovidFlagAlertMsg());
 		Assert.assertTrue(appointmentPage.getCovidFlagAlertMsg().getText()
-				.contains("Appointment Booking is blocked for (red) status till"));
+				.contains("Appointment booking is currently disabled for the selected patient."));
 	}
+	
+	public static void covidAlertMsgRedAutoSuggestion() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(appointmentPage.getCovidFlagAlertMsg());
+		Assert.assertTrue(appointmentPage.getCovidFlagAlertMsg().getText()
+				.contains("Appointment Booking is blocked for"));
+	}
+	 
 
 	public static void clickOnTentative() {
 		BaseClass.waitForPageLoad();
@@ -698,10 +709,13 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void clickOnSaveBtn() {
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.WaitTillElementIsPresent(appointmentPage.getSaveBtn());
+		BaseClass.waitForElementToDisappear(By.xpath("//div[text()='Patient Covid-19 Declaration saved successfully!']"));
+		BaseClass.waitForElementToBeClickable(appointmentPage.getSaveBtn());
 		appointmentPage.getSaveBtn().click();
-		BaseClass.waitForPageLoad();
-//        loginPage.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageToBecomeActive();
+	
+//		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
 	}
 
 //    public void clickOnSaveBtn() {

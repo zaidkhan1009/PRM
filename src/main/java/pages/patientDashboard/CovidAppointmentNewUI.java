@@ -9,7 +9,14 @@ public class CovidAppointmentNewUI {
     //web element of covid-19 form
     @FindBy(xpath = "//h4[text()='Covid 19 Declaration']")
     private WebElement headerCovidForm;
-    @FindBy(id = "selectedPatientName")
+    
+    @FindBy(xpath = "//h4[text()='Covid-19 Declaration']")
+    private WebElement headerCovidFormPD;
+    
+    public WebElement getHeaderCovidFormPD() {
+		return headerCovidFormPD;
+	}
+	@FindBy(id = "selectedPatientName")
     private WebElement patientName;
     @FindBy(id = "selectedPatientMobile")
     private WebElement patientMobile;
@@ -17,7 +24,19 @@ public class CovidAppointmentNewUI {
     private WebElement saveCovidFormBtn;
     @FindBy(xpath = "//span[@class='cmnicons cncl-mdl']")
     private WebElement cancelCovidFormBtn;
-    @FindBy(id = "infDiseaseFormReset")
+    @FindBy(xpath = "(//span[@class='cmnicons cncl-mdl'])[14]")
+    private WebElement cancelCovidFormBtnPD;
+    
+    @FindBy(xpath = "//button[@id='infDiseaseFormSave']//span[@class='cmnicons sv-mdl']")
+    private WebElement saveCovidFormBtnPD;
+    
+    public WebElement getSaveCovidFormBtnPD() {
+		return saveCovidFormBtnPD;
+	}
+	public WebElement getCancelCovidFormBtnPD() {
+		return cancelCovidFormBtnPD;
+	}
+	@FindBy(id = "infDiseaseFormReset")
     private WebElement resetCovidFormBtn;
     @FindBy(id = "infDiseaseFormPrint")
     private WebElement printCovidFormBtn;

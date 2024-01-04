@@ -119,7 +119,9 @@ public class AppointmentsListPageActions extends BaseClass {
     }
 
     public static void openCovidForm() {
+    	BaseClass.waitForElementToDisappear(By.xpath("//div[@class = 'modal overlay show']"));
         BaseClass.waitForPageLoad();
+        BaseClass.waitForSpinnerToDisappear();
         BaseClass.waitForElementToBeClickable(appointmentsListPage.getCovidStatus());
         appointmentsListPage.getCovidStatus().click();
     }

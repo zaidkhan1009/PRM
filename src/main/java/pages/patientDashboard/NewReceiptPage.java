@@ -76,8 +76,8 @@ public class NewReceiptPage {
 	@FindBy(xpath = "(//i[text()='Save'])[1]")
 	private WebElement saveBtn;
 
-	@FindBy(className= "cmnicons srch")
-	private WebElement searchBtn;
+//	@FindBy(className= "cmnicons srch")
+//	private WebElement searchBtn;
 
 	@FindBy(xpath = "//a[@class='buttonAdd']")
 	private WebElement addBtn;
@@ -151,7 +151,7 @@ public class NewReceiptPage {
 	private WebElement actionColumnName;
 	@FindBy(xpath = "(//span[@class='nomrgn pdLR20 ng-binding'])[1]")
 	private WebElement totalReceiptsAmount;
-	@FindBy(xpath = "(//span[@class='nomrgn pdLR20 ng-binding'])[2]")
+	@FindBy(xpath = "(//span[@class='separator_title'])[1]")
 	private WebElement remainingAmountDueInvoice;
 	@FindBy(xpath = "//div[contains(text(),'Remaining Amount Due on Invoice(s)')]/following-sibling::div/a[contains(text(),'Payment')]")
 	private WebElement applyPaymentButton;
@@ -295,9 +295,9 @@ public class NewReceiptPage {
 		return saveBtn;
 	}
 
-	public WebElement getSearchBtn() {
-		return searchBtn;
-	}
+//	public WebElement getSearchBtn() {
+//		return searchBtn;
+//	}
 
 	public WebElement getAddBtn() {
 		return addBtn;

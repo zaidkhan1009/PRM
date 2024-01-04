@@ -12,7 +12,7 @@ import pageActions.doctorDashboard.PatientRegistrationPageActions;
 import pageActions.patientDashboard.AppointmentsListPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.CovidAppointmentNewUIPageActions;
-import pageActions.patientDashboard.CovidDeclarationFormPageActions;
+import pageActions.patientDashboard.CovidAppointmentNewUIPageActions;
 import pageActions.patientDashboard.OralExamsPageActions;
 import pageActions.patientDashboard.TreatmentPlanListingPageActions;
 import pageActions.patientDashboard.TreatmentPlansPageActions;
@@ -86,7 +86,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 	@Test(priority = 1)
 	public void appointmentCovidPatient() {
 		logger.log(Status.PASS, APPOINTMENT_COVID_PATIENT);
-		CommonPageActions.selectClinicFrmHeader("Amanora");
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.covidOption();
 		AppointmentAddPageActions.enterPatientName(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
@@ -235,6 +235,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 		CovidAppointmentNewUIPageActions.errorMsgDisplayed();
 		CovidAppointmentNewUIPageActions.closeCovidForm();
 		Assert.assertTrue(CommonPageActions.verification().contains("Appointment"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
@@ -251,6 +252,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 	@Test(priority = 2)
 	public void bookAppointmentGreenFlag() {
 		logger.log(Status.PASS, BOOK_APPOINTMENT_GREEN_FLAG);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.enterPatientName(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		AppointmentAddPageActions.enterMobileNumber(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
@@ -282,6 +284,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 		AppointmentAddPageActions.clickOnSaveBtn();
 		CommonPageActions.selectClinicFrmHeader(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 5));
 		DoctorDashBoardPageActions.clickOnAppListBtn();
+		AppointmentsLisitngPageActions.clickOnLastPage();
 		AppointmentsLisitngPageActions.appointmentStatus(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1), "New");
 		AppointmentsLisitngPageActions.appointmentType(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1),
 				"Confirmed");
@@ -291,49 +294,51 @@ public class AppointmentCovidTestcase extends BaseClass {
 		AppointmentsLisitngPageActions.editButton(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		AppointmentsLisitngPageActions.deleteButton(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		AppointmentsLisitngPageActions.openGreenFlag(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.selectedFirstQuestion("None of Them");
-		CovidDeclarationFormPageActions.noOptionSelected(2);
-		CovidDeclarationFormPageActions.noOptionSelected(3);
-		CovidDeclarationFormPageActions.noOptionSelected(4);
-		CovidDeclarationFormPageActions.noOptionSelected(5);
-		CovidDeclarationFormPageActions.noOptionSelected(6);
-		CovidDeclarationFormPageActions.noOptionSelected(7);
-		CovidDeclarationFormPageActions.noOptionSelected(8);
-		CovidDeclarationFormPageActions.noOptionSelected(9);
-		CovidDeclarationFormPageActions.closeCovidForm();
+		CovidAppointmentNewUIPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		CovidAppointmentNewUIPageActions.selectedFirstQuestion("None of Them");
+		CovidAppointmentNewUIPageActions.noOptionSelected(2);
+		CovidAppointmentNewUIPageActions.noOptionSelected(3);
+		CovidAppointmentNewUIPageActions.noOptionSelected(4);
+		CovidAppointmentNewUIPageActions.noOptionSelected(5);
+		CovidAppointmentNewUIPageActions.noOptionSelected(6);
+		CovidAppointmentNewUIPageActions.noOptionSelected(7);
+		CovidAppointmentNewUIPageActions.noOptionSelected(8);
+		CovidAppointmentNewUIPageActions.noOptionSelected(9);
+		CovidAppointmentNewUIPageActions.closeCovidForm();
 		AppointmentsLisitngPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientRegistrationPageActions.selectGenderMale("Male");
 		PatientRegistrationPageActions.enterAlterContactName(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		PatientRegistrationPageActions.enterAlternateMobileNO(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		PatientRegistrationPageActions.enterAge("27");
 		PatientRegistrationPageActions.clickOnApproveSave();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.openCovidForm();
-		CovidDeclarationFormPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.selectedFirstQuestion("None of Them");
-		CovidDeclarationFormPageActions.noOptionSelected(2);
-		CovidDeclarationFormPageActions.noOptionSelected(3);
-		CovidDeclarationFormPageActions.noOptionSelected(4);
-		CovidDeclarationFormPageActions.noOptionSelected(5);
-		CovidDeclarationFormPageActions.noOptionSelected(6);
-		CovidDeclarationFormPageActions.noOptionSelected(7);
-		CovidDeclarationFormPageActions.noOptionSelected(8);
-		CovidDeclarationFormPageActions.noOptionSelected(9);
-		CovidDeclarationFormPageActions.closeCovidForm();
+		CovidAppointmentNewUIPageActions.patientNameCovidFormPD(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		CovidAppointmentNewUIPageActions.selectedFirstQuestion("None of Them");
+		CovidAppointmentNewUIPageActions.noOptionSelected(2);
+		CovidAppointmentNewUIPageActions.noOptionSelected(3);
+		CovidAppointmentNewUIPageActions.noOptionSelected(4);
+		CovidAppointmentNewUIPageActions.noOptionSelected(5);
+		CovidAppointmentNewUIPageActions.noOptionSelected(6);
+		CovidAppointmentNewUIPageActions.noOptionSelected(7);
+		CovidAppointmentNewUIPageActions.noOptionSelected(8);
+		CovidAppointmentNewUIPageActions.noOptionSelected(9);
+		CovidAppointmentNewUIPageActions.closeCovidFormPD();
 		PatientDashboardPageActions.clickOnAppList();
 		AppointmentsListPageActions.openCovidForm();
-		CovidDeclarationFormPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.selectedFirstQuestion("None of Them");
-		CovidDeclarationFormPageActions.noOptionSelected(2);
-		CovidDeclarationFormPageActions.noOptionSelected(3);
-		CovidDeclarationFormPageActions.noOptionSelected(4);
-		CovidDeclarationFormPageActions.noOptionSelected(5);
-		CovidDeclarationFormPageActions.noOptionSelected(6);
-		CovidDeclarationFormPageActions.noOptionSelected(7);
-		CovidDeclarationFormPageActions.noOptionSelected(8);
-		CovidDeclarationFormPageActions.noOptionSelected(9);
-		CovidDeclarationFormPageActions.closeCovidForm();
-		Assert.assertTrue(CommonPageActions.verification().contains("Appointments List"));
+		CovidAppointmentNewUIPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		CovidAppointmentNewUIPageActions.selectedFirstQuestion("None of Them");
+		CovidAppointmentNewUIPageActions.noOptionSelected(2);
+		CovidAppointmentNewUIPageActions.noOptionSelected(3);
+		CovidAppointmentNewUIPageActions.noOptionSelected(4);
+		CovidAppointmentNewUIPageActions.noOptionSelected(5);
+		CovidAppointmentNewUIPageActions.noOptionSelected(6);
+		CovidAppointmentNewUIPageActions.noOptionSelected(7);
+		CovidAppointmentNewUIPageActions.noOptionSelected(8);
+		CovidAppointmentNewUIPageActions.noOptionSelected(9);
+		CovidAppointmentNewUIPageActions.closeCovidForm();
+		Assert.assertTrue(CommonPageActions.verification().contains("Appointment/Event Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
@@ -346,21 +351,28 @@ public class AppointmentCovidTestcase extends BaseClass {
 	 * and oximeter and start the treatment from treatment input list and treatment
 	 * plan listing
 	 */
-	@Test(priority = 3, dependsOnMethods = "bookAppointmentGreenFlag")
+//	@Test(priority = 3, dependsOnMethods = "bookAppointmentGreenFlag")
+	@Test(priority = 3)
+
 	public void treatmentGreenPatient() {
 		logger.log(Status.PASS, TREATMENT_GREEN_PATIENT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
-		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
-				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		OralExamsPageActions.clickOnTeethImage("Adult", "24");
 		TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
-		TreatmentPlansPageActions.clickOnConsultationXRays();
-		TreatmentPlansPageActions.clickOnTreatments(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 1));
+		TreatmentPlansPageActions.clickOnPedo();
 		TreatmentPlansPageActions.clickOnTreatments(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 2, 1));
+//		TreatmentPlansPageActions.clickOnConsultationXRays();
+		TreatmentPlansPageActions.clickOnTreatments(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 1));
 		TreatmentPlansPageActions.saveTreatment();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		TreatmentPlansPageActions.checkedInputListDataName();
@@ -381,26 +393,26 @@ public class AppointmentCovidTestcase extends BaseClass {
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.openCovidForm();
-		CovidDeclarationFormPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.selectedFirstQuestion("None of Them");
-		CovidDeclarationFormPageActions.noOptionSelected(2);
-		CovidDeclarationFormPageActions.noOptionSelected(3);
-		CovidDeclarationFormPageActions.noOptionSelected(4);
-		CovidDeclarationFormPageActions.noOptionSelected(5);
-		CovidDeclarationFormPageActions.noOptionSelected(6);
-		CovidDeclarationFormPageActions.noOptionSelected(7);
-		CovidDeclarationFormPageActions.noOptionSelected(8);
-		CovidDeclarationFormPageActions.noOptionSelected(9);
-		CovidDeclarationFormPageActions.patientTemperature();
-		CovidDeclarationFormPageActions.patientOximeter();
-		CovidDeclarationFormPageActions.setPatientTemperature("97");
-		CovidDeclarationFormPageActions.setPatientOximeter("100");
-		CovidDeclarationFormPageActions.saveCovidForm();
+		CovidAppointmentNewUIPageActions.patientNameCovidFormPD(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		CovidAppointmentNewUIPageActions.selectedFirstQuestion("None of Them");
+		CovidAppointmentNewUIPageActions.noOptionSelected(2);
+		CovidAppointmentNewUIPageActions.noOptionSelected(3);
+		CovidAppointmentNewUIPageActions.noOptionSelected(4);
+		CovidAppointmentNewUIPageActions.noOptionSelected(5);
+		CovidAppointmentNewUIPageActions.noOptionSelected(6);
+		CovidAppointmentNewUIPageActions.noOptionSelected(7);
+		CovidAppointmentNewUIPageActions.noOptionSelected(8);
+		CovidAppointmentNewUIPageActions.noOptionSelected(9);
+		CovidAppointmentNewUIPageActions.patientTemperature();
+		CovidAppointmentNewUIPageActions.patientOximeter();
+		CovidAppointmentNewUIPageActions.setPatientTemperature("97");
+		CovidAppointmentNewUIPageActions.setPatientOximeter("100");
+		CovidAppointmentNewUIPageActions.saveCovidFormPD();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.openCovidForm();
-		CovidDeclarationFormPageActions.checkPatientTemperature("97");
-		CovidDeclarationFormPageActions.checkPatientOximeter("100");
-		CovidDeclarationFormPageActions.closeCovidForm();
+		CovidAppointmentNewUIPageActions.checkPatientTemperature("97");
+		CovidAppointmentNewUIPageActions.checkPatientOximeter("100");
+		CovidAppointmentNewUIPageActions.closeCovidFormPD();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions
 				.selectTreatmentInTreatmentListPage(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
@@ -412,17 +424,23 @@ public class AppointmentCovidTestcase extends BaseClass {
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * verify the treatment details at the work done add page and work done history
 	 * page
 	 */
-	@Test(priority = 4, dependsOnMethods = "treatmentGreenPatient")
+//	@Test(priority = 4, dependsOnMethods = "treatmentGreenPatient")
+	@Test(priority = 4)
 	public void workDoneAddPage() {
 		logger.log(Status.PASS, WORK_DONE_ADD_PAGE);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		PatientDashboardPageActions.hideDueWarningPopup();
@@ -437,7 +455,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 		WorksDonePageActions.checkSourceNo(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "24");
 		WorksDonePageActions.checkedStatusTreatment(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "Started");
 		WorksDonePageActions.checkProgressDropDown(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
-		WorksDonePageActions.checkSuspededBtn(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
+		WorksDonePageActions.checkSuspededBtn(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));            //commented for consultation trt bcz treatment selected doesn't have stages and therefore suspend btn
 		WorksDonePageActions.checkDataName(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
 		WorksDonePageActions.checkBox(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
 		WorksDonePageActions.modifiedDate(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), TODAY_DATE);
@@ -470,34 +488,43 @@ public class AppointmentCovidTestcase extends BaseClass {
 		WorkDoneHistoryPageActions.checkedRemarks(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "No Remarks");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * Changing the work done stages and checked All new updated data at work done
 	 * add page and work done history page
 	 */
-	@Test(priority = 5, dependsOnMethods = "workDoneAddPage")
+//	@Test(priority = 5, dependsOnMethods = "workDoneAddPage")
+	@Test(priority = 5)
 	public void treatmentStageInProgress() {
 		logger.log(Status.PASS, TREATMENT_STAGE_INPROGRESS);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
-		WorksDonePageActions.selectDoctor(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
-				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
-		WorksDonePageActions.selectTime(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "15");
-		WorksDonePageActions.enterRemarks(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "it is for testing");
-		WorksDonePageActions.selectStages(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "In-Progress");
-		WorksDonePageActions.clickOnAdd(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
-		WorksDonePageActions.closeAppoitmentPopup();
-		WorksDonePageActions.checkedStatusTreatment(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
-				"In-Progress");
-		WorksDonePageActions.modifiedDate(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), TODAY_DATE);
-		WorksDonePageActions.checkDoctorTreated(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
-				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
+		
+//		WorksDonePageActions.checkDoctorSelected(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
+//				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
+//		WorksDonePageActions.selectTime(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "15");
+//		WorksDonePageActions.enterRemarks(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "it is for testing");
+//		WorksDonePageActions.selectStages(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "In-Progress");
+//		WorksDonePageActions.clickOnAdd(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
+//		WorksDonePageActions.closeAppoitmentPopup();
+//		WorksDonePageActions.checkedStatusTreatment(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
+//				"In-Progress");
+//		WorksDonePageActions.modifiedDate(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), TODAY_DATE);
+//		WorksDonePageActions.checkDoctorSelected(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
+//				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
 		WorksDonePageActions.checkSpentTime(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "15");
 		WorksDonePageActions.checkStatus(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "In-Progress");
 		WorksDonePageActions.checkRemarksWorkDoneAddPage(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
@@ -522,22 +549,32 @@ public class AppointmentCovidTestcase extends BaseClass {
 				"it is for testing");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * changing the stages of the treatment to complete and checked all new changes
 	 * at the work done history and work done add
 	 */
-	@Test(priority = 6, dependsOnMethods = "treatmentStageInProgress")
+//	@Test(priority = 6, dependsOnMethods = "treatmentStageInProgress")
+	@Test(priority = 6)
 	public void treatmentStageComplete() {
 		logger.log(Status.PASS, TREATMENT_STAGE_COMPLETE);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
+//		WorksDonePageActions.clickWorkDoneHistory();
+		WorksDonePageActions.completePaymentToCompleteTrt();
 		WorksDonePageActions.selectDoctor(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
 		WorksDonePageActions.selectTime(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "30");
@@ -567,19 +604,28 @@ public class AppointmentCovidTestcase extends BaseClass {
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
+
 	}
 
 	/**
 	 * validated all cases of the follow up modal and checked same at work done
 	 * history and work done add
 	 */
-	@Test(priority = 7, dependsOnMethods = "treatmentStageComplete")
+//	@Test(priority = 7, dependsOnMethods = "treatmentStageComplete")
+	@Test(priority = 7)
 	public void followUp() {
 		logger.log(Status.PASS, FOLLOW_UP);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneHistory();
 		WorkDoneHistoryPageActions.checkedStatusTreatment(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
@@ -622,6 +668,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
@@ -630,37 +677,44 @@ public class AppointmentCovidTestcase extends BaseClass {
 	 * listing and also checking start should not be present at the treatment plan
 	 * listing
 	 */
-	@Test(priority = 8, dependsOnMethods = "bookAppointmentGreenFlag")
+//	@Test(priority = 8, dependsOnMethods = "bookAppointmentGreenFlag")
+	@Test(priority = 8)
 	public void convertingGreenToRedFlag() {
 		logger.log(Status.PASS, CONVERTING_GREEN_TO_RED_FLAG);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.openCovidForm();
-		CovidDeclarationFormPageActions.patientNameCovidForm(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
-		CovidDeclarationFormPageActions.selectedFirstQuestion("None of Them");
-		CovidDeclarationFormPageActions.noOptionSelected(2);
-		CovidDeclarationFormPageActions.noOptionSelected(3);
-		CovidDeclarationFormPageActions.noOptionSelected(4);
-		CovidDeclarationFormPageActions.noOptionSelected(5);
-		CovidDeclarationFormPageActions.noOptionSelected(6);
-		CovidDeclarationFormPageActions.noOptionSelected(7);
-		CovidDeclarationFormPageActions.noOptionSelected(8);
-		CovidDeclarationFormPageActions.noOptionSelected(9);
-		CovidDeclarationFormPageActions.checkPatientTemperature("97");
-		CovidDeclarationFormPageActions.checkPatientOximeter("100");
-		CovidDeclarationFormPageActions.setPatientTemperature("100");
-		CovidDeclarationFormPageActions.setPatientOximeter("90");
-		CovidDeclarationFormPageActions.saveCovidForm();
+		CovidAppointmentNewUIPageActions.patientNameCovidFormPD(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		CovidAppointmentNewUIPageActions.selectedFirstQuestion("None of Them");
+		CovidAppointmentNewUIPageActions.noOptionSelected(2);
+		CovidAppointmentNewUIPageActions.noOptionSelected(3);
+		CovidAppointmentNewUIPageActions.noOptionSelected(4);
+		CovidAppointmentNewUIPageActions.noOptionSelected(5);
+		CovidAppointmentNewUIPageActions.noOptionSelected(6);
+		CovidAppointmentNewUIPageActions.noOptionSelected(7);
+		CovidAppointmentNewUIPageActions.noOptionSelected(8);
+		CovidAppointmentNewUIPageActions.noOptionSelected(9);
+		CovidAppointmentNewUIPageActions.checkPatientTemperature("97");
+		CovidAppointmentNewUIPageActions.checkPatientOximeter("100");
+		CovidAppointmentNewUIPageActions.setPatientTemperature("100");
+		CovidAppointmentNewUIPageActions.setPatientOximeter("90");
+		CovidAppointmentNewUIPageActions.saveCovidFormPD();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.checkPatientRedFlag();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		OralExamsPageActions.clickOnTeethImage("Adult", "24");
 		TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
-		TreatmentPlansPageActions.clickOnConsultationXRays();
+		TreatmentPlansPageActions.clickOnPedo();
 		TreatmentPlansPageActions.clickOnTreatments(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 1));
 		TreatmentPlansPageActions.saveTreatment();
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -677,19 +731,27 @@ public class AppointmentCovidTestcase extends BaseClass {
 		AppointmentAddPageActions.clickOnSaveBtn();
 		AppointmentAddPageActions.covidAlertMsgRed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Add Appointment"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * validated retreat for the treatment scenario at the both page work done
 	 * history and work done add page
 	 */
-	@Test(priority = 9, dependsOnMethods = "treatmentStageComplete")
+//	@Test(priority = 9, dependsOnMethods = "treatmentStageComplete")
+	@Test(priority = 9)
 	public void reTreatRedCovidPatient() {
 		logger.log(Status.PASS, RE_TREAT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2));
 		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
 		CommonPageActions.clickOnPatient(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneHistory();
 		WorkDoneHistoryPageActions.followUpBtnRedCovidFlag(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
@@ -710,17 +772,20 @@ public class AppointmentCovidTestcase extends BaseClass {
 		WorkDoneHistoryPageActions.errorMessage("Select Stage");
 		WorkDoneHistoryPageActions.selectStage("In-Progress");
 		WorkDoneHistoryPageActions.saveRetreatDetails();
+//		PatientDashboardPageActions.clickOnWorkDoneAdd();	
 		WorksDonePageActions.checkedStatusTreatment(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
 				"In-Progress");
 		WorksDonePageActions.modifiedDate(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), TODAY_DATE);
-		WorksDonePageActions.checkDoctorTreated(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
+		WorksDonePageActions.checkDoctorSelected(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
 				ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
 		WorksDonePageActions.checkSpentTime(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "0");
-		WorksDonePageActions.checkStatus(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "In-Progress: Re-Treat");
+		WorksDonePageActions.checkStatus(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2), "In-Progress: Re-Treat");  //In-Progress: Re-Treat
 		WorksDonePageActions.checkRemarksWorkDoneAddPage(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2),
-				"re-treat testing");
+				"re-treat testing"); //re-treat testing
 		WorksDonePageActions.workDoneAddBtnRedCovidPatient(ExcelReader.readExcelData(FILE_PATH, TREATMENT_SHEET, 1, 2));
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		CommonPageActions.backTODoctorDashboard();
+
 	}
 
 	/**
@@ -728,9 +793,11 @@ public class AppointmentCovidTestcase extends BaseClass {
 	 * suggestion validated appointment should not be book for red covid flag
 	 * patient
 	 */
-	@Test(priority = 10, dependsOnMethods = "bookAppointmentGreenFlag")
+//	@Test(priority = 10, dependsOnMethods = "bookAppointmentGreenFlag")
+	@Test(priority = 10)
 	public void appointmentRedCovidPatient() {
 		logger.log(Status.PASS, APPOINTMENT_RED_COVID_PATIENT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.enterPatientName(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 1));
 		AppointmentAddPageActions
@@ -739,7 +806,7 @@ public class AppointmentCovidTestcase extends BaseClass {
 		AppointmentAddPageActions
 				.selectDoctorFromDropdown(ExcelReader.readExcelData(FILE_PATH, APPOINTMENT_SHEET, 1, 9));
 		AppointmentAddPageActions.clickOnSaveBtn();
-		AppointmentAddPageActions.covidAlertMsgRed();
+		AppointmentAddPageActions.covidAlertMsgRedAutoSuggestion();
 		Assert.assertTrue(CommonPageActions.verification().contains("Appointment"));
 	}
 }

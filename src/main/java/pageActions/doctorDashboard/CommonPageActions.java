@@ -95,6 +95,7 @@ public class CommonPageActions extends BaseClass {
     
     
     public static void selectClinicFrmHeader(String clinic) {
+    	BaseClass.waitForPageLoad();
     	BaseClass.waitForSpinnerToDisappear();
     	BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
         BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
@@ -186,6 +187,7 @@ public class CommonPageActions extends BaseClass {
             Thread.sleep(4000);
             BaseClass.waitForUIWidgetOverlayToDisappear();
             commonPage.getSearchBtn().click();
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -218,8 +220,9 @@ public class CommonPageActions extends BaseClass {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+      //td[contains(text(),'1111111113')]/preceding-sibling::td[1]//a[contains(text(),'01dec-4363')]
            WebElement patientElement = driver.findElement(By.xpath("//td[contains(text(),'" + mobile_no
-                    + "')]/preceding-sibling::td//a[contains(text(),'" + patient_name + "')]"));
+                    + "')]/preceding-sibling::td[1]//a[contains(text(),'" + patient_name + "')]"));
            BaseClass.waitForElementVisibility(patientElement, 4000);
            BaseClass.waitForModalOverlayToDisappear();
            patientElement.click();

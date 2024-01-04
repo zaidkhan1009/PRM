@@ -9,7 +9,16 @@
 			<class name="tests.AppointmentCovidTestcase">
 				<methods> 
 					<include name="appointmentCovidPatient" />
-					
+					<include name="bookAppointmentGreenFlag" /> 
+					<include name="treatmentGreenPatient" />
+					<include name="workDoneAddPage" />
+					<include name="treatmentStageInProgress" />
+					<include name="treatmentStageComplete"/>
+					<include name="followUp"/>
+					<include name="convertingGreenToRedFlag"/>
+					<include name="reTreatRedCovidPatient"/>
+					<include name="appointmentRedCovidPatient"/>
+			
 				</methods>
 			</class>
 		</classes>

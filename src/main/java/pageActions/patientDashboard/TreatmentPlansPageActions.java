@@ -78,8 +78,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForPageLoad();
 		try {
 			Thread.sleep(5000);
-			WebElement web = driver.findElement(
-					By.xpath("//*[text()[contains(.,'" + treatment + "')]]/../preceding-sibling::td//label"));
+			WebElement web = driver.findElement(By.xpath("//*[text()[contains(.,'" + treatment + "')]]/../preceding-sibling::td//label"));
 			web.click();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

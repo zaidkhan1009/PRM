@@ -1,5 +1,6 @@
 package pageActions.doctorDashboard;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -23,6 +24,7 @@ public class PatientDashboardPageActions extends BaseClass {
 
 	public static void checkPatientRedFlag() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getRedFlag());
 		Assert.assertTrue(checkedWebElementDisplayed(patientDashboardPage.getRedFlag()));
 	}
@@ -39,6 +41,7 @@ public class PatientDashboardPageActions extends BaseClass {
 
 	public static void openCovidForm() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getGreenFlagEdit());
 		patientDashboardPage.getGreenFlagEdit().click();
 	}
@@ -52,6 +55,7 @@ public class PatientDashboardPageActions extends BaseClass {
 		}
 		if (patientDashboardPage.getAmountDuePopup().isDisplayed()) {
 			patientDashboardPage.getDueWarningYes().click();
+BaseClass.waitForSpinnerToDisappear();
 		}
 	}
 
@@ -137,9 +141,12 @@ public class PatientDashboardPageActions extends BaseClass {
 	}
 
 	public static void clickOnWorkDoneAdd() {
+		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal-backdrop fade']"));
+		BaseClass.waitForPageLoad();
+
 		BaseClass.waitForElementVisibility(patientDashboardPage.getWorkDoneAddBtn(), 4000);
 		patientDashboardPage.getWorkDoneAddBtn().click();
-		BaseClass.waitForSpinnerToDisappear();
+//		BaseClass.waitForSpinnerToDisappear();
 	}
 
 //	public static void clickOnWorkDoneAdd() {
@@ -195,7 +202,7 @@ public class PatientDashboardPageActions extends BaseClass {
 	public static void clickOnTreatmentPlanAddBtn() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientDashboardPage.getTreatmentPlanAddBtn(), 4000);
-		BaseClass.waitForModalBackdropToDisappear();
+//		BaseClass.waitForModalBackdropToDisappear();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {

@@ -678,6 +678,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAlternateMobileNO(String alterNateMoblieNum) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientRegistrationPage.getAlternateContact(), 5000);
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAlternateContact());
 		patientRegistrationPage.getAlternateContact().clear();
@@ -695,6 +696,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAlterContactName(String alterNateContactName) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAlternateName());
 		patientRegistrationPage.getAlternateName().clear();
 		patientRegistrationPage.getAlternateName().sendKeys(alterNateContactName);
@@ -702,6 +704,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAge(String Age) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAge());
 		patientRegistrationPage.getAge().clear();
 		patientRegistrationPage.getAge().sendKeys(Age);

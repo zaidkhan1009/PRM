@@ -51,7 +51,7 @@ public class WorkDoneHistoryPage {
 	private WebElement headerNotesFollowup;
 	@FindBy(id = "notes")
 	private WebElement notesFollowUp;
-	@FindBy(xpath = "//span[text()='768 characters left']")
+	@FindBy(xpath = "//span[text()='768 character(s) left']")
 	private WebElement maxCharLimitNotesMsg;
 	@FindBy(xpath = "//textarea[@id='notes']/../..//div[text()='Enter Notes']")
 	private WebElement errorMsgNote;

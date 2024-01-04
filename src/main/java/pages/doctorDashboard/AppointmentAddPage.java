@@ -136,9 +136,9 @@ public class AppointmentAddPage {
     private WebElement patientCovidStatus;
     @FindBy(xpath = "//span[text()='Covid-19 Declaration']")
     private WebElement headerCovid;
-    @FindBy(xpath = "//span[@class='ng-binding ng-scope']")
+    @FindBy(xpath = "//div[@class='alert ng-binding ng-isolate-scope alert-danger alert-dismissable']")
     private WebElement CovidFlagAlertMsg;
-    @FindBy(xpath = "//div[@id='patient_infDses_flag']//span[contains(@class,'grey')]")
+    @FindBy(xpath = "//div[@id='patient_infDses_flag']//div[contains(@class,'grey')]")
     private WebElement greyFlag;
     @FindBy(xpath = "//div[@id='patient_infDses_flag']//h1[text()='Not Available']")
     private WebElement notAvailableGrey;
@@ -146,9 +146,9 @@ public class AppointmentAddPage {
     private WebElement covidFormBtn;
     @FindBy(xpath = "//h1[text()='Treatment Allowed']")
     private WebElement greenCovidPatient;
-    @FindBy(xpath = "//span[text()='Patient Covid-19 Declaration saved successfully!']")
+    @FindBy(xpath = "//div[text()='Patient Covid-19 Declaration saved successfully!']")
     private WebElement covidUpdateSuccessMsg;
-    @FindBy(xpath = "//h1[text()='Treatment Not Allowed']")
+    @FindBy(xpath = "//h1[text()='Treatment not Allowed']")
     private WebElement redCovidPatient;
     @FindBy(xpath = "//div[text()='Enter mobile no.']")
     private WebElement enterMobileNoMsg;

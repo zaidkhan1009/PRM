@@ -40,16 +40,20 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 
 	/*closing the alert popup*/
 	public static void clickOnAlert() {
-		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageLoad();
 
 		try {
 		boolean isAlertDisplayed = basePatientLifeCyclePage.getAlert().isDisplayed();
 		System.out.println(isAlertDisplayed);
 		if (isAlertDisplayed) {
-		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getAlert(), 4000);
+		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getAlert());
 //		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
 //		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
 		BaseClass.waitForUIWidgetOverlayToDisappear();
+		
+		WebElement ele = driver.findElement(By.xpath("//div[@class='modal fade']"));
+		if(ele.isDisplayed())
+		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal fade']"));
 		basePatientLifeCyclePage.getAlert().click();
 		//BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
 		}

@@ -29,7 +29,7 @@ public class AppointmentsLisitngPageActions extends BaseClass{
     public static void openGreenFlag(String patient) {
         BaseClass.waitForPageLoad();
         try {
-            WebElement web = driver.findElement(By.xpath("//span[contains(@data-pname,'" + patient + "')]"));
+            WebElement web = driver.findElement(By.xpath("//span[normalize-space(text())='"+ patient +"']/../../../following-sibling::span/span[contains(@class,'green')]"));
             web.click();
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -417,13 +417,35 @@ public class AppointmentsLisitngPageActions extends BaseClass{
     	BaseClass.waitForSpinnerToDisappear();
     	 try {
     		 Thread.sleep(2500);
+    		     		 
     	 } catch (InterruptedException e1) {
              // TODO Auto-generated catch block
              e1.printStackTrace();
          }
-    	// BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
-    	BaseClass.WaitTillElementIsPresent(clinicAppointmentsPage.getLastPage());
-    	clinicAppointmentsPage.getLastPage().click();
+    	 BaseClass.waitForPageToBecomeActive();
+//    	 BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+    	 BaseClass.WaitTillElementIsPresent(clinicAppointmentsPage.getLastPage());
+	     clinicAppointmentsPage.getLastPage().click();
+    }
+    
+public static void clickOnLastPagePatientListing() {
+    	
+    	clinicAppointmentsPage = PageFactory.initElements(driver, AppointmentsLisitngPage.class);
+    	
+    	BaseClass.waitForSpinnerToDisappear();
+    	 try {
+    		 Thread.sleep(2500);
+    		
+    		 
+    	 } catch (InterruptedException e1) {
+             // TODO Auto-generated catch block
+             e1.printStackTrace();
+         }
+    	 BaseClass.waitForPageToBecomeActive();
+//    	 BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+    	 WebElement element = driver.findElement(By.xpath("//div[@class='clearfix topPagination pagingUI']//a[@class='last']"));
+    	 BaseClass.WaitTillElementIsPresent(element);
+	     element.click();
     }
 
     public static void confirmWithConfirmed() {

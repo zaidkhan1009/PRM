@@ -55,6 +55,7 @@ public class WorksDonePageActions extends BaseClass{
 	
 	public static void checkLabWorkOrderBtn(){
 		BaseClass.waitForPageLoad();
+		BaseClass.WaitTillElementIsPresent(worksDonePage.getLabWorkOrderAddBtn());
 		Assert.assertTrue(checkedElementDisplayed(worksDonePage.getLabWorkOrderAddBtn()));
 	}
 	public static void clickInvoiceListBtn() {
@@ -75,7 +76,9 @@ public class WorksDonePageActions extends BaseClass{
 	}
 
 	public static void checkedAddAllBtn() {
-		BaseClass.WaitTillElementIsPresent(worksDonePage.getAddAllBtn());
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(worksDonePage.getAddAllBtn());
 		Assert.assertTrue(checkedElementDisplayed(worksDonePage.getAddAllBtn()));
 	}
 
@@ -100,6 +103,7 @@ public class WorksDonePageActions extends BaseClass{
 	}
 	
 	public static void clickWorkDoneHistory() {
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(worksDonePage.getHistoryBtn(), 4000);
 		worksDonePage.getHistoryBtn().click();
 		BaseClass.waitForSpinnerToDisappear();
@@ -312,6 +316,7 @@ public class WorksDonePageActions extends BaseClass{
 
 	public static void selectStages(String treatment, String stage) {
 		BaseClass.waitForPageLoad();
+		
 		WebElement web = driver
 				.findElement(By.xpath("//span[contains(text(),'" + treatment + "')]/../..//select[@data-ng-model='value']"));
 		BaseClass.selectFromDropDownByVisibleText(web, stage);
@@ -331,7 +336,7 @@ public class WorksDonePageActions extends BaseClass{
 		List<WebElement> dateTime = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Date/Time']"));
 		List<WebElement> trtDentist = driver.findElements(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//th[text()='Trt. Dentist']"));
+				+ "')]/../../following-sibling::div//th[text()='Trt. Dentist/Specialist']"));
 		List<WebElement> clinicName = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Clinic Name']"));
 		List<WebElement> time = driver.findElements(By
@@ -368,6 +373,7 @@ public class WorksDonePageActions extends BaseClass{
 
 	public static void checkDoctorTreated(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
+		
 		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
 				+ "')]/../../following-sibling::div//select[@id='Doctor']/../../../div"));
 		Assert.assertTrue(web.getText().trim().equalsIgnoreCase(doctor));
@@ -375,14 +381,22 @@ public class WorksDonePageActions extends BaseClass{
 
 	public static void checkDoctorSelected(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
-		WebElement web = driver.findElement(By.xpath(
-				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
+		BaseClass.waitForElementVisibility(web, 4000);
 		Select sel = new Select(web);
 		Assert.assertTrue(sel.getFirstSelectedOption().getText().trim().equalsIgnoreCase(doctor));
 	}
 
 	public static void selectDoctor(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		WebElement web = driver.findElement(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
 		Select sel = new Select(web);
@@ -420,6 +434,7 @@ public class WorksDonePageActions extends BaseClass{
 
 	public static void selectTime(String treatment, String timeSlotSelected) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal overlay show']"));
 		WebElement web = driver.findElement(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='time']"));
 		BaseClass.selectFromDropDownByVisibleText(web, timeSlotSelected);
@@ -473,6 +488,8 @@ public class WorksDonePageActions extends BaseClass{
 				By.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div/table/tbody/tr"));
 		for (int i = 1; webElements.size() > i; i++) {
 			int j = i + 1;
+			
+
 			WebElement web = driver.findElement(
 					By.xpath("//span[contains(text(),'"+treatment+"')]/../../following-sibling::div/table/tbody/tr[" + j
 							+ "]/td[6]"));
@@ -491,7 +508,7 @@ public class WorksDonePageActions extends BaseClass{
 	public static void checkEdit(String treatment) {
 		BaseClass.waitForPageLoad();
 		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../..//following-sibling::span[@class='actn-icn edit']"));
+				+ "')]/../../..//following-sibling::span[@class='actn-icn edit']"));
 		Assert.assertTrue(checkedElementDisplayed(web));
 	}
 	
@@ -558,6 +575,30 @@ public class WorksDonePageActions extends BaseClass{
 	
 	private static boolean checkedElementDisplayed(WebElement element) {
 		return (element.isDisplayed());
+	}
+	
+	//new method created by shrey sharma to collect payment using collectPay btn on Work done add page bcz of implementation of criteria to complete payment before completing the trt
+	public static void completePaymentToCompleteTrt() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ele = driver.findElement(By.xpath("//a[@data-ng-click='redirectRcptType($event)']"));
+		if(ele.getText().trim().contains("Collect Pay")) {
+		
+		BaseClass.WaitTillElementIsPresent(worksDonePage.getCollectPaymentBtn());
+		worksDonePage.getCollectPaymentBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
+		NewReceiptPageActions.addingReceiptEqualRemainingAmount();
+		NewReceiptPageActions.clickSaveBtn();
+		}
+		else
+			System.out.println("Payment already collected");
+		
 	}
 
 }

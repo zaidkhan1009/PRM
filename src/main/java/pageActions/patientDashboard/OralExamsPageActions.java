@@ -591,8 +591,12 @@ public class OralExamsPageActions extends BaseClass {
 
 	public static void clickOnTeethImage(String toothType, String teethNo) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		
 		String toothNO = "tooth" + teethNo;
 		if (toothType.equals("Adult")) {
+			BaseClass.waitForElementToBeClickable(oralExamsPage.getAdult());
+			BaseClass.waitForModalOverlayToDisappear();
 			driver.findElement(By.xpath("//div[@id='adult']//span[contains(@class,'" + toothNO + "')]")).click();
 		} else if (toothType.equals("Pedo")) {
 			oralExamsPage.getPedo().click();

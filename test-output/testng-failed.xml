@@ -11,7 +11,7 @@
           <include name="configReport"/>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="appointmentCovidPatient"/>
+          <include name="appointmentRedCovidPatient"/>
         </methods>
       </class> <!-- tests.AppointmentCovidTestcase -->
     </classes>

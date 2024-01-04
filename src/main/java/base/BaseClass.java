@@ -290,7 +290,7 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void waitForModalBackdropToDisappear() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class=modal-backdrop fade]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class=modal-backdrop fade in]")));
 	}
 
 	public static String convert24HourFormatTo12HourFormat(String time)
@@ -333,8 +333,7 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void waitForPageToBecomeActive() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='modal-backdrop fade  in']")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='modal-backdrop fade  in']")));
 	}
 
 	public static void selectFromDropDownByIndex(WebElement ele, int index) {
@@ -604,7 +603,7 @@ public class BaseClass extends ExtentReportListener {
 	@AfterClass
 	public void tearDown() throws Exception {
 
-		 driver.quit();
+//		 driver.quit();
 
 	}
 }
