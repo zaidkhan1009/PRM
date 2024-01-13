@@ -738,8 +738,9 @@ public class PatientRegistrationPageActions extends BaseClass  {
 	}
 		
 	public static void selectGenderMale(String gender) {
-    	BaseClass.waitForPageLoad();
-		BaseClass.waitForElementVisibility(patientRegistrationPage.getGenderMale(),5000);
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getGenderMale());
 		BaseClass.hoverOnElement(patientRegistrationPage.getGenderMale());
 		if(gender.equals("Male"))
 		{

@@ -167,6 +167,8 @@ public class FeedbackAddPageActions extends BaseClass {
             JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
             Object obj = javascriptExecutor.executeScript("return document.getElementById('feedbackDt').value;");
             String str = (String) obj;
+            System.out.println("Date is : "+str);
+            System.out.println("expected :"+expected);
             Assert.assertTrue(str.contains(expected));
         } catch (InterruptedException e) {
             e.printStackTrace();

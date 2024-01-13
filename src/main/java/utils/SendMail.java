@@ -9,8 +9,8 @@ public class SendMail {
     public static void main(String[] args) {
 
         // Sender's email address
-        String senderEmail = "zaidkhan0509@gmail.com";
-        String senderPassword = "TestPass@1234"; // Sender's email password
+        final String senderEmail = "zaidkhan0509@gmail.com";
+        final String senderPassword = "TestPass@1234"; // Sender's email password
         
         // Receiver's email address
         String receiverEmail = "mohammad.umar@instantsys.com";

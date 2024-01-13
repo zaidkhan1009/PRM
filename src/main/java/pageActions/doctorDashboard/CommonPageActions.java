@@ -95,18 +95,20 @@ public class CommonPageActions extends BaseClass {
     
     
     public static void selectClinicFrmHeader(String clinic) {
+
     	BaseClass.waitForPageLoad();
     	BaseClass.waitForSpinnerToDisappear();
     	BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
-        BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
+        BaseClass.waitForElementToBeClickable(commonPage.getLogout());
+        BaseClass.waitForElementToBeClickable(commonPage.getSearchClinicDropdown());
         commonPage.getSearchClinicDropdown().clear();
-        BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
+        BaseClass.waitForElementToBeClickable(commonPage.getSearchClinicDropdown());
         commonPage.getSearchClinicDropdown().sendKeys(clinic);
         BaseClass.waitForSpinnerToDisappear();
-        BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
+        BaseClass.waitForElementToBeClickable(commonPage.getSearchClinicDropdown());
         BaseClass.waitForPageToBecomeActive();
         WebElement element = driver.findElement(By.xpath("//a[contains(text(),'" + clinic + "')]"));
-        BaseClass.waitForElementVisibility(element, 4000);
+        BaseClass.waitForElementToBeClickable(element);
         BaseClass.hoverOnElement(element);
         element.click();
         BaseClass.waitForPageToBecomeActive();
@@ -146,7 +148,9 @@ public class CommonPageActions extends BaseClass {
     }
 
     public static void backTODoctorDashboard() {
+    	BaseClass.waitForPageLoad();
     	BaseClass.waitForSpinnerToDisappear();
+    	
         BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
     	BaseClass.waitForSpinnerToDisappearOnDoctorDashboard();
         BaseClass.waitForElementVisibility(commonPage.getLogo(), 6000);

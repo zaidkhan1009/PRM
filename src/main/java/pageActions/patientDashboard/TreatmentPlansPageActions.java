@@ -190,6 +190,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 	}
 	
 	public static void clickOnNewTeethBtn() {
+		BaseClass.waitForPageLoad();
+
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getNewTeeth());
 		treatmentPlansPage.getNewTeeth().click();

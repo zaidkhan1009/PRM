@@ -241,8 +241,8 @@ public class SheetTest {
 						mapData.put("doctor_name", (String) row.get(4));
 						mapData.put("doctor_nickName", (String) row.get(5));
 						mapData.put("clinic_name", (String) row.get(6));
-						break;
 					}
+					break;
 
 				case "WorkDoneData":
 					mapData.put("patient_name",values.get(1).get(0).toString());

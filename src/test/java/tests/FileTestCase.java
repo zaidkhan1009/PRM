@@ -3,7 +3,9 @@ package tests;
 import com.aventstack.extentreports.Status;
 
 import base.BaseClass;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.FileListingPageActions;
@@ -41,6 +43,16 @@ public class FileTestCase extends BaseClass {
     //checked All fields and text when we redirects to file add page for first time
     public void fileAddPage(){
         logger.log(Status.PASS, FILE_ADD_PAGE);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+		
+		BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.headerPage("Files");
         FilesPageActions.verifyPatientName(PATIENT_NAME);
@@ -58,12 +70,22 @@ public class FileTestCase extends BaseClass {
         FilesPageActions.cancelBtnDisplayed();
         BasePatientLifeCyclePageActions.dashBoardBtnVerify();
         Assert.assertTrue(CommonPageActions.verification().contains("Files"));
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
     }
 
     @Test(groups = {"Sanity","Regression"},enabled = true,priority = 2)
     //checked all WebElement at file listing without any file Add
     public void fileListPage(){
         logger.log(Status.PASS, FILE_LIST_PAGE);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+		
         PatientDashboardPageActions.clickOnFilesList();
         BasePatientLifeCyclePageActions.openCloseLeftNavigator();
         BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
@@ -96,12 +118,22 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.pastDocsTabNotSelected();
         FileListingPageActions.noRecordMessageDisplayed();
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
     }
 
     @Test(groups = {"Sanity","Functional","Regression"},enabled = true,priority = 3)
     //validating error message without inputs
     public void invalidInputError(){
         logger.log(Status.PASS, INVALID_INPUT_ERROR);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.clickSaveBtn();
         FilesPageActions.checkedErrorCategory("Select category");
@@ -113,12 +145,22 @@ public class FileTestCase extends BaseClass {
         FilesPageActions.clickSaveBtn();
         FilesPageActions.errorMsgFileNotSelected();
         Assert.assertTrue(CommonPageActions.verification().contains("Files"));
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
     }
 
     @Test(groups = {"Smoke","Sanity","Functional","Regression"},enabled = true,priority = 4)
     //Added single files together and validated at File listing
     public void uploadFile(){
         logger.log(Status.PASS, UPLOAD_FILE);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.headerPage("Files");
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
@@ -145,12 +187,22 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.noRecordMessageDisplayed();
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
         BaseClass.softAssert().assertAll();
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
     }
 
     @Test(groups = {"Smoke","Sanity","Functional","Regression"},enabled = true,priority = 5)
     //Added multiple files together and validated at File listing
     public void addedMultipleFiles() {
         logger.log(Status.PASS, ADDED_MULTIPLE_FILES);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         //Added File and deleted from input list at File Add Page
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
@@ -184,12 +236,23 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.profileTabNotSelected();
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
         BaseClass.softAssert().assertAll();
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
+
 }
 
     @Test(groups = {"Functional","Regression"},enabled = true,priority = 6)
     //uploaded multiple file together and passed a title then title should be same for every File at file listing page.
     public void checkTitleScenerio() {
         logger.log(Status.PASS, CHECK_TITLE_SCENARIO);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.uploadMultipleFiles(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg",System.getProperty("user.dir")+"\\PatientFiles\\File2.jpg");
      //   FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
@@ -207,12 +270,24 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.multipleFilesRenameDeleteBtn("Image",2);
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
         BaseClass.softAssert().assertAll();
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
+
     }
 
     @Test(groups = {"Functional","Regression"},enabled = true,priority = 7)
     //Edited file from listing and validated All scenario related to edit.
     public void editFile(){
         logger.log(Status.PASS, EDIT_FILE);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
         FilesPageActions.selectCategory("Profile");
@@ -232,8 +307,8 @@ public class FileTestCase extends BaseClass {
         FilesPageActions.fileTitleWebElementCheckBoxSelected();
         FilesPageActions.editCheckDeleteBtnFileAddPage("File1.jpg");
         FilesPageActions.editCheckImageFileAddPage("File1.jpg");
-        FilesPageActions.enterTitleFile("Image2");
         FilesPageActions.selectCategory("Past Docs");
+        FilesPageActions.enterTitleFile("Image2");
         FilesPageActions.clickVisibletoPatientBtnForEditFileAddPage("File1.jpg");
         FilesPageActions.clickSaveBtn();
         FilesPageActions.successfullyMessage();
@@ -250,12 +325,23 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.profileTabNotSelected();
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
         BaseClass.softAssert().assertAll();
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
+
     }
 
     @Test(groups = {"Functional","Regression"},enabled = true,priority = 8)
     //Deleting file from file listing  and edited file and deleted from file Add page
     public void deletedFileListing(){
         logger.log(Status.PASS, DELETED_FILE_LISTING);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File4.jpg");
         FilesPageActions.selectCategory("Profile"); 
@@ -298,12 +384,23 @@ public class FileTestCase extends BaseClass {
         FileListingPageActions.deletedFileListing("New File");
         Assert.assertTrue(CommonPageActions.verification().contains("File Listing"));
         BaseClass.softAssert().assertAll();
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
+
     }
 
     @Test(groups = {"Functional","Regression"},enabled = true,priority = 9)
     //Checked functionality of reset and cancel button
     public void resetCancelFunctionality(){
         logger.log(Status.PASS, RESET_CANCEL_FUNCTIONALITY);
+//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+//		DoctorDashBoardPageActions.clickonAppointmentAdd();
+//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+//		CommonPageActions.clickOnSearchBtn();
+//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+//
+//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
         FilesPageActions.checkDeleteBtnFileAddPage("File1.jpg");
@@ -325,5 +422,7 @@ public class FileTestCase extends BaseClass {
         BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnFilesAdd();
         CommonPageActions.verification().contains("Files");
+        BasePatientLifeCyclePageActions.clickOnDashBoard();
+
     }
 }

@@ -6,14 +6,15 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="tests.AppointmentCovidTestcase">
+      <class name="tests.PrescriptionTestCase">
         <methods>
           <include name="configReport"/>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="appointmentRedCovidPatient"/>
+          <include name="testSetup"/>
+          <include name="validationMsgAddPrescriptionPage"/>
         </methods>
-      </class> <!-- tests.AppointmentCovidTestcase -->
+      </class> <!-- tests.PrescriptionTestCase -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

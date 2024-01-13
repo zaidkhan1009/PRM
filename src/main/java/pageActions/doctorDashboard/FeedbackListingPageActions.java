@@ -104,6 +104,7 @@ public class FeedbackListingPageActions extends BaseClass {
     }
 
     public static void feedbackListingColumnName() {
+    	BaseClass.waitForPageLoad();
     	BaseClass.waitForSpinnerToDisappear();
             Assert.assertTrue(checkedWebElementDisplayed(feedbackListPage.getSub_Created_date()) && checkedWebElementDisplayed(feedbackListPage.getType()) && checkedWebElementDisplayed(feedbackListPage.getPatient_Name_Id()) && checkedWebElementDisplayed(feedbackListPage.getMobile())
                     && checkedWebElementDisplayed(feedbackListPage.getEmail()) && checkedWebElementDisplayed(feedbackListPage.getSubmittedBy()) && checkedWebElementDisplayed(feedbackListPage.getAttachment()) && checkedWebElementDisplayed(feedbackListPage.getAction()));
@@ -267,7 +268,7 @@ public class FeedbackListingPageActions extends BaseClass {
 
     public static void detailsFields(){
     	BaseClass.waitForPageLoad();
-        Assert.assertTrue(checkedWebElementDisplayed(feedbackListPage.getDetails())&&feedbackListPage.getDetails().getAttribute("placeholder").contains("» name/email/feedbackListPage.getMobile()"));
+        Assert.assertTrue(checkedWebElementDisplayed(feedbackListPage.getDetails())&&feedbackListPage.getDetails().getAttribute("placeholder").contains("» name/email/mobile"));
     }
 
     public static void dateFilter(){

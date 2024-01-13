@@ -210,8 +210,8 @@ public class ReceiptListingPageActions extends BaseClass {
 	//open the view modal which having Receipt created today
 	public static void openViewModal(){
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(receiptListingPage.getPayInvoiceBtn(),4000);
-		if(receiptListingPage.getRowTreatmentColumn().size()>0) {
+		BaseClass.waitForElementVisibility(receiptListingPage.getSendReceiptBtn(),4000);
+		if(receiptListingPage.getRowTreatmentColumn().size()>0) {       //6
 			Random randomGenerator = new Random();
 			int index = randomGenerator.nextInt(receiptListingPage.getRowTreatmentColumn().size());
 			WebElement item = receiptListingPage.getRowTreatmentColumn().get(index);
@@ -222,7 +222,7 @@ public class ReceiptListingPageActions extends BaseClass {
 			
 			//changing LogStatus to Status for newer functionality
 			logger.log(Status.PASS, receipt_Number_extentReport);
-			WebElement viewBtn = cells.get(7).findElement(By.xpath("a[contains(@class,'patientReceiptViewCall')]"));
+			WebElement viewBtn = cells.get(7).findElement(By.xpath("//a[contains(@class,'patientReceiptViewCall')]"));
 			viewBtn.click();
 		}else{
 			Assert.fail("There is no Receipt");
@@ -315,7 +315,7 @@ public class ReceiptListingPageActions extends BaseClass {
 
 	public static void clickEditBtn(String mode) {
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(receiptListingPage.getPayInvoiceBtn(),4000);
+		BaseClass.waitForElementVisibility(receiptListingPage.getSendReceiptBtn(),4000);
 		WebElement ele = driver.findElement(By.xpath("//td[contains(text(),'"+mode+"')]/following-sibling::td/a[@class='patientReceiptEditCall btn']"));
 		BaseClass.waitForModalBackdropToDisappear();
 		ele.click();

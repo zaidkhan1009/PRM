@@ -38,6 +38,7 @@ public class ChiefComplaintAddPageActions extends BaseClass {
 	/*checking every chief comlaints boxes present at chief complaints Add page*/
 	public static void VerifyChiefCompliantBoxes() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		boolean flag = (checkedElementDisplayed(chiefComplaint("Pain"))
 				&& checkedElementDisplayed(chiefComplaint("Sensitivity"))
 				&& checkedElementDisplayed(chiefComplaint("Chewing Difficulty"))

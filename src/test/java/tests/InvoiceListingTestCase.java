@@ -11,7 +11,9 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.InvoiceListingPageActions;
@@ -61,6 +63,12 @@ public class InvoiceListingTestCase extends BaseClass{
     private static final String INVOICE_LISTING_VIEW_MODAL = "Validating discount popup of the invoice - #invoiceListingViewModal";
     Map<String, String> billingData = null;
     Map<String, String> patntTrtmntPlanData = null;
+    
+    @BeforeClass(alwaysRun = true)
+    public void testSetup() {
+    billingData = SheetTest.prepareData("BillingData","Billing","A1","Z");
+    patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+    }
 
     /**
      * checked side navigation all module button
@@ -81,6 +89,15 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression"},priority = 1)
     public void InvoiceListWithoutInvoices() {
         logger.log(Status.PASS, INVOICE_LIST_WITHOUT_INVOICES);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+		        
         PatientDashboardPageActions.clickOnInvoiceList();
         BasePatientLifeCyclePageActions.openCloseLeftNavigator();
         BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
@@ -88,7 +105,7 @@ public class InvoiceListingTestCase extends BaseClass{
         InvoiceListingPageActions.headerPage("Invoice Listing");
         InvoiceListingPageActions.verifyUserName(billingData.get("patient_name2"));
         InvoiceListingPageActions.checkReceiptBtn();
-        BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+        BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
         InvoiceListingPageActions.invoiceStatusDropDown("Select Invoice Status");
         InvoiceListingPageActions.showDetailsCheckBox();
         InvoiceListingPageActions.checkSearchBtn();
@@ -96,6 +113,7 @@ public class InvoiceListingTestCase extends BaseClass{
         InvoiceListingPageActions.amountSection();
         InvoiceListingPageActions.checkCollectAdvacePaymentBtn();
         Assert.assertTrue(CommonPageActions.verification().contains("Invoice Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
     }
 
     /**
@@ -108,8 +126,17 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 2)
     public void createInvoice() {
         logger.log(Status.PASS, CREATE_INVOICE);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
         BasePatientLifeCyclePageActions.clickOnAlert();
+		TreatmentPlansPageActions.clickOnNewTeethBtn();
         OralExamsPageActions.clickOnTeethImageFromTreatmentList("Adult", "24");
         TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
         TreatmentPlansPageActions.clickOnConsultationXRays();
@@ -118,8 +145,8 @@ public class InvoiceListingTestCase extends BaseClass{
         TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup2_Plan2"));
         TreatmentPlansPageActions.saveTreatment();
         TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-        BasePatientLifeCyclePageActions.clickOnDashBoard();
-//      BasePatientLifeCyclePageActions.clickOnAlert();
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+      BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnAppAdd();
         AppointmentAddPageActions.selectDoctorFromDropdown(billingData.get("doctor"));
         AppointmentAddPageActions.selectReferralFromDropdown("Patient");
@@ -137,6 +164,7 @@ public class InvoiceListingTestCase extends BaseClass{
         InvoiceListingPageActions.invoiceDataTable();
         InvoiceListingPageActions.actionsButton_InvoicesCreatedDate();
         Assert.assertTrue(CommonPageActions.verification().contains("Invoice Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
     }
 
     /**
@@ -158,6 +186,15 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Sanity","Functional"},priority = 3)
     public void discountCouponApplied(){
         logger.log(Status.PASS, DISCOUNT_COUPON_APPLIED);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnInvoiceList();
         InvoiceListingPageActions.openCouponModal(INVOICE_CREATED_DATE);
         InvoiceListingPageActions.saveModalDetails();
@@ -185,7 +222,7 @@ public class InvoiceListingTestCase extends BaseClass{
 //        InvoiceListingPageActions.treatmentTableAfterCouponApplied("Amt",20);
 
         InvoiceListingPageActions.closeModal();
-        BasePatientLifeCyclePageActions.clickOnDashBoard();
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
         BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
         TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
@@ -196,6 +233,8 @@ public class InvoiceListingTestCase extends BaseClass{
         TreatmentPlanListingPageActions.verifyCouponImpactInMainList(patntTrtmntPlanData.get("planGroup2_Plan2_FullName"));
         TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
         Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
     }
     
  
@@ -220,6 +259,14 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression"},priority = 4)
     public void invoiceListingViewModal(){
         logger.log(Status.PASS, INVOICE_LISTING_VIEW_MODAL);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnInvoiceList();
         InvoiceListingPageActions.invoiceListTableColumnName();
         InvoiceListingPageActions.invoiceDataTable();
@@ -234,11 +281,22 @@ public class InvoiceListingTestCase extends BaseClass{
         InvoiceListingPageActions.totalDueViewModal();
         InvoiceListingPageActions.closeViewModal();
         Assert.assertTrue(CommonPageActions.verification().contains("Invoice Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
     }
     
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 5)
     public void deleteTreatmentInvoiceDelete(){
         logger.log(Status.PASS, DELETE_TREATMENT_INVOICE_DELETE);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
         PatientDashboardPageActions.clickOnInvoiceList();
         InvoiceListingPageActions.openDeleteModal(INVOICE_CREATED_DATE);
         InvoiceListingPageActions.checkPatientNameDeleteModal(billingData.get("patient_name2"));
@@ -262,7 +320,7 @@ public class InvoiceListingTestCase extends BaseClass{
         InvoiceListingPageActions.clickOnSearch();
         InvoiceListingPageActions.invoiceDeleted(INVOICE_CREATED_DATE);
         InvoiceListingPageActions.negativeInvoiceAfterDelete(INVOICE_CREATED_DATE);
-        BasePatientLifeCyclePageActions.clickOnDashBoard();
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 //      BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
         TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
@@ -273,6 +331,8 @@ public class InvoiceListingTestCase extends BaseClass{
         TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentListViewPopup(patntTrtmntPlanData.get("planGroup2_Plan2_FullName"));
         TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
         Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
     }
     
 
@@ -297,8 +357,18 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 6)
     public void createAndPayInvoice() {
         logger.log(Status.PASS, CREATE_INVOICE);
+        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
         BasePatientLifeCyclePageActions.clickOnAlert();
+		TreatmentPlansPageActions.clickOnNewTeethBtn();
+
         OralExamsPageActions.clickOnTeethImageFromTreatmentList("Adult", "24");
         TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
         TreatmentPlansPageActions.clickOnConsultationXRays();
@@ -307,7 +377,7 @@ public class InvoiceListingTestCase extends BaseClass{
         TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup2_Plan2"));
         TreatmentPlansPageActions.saveTreatment();
         TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-        BasePatientLifeCyclePageActions.clickOnDashBoard();
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 //      BasePatientLifeCyclePageActions.clickOnAlert();
         PatientDashboardPageActions.clickOnAppAdd();
         AppointmentAddPageActions.selectDoctorFromDropdown(billingData.get("doctor"));
@@ -343,5 +413,7 @@ public class InvoiceListingTestCase extends BaseClass{
         ReceiptListingPageActions.checkReceiptListingTableHead();
         BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
         PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
     }
 }

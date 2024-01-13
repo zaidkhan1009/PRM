@@ -290,7 +290,7 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void waitForModalBackdropToDisappear() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class=modal-backdrop fade in]")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='modal-backdrop fade in']")));
 	}
 
 	public static String convert24HourFormatTo12HourFormat(String time)

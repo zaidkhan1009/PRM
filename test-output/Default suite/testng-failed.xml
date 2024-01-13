@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test name="Default test(failed)">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.AppointmentAddEConsultTestCase">
+      <class name="tests.ChiefComplaintTestCase">
         <methods>
+          <include name="configReport"/>
+          <include name="testSetup"/>
           <include name="tearDown"/>
-          <include name="statusOfScripts"/>
           <include name="setup"/>
-          <include name="appointmentEConsultPage"/>
-          <include name="suite"/>
+          <include name="appointmentWithOutChiefComplaintImpactInChiefComplaintList"/>
+          <include name="chiefComplaintListHomePage"/>
+          <include name="VerifyDeleteBTnCCAddPage"/>
+          <include name="addCCWithoutAppSameDay"/>
+          <include name="ChiefComplaintAddPageActions"/>
+          <include name="chiefComplaintByClinicWise"/>
+          <include name="painPopupElementAndBehaviour"/>
         </methods>
-      </class> <!-- tests.AppointmentAddEConsultTestCase -->
+      </class> <!-- tests.ChiefComplaintTestCase -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

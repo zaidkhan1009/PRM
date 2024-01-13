@@ -4,21 +4,13 @@
 	<listeners>
 		<listener class-name="utils.ExtentReportListener" />
 	</listeners>
-	<test name="Test">
-		<classes>
-			<class name="tests.AppointmentCovidTestcase">
-				<methods> 
-					<include name="appointmentCovidPatient" />
-					<include name="bookAppointmentGreenFlag" /> 
-					<include name="treatmentGreenPatient" />
-					<include name="workDoneAddPage" />
-					<include name="treatmentStageInProgress" />
-					<include name="treatmentStageComplete"/>
-					<include name="followUp"/>
-					<include name="convertingGreenToRedFlag"/>
-					<include name="reTreatRedCovidPatient"/>
-					<include name="appointmentRedCovidPatient"/>
-			
+	<test name="Test">	
+		<classes>	
+		<class name="tests.PrescriptionTestCase">
+				<methods>
+						<include name="validationMsgAddPrescriptionPage"/>
+						
+						
 				</methods>
 			</class>
 		</classes>

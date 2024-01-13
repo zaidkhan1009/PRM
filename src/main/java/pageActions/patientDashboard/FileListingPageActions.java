@@ -107,7 +107,7 @@ public class FileListingPageActions extends BaseClass {
 
     public static void clickFileDeleteBtn(String fileName) {
         BaseClass.waitForPageLoad();
-        driver.findElement(By.xpath("//span[contains(text(),'" + fileName + "')]/../../following-sibling::div/a[@class='deleteFileListButton deleteConfirm']")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'"+fileName+"')]/../../preceding-sibling::div/a[contains(@class,'deleteFileListButton deleteConfirm')]")).click();
     }
 
     public static void clickPastDocsTab() {

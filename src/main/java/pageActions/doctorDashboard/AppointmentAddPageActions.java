@@ -713,8 +713,7 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(appointmentPage.getSaveBtn());
 		appointmentPage.getSaveBtn().click();
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForPageToBecomeActive();
-	
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 //		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
 	}
 

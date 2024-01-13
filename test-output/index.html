@@ -103,7 +103,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="tests.AppointmentCovidTestcase" class="method navigator-link" hash-for-method="appointmentRedCovidPatient">appointmentRedCovidPatient</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="tests.PrescriptionTestCase" class="method navigator-link" hash-for-method="validationMsgAddPrescriptionPage">validationMsgAddPrescriptionPage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -121,14 +121,14 @@
           <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">tests.AppointmentCovidTestcase</span>
+              <span class="class-name">tests.PrescriptionTestCase</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="appointmentRedCovidPatient">
-                  </a> <!-- appointmentRedCovidPatient -->
-                  <span class="method-name">appointmentRedCovidPatient</span>
+                  <a name="validationMsgAddPrescriptionPage">
+                  </a> <!-- validationMsgAddPrescriptionPage -->
+                  <span class="method-name">validationMsgAddPrescriptionPage</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -148,11 +148,11 @@
   &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;tests.AppointmentCovidTestcase&quot;&gt;
+      &lt;class name=&quot;tests.PrescriptionTestCase&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;appointmentRedCovidPatient&quot;/&gt;
+          &lt;include name=&quot;validationMsgAddPrescriptionPage&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- tests.AppointmentCovidTestcase --&gt;
+      &lt;/class&gt; &lt;!-- tests.PrescriptionTestCase --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -194,14 +194,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'appointmentRedCovidPatient')
-data.setCell(0, 2, 'tests.AppointmentCovidTestcase')
-data.setCell(0, 3, 14799);
+data.setCell(0, 1, 'validationMsgAddPrescriptionPage')
+data.setCell(0, 2, 'tests.PrescriptionTestCase')
+data.setCell(0, 3, 359174);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 14 seconds</span>
+              <span class="suite-total-time">Total running time: 5 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -216,29 +216,23 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">9 ignored methods</span>
+            <span class="header-content">6 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">tests.AppointmentCovidTestcase</span>
+              <span class="ignored-class-name">tests.PrescriptionTestCase</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">treatmentStageComplete</span>
+                <span class="ignored-method-name">addPrescription</span>
                 <br/>
-                <span class="ignored-method-name">followUp</span>
+                <span class="ignored-method-name">checkedPrescriptionAddAndPrescriptionListingUi</span>
                 <br/>
-                <span class="ignored-method-name">treatmentGreenPatient</span>
+                <span class="ignored-method-name">deletePrescriptionFromPrescriptionListing</span>
                 <br/>
-                <span class="ignored-method-name">appointmentCovidPatient</span>
+                <span class="ignored-method-name">deletePrescriptionFromInputList</span>
                 <br/>
-                <span class="ignored-method-name">convertingGreenToRedFlag</span>
+                <span class="ignored-method-name">checkedPrescriptionListingAfterAddPrescription</span>
                 <br/>
-                <span class="ignored-method-name">bookAppointmentGreenFlag</span>
-                <br/>
-                <span class="ignored-method-name">treatmentStageInProgress</span>
-                <br/>
-                <span class="ignored-method-name">workDoneAddPage</span>
-                <br/>
-                <span class="ignored-method-name">reTreatRedCovidPatient</span>
+                <span class="ignored-method-name">editPrescription</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -250,22 +244,26 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">tests.AppointmentCovidTestcase</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">tests.PrescriptionTestCase</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
                 <span class="method-name">configReport</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
-                <span class="method-start">34 ms</span>
+                <span class="method-start">46 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">testSetup</span>
+                <span class="method-start">13754 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">appointmentRedCovidPatient</span>
-                <span class="method-start">12849 ms</span>
+                <span class="method-name">validationMsgAddPrescriptionPage</span>
+                <span class="method-start">16772 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">27648 ms</span>
+                <span class="method-start">375950 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

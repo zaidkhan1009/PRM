@@ -90,7 +90,7 @@ public class NewReceiptPageActions extends BaseClass {
 	}
 
 	public static void checkSubTypeOfModes(String mode) {
-		List<WebElement> subType = driver.findElements(By.xpath("//label[contains(text(),'"+mode+"')]/../../../../..//div[@class='checkbox-inline cstm_rdb_ckb chkbType2 subMode_multi_line']//label"));
+		List<WebElement> subType = driver.findElements(By.xpath("//label[contains(text(),'"+mode+"')]/../../../../..//div[@class='checkbox-inline cstm_rdb_ckb chkbType2 subMode_multi_line incrWdth']//label"));
 		switch (mode){
 			case "Card":
 				String[] expCard = { "Card", "EMI", "Bajaj Finance", "Kotak Finance", "HDFC Paper Fin", "ShopSe EMI"};
@@ -312,6 +312,13 @@ public class NewReceiptPageActions extends BaseClass {
 		BaseClass.waitForElementVisibility(newReceiptPage.getSaveBtn(),4000);
 		BaseClass.waitForModalOverlayToDisappear();
 		newReceiptPage.getSaveBtn().click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 //	public static void clickSaveBtn() {

@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import base.BaseClass;
+import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pages.patientDashboard.WorksDonePage;
 
 public class WorksDonePageActions extends BaseClass{
@@ -374,8 +375,7 @@ public class WorksDonePageActions extends BaseClass{
 	public static void checkDoctorTreated(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
 		
-		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//select[@id='Doctor']/../../../div"));
+		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment+ "')]/../../following-sibling::div//select[@id='Doctor']/../div"));
 		Assert.assertTrue(web.getText().trim().equalsIgnoreCase(doctor));
 	}
 
@@ -588,6 +588,7 @@ public class WorksDonePageActions extends BaseClass{
 			e.printStackTrace();
 		}
 		WebElement ele = driver.findElement(By.xpath("//a[@data-ng-click='redirectRcptType($event)']"));
+		System.out.println("Payment collect : "+ele.getText().trim());
 		if(ele.getText().trim().contains("Collect Pay")) {
 		
 		BaseClass.WaitTillElementIsPresent(worksDonePage.getCollectPaymentBtn());
@@ -595,6 +596,11 @@ public class WorksDonePageActions extends BaseClass{
 		BaseClass.waitForSpinnerToDisappear();
 		NewReceiptPageActions.addingReceiptEqualRemainingAmount();
 		NewReceiptPageActions.clickSaveBtn();
+		
+		BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+
+		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		}
 		else
 			System.out.println("Payment already collected");

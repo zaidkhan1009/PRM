@@ -35,8 +35,16 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 	/*-- Click the Subscribers Button shown in Miscellaneous Call listing --*/
 	public static void clickOnSubscribers() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getSubscribersBtn());
 		miscellaneousCallListingPage.getSubscribersBtn().click();
+	}
+	
+	public static void clickOnAddNew() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getAddNewBtnOnMiscList());
+		miscellaneousCallListingPage.getAddNewBtnOnMiscList().click();
 	}
 
 	/*-- Click the Miscellaneous Call list Button shown in Subscriber listing --*/
@@ -56,7 +64,7 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 	/*-- Click the Reset Button shown in Miscellaneous Call listing --*/
 	public static void clickOnResetBtn() {
 		BaseClass.waitForPageLoad();
-		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getResetBtn());
+//		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getResetBtn());
 		miscellaneousCallListingPage.getResetBtn().click();
 		BaseClass.waitForSpinnerToDisappear();
 	}
@@ -65,6 +73,8 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 	public static void clickSearchBtn()
 	{
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForModalOverlayToDisappear();
+		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getSearchBtn());
 		miscellaneousCallListingPage.getSearchBtn().click();
 		BaseClass.waitForSpinnerToDisappear();
 	}
@@ -91,7 +101,7 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 		System.out.println("%%%%%%%%"+expectedTime);
 		String dateTime = date+" "+time;
 		try {
-			SimpleDateFormat fmt = new SimpleDateFormat("dd-mm-yy h:mm a");
+			SimpleDateFormat fmt = new SimpleDateFormat("dd-mm-yy h:mm");
 			Date actualDateTime = fmt.parse(dateTime);
 			Date expectedDateTime = fmt.parse(expectedDate+" "+expectedTime);
 
@@ -231,6 +241,8 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 	/*-- Enter data in details filter--*/
 	public static void addDetails(String name) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getDetailsTxtBx());
 		miscellaneousCallListingPage.getDetailsTxtBx().clear();
 		miscellaneousCallListingPage.getDetailsTxtBx().sendKeys(name);
 	}
@@ -239,6 +251,7 @@ public class     MiscellaneousCallListingPageActions extends BaseClass  {
 	public static void AddFromDate(String date)
 	{
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(miscellaneousCallListingPage.getFromDateBtn());
 		miscellaneousCallListingPage.getFromDateBtn().sendKeys(date);
 	}
 

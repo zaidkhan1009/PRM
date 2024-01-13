@@ -61,7 +61,7 @@ public class PrescriptionListingPage {
 	private WebElement notesInView;
 	@FindBy(className = "close")
 	private WebElement closeViewButton;
-	@FindBy(className = "//span[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//span[@class='ng-binding ng-scope']")
 	private WebElement getMailSentTxt;
 	
 	/*---WebElement in Send Pop up----*/

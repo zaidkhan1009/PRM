@@ -146,7 +146,9 @@ public class DoctorDashBoardPageActions extends BaseClass {
 	}
 
 	public static void clickOnMiscCallsList() {
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappearOnDoctorDashboard();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(docDashPage.getMiscCallsListBtn());
 		docDashPage.getMiscCallsListBtn().click();
 		BaseClass.waitForSpinnerToDisappear();

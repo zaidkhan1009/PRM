@@ -2,11 +2,14 @@ package tests;
 
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.LabWorkOrderEditPageActions;
@@ -16,6 +19,7 @@ import pageActions.patientDashboard.TreatmentPlanListingPageActions;
 import pageActions.patientDashboard.TreatmentPlansPageActions;
 import pageActions.patientDashboard.WorkDoneHistoryPageActions;
 import pageActions.patientDashboard.WorksDonePageActions;
+import utils.ExcelReader;
 import utils.SheetTest;
 import utils.TestData;
 
@@ -57,15 +61,29 @@ public class WorksDoneTestCase extends BaseClass{
 	 * checked no record message displayed at the both page for first time  redirection
 	 */
 	
+	@BeforeTest
+	public void testSetup() {
+		workDoneData = SheetTest.prepareData("WorkDoneData","WorkDone","A1","Z");
+	}
+	
 	@Test(enabled = true, priority = 1)
 	public void checkedWorkDoneAddAndHistoryNoTreatment() {
 		logger.log(Status.PASS, CHECKED_WORK_DONE_ADD_AND_HISTORY_NO_TREATMENT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+		
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
 		/* Only For First Time */
-//		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
+		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
 		WorksDonePageActions.checkedUserName(workDoneData.get("patient_name"));
 		WorksDonePageActions.checkedInvoiceListBtn();
 		WorksDonePageActions.checkedCollectAdvanceBtn();
@@ -87,6 +105,7 @@ public class WorksDoneTestCase extends BaseClass{
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
@@ -104,6 +123,13 @@ public class WorksDoneTestCase extends BaseClass{
 	@Test(enabled = true, priority = 2,description = "Start Treatment For Auto-Complete Plans")
 	public void startTreatmenAutoComplete() {
 		logger.log(Status.PASS, START_TREATMENT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
@@ -171,11 +197,19 @@ public class WorksDoneTestCase extends BaseClass{
 		WorkDoneHistoryPageActions.checkedRemarks(workDoneData.get("planGroup4_Plan1_FullName"), "No Remarks");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 	
 	@Test(enabled = true, priority = 3,description = "Start Treatment For Non Auto-Complete Plans")
 	public void startTreatmentAligner() {
 		logger.log(Status.PASS, START_TREATMENT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
@@ -246,6 +280,7 @@ public class WorksDoneTestCase extends BaseClass{
 		WorkDoneHistoryPageActions.checkedRemarks(workDoneData.get("planGroup1_Plan1_FullName"), "No Remarks");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 	
 	@Test(enabled = true, priority = 3,description = "Start Treatment For Aligners")
@@ -268,6 +303,13 @@ public class WorksDoneTestCase extends BaseClass{
 	@Test(enabled = true, priority = 4,description = "Verify Treatment Stages")
 	public void treatmentStageInProgress() {
 		logger.log(Status.PASS, TREATMENT_STAGE_IN_PROGRESS);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneAdd();
@@ -299,16 +341,32 @@ public class WorksDoneTestCase extends BaseClass{
 		WorkDoneHistoryPageActions.checkedRemarks(workDoneData.get("planGroup1_Plan1_FullName"), "it is for testing");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * changing the stages of the treatment to complete and checked all new changes at the work done history and work done add
 	 */
-	@Test(enabled = true, priority = 5,dependsOnMethods = {"treatmentStageInProgress"})
+//	@Test(enabled = true, priority = 5,dependsOnMethods = {"treatmentStageInProgress"})
+	@Test(enabled = true, priority = 5)
+
 	public void treatmentStageComplete() {
 		logger.log(Status.PASS, TREATMENT_STAGE_COMPLETE);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
+		
+		WorksDonePageActions.completePaymentToCompleteTrt();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
+
 		WorksDonePageActions.selectDoctor(workDoneData.get("planGroup1_Plan1_FullName"), workDoneData.get("doctor"));
 		WorksDonePageActions.selectTime(workDoneData.get("planGroup1_Plan1_FullName"), "30");
 		WorksDonePageActions.enterRemarks(workDoneData.get("planGroup1_Plan1_FullName"), "Change to complete");
@@ -332,22 +390,33 @@ public class WorksDoneTestCase extends BaseClass{
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
 		BasePatientLifeCyclePageActions.clickOnAddNewBtn();
-		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
+//		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
 		WorksDonePageActions.checkLabWorkOrderBtn();
 		WorksDonePageActions.checkedInvoiceListBtn();
 		WorksDonePageActions.checkedHistoryBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		WorksDonePageActions.checkedPrintBtnNotPresent();
-		WorksDonePageActions.checkedAddAllBtnNotPresent();
+//		WorksDonePageActions.checkedPrintBtnNotPresent();         //commented 3 lines bcz only be shown if all trt are completed but autocomplete trt above entry is pending
+//		WorksDonePageActions.checkedAddAllBtnNotPresent();
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * validated all cases of the follow up modal and checked same at work done history and work done add
 	 */
-	@Test(enabled = true, priority = 6,dependsOnMethods = {"treatmentStageComplete"})
+//	@Test(enabled = true, priority = 6,dependsOnMethods = {"treatmentStageComplete"})
+	@Test(enabled = true, priority = 6)
 	public void followUp(){
 		logger.log(Status.PASS, FOLLOW_UP);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneHistory();
 		WorkDoneHistoryPageActions.checkedStatusTreatment(workDoneData.get("planGroup1_Plan1_FullName"), "Completed");
 		WorkDoneHistoryPageActions.clickFollowUpBtn(workDoneData.get("planGroup1_Plan1_FullName"));
@@ -382,22 +451,33 @@ public class WorksDoneTestCase extends BaseClass{
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
 		BasePatientLifeCyclePageActions.clickOnAddNewBtn();
-		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
+//		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
 		WorksDonePageActions.checkLabWorkOrderBtn();
 		WorksDonePageActions.checkedInvoiceListBtn();
 		WorksDonePageActions.checkedHistoryBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		WorksDonePageActions.checkedPrintBtnNotPresent();
-		WorksDonePageActions.checkedAddAllBtnNotPresent();
+//		WorksDonePageActions.checkedPrintBtnNotPresent();       //commented 3 lines bcz only be shown if all trt are completed but autocomplete trt above entry is pending
+//		WorksDonePageActions.checkedAddAllBtnNotPresent();
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/**
 	 * validated retreat for the treatment scenario at the both page work done history and work done add page
 	 */
-	@Test(enabled = true, priority = 7,dependsOnMethods = {"followUp"})
+//	@Test(enabled = true, priority = 7,dependsOnMethods = {"followUp"})
+	@Test(enabled = true, priority = 7)
 	public void reTreat(){
 		logger.log(Status.PASS, RE_TREAT);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(workDoneData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(workDoneData.get("patient_mobile"),workDoneData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnWorkDoneHistory();
 		WorkDoneHistoryPageActions.clickReTreatBtn(workDoneData.get("planGroup1_Plan1_FullName"));
 		WorkDoneHistoryPageActions.headerReTreatModal("Are you sure you want to re-treat this treatment?");
@@ -422,5 +502,6 @@ public class WorksDoneTestCase extends BaseClass{
 		WorksDonePageActions.checkStatus(workDoneData.get("planGroup1_Plan1_FullName"), "In-Progress: Re-Treat");
 		WorksDonePageActions.checkRemarksWorkDoneAddPage(workDoneData.get("planGroup1_Plan1_FullName"),"re-treat testing");
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 }

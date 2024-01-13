@@ -10,6 +10,8 @@ import org.sikuli.script.Pattern;
 import org.testng.Assert;
 import utils.TestData;
 import base.BaseClass;
+import pageActions.doctorDashboard.PatientDashboardPageActions;
+import pages.doctorDashboard.PatientDashboardPage;
 import pages.patientDashboard.BasePatientLifeCyclePage;
 
 /*
@@ -47,18 +49,27 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 		System.out.println(isAlertDisplayed);
 		if (isAlertDisplayed) {
 		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getAlert());
-//		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+//		WebElement web= driver.findElement(By.xpath("//div[@class='modal-backdrop fade']"));
+//		if(web.isDisplayed()) {
+//			System.out.println("Modal backdrop fade "+web.isDisplayed());
+//		BaseClass.waitForElementToDisappear((By.xpath("//div[@class='modal-backdrop fade']")));
+//		}
 //		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
 		BaseClass.waitForUIWidgetOverlayToDisappear();
 		
-		WebElement ele = driver.findElement(By.xpath("//div[@class='modal fade']"));
-		if(ele.isDisplayed())
-		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal fade']"));
+//		WebElement ele = driver.findElement(By.xpath("//div[@class='modal fade']"));
+//		if(driver.findElement(By.xpath("//div[@class='modal fade']")).isDisplayed()==true) {
+//		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal fade']"));
+//		}
 		basePatientLifeCyclePage.getAlert().click();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
+		Thread.sleep(1000);
+
 		//BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
 		}
 		}
-		catch(NoSuchElementException e) {
+		catch(NoSuchElementException | InterruptedException e) {
+//			basePatientLifeCyclePage.getAlert().click();
 			System.out.println("Alert not clicked");
 		}
 	}
@@ -85,11 +96,17 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getDashboardBtn(),4000);
 		Assert.assertTrue(checkedElementDisplayed(basePatientLifeCyclePage.getDashboardBtn()));
 	}
+	
+	public static void commonDashBoardBtnVerify() {
+		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getCommonDashboardBtn(),4000);
+		Assert.assertTrue(checkedElementDisplayed(basePatientLifeCyclePage.getCommonDashboardBtn()));
+	}
+
 
 	/*clicking on the dashboard button*/
 	
 	public static void clickOnDashBoard() {
-		if(basePatientLifeCyclePage.getDashboardBtn().isDisplayed()) {
+		if(basePatientLifeCyclePage.getDashboardBtn().isDisplayed()==true) {
 			BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getDashboardBtn());
 			BaseClass.executeScript(basePatientLifeCyclePage.getDashboardBtn());
 			BaseClass.waitForModalOverlayToDisappear();
@@ -100,6 +117,7 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 				e.printStackTrace();
 			}
 		}
+		
 		else {
 			BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getDashboardBtn(), 4000);
 			BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getDashboardBtn());
@@ -118,6 +136,19 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getDashboardBtnReceipt(), 4000);
 		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getDashboardBtnReceipt());
 		BaseClass.executeScript(basePatientLifeCyclePage.getDashboardBtnReceipt());
+		BaseClass.waitForModalOverlayToDisappear();
+		BaseClass.waitForSpinnerToDisappear();
+		 try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public static void clickOnDashBoardCommon() {
+		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getCommonDashboardBtn(), 4000);
+		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getCommonDashboardBtn());
+		BaseClass.executeScript(basePatientLifeCyclePage.getCommonDashboardBtn());
 		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForSpinnerToDisappear();
 		 try {
@@ -155,7 +186,9 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 
 	/*clicking at the add new button*/
 	public static void clickOnAddNewBtn() {
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getAddNewBtn());
 		basePatientLifeCyclePage.getAddNewBtn().click();
 		BaseClass.waitForSpinnerToDisappear();

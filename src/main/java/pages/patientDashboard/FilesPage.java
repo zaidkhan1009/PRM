@@ -48,9 +48,9 @@ public class FilesPage {
     private WebElement errorFileTitle;
     @FindBy(xpath = "//div[@class='clearfix alertMessage']")
     private WebElement fileNotSelectedErrorMsg;
-    @FindBy(xpath = "//div[text()='File(s) saved/updated sucessfully!']")
+    @FindBy(xpath = "//div[contains(text(),'File(s) saved/updated sucessfully')]")
     private WebElement successMsg;
-    
+  //div[text()='File(s) saved/updated sucessfully']
     
 	public WebElement getCategoryDopdownHeader() {
 		return categoryDopdownHeader;

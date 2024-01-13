@@ -119,9 +119,9 @@ public class AppointmentsListPageActions extends BaseClass {
     }
 
     public static void openCovidForm() {
-    	BaseClass.waitForElementToDisappear(By.xpath("//div[@class = 'modal overlay show']"));
         BaseClass.waitForPageLoad();
         BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForModalOverlayToDisappear();
         BaseClass.waitForElementToBeClickable(appointmentsListPage.getCovidStatus());
         appointmentsListPage.getCovidStatus().click();
     }
@@ -129,6 +129,7 @@ public class AppointmentsListPageActions extends BaseClass {
     /*checking Appointment added successfully for the patient*/
     public static void appointmentAdded() {
         BaseClass.waitForPageLoad();
+        BaseClass.waitForSpinnerToDisappear();
         if (appointmentsListPage.getAppointmentsPatient().size() > 0) {
             BaseClass.visibilityOfListLocated(appointmentsListPage.getDates());
             for (int i = 0; appointmentsListPage.getDates().size() > i; i++) {
@@ -171,6 +172,8 @@ public class AppointmentsListPageActions extends BaseClass {
     /*checked there are any Appointment available for the patient within 24 hr or not*/
     public static void appointmentAvailable() {
         BaseClass.waitForPageLoad();
+        BaseClass.waitForSpinnerToDisappear();
+        BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
         boolean flag = false;
         final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
         if (appointmentsListPage.getAppointmentsPatient().size() > 0) {

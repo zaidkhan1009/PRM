@@ -195,12 +195,7 @@ public class FilesPageActions extends BaseClass {
     
     public static void successfullyMessage(){
         BaseClass.waitForPageLoad();
-        try {
-            Thread.sleep(2000);
             BaseClass.softAssert().assertTrue(checkElementDisplayed(filesPage.getSuccessMsg()));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
     public static void getFirstSelectOptions(String category){
         BaseClass.waitForPageLoad();

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import base.BaseClass;
+import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pages.doctorDashboard.Login;
 import pages.doctorDashboard.PatientDashboardPage;
 
@@ -57,6 +58,9 @@ public class PatientDashboardPageActions extends BaseClass {
 			patientDashboardPage.getDueWarningYes().click();
 BaseClass.waitForSpinnerToDisappear();
 		}
+		else {
+			BasePatientLifeCyclePageActions.clickOnAlert();
+		}
 	}
 
 //	public static void hideDueWarningPopup() {
@@ -77,6 +81,7 @@ BaseClass.waitForSpinnerToDisappear();
 
 	public static void clickOnFilesAdd() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForModalBackdropToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getFilesAddBtn());
 		try {
 			patientDashboardPage.getFilesAddBtn().click();
@@ -266,13 +271,14 @@ BaseClass.waitForSpinnerToDisappear();
 //		BaseClass.waitForPageLoad();\BaseClass
 		BaseClass.waitForElementVisibility(patientDashboardPage.getChiefComplaintAddBtn(), 4000);
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getChiefComplaintAddBtn());
-		patientDashboardPage.getChiefComplaintAddBtn().click();
-		BaseClass.waitForSpinnerToDisappear();
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		patientDashboardPage.getChiefComplaintAddBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
+		
 	}
 
 	public static void clickOnChiefComplaintlistBtn() {
@@ -311,7 +317,7 @@ BaseClass.waitForSpinnerToDisappear();
 
 	public static void clickOnPrescriptionTestAdd() {
 		BaseClass.waitForPageLoad();
-		BaseClass.WaitTillElementIsPresent(patientDashboardPage.getPrescriptionTestAdd());
+		BaseClass.waitForElementToBeClickable(patientDashboardPage.getPrescriptionTestAdd());
 		patientDashboardPage.getPrescriptionTestAdd().click();
 		driver.navigate().refresh();
 	}

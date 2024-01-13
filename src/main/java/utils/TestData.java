@@ -42,6 +42,12 @@ public class TestData {
         String date = simpleDateFormat.format(now);
         return date;
     }
+    public String getTodayDateFullYear(){
+        Date now = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String date = simpleDateFormat.format(now);
+        return date;
+    }
     
     public String getFewMinuteBackFromCurrentDateTime() {
     	int addMinuteTime=-3;

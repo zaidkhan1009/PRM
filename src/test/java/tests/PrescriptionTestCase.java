@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
 import base.BaseClass;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.PrescriptionListingPageActions;
@@ -59,21 +62,14 @@ public class PrescriptionTestCase extends BaseClass {
     private Map<String, String> patntPresData;
     private Map<String,String> patntPresData1;
    
+    @BeforeClass(alwaysRun = true)
+	public void testSetup() {
+    	patntPresData = SheetTest.prepareData("Prescription", "PrescriptionTestData", "A2", "Q2");
+    	patntPresData1 = SheetTest.prepareData("Prescription", "PrescriptionTestData", "A3", "Q3");
+    }
+    
 	
 	
-	
-	public Map<String, String> prepareData(String moduleName, String sheetName, String rowRange, String colRange)
-	{
-//		Map<String, String> regData = null;
-		try {
-			patntPresData = SheetTest.getDataFromGoogleSheet(moduleName, sheetName, rowRange, colRange);
-		} catch (GeneralSecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return patntPresData;
-	}
 	
 	/*
 	 * checked header of the Prescription page
@@ -86,16 +82,25 @@ public class PrescriptionTestCase extends BaseClass {
 	 * checked all fields name present in Add Prescription page.
 	 * checked add prescription button on prescription listing page.
 	 */
+    
 	@Test(enabled = true, priority = 1)
 	public void checkedPrescriptionAddAndPrescriptionListingUi() {
 		logger.log(Status.PASS, CHECKED_PRESCRIPTION_ADD_AND_PRESCRIPTION_LiSTING_UI);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
 		BasePatientLifeCyclePageActions.verifyPatientName(PATIENT_NAME);
 		/* Right Navigation */
 		PrescriptionPageActions.checkSave();
@@ -113,7 +118,7 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.checkNotes();
 		Assert.assertTrue(CommonPageActions.verification().contains("Add Prescription"));
 		/*verify all elements when we go first time on Prescription listing */
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -121,10 +126,11 @@ public class PrescriptionTestCase extends BaseClass {
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.verifyPatientName(PATIENT_NAME);
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
 		PrescriptionListingPageActions.verifyNoRecordFoundMessage();
 		PrescriptionListingPageActions.verifyAddNewBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Prescription Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 	/*
@@ -139,6 +145,14 @@ public class PrescriptionTestCase extends BaseClass {
 	public void addPrescription() {
 		System.out.println(patntPresData);
 		logger.log(Status.PASS, ADD_PRESCRIPTION);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
@@ -163,13 +177,14 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.verifyPrescriptionInputListData(patntPresData.get("route"));
 		PrescriptionPageActions.verifyPrescriptionInputListData(patntPresData.get("instruction"));
 		PrescriptionPageActions.verifyNotesInputList(patntPresData.get("brand_name"),patntPresData.get("notes"));
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.clickEditInputList(patntPresData.get("brand_name"));
 		PrescriptionPageActions.cancelInputList(patntPresData.get("brand_name"));
 		PrescriptionPageActions.clickEditInputList(patntPresData.get("brand_name"));
 		PrescriptionPageActions.clickOnSaveBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.actionBtnInputList(patntPresData.get("brand_name"));
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -195,6 +210,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionListingPageActions.notesInView(patntPresData.get("brand_name"),patntPresData.get("notes"));
 		PrescriptionListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Prescription Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 	/*
@@ -205,9 +222,17 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 3)
 	public void checkedPrescriptionListingAfterAddPrescription() {
 		logger.log(Status.PASS, CHECKED_PRESCRIPTION_LISTING_AFTER_ADD_PRESCRIPTION);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
 		PrescriptionListingPageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.verifyPatientName(PATIENT_NAME);
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -238,6 +263,7 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionListingPageActions.closeViewPopup();
 		PrescriptionListingPageActions.clickSendBtnMainList(patntPresData.get("brand_name"),PATIENT_NAME,MOBILE_NUMBER,EMAIL_ID);
 		Assert.assertTrue(CommonPageActions.verification().contains("Prescription Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		}
 	
 
@@ -250,9 +276,17 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 4)
 	public void editPrescription() {
 		logger.log(Status.PASS, EDIT_PRESCRIPTION);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
-		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.clickEditInputList(patntPresData.get("brand_name"));
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		PrescriptionPageActions.getBrandName(patntPresData.get("brand_name"));
@@ -283,7 +317,7 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.verifyPrescriptionInputListData(patntPresData1.get("route"));
 		PrescriptionPageActions.verifyPrescriptionInputListData(patntPresData1.get("instruction"));
 		PrescriptionPageActions.verifyNotesInputList(patntPresData1.get("brand_name"),patntPresData1.get("notes"));
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -306,6 +340,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionListingPageActions.notesInView(patntPresData1.get("brand_name"),patntPresData1.get("notes"));
 		PrescriptionListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Prescription Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 	/*
@@ -316,14 +352,24 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 5)
 	public void deletePrescriptionFromInputList() {
 		logger.log(Status.PASS, DELETE_PRESCRIPTION_FROM_INPUT_LIST);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		PrescriptionPageActions.clickOnDeleteBtn(patntPresData1.get("brand_name"));
 		PrescriptionPageActions.clickOnYesDelete();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		PrescriptionPageActions.verifyPrescriptionDeletedInputList(patntPresData1.get("brand_name"));
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -332,6 +378,7 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionListingPageActions.verifyPrescriptionDeletedInViewMainList(patntPresData1.get("brand_name"));
 		PrescriptionListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Prescription Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 	/*
@@ -342,9 +389,17 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 6)
 	public void deletePrescriptionFromPrescriptionListing() {
 		logger.log(Status.PASS, DELETE_PRESCRIPTION_FROM_PRESCRIPTION_LISTING);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
-		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addStrength(patntPresData.get("strength"));
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
@@ -358,8 +413,9 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.beforeFood();
 		PrescriptionPageActions.enterNote(patntPresData.get("notes"));
 		PrescriptionPageActions.clickOnSaveBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		BasePatientLifeCyclePageActions.clickOnAlert();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -372,13 +428,14 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionListingPageActions.dataNameInView();
 		PrescriptionListingPageActions.verifyPrescriptionDeletedInViewMainList(patntPresData1.get("brand_name"));
 		BasePatientLifeCyclePageActions.closeViewPopup();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
 		PrescriptionPageActions.verifyPrescriptionDeletedInputList(patntPresData1.get("brand_name"));
 		Assert.assertTrue(CommonPageActions.verification().contains("Add Prescription"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 	/*
@@ -387,9 +444,17 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 7)
 	public void validationMsgAddPrescriptionPage() {
 		logger.log(Status.PASS, VALIDATION_MSGS_ON_ADD_PRESCRIPTION_PAGE);
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
-		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorBrand("Enter Brand Name");
 		PrescriptionPageActions.checkedErrorGeneric("Enter Generic Name");
@@ -398,6 +463,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.checkedErrorDosage("Select Dosage");
 		PrescriptionPageActions.checkedErrorInstruction("Select Instruction");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
 		PrescriptionPageActions.addGenericName(patntPresData.get("generic_name"));
@@ -407,6 +474,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorBrand("Enter Brand Name");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addGenericName(patntPresData.get("generic_name"));
@@ -416,6 +485,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorDuration("Enter Duration");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
@@ -425,15 +496,19 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorGeneric("Enter Generic Name");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addGenericName(patntPresData.get("generic_name"));
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
-		PrescriptionPageActions.clickOnMorning();
+		PrescriptionPageActions.clickOnAfternoon();
 		PrescriptionPageActions.beforeFood();
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorDurationDrpDwn("Select Duration Unit");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
@@ -443,6 +518,8 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorDosage("Select Dosage");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PrescriptionPageActions.addBrandName(patntPresData.get("brand_name"));
 		PrescriptionPageActions.addDuration(patntPresData.get("duration"));
@@ -452,8 +529,11 @@ public class PrescriptionTestCase extends BaseClass {
 		PrescriptionPageActions.clickOnSaveBtn();
 		PrescriptionPageActions.checkedErrorInstruction("Select Instruction");
 		PrescriptionPageActions.clickOnResetBtn();
+		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		Assert.assertTrue(CommonPageActions.verification().contains("Add Prescription"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 }

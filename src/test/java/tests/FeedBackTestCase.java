@@ -33,6 +33,7 @@ public class FeedBackTestCase extends BaseClass {
      * Please update the input before executing the test cases
      */
     private static final String TODAY_DATE = TestData.getInstance().getTodayDate();
+    private static final String TODAY_DATE_FULL_YEAR = TestData.getInstance().getTodayDateFullYear();
     
     
     /**
@@ -50,9 +51,12 @@ public class FeedBackTestCase extends BaseClass {
      * Google Sheet Details
      */
     
-    private static final String MODULE_NAME="Feedback";
-    private static final String SHEET_NAME="FeedbackTestData";
-    private Map<String ,String> feedbackTestScriptData=SheetTest.prepareData(MODULE_NAME, SHEET_NAME, "A2", "G2");
+    
+    Map<String ,String> feedbackTestScriptData=null;
+    @BeforeTest
+	public void testSetup() {
+        feedbackTestScriptData=SheetTest.prepareData("Feedback", "FeedbackTestData", "A2", "G2");
+	}
 
     
 
@@ -62,12 +66,17 @@ public class FeedBackTestCase extends BaseClass {
      * started the treatment and completed All work done of the patient
      * Now checked feedback Add button should be available at Appointment listing after work done completed
      */
-    @Test(groups = {"Smoke","Sanity","Functional","Regression"},enabled = true,priority = 1)
+//    @Test(groups = {"Smoke","Sanity","Functional","Regression"},enabled = true,priority = 1)
+    @Test(enabled = true,priority = 1)
     public void creatingTreatment(){
         logger.log(Status.PASS, CREATING_TREATMENT);
         CommonPageActions.selectClinicFrmHeader(feedbackTestScriptData.get("clinic_name"));
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+
         CommonPageActions.enterMobileNo(feedbackTestScriptData.get("patient_mobileNumber"));
         CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
         CommonPageActions.clickOnPatient(feedbackTestScriptData.get("patient_mobileNumber"),feedbackTestScriptData.get("patient_name"));
         PatientDashboardPageActions.hideDueWarningPopup();
         BasePatientLifeCyclePageActions.clickOnAlert();
@@ -101,16 +110,18 @@ public class FeedBackTestCase extends BaseClass {
         TreatmentPlanListingPageActions.selectTreatmentInTreatmentListPage(feedbackTestScriptData.get("treatment_fullName"));
         TreatmentPlanListingPageActions.clickOnStartBtn(TODAY_DATE);
         WorksDonePageActions.checkedTreatmentStartMsgDisplayed();
+        
         WorksDonePageActions.selectDoctor(feedbackTestScriptData.get("treatment_fullName"), feedbackTestScriptData.get("doctor_name"));
         WorksDonePageActions.selectTime(feedbackTestScriptData.get("treatment_fullName"), "30");
         WorksDonePageActions.enterRemarks(feedbackTestScriptData.get("treatment_fullName"), "Change to complete");
-        WorksDonePageActions.selectStages(feedbackTestScriptData.get("treatment_fullName"), "Completed");
+//        WorksDonePageActions.selectStages(feedbackTestScriptData.get("treatment_fullName"), "Completed");          trt have single stage that's why already selected and disabled
         WorksDonePageActions.clickOnAdd(feedbackTestScriptData.get("treatment_fullName"));
+        
         WorkDoneHistoryPageActions.checkDateTreatment(feedbackTestScriptData.get("treatment_fullName"), TODAY_DATE);
         WorkDoneHistoryPageActions.checkSourceNo(feedbackTestScriptData.get("treatment_fullName"), "24");
         WorkDoneHistoryPageActions.checkedStatusTreatment(feedbackTestScriptData.get("treatment_fullName"), "Completed");
         WorkDoneHistoryPageActions.followUpBtn(feedbackTestScriptData.get("treatment_fullName"));
-        WorkDoneHistoryPageActions.reTreatBtn(feedbackTestScriptData.get("treatment_fullName"));
+//        WorkDoneHistoryPageActions.reTreatBtn(feedbackTestScriptData.get("treatment_fullName"));                 retreat btn not available for single stage trt
         WorkDoneHistoryPageActions.checkDataName(feedbackTestScriptData.get("treatment_fullName"));
         WorkDoneHistoryPageActions.modifiedDate(feedbackTestScriptData.get("treatment_fullName"), TODAY_DATE);
         WorkDoneHistoryPageActions.checkDoctorTreated(feedbackTestScriptData.get("treatment_fullName"), feedbackTestScriptData.get("doctor_name"));
@@ -135,8 +146,9 @@ public class FeedBackTestCase extends BaseClass {
         PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnAppList();
         AppointmentsListPageActions.checkFeedbackBtn(TODAY_DATE);
-        Assert.assertTrue(CommonPageActions.verification().contains("Appointments List"));
+        Assert.assertTrue(CommonPageActions.verification().contains("Appointment/Event Listing"));
         BaseClass.softAssert().assertAll();
+        CommonPageActions.backTODoctorDashboard();
     }
 
     /**
@@ -147,8 +159,12 @@ public class FeedBackTestCase extends BaseClass {
     public void doctorFeedbackAddUiFeedbackListing(){
         logger.log(Status.PASS, DOCTOR_FEEDBACK_ADD_UI_FEEDBACK_LISTING);
         CommonPageActions.selectClinicFrmHeader(feedbackTestScriptData.get("clinic_name"));
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+
         CommonPageActions.enterMobileNo(feedbackTestScriptData.get("patient_mobileNumber"));
         CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
         CommonPageActions.clickOnPatient(feedbackTestScriptData.get("patient_mobileNumber"),feedbackTestScriptData.get("patient_name"));
         PatientDashboardPageActions.hideDueWarningPopup();
         BasePatientLifeCyclePageActions.clickOnAlert();
@@ -183,6 +199,7 @@ public class FeedBackTestCase extends BaseClass {
         FeedbackListingPageActions.resetBtn();
         FeedbackListingPageActions.noRecordFoundDisplayed();
         Assert.assertTrue(CommonPageActions.verification().contains("Feedback Listing"));
+        CommonPageActions.backTODoctorDashboard();
     }
 
     /**
@@ -198,9 +215,11 @@ public class FeedBackTestCase extends BaseClass {
         logger.log(Status.PASS, BEHAVIOUR_FEEDBACK_ADD_UI_PAGE);
         CommonPageActions.selectClinicFrmHeader(feedbackTestScriptData.get("clinic_name"));
         DoctorDashBoardPageActions.clickOnAppListBtn();
+		AppointmentsLisitngPageActions.clickOnLastPage();
+
 //        AppointmentsLisitngPageActions.selectDoctorFRmDrpDwn(feedbackTestScriptData.get("doctor_name"));
         AppointmentsLisitngPageActions.clickFeedbackBtn(feedbackTestScriptData.get("patient_name"));
-        FeedbackAddPageActions.feedbackDate(TODAY_DATE);
+        FeedbackAddPageActions.feedbackDate(TODAY_DATE_FULL_YEAR);
         FeedbackAddPageActions.savefeedBackAdd();
         FeedbackAddPageActions.serialMandatoryFields();
         FeedbackAddPageActions.enterSerialNumber("12345");
@@ -243,7 +262,8 @@ public class FeedBackTestCase extends BaseClass {
         FeedbackAddPageActions.feedbackSerialNumber("");
         FeedbackAddPageActions.cancelfeedBackAdd();
         BaseClass.softAssert().assertAll();
-        Assert.assertEquals(CommonPageActions.verification(),"Appointments/Event Listing");
+        Assert.assertEquals(CommonPageActions.verification(),"Appointment/Event Listing");
+        CommonPageActions.backTODoctorDashboard();
     }
 //
 //    /**
@@ -256,10 +276,13 @@ public class FeedBackTestCase extends BaseClass {
     public void doctorAddedFeedback(){
         logger.log(Status.PASS, DOCTOR_ADDED_FEEDBACK);
         CommonPageActions.selectClinicFrmHeader(feedbackTestScriptData.get("clinic_name"));
+        
         DoctorDashBoardPageActions.clickOnAppListBtn();
+		AppointmentsLisitngPageActions.clickOnLastPage();
+
 //        AppointmentsLisitngPageActions.selectDoctorFRmDrpDwn(feedbackTestScriptData.get("doctor_name"));
         AppointmentsLisitngPageActions.clickFeedbackBtn(feedbackTestScriptData.get("patient_name"));
-//        FeedbackAddPageActions.feedbackDate(TODAY_DATE);
+        FeedbackAddPageActions.feedbackDate(TODAY_DATE_FULL_YEAR);
         FeedbackAddPageActions.enterSerialNumber("12345");
         FeedbackAddPageActions.selectRating(1);
         FeedbackAddPageActions.savefeedBackAdd();
@@ -274,10 +297,12 @@ public class FeedBackTestCase extends BaseClass {
         FeedbackAddPageActions.selectDentistInteractionRate_1();
         FeedbackAddPageActions.addFeedbackNotes_rate_1("testing feedback");
         FeedbackAddPageActions.savefeedBackAdd();
+        
+        //test failing here bcz feedback listing is not available
         FeedbackListingPageActions.feedbackListingColumnName();
         FeedbackListingPageActions.patientName_PatientId(feedbackTestScriptData.get("patient_name"));
         FeedbackListingPageActions.feedbackType(feedbackTestScriptData.get("patient_name"),"Patient Feedback");
-        FeedbackListingPageActions.feedbackDate(feedbackTestScriptData.get("patient_name"),TODAY_DATE);
+        FeedbackListingPageActions.feedbackDate(feedbackTestScriptData.get("patient_name"),TODAY_DATE_FULL_YEAR);
         FeedbackListingPageActions.mobileNumber(feedbackTestScriptData.get("patient_name"),feedbackTestScriptData.get("patient_mobileNumber"));
         FeedbackListingPageActions.emailId(feedbackTestScriptData.get("patient_name"),"NA");
         FeedbackListingPageActions.submittedBy(feedbackTestScriptData.get("patient_name"),feedbackTestScriptData.get("doctor_nickName"));
@@ -304,6 +329,7 @@ public class FeedBackTestCase extends BaseClass {
         AppointmentsLisitngPageActions.selectDoctorFRmDrpDwn(feedbackTestScriptData.get("doctor_name"));
         AppointmentsLisitngPageActions.checkFeedbackBtnDisable(TODAY_DATE);
         Assert.assertEquals(CommonPageActions.verification(),"Feedback Listing");
+        CommonPageActions.backTODoctorDashboard();
     }
 
 //    /**
