@@ -33,6 +33,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -41,6 +42,7 @@ import org.testng.asserts.SoftAssert;
 import com.aventstack.extentreports.ExtentTest;
 
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
 import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pages.doctorDashboard.DoctorDashBoardPage;
@@ -77,53 +79,36 @@ public class BaseClass extends ExtentReportListener {
 	@BeforeTest
 	public void configReport() {
 		ExtentReportListener extent = new ExtentReportListener();
-
 		logger = extent.getExtentTest();
 		System.out.println("Test Class logger ---->" + logger);
-
 	}
 
 	public static void launchBrowser() {
-
 		browser = config.getBrowser();
-
 		if (browser.equalsIgnoreCase("chrome")) {
-			driver = new ChromeDriver();
-		}
-
-		else if (browser.equalsIgnoreCase("firefox")) {
+			driver = new ChromeDriver(); 
+		} else if (browser.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
-		}
-
-		else if (browser.equalsIgnoreCase("ie") || (browser.equalsIgnoreCase("edge"))) {
+		} else if (browser.equalsIgnoreCase("ie") || (browser.equalsIgnoreCase("edge"))) {
 			driver = new EdgeDriver();
-		}
-
-		else {
+		} else {
 			System.out.println("Incorrect option - Launching Chrome browser for safety");
-			driver = new ChromeDriver();
-		}
+			driver = new ChromeDriver();		}
 
 		driver.manage().window().maximize();
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
 	}
 
 	public static void launchDoctorDashboard() {
-
 		appURL = config.getEnvURL();
 		driver.get(appURL);
-
 	}
 
 	public static String getUsername() {
-
 		username = config.getUserName();
 		return username;
 	}
 
 	public static String getPassword() {
-
 		password = config.getUserPassword();
 		return password;
 	}
@@ -131,24 +116,20 @@ public class BaseClass extends ExtentReportListener {
 	public static void doctorDashboardHomePage() {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("dashBoardAppointmentAdd")));
-
 		BaseClass.waitForSpinnerToDisappear();
+		checkPendingActionsReminder();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("brand_logo")));
+		
 		String actualTitle = driver.getTitle();
 		if (actualTitle.contains("Doctor Dashboard")) {
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
-		} else if (actualTitle.contains("Appointment")) {
-
-			driver.navigate().refresh();
+			BaseClass.waitForSpinnerToDisappear();
+		} else if (actualTitle.contains("Add Appointment")) {
+			CommonPageActions.backToDoctorDashbrd();
 		} else if (actualTitle.contains("Appointment Scheduler Calender")) {
 			CommonPageActions.backToDoctorDashbrd();
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
 		} else {
 			CommonPageActions.backToDoctorDashbrd();
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
 		}
-		AppointmentAddPageActions.toVerifyAppointmentHomePage();
-
 	}
 
 	public static void openAddAppointmentPage() {
@@ -182,13 +163,103 @@ public class BaseClass extends ExtentReportListener {
 			DoctorDashBoardPageActions.clickOnPatientAdd();
 		}
 	}
+	
+	public static void openAppointmentListingPage() {
+		
+		BaseClass.waitForSpinnerToDisappear();
+		String actualTitle = driver.getTitle();
+		if (actualTitle.contains("Doctor Dashboard")) {
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		} else if (actualTitle.contains("Appointment/Event Listing")) {
+			driver.navigate().refresh();
+		} else if (actualTitle.contains("Appointment Scheduler Calender")) {
+			CommonPageActions.backToDoctorDashbrd();
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		} else {
+			CommonPageActions.backToDoctorDashbrd();
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		}
+		
+		waitForSpinnerToDisappear();
+		waitForModalOverlayToDisappear();
+		AppointmentsLisitngPageActions.verifiyAppListHP();
+	}
+	
+	public static void checkPendingActionsReminder() {
+		
+		try {
+
+			List<WebElement> pendingActionsReminder = driver.findElements(By.xpath("//h4[contains(text(),'Pending Actions')]"));
+
+			// must check if popup is displayed only
+			boolean isNotificationDisplayed = (pendingActionsReminder.get(0).isDisplayed());
+
+			if (isNotificationDisplayed) {
+				
+				List<WebElement> closePendingActionsReminder = driver
+						.findElements(By.xpath("//a[@class='close notActiveSec ui-link']"));
+				List<WebElement> savePendingActionsReminder = driver
+						.findElements(By.xpath("//a[@class='close btn-act-save dueApptSaveDataBtn ui-link']"));
+				
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+				boolean isNotificationPresent = pendingActionsReminder.size() > 0;
+				boolean isSnoozePresent = closePendingActionsReminder.size() > 0;
+				boolean isSavePresent = savePendingActionsReminder.size() > 0;
+				
+				if (isSavePresent) {
+					CommonPageActions.selectNoShowPendingActions();
+				} else {
+					CommonPageActions.closePendingActionsReminder();
+				}
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Pending actions notification appeared and couldn't be closed");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Pedning actions notification not appeared and is handled");
+		}
+		
+	}
 
 	/************************************************
 	 * 
 	 * Utils - Utilities
 	 * 
 	 ***********************************************/
-
+	
+	public static void switchUser(String user, String cred) {
+		
+		Login login = PageFactory.initElements(driver, Login.class);
+		
+		waitForSpinnerToDisappear();
+		CommonPageActions.clickOnlogOut();
+		waitForPageLoad();
+		waitForSpinnerToDisappear();
+		
+		waitToBeClickableAndSendKeys(login.getUnTxBx(), user);
+		waitToBeClickableAndSendKeys(login.getPwdTxBx(), cred);
+		
+		driver.findElement(By.xpath("//input[@id='loginButton']")).click();
+		waitForPageLoad();
+		waitForSpinnerToDisappear();
+		waitForSpinnerToDisappearOnDoctorDashboard();
+		
+	}
+	
+	
+	public static void highlightElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].style.border='2px solid red'", element);
+        try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // You can modify the style as needed for highlighting (e.g., change color, background, etc.)
+    }
+	
+	
 	public static void pressTabKey(WebDriver driver) {
 		Actions action = new Actions(driver);
 		action.sendKeys(Keys.TAB).build().perform();
@@ -377,9 +448,18 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void selectFromDropDownByVisibleText(WebElement ele, String value) {
 
-		boolean isElementPresent = false;
-
+		//boolean isElementPresent = false;
+		
 		waitForElementVisibility(ele);
+		waitForElementToBeClickable(ele);
+		waitForModalOverlayToDisappear();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		new Select(ele).selectByVisibleText(value);
 	}
 
@@ -405,7 +485,7 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void waitForElementVisibility(WebElement ele, int secs) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.visibilityOf(ele));
 	}
 	
@@ -424,6 +504,7 @@ public class BaseClass extends ExtentReportListener {
 	public static void waitToBeClickableAndClick(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
+		element.click();
 	}
 
 	public static void waitForElementToBeClickable(WebElement ele) {
@@ -431,6 +512,11 @@ public class BaseClass extends ExtentReportListener {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
+	
+	public static void waitForElementToBeClickable(String xpathLocator) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathLocator)));
+	}	
 
 	public static void executeScript(WebElement ele) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -594,6 +680,8 @@ public class BaseClass extends ExtentReportListener {
 
 		// waitForElementToBeClickable(login.getLoginBtn());
 		driver.findElement(By.xpath("//input[@id='loginButton']")).click();
+		waitForPageLoad();
+		waitForSpinnerToDisappear();
 		waitForSpinnerToDisappearOnDoctorDashboard();
 
 		// waitForElementToBeClickable(login.getLoginBtn());

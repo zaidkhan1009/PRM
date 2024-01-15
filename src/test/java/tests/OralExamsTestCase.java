@@ -2,10 +2,6 @@ package tests;
 
 import java.util.Map;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,6 +15,7 @@ import pageActions.patientDashboard.ChiefComplaintAddPageActions;
 import pageActions.patientDashboard.ChiefComplaintListingPageActions;
 import pageActions.patientDashboard.OralExamListingPageActions;
 import pageActions.patientDashboard.OralExamsPageActions;
+import utils.SheetTest;
 
 public class OralExamsTestCase extends BaseClass{
 	
@@ -43,6 +40,18 @@ public class OralExamsTestCase extends BaseClass{
 	Map<String, String> patntOralExamData = null;
 
 
+	@BeforeMethod
+	public void testSetup() {
+		
+		patntOralExamData = SheetTest.prepareData("OralExamData","OralExam","A1","Z");
+		CommonPageActions.selectClinicFrmHeader(patntOralExamData.get("clinicLocation"));
+		CommonPageActions.enterMobileNo(patntOralExamData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		CommonPageActions.clickOnPatient(patntOralExamData.get("patient_mobile"),patntOralExamData.get("patient_name"));
+		Assert.assertTrue(CommonPageActions.verification().contains("Patient Dashboard"));	
+		
+		
+	}
 
 	@Test(enabled = true, priority = 1)
 	public void verifyUIOralExamAdd() {
@@ -67,6 +76,7 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.clickOnHardTissue();
 		OralExamsPageActions.verifyWebElementInHardTissue();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exams"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 2)
@@ -83,6 +93,7 @@ public class OralExamsTestCase extends BaseClass{
 		/* Only For First Time Traversing */
 //		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exam Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 3)
@@ -141,25 +152,26 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.verifyToothObservationRemark();
 		OralExamsPageActions.clickOnHardTissueInPopup();
 		OralExamsPageActions.verifyTitleOfPopup("mixed", "Hard Tissue");
-		OralExamsPageActions.clickOnMandibularAngle();
+		OralExamsPageActions.clickOnMandibularAngleOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnMandibularBody();
+		OralExamsPageActions.clickOnMandibularBodyOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnMaxillaryTuberosity();
+		OralExamsPageActions.clickOnMaxillaryTuberosityOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnPosteriorMaxilla();
+		OralExamsPageActions.clickOnPosteriorMaxillaOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnPreMaxilla();
+		OralExamsPageActions.clickOnPreMaxillaOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnMaxillarySinus();
+		OralExamsPageActions.clickOnMaxillarySinusOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnMandibularSymphysis();
+		OralExamsPageActions.clickOnMandibularSymphysisOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
-		OralExamsPageActions.clickOnTMJoint();
+		OralExamsPageActions.clickOnTMJointOnPopup();
 		OralExamsPageActions.verifyHardProvisionals();
 		OralExamsPageActions.verifyToothObservationRemark();
 		OralExamsPageActions.clickOnCloseBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exams"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 4)
@@ -229,6 +241,7 @@ public class OralExamsTestCase extends BaseClass{
 //		ChiefComplaintListingPageActions.userNameInView("Bad Breath", patntOralExamData.get("doctorNickName"));
 		ChiefComplaintListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 5)
@@ -300,6 +313,7 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.deSelectedInRespective("Mixed", "11");
 		OralExamsPageActions.deSelectedInRespective("Mixed", "12");
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exams"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 6)
@@ -413,6 +427,7 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.selectedHardTissueProvisionalDisplayedBelow();
 		OralExamsPageActions.clickOnCloseBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exams"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 7)
@@ -461,6 +476,7 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamListingPageActions.noteOralExamViewPopup("47", "it for testing");
 		BasePatientLifeCyclePageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exam Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 8)
@@ -485,11 +501,11 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.clickOnHardTissueProvisinals();
 		OralExamsPageActions.clickOnMaxillarySinus();
 		OralExamsPageActions.clickOnHardTissueProvisinals();
-		OralExamsPageActions.enterOralExamNotes("it for testing");
+		OralExamsPageActions.enterOralExamNotes("it is for testing");
 		OralExamsPageActions.clickOnSaveBtn();
 		OralExamsPageActions.verifyInputListWebElement();
 		OralExamsPageActions.provisinalsInputListOfMultipleTeeth("44", "45", 6);
-		OralExamsPageActions.verifyNoteInputList("44", "it for testing");
+		OralExamsPageActions.verifyNoteInputList("44", "it is for testing");
 		OralExamsPageActions.verifyActionBtnOfTeethNo("44");
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -500,16 +516,17 @@ public class OralExamsTestCase extends BaseClass{
 		BasePatientLifeCyclePageActions.actionBtnMainList(patntOralExamData.get("clinicLocation"));
 		OralExamListingPageActions.checkedDataName();
 		OralExamListingPageActions.verifyProvisinalsMultipleTeethOralExamList("44", "45", 6);
-		OralExamListingPageActions.verifyNoteOralExamList("44", "it for testing");
+		OralExamListingPageActions.verifyNoteOralExamList("44", "it is for testing");
 		OralExamListingPageActions.verifyCreatedByInOralExamList("44",patntOralExamData.get("doctorNickName"));
 		BasePatientLifeCyclePageActions.clickViewBtn(patntOralExamData.get("clinicLocation"));
 		BasePatientLifeCyclePageActions.headerViewPopup("Oral Exam View");
 		OralExamListingPageActions.checkedViewDataName();
 		OralExamListingPageActions.oralExamViewPopup("44", 6);
 		OralExamListingPageActions.createdByOralExamViewPopup("44", patntOralExamData.get("doctorNickName"));
-		OralExamListingPageActions.noteOralExamViewPopup("44", "it for testing");
+		OralExamListingPageActions.noteOralExamViewPopup("44", "it is for testing");
 		BasePatientLifeCyclePageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exam Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	@Test(enabled = true, priority = 9)
@@ -559,5 +576,6 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamsPageActions.verifyProvisinalsInputList("43", 1);
 		Assert.assertTrue(CommonPageActions.verification().contains("Oral Exams"));
 		CommonPageActions.softAssert().assertAll();
+		CommonPageActions.backTODoctorDashboard();
 	}
 }

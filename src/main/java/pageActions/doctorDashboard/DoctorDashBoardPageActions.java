@@ -78,46 +78,7 @@ public class DoctorDashBoardPageActions extends BaseClass {
 		//BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
 		BaseClass.waitForSpinnerToDisappear();
 
-		try {
-
-			List<WebElement> pendingActionsReminder = driver
-					.findElements(By.xpath("//h4[contains(text(),'Pending Actions')]"));
-			List<WebElement> closePendingActionsReminder = driver
-					.findElements(By.xpath("//a[@class='close notActiveSec ui-link']"));
-			List<WebElement> savePendingActionsReminder = driver
-					.findElements(By.xpath("//a[@class='close btn-act-save dueApptSaveDataBtn ui-link']"));
-
-			boolean isNotificationDisplayed = pendingActionsReminder.get(0).isDisplayed();
-			
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-			
-			
-			boolean isNotificationPresent = pendingActionsReminder.size() > 0;
-			boolean isSnoozePresent = closePendingActionsReminder.size() > 0;
-			boolean isSavePresent = savePendingActionsReminder.size() > 0;
-
-			if (isNotificationDisplayed) {
-
-				if (isSavePresent) {
-
-					CommonPageActions.selectNoShowPendingActions();
-
-				}
-
-				else {
-
-					CommonPageActions.closePendingActionsReminder();
-
-//					BaseClass.hoverOnElement(closePendingActionsReminder.get(0));
-//					closePendingActionsReminder.get(0).click();
-				}
-			}
-
-		} catch (NoSuchElementException e) {
-
-			System.out.println("Pending actions notification appeared and couldn't be closed");
-
-		}
+		
 
 		BaseClass.waitForElementVisibility(docDashPage.getAppListBtn(), 4000);
 		BaseClass.waitForUIWidgetOverlayToDisappear();
@@ -172,7 +133,9 @@ public class DoctorDashBoardPageActions extends BaseClass {
 	}
 
 	public static void clickOnProductSales() {
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(docDashPage.getDashboardProductSale());
 		docDashPage.getDashboardProductSale().click();
 		BaseClass.waitForSpinnerToDisappear();

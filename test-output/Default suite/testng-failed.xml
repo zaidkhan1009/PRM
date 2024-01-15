@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="tests.AppointmentAddEConsultTestCase">
+      <class name="tests.LabWorkOrderListingTestCase1">
         <methods>
+          <include name="configReport"/>
           <include name="tearDown"/>
-          <include name="statusOfScripts"/>
+          <include name="testSetup"/>
           <include name="setup"/>
-          <include name="appointmentEConsultPage"/>
-          <include name="suite"/>
+          <include name="completePaymentAndCheckLWOStatus"/>
         </methods>
-      </class> <!-- tests.AppointmentAddEConsultTestCase -->
+      </class> <!-- tests.LabWorkOrderListingTestCase1 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

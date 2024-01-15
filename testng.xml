@@ -6,21 +6,34 @@
 	</listeners>
 	<test name="Test">
 		<classes>
-			<class name="tests.AppointmentAddEConsultTestCase">
+			<class name="tests.EventTestCase">
 				<methods>
-					<!--<include name="appointmentInClinicPage" /> 
-					<include name="mandatoryFields" />
-					<include name="bookNewAppointmentInClinic" />
-					<include name="createNewPatient" />-->
-					
-					
+					<include name="verifyHoursMinsutesAndDurationValidation" />
+					<!--<include name="verifyAllWebElementOnAddProductSale" />
+					<include name="checkingWithoutMandatoryFields" />
+					<include name="verifyHoursMinsutesAndDurationValidation" />
+					<include name="behaviourChiefComplaintOnOralExam" />
+					<include name="teethBehaviourOralExamAdd" />
+					<include name="behaviorOfTissueForSingleTeeth" />
+					<include name="addOralExamSingleTeeth" />
+					<include name="addOralExamOfMultipleTeeth" />
+					<include name="oralExamEditInputList" />-->
 				</methods>
 			</class>
 		</classes>
-	</test> <!--
-	Test -->
-</suite> <!--
-	'Commented code for debug or other purpose'
+	</test>
+</suite>
+<!--
+'Commented code for debug or other purpose'
 
-<include name="appointmentEConsultPage" />
-Suite -->
+<class name="tests.AppointmentAddScanTestCase">
+				<methods>	
+					<include name="appointmentScanPage" /> 
+					<include name="mandatoryFields" />
+					<include name="bookNewAppointmentScanHome" />
+					<include name="deleteAppointment" /
+					<include name="bookTentativeAppointment" />
+				</methods>
+</class>
+
+-->

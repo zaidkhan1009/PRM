@@ -17,7 +17,7 @@ public class CommonPage {
     @FindBy(id = "logoutBtn")
     private WebElement logout;
     
-    @FindBy(xpath = "//li[@id='topDropdownContainer']//input")
+    @FindBy(xpath ="//li[@id='topDropdownContainer']//input")
     private WebElement searchClinicDropdown;
     
     @FindBy(id = "searchBtnContainer")

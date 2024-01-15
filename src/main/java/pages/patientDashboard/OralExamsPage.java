@@ -129,27 +129,47 @@ public class OralExamsPage {
 	// ------------------------webelement of hard tissue in popup---
 	@FindBy(xpath = "//div[@id='toothViewPopup']//a[text()='Hard Tissue']")
 	private WebElement HardTissueOnPopUp;
-	@FindBy(xpath = "//span[text()='Mandibular Angle']")
-	private WebElement MandibularAngle;
-	@FindBy(xpath = "//div[@ng-click='addToothHardTissue(hTissues.id, hTissues.title)']//span[text()='Mandibular Body']")
-	private WebElement MandibularBody;
-	@FindBy(xpath = "//span[text()='Maxillary Tuberosity']")
-	private WebElement MaxillaryTuberosity;
-	@FindBy(xpath = "//span[text()='Posterior Maxilla']")
-	private WebElement PosteriorMaxilla;
-	@FindBy(xpath = "//span[text()='Pre-Maxilla']")
-	private WebElement PreMaxilla;
-	@FindBy(xpath = "//span[text()='Maxillary Sinus']")
-	private WebElement MaxillarySinus;
-	@FindBy(xpath = "//span[text()='Mandibular Symphysis']")
-	private WebElement MandibularSymphysis;
-	@FindBy(xpath = "//span[text()='TM Joint']")
-	private WebElement TMJoint;
+
 	@FindBy(xpath = "//div[contains(@ng-click,'hDiadgnos.ProvisionalDiagnostic.id')]")
 	private List<WebElement> HardProvisinalsInPopup;
 	@FindBy(xpath = "//div[contains(@ng-click,'removeToothHardTissueItems')]//a[@class='remove-button']")
 	private List<WebElement> provisionalRemoveBtnHardTissue;
-
+	
+	//-----------------------------------------------------------------------------------------------------
+	@FindBy(xpath = "//h5[text()='Mandibular Angle']" ) // changed the xpath from "//span[text()='Mandibular Angle']")
+	private WebElement MandibularAngleOnPopup;
+	@FindBy(xpath = "//h5[text()='Mandibular Body']")
+	private WebElement MandibularBodyOnPopup;
+	@FindBy(xpath = "//h5[text()='Maxillary Tuberosity']")
+	private WebElement MaxillaryTuberosityOnPopup;
+	@FindBy(xpath = "//h5[text()='Posterior Maxilla']")
+	private WebElement PosteriorMaxillaOnPopup;
+	@FindBy(xpath = "//h5[text()='Pre-Maxilla']")
+	private WebElement PreMaxillaOnPopup;
+	@FindBy(xpath = "//h5[text()='Maxillary Sinus']")
+	private WebElement MaxillarySinusOnPopup;
+	@FindBy(xpath = "//h5[text()='Mandibular Symphysis']")
+	private WebElement MandibularSymphysisOnPopup;
+	@FindBy(xpath = "//h5[text()='TM Joint']")
+	private WebElement TMJointOnPopup;
+	//-----------------------------------------------------------------------------------------------------
+	@FindBy(xpath = "//span[text()='Mandibular Angle']" ) // changed the xpath from "//span[text()='Mandibular Angle']")
+	private WebElement MandibularAngle;
+	@FindBy(xpath = "//span[text()='Mandibular Body']")
+	private WebElement MandibularBody ;
+	@FindBy(xpath = "//span[text()='Maxillary Tuberosity']")
+	private WebElement MaxillaryTuberosity ;
+	@FindBy(xpath = "//span[text()='Posterior Maxilla']")
+	private WebElement PosteriorMaxilla ;
+	@FindBy(xpath = "//span[text()='Pre-Maxilla']")
+	private WebElement PreMaxilla ;
+	@FindBy(xpath = "//span[text()='Maxillary Sinus']")
+	private WebElement MaxillarySinus ;
+	@FindBy(xpath = "//span[text()='Mandibular Symphysis']")
+	private WebElement MandibularSymphysis ;
+	@FindBy(xpath = "//span[text()='TM Joint']")
+	private WebElement TMJoint ;
+	
 	// ---------------webelment of chief complaints on oral page-------------------
 	@FindBy(xpath = "//span[@alt='Edit added chief complaint(s)']")
 	private WebElement chiefComplaintEditBtn;
@@ -180,6 +200,39 @@ public class OralExamsPage {
 	
 	private static final String TODAY_DATE =TestData.getInstance().getTodayDate();
 
+	public WebElement getMandibularAngleOnPopup() {
+		return MandibularAngleOnPopup;
+	}
+	
+	public WebElement getMandibularBodyOnPopup() {
+		return MandibularBodyOnPopup;
+	}
+	
+	public WebElement getMaxillaryTuberosityOnPopup() {
+		return MaxillaryTuberosityOnPopup;
+	}
+	
+	public WebElement getPosteriorMaxillaOnPopup() {
+		return PosteriorMaxillaOnPopup;
+	}
+	
+	public WebElement getPreMaxillaOnPopup() {
+		return PreMaxillaOnPopup;
+	}
+	
+	public WebElement getMaxillarySinusOnPopup() {
+		return MaxillarySinusOnPopup;
+	}
+	
+	public WebElement getMandibularSymphysisOnPopup() {
+		return MandibularSymphysisOnPopup;
+	}
+	
+	public WebElement getTMJointOnPopup() {
+		return TMJointOnPopup;
+	}
+	
+	
 	public WebElement getTeeth() {
 		return teeth;
 	}

@@ -69,6 +69,7 @@ public class SheetTest {
 		List<List<Object>> values = response.getValues();
 		
 		// Print value
+		System.out.println("Map Data");
 		System.out.println(values);
 		
 		Map<String, String> mapData = new HashMap<String, String>();
@@ -290,33 +291,35 @@ public class SheetTest {
 
 				case "LWO":
 					for (List<Object> row : values) {
-						mapData.put("lab_name", (String) row.get(2));
-						mapData.put("order_type", (String) row.get(3));
-						mapData.put("work_details", (String) row.get(4));
-						mapData.put("other_info", (String) row.get(5));
-						mapData.put("source", (String) row.get(6));
-						mapData.put("item_sent", (String) row.get(7));
-						mapData.put("lab_no", (String) row.get(8));
-						mapData.put("revision", (String) row.get(9));
-						mapData.put("reason", (String) row.get(10));
-						mapData.put("status", (String) row.get(11));
-						mapData.put("require", (String) row.get(12));
-						mapData.put("shade", (String) row.get(13));
-						mapData.put("shade_option", (String) row.get(14));
-						mapData.put("stains_internal", (String) row.get(15));
-						mapData.put("stains_external", (String) row.get(16));
-						mapData.put("translucency", (String) row.get(17));
-						mapData.put("texture", (String) row.get(18));
-						mapData.put("configurations", (String) row.get(19));
-						mapData.put("configurations_opt", (String) row.get(20));
-						mapData.put("surface_details", (String) row.get(21));
-						mapData.put("notes", (String) row.get(22));
-						mapData.put("attach_name", (String) row.get(23));
-						mapData.put("revision_no", (String) row.get(24));
-						mapData.put("updation_reason", (String) row.get(25));
-						mapData.put("plan_treatment_group", (String) row.get(26));
-						mapData.put("plan_short_name", (String) row.get(27));
-						mapData.put("plan_Full_Name", (String) row.get(28));
+						
+						mapData.put("test_name", (String) row.get(0));
+						mapData.put("lab_name", (String) row.get(1));
+						mapData.put("order_type", (String) row.get(2));
+						mapData.put("work_details", (String) row.get(3));
+						mapData.put("other_info", (String) row.get(4));
+						mapData.put("source", (String) row.get(5));
+						mapData.put("item_sent", (String) row.get(6));
+						mapData.put("lab_no", (String) row.get(7));
+						mapData.put("revision", (String) row.get(8));
+						mapData.put("reason", (String) row.get(9));
+						mapData.put("status", (String) row.get(10));
+						mapData.put("require", (String) row.get(11));
+						mapData.put("shade", (String) row.get(12));
+						mapData.put("shade_option", (String) row.get(13));
+						mapData.put("stains_internal", (String) row.get(14));
+						mapData.put("stains_external", (String) row.get(15));
+						mapData.put("translucency", (String) row.get(16));
+						mapData.put("texture", (String) row.get(17));
+						mapData.put("configurations", (String) row.get(18));
+						mapData.put("configurations_opt", (String) row.get(19));
+						mapData.put("surface_details", (String) row.get(20));
+						mapData.put("notes", (String) row.get(21));
+						mapData.put("attach_name", (String) row.get(22));
+						mapData.put("revision_no", (String) row.get(23));
+						mapData.put("updation_reason", (String) row.get(24));
+						mapData.put("plan_treatment_group", (String) row.get(25));
+						mapData.put("plan_short_name", (String) row.get(26));
+						mapData.put("plan_full_name", (String) row.get(27));
 					}
 					break;
 

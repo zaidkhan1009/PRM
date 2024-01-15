@@ -31,7 +31,7 @@ public class TreatmentPlansPage {
 	private WebElement byArchBtn;
 	@FindBy(xpath = "//h1[text()='Treatment Plans']")
 	private WebElement header;
-	@FindBy(xpath = "//div[@id='confirmbox']//button[@class='btn btn-warning confirmBtn']")
+	@FindBy(xpath = "//button[@class='close']/span[@class='cmnicons yes-mdl']" ) // changed the xpath from "//div[@id='confirmbox']//button[@class='btn btn-warning confirmBtn']")
 	private WebElement yesOnMultiselect;
 	// ------------webelement of the popup after selected teeth image------
 	@FindBy(xpath = "//h4[contains(@class,'modal-title')]/span[contains(text(),'Findings')]")
@@ -90,7 +90,7 @@ public class TreatmentPlansPage {
 	private WebElement oralExamBtn;
 	@FindBy(xpath = "//span[contains(text(),'Please select a treatment before clicking on save!')]")
 	private WebElement withoutTreatmentMsg;
-	@FindBy(xpath = "//label[@for='bridge']")
+	@FindBy(xpath = "//div[@for='bridge']" ) // "//div[@for='bridge']")
 	private WebElement partOfBridgeChkBx;
 
 	// ----------------webElement of oral exam popup after selecting pencil in

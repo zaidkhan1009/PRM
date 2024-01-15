@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -635,6 +636,23 @@ public class LabWorkOrderEditPageActions extends BaseClass {
 	public static void clickSubmittedToLab() {
 		BaseClass.waitForPageLoad();
 		labWorkOrderEditPage.getSubmittedToLabInEdit().click();
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		try {
+			List<WebElement> labChange = driver.findElements(By.xpath("//div[@class='col-md-12 modalConfirmTxt fnt_14'][contains(text(),'lab selected previously has been changed!')]"));
+			boolean isLabChangeDisplayed = (labChange.get(0).isDisplayed());
+			if (isLabChangeDisplayed) {
+				WebElement yesBtnOnPopup = driver.findElement(By.xpath("//span[@class='cmnicons yes-mdl']"));
+				BaseClass.waitForElementToBeClickable(yesBtnOnPopup);
+				yesBtnOnPopup.click();
+				BaseClass.waitForPageLoad();
+				BaseClass.waitForSpinnerToDisappear();
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Popup for Lab change when submit to lab handled");
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Lab change popup hasn't appeared and handled");
+		}
 	}
 
 	/*Click the reset button shown in LWO edit screen*/

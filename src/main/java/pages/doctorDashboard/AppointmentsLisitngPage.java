@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AppointmentsLisitngPage {
 
-	@FindBy(xpath = "//th[text()='Patient Name']")
+	@FindBy(xpath ="//th[contains(text(),'Patient Name')]") //changed the xpath from "//th[text()='Patient Name']")   
 	private WebElement patientName;
 	@FindBy(xpath = "//th[text()='Patient Id']")
 	private WebElement patientId;
@@ -25,7 +25,7 @@ public class AppointmentsLisitngPage {
 	private WebElement clinic;
 	@FindBy(xpath = "//th[text()='Action']")
 	private WebElement actionBtn;
-	@FindBy(xpath = "//input[@id='serach_option']")
+	@FindBy(xpath ="//input[@id='search_option_mainClinic']")  // changed the xpath from "//input[@id='serach_option']")
 	public WebElement docDropDoownBtn;
 	@FindBy(id = "fromDate")
 	private WebElement fromDateTxt;
@@ -35,7 +35,7 @@ public class AppointmentsLisitngPage {
 	private WebElement toDateTxt;
 	@FindBy(xpath = "//button[contains(@ng-click,'toDate')]")
 	private WebElement toDateCalenderIcon;
-	@FindBy(id = "type")
+	@FindBy(id ="category")  // changed the xpath from "type")
 	private WebElement appTypeDrpDwn;
 	@FindBy(xpath = "//i[text()='Search']/preceding-sibling::span")
 	private WebElement searchBtn;
@@ -44,7 +44,7 @@ public class AppointmentsLisitngPage {
 	@FindBy(xpath = "//body[contains(@data-ng-class,'fbDesign')]")
 	private WebElement Alert;
 	// .......................................
-	@FindBy(xpath = "//td[contains(@class,'dateTDwdth')]")
+	@FindBy(xpath ="//td[contains(@class,'text-left revisionBlock ng-scope')]") // changed the xpath from "//td[contains(@class,'dateTDwdth')]")
 	private List<WebElement> timeSlotApp;
 	@FindBy(xpath = "//span[contains(text(),'Tentative')]")
 	private List<WebElement> tentative;
@@ -60,7 +60,7 @@ public class AppointmentsLisitngPage {
 	private List<WebElement> deleteBtn;
 	@FindBy(xpath = "//div[contains(@data-ng-click,'confirmApp')]//span[@class='actn-icn noShow']")
 	private List<WebElement> noShowBtn;
-	@FindBy(xpath = "//table[@id='clinicApptAllListTable']//td[contains(text(),'No records found')]")
+	@FindBy(xpath = "//i[@class='ng-binding'][text()='No Record Found!']") // changed the xpath from "//table[@id='clinicApptAllListTable']//td[contains(text(),'No records found')]")
 	public WebElement noRecordFoundMsg;
 	@FindBy(id = "reason")
 	private WebElement noShowVisibleText;
@@ -121,7 +121,7 @@ public class AppointmentsLisitngPage {
 	private List<WebElement> followOnStatus;
 	@FindBy(xpath = "//span[text()='No Show']")
 	private List<WebElement> noShowStatus;
-	@FindBy(xpath = "//span[text()='Checked In']")
+	@FindBy(xpath = "//span[text()='ChkIN']") // [umar: 4-Jan-24] changed the xpath from "//span[text()='Checked In']")
 	private List<WebElement> checkinStatus;
 	@FindBy(xpath = "//span[text()='Expired']")
 	private List<WebElement> expiredStatus;
@@ -139,6 +139,9 @@ public class AppointmentsLisitngPage {
 	private WebElement textOnDelete;
 	@FindBy(xpath = "//div[text()='Select reason']")
 	private WebElement reasonErrorMsg;
+	@FindBy(xpath="//span[@class='actn-icn edit']/../../../div[1]")
+	private WebElement viewAction;
+	
 //    @FindBy(xpath = "//iframe[contains(@id,'fancybox-frame')]")
 //    private WebElement viewFrame;
 	
@@ -155,6 +158,10 @@ public class AppointmentsLisitngPage {
 	 * Getters for the locators
 	 */
 
+	public WebElement getViewAction() {
+		return viewAction;
+	}
+	
 	public WebElement getPatientName() {
 		return patientName;
 	}

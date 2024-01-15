@@ -93,7 +93,7 @@ public class AppointmentsListPageActions extends BaseClass {
 
     public static void checkViewBtn() {
         BaseClass.waitForPageLoad();
-        WebElement web = appointmentsListPage.getCells().get(6).findElement(By.xpath(".//span[@class='actn-icn view']"));
+        WebElement web = appointmentsListPage.getCells().get(6).findElement(By.xpath("//span[@class='actn-icn view']"));
         Assert.assertTrue(checkedWebElementDisplayed(web));
     }
     

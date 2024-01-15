@@ -176,11 +176,11 @@ public class AppointmentAddPage {
     private WebElement servicePincodeErrMsg;
     @FindBy(id = "state")
     private WebElement serviceState;
-    @FindBy(xpath = "//select[@id='state']/../../..//div[@class='error mrgn-top5 ng-binding ng-scope']")    
+    @FindBy(xpath ="//select[@id='state']/../../..//div[@class='error ng-binding ng-scope']") // [Umar, 2-Jan-24]: xpath changed from "//select[@id='state']/../../..//div[@class='error mrgn-top5 ng-binding ng-scope']"   
     private WebElement serviceStateErrMsg;
     @FindBy(id = "service clinic")
     private WebElement serviceClinic;
-    @FindBy(xpath = "//select[@id='service clinic']/../../..//div[@class='error mrgn-top5 ng-binding ng-scope']")    
+    @FindBy(xpath = "//select[@id='service clinic']/../../..//div[@class='error ng-binding ng-scope']") // [Umar, 2-Jan-24]: xpath changed from "//select[@id='service clinic']/../../..//div[@class='error mrgn-top5 ng-binding ng-scope']")    
     private WebElement serviceClinicErrMsg;
     @FindBy(xpath = "//div[@class='alert ng-isolate-scope alert-success alert-dismissable']//div//span")    
     private WebElement updateAppnmntTxt;

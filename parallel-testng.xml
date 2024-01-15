@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="utils.ExtentReportListener" />
+	</listeners>
+	<test name="Test">
+		<classes>
+			<class name="tests.AppointmentListingTestCase">
+				<methods>
+					<!--<include name="verifyAllElementOnAppListHp" /> 
+					<include name="verifyAppointmentTypeFilter" /> 
+					<include name="verifyDoctorFilter" />
+					<include name="checkedFrmDateIsBeforeAfterDate" />
+					<include name="dateFilterAlongWithAppType" />
+					<include name="verifyViewBtnBehaviour" />
+					<include name="verifyConfirm" />
+					<include name="verifyConfirmWithConfirmed" />
+					<include name="editAndDeleteValidated" />-->
+					<include name="noRecordFoundMsgVerification" />
+				</methods>
+			</class>
+			<class name="tests.LabWorkOrderListingTestCase1">
+				<methods>
+					<!--<include name="checkedLabWorkOrderListUi" />
+					<include name="checkLabWorkOrderAfterTreatmentStart" />
+					<include name="CheckLabWorkOrderOnEditAfterTreatmentStart" />
+					<include name="checkAfterEnterDataInLabWorkOrderEditPage" />
+					<include name="clickSubmittedToLabOfAboveLabWorkOrder" />
+					<include name="completeTrtAndCheckLWOStatus" />
+					<include name="completePaymentAndCheckLWOStatus" />
+					<include name="reTreatAboveCompleteTrtAndCheckLWOStatus" />-->
+					<include name="CompleteAboveReTreatTrtAndCheckLWOStatus" />
+				</methods>
+			</class>
+			<class name="tests.LabWorkOrderListingTestCase2">
+				<methods>
+					<!--<include name="checkSuspendRelatedScenarioOnLabWorkOrder" />
+					<include name="checkbridgeableRelatedScenerio" />
+					<include name="checkByArchRelatedScenario" />-->
+				</methods>
+			</class>
+						<class name="tests.OralExamsTestCase">
+				<methods>
+					<!--<include name="verifyUIOralExamAdd" />
+					<include name="verifyOralExamListUIWithoutOralExam" />
+					<include name="verifyWebElementOnTeethPopup" />
+					<include name="behaviourChiefComplaintOnOralExam" />
+					<include name="teethBehaviourOralExamAdd" />
+					<include name="behaviorOfTissueForSingleTeeth" />
+					<include name="addOralExamSingleTeeth" />
+					<include name="addOralExamOfMultipleTeeth" />
+					<include name="oralExamEditInputList" />-->
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
+<!--
+'Commented code for debug or other purpose'
+
+<class name="tests.AppointmentAddScanTestCase">
+				<methods>	
+					<include name="appointmentScanPage" /> 
+					<include name="mandatoryFields" />
+					<include name="bookNewAppointmentScanHome" />
+					<include name="deleteAppointment" /
+					<include name="bookTentativeAppointment" />
+				</methods>
+</class>
+
+-->

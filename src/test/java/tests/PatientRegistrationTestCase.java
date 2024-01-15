@@ -289,6 +289,9 @@ public class PatientRegistrationTestCase extends BaseClass {
 	public void createNewPatient() {
 		logger.log(Status.PASS, CREATE_PATIENT);
 		
+		//temp code
+		CommonPageActions.selectClinicFrmHeader("Bhumkar Chowk");
+		
 		BaseClass.openPatientRegistrationHomePage();
 		BasePatientLifeCyclePageActions.headerOnListPage(HEADER_LISTING_PAGE);
 		PatientRegistrationPageActions.enterPatientName(patntRegData.get("patient_name"));

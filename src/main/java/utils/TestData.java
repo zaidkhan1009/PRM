@@ -44,7 +44,7 @@ public class TestData {
     }
     
     public String getFewMinuteBackFromCurrentDateTime() {
-    	int addMinuteTime=-3;
+    	int addMinuteTime=-600;
     	Date now = new Date();
     	Date targetTime = DateUtils.addMinutes(now, addMinuteTime);
     	SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("dd-MM-yy h:mm a");
@@ -53,7 +53,7 @@ public class TestData {
     }
     
     public String getFewMinuteAfterFromCurrentDateTime() {
-    	int addMinuteTime=8;
+    	int addMinuteTime=600;
     	Date now = new Date();
     	Date targetTime = DateUtils.addMinutes(now, addMinuteTime);
     	SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("dd-MM-yy h:mm a");

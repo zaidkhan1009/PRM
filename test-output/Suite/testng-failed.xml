@@ -6,22 +6,14 @@
   </listeners>
   <test name="Test(failed)">
     <classes>
-      <class name="tests.AppointmentAddEConsultTestCase">
+      <class name="tests.EventTestCase">
         <methods>
-          <include name="bookNewAppointmentEConsult"/>
-          <include name="editAppointmentWithInvaidHours"/>
           <include name="configReport"/>
           <include name="tearDown"/>
-          <include name="deleteAppointment"/>
-          <include name="editAppointment"/>
-          <include name="testSetup"/>
-          <include name="mandatoryFields"/>
+          <include name="verifyHoursMinsutesAndDurationValidation"/>
           <include name="setup"/>
-          <include name="appointmentEConsultPage"/>
-          <include name="validateAutoSelectPatientFromSuggestion"/>
-          <include name="verifyAlreadyBookedDoctorSlot"/>
         </methods>
-      </class> <!-- tests.AppointmentAddEConsultTestCase -->
+      </class> <!-- tests.EventTestCase -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -111,7 +111,7 @@ public class EventTestCase extends BaseClass {
 		BaseClass.waitForPageLoad();
 		EventPageActions.clickOnEvent();
 		EventPageActions.verifyDefaultSelectedEventType();
-		EventPageActions.verifySelectedDateInEvent ( EventPageActions.getCurrentDate ());
+		EventPageActions.verifySelectedDateInEvent(EventPageActions.getCurrentDate());
 		EventPageActions.verifyDefaultSelectedClinic(INCILINIC_FACILITY);
 		EventPageActions.verifyAllMandatoryWebElementOnByDoctorEvent();
 		EventPageActions.selectClinicInEvent(INCILINIC_FACILITY);
@@ -119,8 +119,9 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.selectClinicInEvent(ECONSULT_FACILITY);
 		EventPageActions.verifyAllMandatoryWebElementOnByRoomEvent();
 		EventPageActions.selectClinicInEvent(SCANNER_FACILITY);
-		EventPageActions.verifyAllMandatoryWebElementOnByScannerEvent();
-		CommonPageActions.verifyPageTitle(ADD_EVENT_PAGE_TITLE);
+		// commenting below code since the functionality has been removed
+//		EventPageActions.verifyAllMandatoryWebElementOnByScannerEvent();
+//		CommonPageActions.verifyPageTitle(ADD_EVENT_PAGE_TITLE);
 	}
 
 	/*
@@ -162,9 +163,11 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.eventDurationErrorMsg();
 
 		EventPageActions.selectClinicInEvent(SCANNER_FACILITY);
-		EventPageActions.selectScannerErrorMsg();
+//		Commenting the below line since the functionality is not available anymore
+//		EventPageActions.selectScannerErrorMsg();
 		EventPageActions.enterTittleErrorMsg();
-		EventPageActions.verifyDefaultSelectedOptionInScannerDrpDown();
+//		Commenting the below line since the functionality is not available anymore
+//		EventPageActions.verifyDefaultSelectedOptionInScannerDrpDown();
 		EventPageActions.verifyDefaultSelectedOptionInCategoryDrpDwn();
 		EventPageActions.selectCategoryErrorMsg();
 		EventPageActions.eventDurationErrorMsg();
