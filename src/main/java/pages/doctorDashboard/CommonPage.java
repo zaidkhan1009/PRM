@@ -20,7 +20,7 @@ public class CommonPage {
     @FindBy(xpath = "//li[@id='topDropdownContainer']//input")
     private WebElement searchClinicDropdown;
     
-    @FindBy(xpath = "//a[@class='searchBtn fa fa-search cursor-pointer']")
+    @FindBy(xpath = "//a[contains(@class,'searchBtn')]")
     private WebElement searchBtn;
     
     @FindBy(id = "patientbyall")

@@ -6,15 +6,15 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="tests.PrescriptionTestCase">
+      <class name="tests.TreatmentPlansTestCase1">
         <methods>
           <include name="configReport"/>
           <include name="tearDown"/>
           <include name="setup"/>
           <include name="testSetup"/>
-          <include name="validationMsgAddPrescriptionPage"/>
+          <include name="checkFunctionalityOfMarkBtn"/>
         </methods>
-      </class> <!-- tests.PrescriptionTestCase -->
+      </class> <!-- tests.TreatmentPlansTestCase1 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

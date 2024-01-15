@@ -66,6 +66,14 @@ public class PrescriptionTestCase extends BaseClass {
 	public void testSetup() {
     	patntPresData = SheetTest.prepareData("Prescription", "PrescriptionTestData", "A2", "Q2");
     	patntPresData1 = SheetTest.prepareData("Prescription", "PrescriptionTestData", "A3", "Q3");
+    	CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		PatientDashboardPageActions.hideDueWarningPopup();
     }
     
 	
@@ -86,14 +94,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 1)
 	public void checkedPrescriptionAddAndPrescriptionListingUi() {
 		logger.log(Status.PASS, CHECKED_PRESCRIPTION_ADD_AND_PRESCRIPTION_LiSTING_UI);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
-		PatientDashboardPageActions.hideDueWarningPopup();
+		
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
@@ -145,13 +146,7 @@ public class PrescriptionTestCase extends BaseClass {
 	public void addPrescription() {
 		System.out.println(patntPresData);
 		logger.log(Status.PASS, ADD_PRESCRIPTION);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -222,13 +217,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 3)
 	public void checkedPrescriptionListingAfterAddPrescription() {
 		logger.log(Status.PASS, CHECKED_PRESCRIPTION_LISTING_AFTER_ADD_PRESCRIPTION);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestList();
 		BasePatientLifeCyclePageActions.headerOnListPage("Prescription Listing");
@@ -276,13 +265,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 4)
 	public void editPrescription() {
 		logger.log(Status.PASS, EDIT_PRESCRIPTION);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
@@ -352,13 +335,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 5)
 	public void deletePrescriptionFromInputList() {
 		logger.log(Status.PASS, DELETE_PRESCRIPTION_FROM_INPUT_LIST);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
@@ -389,13 +366,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 6)
 	public void deletePrescriptionFromPrescriptionListing() {
 		logger.log(Status.PASS, DELETE_PRESCRIPTION_FROM_PRESCRIPTION_LISTING);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");
@@ -444,13 +415,7 @@ public class PrescriptionTestCase extends BaseClass {
 	@Test(enabled = true, priority = 7)
 	public void validationMsgAddPrescriptionPage() {
 		logger.log(Status.PASS, VALIDATION_MSGS_ON_ADD_PRESCRIPTION_PAGE);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER, PATIENT_NAME);
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnPrescriptionTestAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Add Prescription");

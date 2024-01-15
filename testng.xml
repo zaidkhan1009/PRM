@@ -6,9 +6,9 @@
 	</listeners>
 	<test name="Test">	
 		<classes>	
-		<class name="tests.PrescriptionTestCase">
+		<class name="tests.TreatmentPlansTestCase1">
 				<methods>
-						<include name="validationMsgAddPrescriptionPage"/>
+						<include name="checkFunctionalityOfMarkBtn"/>
 						
 						
 				</methods>

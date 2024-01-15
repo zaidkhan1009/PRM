@@ -68,6 +68,14 @@ public class InvoiceListingTestCase extends BaseClass{
     public void testSetup() {
     billingData = SheetTest.prepareData("BillingData","Billing","A1","Z");
     patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+    CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+	DoctorDashBoardPageActions.clickonAppointmentAdd();
+	CommonPageActions.enterMobileNo(MOBILE_NUMBER);
+	CommonPageActions.clickOnSearchBtn();
+	AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+	CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+	PatientDashboardPageActions.hideDueWarningPopup();
     }
 
     /**
@@ -89,14 +97,6 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression"},priority = 1)
     public void InvoiceListWithoutInvoices() {
         logger.log(Status.PASS, INVOICE_LIST_WITHOUT_INVOICES);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
-		PatientDashboardPageActions.hideDueWarningPopup();
 		        
         PatientDashboardPageActions.clickOnInvoiceList();
         BasePatientLifeCyclePageActions.openCloseLeftNavigator();
@@ -126,13 +126,7 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 2)
     public void createInvoice() {
         logger.log(Status.PASS, CREATE_INVOICE);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+        
 		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
         BasePatientLifeCyclePageActions.clickOnAlert();
@@ -186,13 +180,7 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Sanity","Functional"},priority = 3)
     public void discountCouponApplied(){
         logger.log(Status.PASS, DISCOUNT_COUPON_APPLIED);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+        
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnInvoiceList();
@@ -259,13 +247,7 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression"},priority = 4)
     public void invoiceListingViewModal(){
         logger.log(Status.PASS, INVOICE_LISTING_VIEW_MODAL);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+        
 		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnInvoiceList();
         InvoiceListingPageActions.invoiceListTableColumnName();
@@ -288,13 +270,7 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 5)
     public void deleteTreatmentInvoiceDelete(){
         logger.log(Status.PASS, DELETE_TREATMENT_INVOICE_DELETE);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+        
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnInvoiceList();
@@ -357,13 +333,7 @@ public class InvoiceListingTestCase extends BaseClass{
     @Test(groups ={"Regression","Smoke","Sanity","Functional"},priority = 6)
     public void createAndPayInvoice() {
         logger.log(Status.PASS, CREATE_INVOICE);
-        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
+        
 		PatientDashboardPageActions.hideDueWarningPopup();
         PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
         BasePatientLifeCyclePageActions.clickOnAlert();

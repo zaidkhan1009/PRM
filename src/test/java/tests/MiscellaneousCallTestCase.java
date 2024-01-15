@@ -2,6 +2,8 @@ package tests;
 
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import base.BaseClass;
@@ -46,9 +48,14 @@ public class MiscellaneousCallTestCase extends BaseClass{
 	/*
 	 * Test Data from google Sheet 
 	 */
-	private Map<String,String> miscellaneousCallData=SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A2", "L2");
+	private Map<String,String> miscellaneousCallData=null;
 	
-
+	@BeforeClass(alwaysRun = true)
+	public void testSetup() {
+	miscellaneousCallData=SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A2", "L2");
+	CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+	}
+	
 	/*
 	 * Storing mandatory input required to run Miscellaneous test cases,make sure you
 	 * update the mandatory input before running the test cases

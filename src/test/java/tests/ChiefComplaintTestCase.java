@@ -61,13 +61,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@BeforeClass(alwaysRun = true)
     public void testSetup() {
 		patntChiefCmplntData = SheetTest.prepareData("ChiefComplaint", "PatientChiefComplaint", "A2", "H2");
-	}
-
-	
-	@Test(groups = {
-			"Regression" }, enabled = true, description = "Verify Chief Complaint Listing & Elements", priority = 1)
-	public void chiefComplaintListHomePage() {
-		logger.log(Status.PASS, CHIEF_COMPLAINT_LIST_HOME_PAGE);
 		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
@@ -76,6 +69,14 @@ public class ChiefComplaintTestCase extends BaseClass {
 
 		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
+	}
+
+	
+	@Test(groups = {
+			"Regression" }, enabled = true, description = "Verify Chief Complaint Listing & Elements", priority = 1)
+	public void chiefComplaintListHomePage() {
+		logger.log(Status.PASS, CHIEF_COMPLAINT_LIST_HOME_PAGE);
+		
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.headerOnListPage("Chief Complaint Listing");
 		BasePatientLifeCyclePageActions.verifyPatientName(patntChiefCmplntData.get("patient_name"));
@@ -109,13 +110,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 			"Regression" }, enabled = true, description = "Add Verify & Delete Chief Complaint without Appointment", priority = 2)
 	public void addCCWithoutAppSameDay() {
 		logger.log(Status.PASS, ADD_CCWITHOUT_APP_SAME_DAY);
-//		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 
 		PatientDashboardPageActions.clickOnAppList();
@@ -158,13 +152,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 			"Regression" }, enabled = true, description = "Book Appointment With Chief Complaint", priority = 3)
 	public void appointmentWithOutChiefComplaintImpactInChiefComplaintList() {
 		logger.log(Status.PASS, APPOINTMENT_WITH_OUT_CHIEF_COMPLAINT_IMPACT_IN_CHIEF_COMPLAINT_LIST);
-//		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnAppAdd();
 		AppointmentAddPageActions.selectDoctorFromDropdown(patntChiefCmplntData.get("doctor"));
@@ -189,13 +176,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Sanity", "Functional", "Regression" }, enabled = true, priority = 4)
 	public void ChiefComplaintAddPageActions() {
 		logger.log(Status.PASS, CHIEF_COMPLAINT_ADD_PAGE_FIRST_TIME);
-//		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
 		ChiefComplaintAddPageActions.verifyOralExamBtn();
@@ -246,13 +226,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Functional", "Regression" }, enabled = true, priority = 5)
 	public void painPopupElementAndBehaviour() {
 		logger.log(Status.PASS, PAIN_POPUP_ELEMENT_AND_BEHAVIOUR);
-//		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
 		ChiefComplaintAddPageActions.verifyOralExamBtn();
@@ -318,13 +291,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Functional", "Regression" }, enabled = true, priority = 6)
 	public void VerifyDeleteBTnCCAddPage() {
 		logger.log(Status.PASS, VERIFY_DELETE_BTN_CCADD_PAGE);
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
 		ChiefComplaintAddPageActions.verifyOralExamBtn();
@@ -386,13 +352,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Functional", "Regression" }, enabled = true, priority = 7)
 	public void chiefComplaintByClinicWise() {
 		logger.log(Status.PASS, CHIEF_COMPLAINT_BY_CLINIC_WISE);
-//		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnAppAdd();
 		AppointmentAddPageActions

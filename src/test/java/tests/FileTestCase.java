@@ -51,9 +51,7 @@ public class FileTestCase extends BaseClass {
 
 		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
-		
-		BasePatientLifeCyclePageActions.clickOnAlert();
-        PatientDashboardPageActions.clickOnFilesAdd();
+		PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.headerPage("Files");
         FilesPageActions.verifyPatientName(PATIENT_NAME);
         BasePatientLifeCyclePageActions.openCloseLeftNavigator();
@@ -77,15 +75,7 @@ public class FileTestCase extends BaseClass {
     //checked all WebElement at file listing without any file Add
     public void fileListPage(){
         logger.log(Status.PASS, FILE_LIST_PAGE);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
-		
         PatientDashboardPageActions.clickOnFilesList();
         BasePatientLifeCyclePageActions.openCloseLeftNavigator();
         BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
@@ -125,13 +115,6 @@ public class FileTestCase extends BaseClass {
     //validating error message without inputs
     public void invalidInputError(){
         logger.log(Status.PASS, INVALID_INPUT_ERROR);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();
@@ -152,13 +135,6 @@ public class FileTestCase extends BaseClass {
     //Added single files together and validated at File listing
     public void uploadFile(){
         logger.log(Status.PASS, UPLOAD_FILE);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();
@@ -194,13 +170,6 @@ public class FileTestCase extends BaseClass {
     //Added multiple files together and validated at File listing
     public void addedMultipleFiles() {
         logger.log(Status.PASS, ADDED_MULTIPLE_FILES);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();
@@ -244,13 +213,6 @@ public class FileTestCase extends BaseClass {
     //uploaded multiple file together and passed a title then title should be same for every File at file listing page.
     public void checkTitleScenerio() {
         logger.log(Status.PASS, CHECK_TITLE_SCENARIO);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();
@@ -278,15 +240,7 @@ public class FileTestCase extends BaseClass {
     //Edited file from listing and validated All scenario related to edit.
     public void editFile(){
         logger.log(Status.PASS, EDIT_FILE);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
-		BasePatientLifeCyclePageActions.clickOnAlert();
 
         PatientDashboardPageActions.clickOnFilesAdd();
         FilesPageActions.singleFileUploadBtn(System.getProperty("user.dir")+"\\PatientFiles\\File1.jpg");
@@ -333,13 +287,6 @@ public class FileTestCase extends BaseClass {
     //Deleting file from file listing  and edited file and deleted from file Add page
     public void deletedFileListing(){
         logger.log(Status.PASS, DELETED_FILE_LISTING);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();
@@ -392,13 +339,6 @@ public class FileTestCase extends BaseClass {
     //Checked functionality of reset and cancel button
     public void resetCancelFunctionality(){
         logger.log(Status.PASS, RESET_CANCEL_FUNCTIONALITY);
-//        CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-//		DoctorDashBoardPageActions.clickonAppointmentAdd();
-//		CommonPageActions.enterMobileNo(MOBILE_NUMBER);
-//		CommonPageActions.clickOnSearchBtn();
-//		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-//
-//		CommonPageActions.clickOnPatient(MOBILE_NUMBER,PATIENT_NAME);
 		PatientDashboardPageActions.hideDueWarningPopup();
 
         PatientDashboardPageActions.clickOnFilesAdd();

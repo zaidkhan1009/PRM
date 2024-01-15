@@ -66,12 +66,6 @@ public class NewReceiptTestCase extends BaseClass{
 	public void testSetup() {
 		billingData = SheetTest.prepareData("BillingData","Billing","A1","Z");
 		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
-	}
-
-
-	@Test(groups ={"Regression","Sanity","Functional"},enabled= true, priority = 1)
-	public void checkedAdvanceReceiptAndListUI() {
-		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
 		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
@@ -80,6 +74,13 @@ public class NewReceiptTestCase extends BaseClass{
 
 		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
 		PatientDashboardPageActions.hideDueWarningPopup();
+	}
+
+
+	@Test(groups ={"Regression","Sanity","Functional"},enabled= true, priority = 1)
+	public void checkedAdvanceReceiptAndListUI() {
+		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
 		NewReceiptPageActions.collectAdvancePayment();
@@ -122,13 +123,7 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression","Functional"},enabled= true, priority = 2)
 	public void checkValidationMsgs() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
@@ -165,13 +160,7 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression","Smoke","Sanity","Functional"},enabled= true, priority = 3)
 	public void collectPayment() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
@@ -230,13 +219,7 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression","Functional"},enabled= true, priority = 4)
 	public void editReceipt() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		ReceiptListingPageActions.headerOnListPage("Receipt Listing");
@@ -281,15 +264,8 @@ public class NewReceiptTestCase extends BaseClass{
 	public void deleteReceipt() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
 		logger.log(Status.PASS, "Test");
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
-
 		PatientDashboardPageActions.clickOnReceiptList();
 		ReceiptListingPageActions.headerOnListPage("Receipt Listing");
 		ReceiptListingPageActions.clickDeleteBtn("Cash");
@@ -307,15 +283,8 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression"},priority = 6)
 	public void createInvoice(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
-
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		TreatmentPlansPageActions.clickOnNewTeethBtn();
@@ -354,15 +323,8 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression"},priority = 7)
 	public void amountCalculation(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
-
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.invoiceListTableColumnName();
 		InvoiceListingPageActions.invoiceDataTable();
@@ -381,15 +343,8 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression","Functional"},priority = 8)
 	public void paymentDetails(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
-
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.collectPayment();
 		NewReceiptPageActions.checkAndSelectAllModes("Cash", "100", "NA", "NA");
@@ -441,15 +396,8 @@ public class NewReceiptTestCase extends BaseClass{
 	@Test(groups ={"Regression","Functional"},priority = 9)
 	public void amountScenario(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
-		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
-		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
-		CommonPageActions.clickOnSearchBtn();
-		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
-
-		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		
 		PatientDashboardPageActions.hideDueWarningPopup();
-
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.collectPayment();
 		NewReceiptPageActions.checkAndSelectAllModes("Cash", "100", "NA", "NA");
