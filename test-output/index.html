@@ -5,8 +5,9 @@
   <meta charset='utf-8'>
   <title>TestNG reports</title>
 
-    <link type="text/css" href="testng-reports.css" rel="stylesheet" />
-    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="testng-reports.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type='text/javascript'>
@@ -20,9 +21,9 @@
      -->
   </head>
 
-  <body>
-    <div class="top-banner-root">
+  <body>    <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
       <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
@@ -49,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Suite" class="navigator-link ">
-                    <span>C:\Users\MohammadUmar\clove-new\prm\testng.xml</span>
+                    <span>C:\Users\ShreySharma\IdeaProjects\PRM-shrey\testng.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -59,7 +60,7 @@
                 </li>
                 <li>
                   <a href="#" panel-name="group-Suite" class="navigator-link ">
-                    <span>3 groups</span>
+                    <span>2 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,7 +103,7 @@
                     <div class="method-list-content failed suite-Suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyByRoomEvent">verifyByRoomEvent</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyUpdateByRoomEvent">verifyUpdateByRoomEvent</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -125,24 +126,18 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyByRoomEvent">
-                  </a> <!-- verifyByRoomEvent -->
-                  <span class="method-name">verifyByRoomEvent</span>
-                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for title to be &quot;Doctor Dashboard&quot;. Current title: &quot;Add Appointment/Event&quot; (tried for 10 second(s) with 500 milliseconds interval)
-Build info: version: &apos;4.15.0&apos;, revision: &apos;1d14b5521b&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.9&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 121.0, moz:accessibilityChecks: false, moz:buildID: 20231211174248, moz:debuggerAddress: 127.0.0.1:33981, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 47560, moz:profile: C:\Users\MOHAMM~1\AppData\L..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:33981/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:229)
-	at base.BaseClass.verifyPageTitle(BaseClass.java:271)
-	at pageActions.doctorDashboard.CommonPageActions.verifyPageTitle(CommonPageActions.java:33)
-	at tests.EventTestCase.verifyByRoomEvent(EventTestCase.java:774)
-... Removed 25 stack frames
+                  <a name="verifyUpdateByRoomEvent">
+                  </a> <!-- verifyUpdateByRoomEvent -->
+                  <span class="method-name">verifyUpdateByRoomEvent</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [true] but found [false]
+	at pageActions.doctorDashboard.EventPageActions.checkDisableEnableOfOperatoryOnAddAppointment(EventPageActions.java:798)
+	at pageActions.doctorDashboard.EventPageActions.checkRoomIsSelectableOnAddAppt(EventPageActions.java:864)
+	at tests.EventTestCase.verifyUpdateByRoomEvent(EventTestCase.java:877)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames
 </div> <!-- stack-trace -->
                   <em>
-(#1: Add ByRoom Event #2: Verify Event Details on the Event Listing home Page #3: check on Add Appointment page event Added Room is disbaled)                  </em>
+(Verify Updating Room Event and checking on Add Appointment room is disabled for update event time slot and room is available on previous time slot.)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -150,21 +145,21 @@ Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\MohammadUmar\clove-new\prm\testng.xml</span>
+            <span class="header-content">C:\Users\ShreySharma\IdeaProjects\PRM-shrey\testng.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;listeners&gt;
     &lt;listener class-name=&quot;utils.ExtentReportListener&quot;/&gt;
   &lt;/listeners&gt;
-  &lt;test name=&quot;Test&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Test&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;tests.EventTestCase&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;verifyByRoomEvent&quot;/&gt;
+          &lt;include name=&quot;verifyUpdateByRoomEvent&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- tests.EventTestCase --&gt;
     &lt;/classes&gt;
@@ -194,7 +189,7 @@ Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
               <span class="test-group-name">Functional</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
+                <span class="method-in-group-name">verifyUpdateByRoomEvent</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -202,15 +197,7 @@ Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
               <span class="test-group-name">Regression</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">Sanity</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
+                <span class="method-in-group-name">verifyUpdateByRoomEvent</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -232,14 +219,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyByRoomEvent')
+data.setCell(0, 1, 'verifyUpdateByRoomEvent')
 data.setCell(0, 2, 'tests.EventTestCase')
-data.setCell(0, 3, 35456);
+data.setCell(0, 3, 38139);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 35 seconds</span>
+              <span class="suite-total-time">Total running time: 38 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -260,63 +247,63 @@ return data;
             <div class="ignored-class-div">
               <span class="ignored-class-name">tests.EventTestCase</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">addingEventForPastTime</span>
-                <br/>
-                <span class="ignored-method-name">checkingWithoutMandatoryFields</span>
-                <br/>
-                <span class="ignored-method-name">verifyCancelAndResetBtnWorkingOnAddEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyAddingByDoctorEvent</span>
-                <br/>
                 <span class="ignored-method-name">verifyUpdateDoctorEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyResetBtnOnEventListing</span>
-                <br/>
-                <span class="ignored-method-name">verifyFrmAndToDateFilter</span>
-                <br/>
-                <span class="ignored-method-name">verifyAddingEventOnLastScannerAvailable</span>
-                <br/>
-                <span class="ignored-method-name">verifyAddEventIfAppointmentAlreadyBookedForTime</span>
                 <br/>
                 <span class="ignored-method-name">verifyDocEventIfAlreadyEventOnSameTime</span>
                 <br/>
-                <span class="ignored-method-name">verifyElementOnEventList</span>
+                <span class="ignored-method-name">verifyAddingByDoctorEvent</span>
                 <br/>
-                <span class="ignored-method-name">verifyAddEventFromEventListingAndRedirection</span>
+                <span class="ignored-method-name">verifyEventTypeFilterWithDateFilter</span>
                 <br/>
-                <span class="ignored-method-name">verifyHoursMinsutesAndDurationValidation</span>
-                <br/>
-                <span class="ignored-method-name">verifyDeleteByRoomEvent</span>
+                <span class="ignored-method-name">checkingWithoutMandatoryFields</span>
                 <br/>
                 <span class="ignored-method-name">verifyDeleteDoctorEvent</span>
                 <br/>
-                <span class="ignored-method-name">verifyByScannerEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyAllWebElementOnEventAdd</span>
+                <span class="ignored-method-name">verifyAddEventIfTentativeAppointmentAlreadyBookedForTime</span>
                 <br/>
                 <span class="ignored-method-name">verifyByOperatoryEvent</span>
                 <br/>
-                <span class="ignored-method-name">verifyUpdateByOperatoryEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyDeleteByOperatoryEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyAddingEventOnLastOpearatoryAvailable</span>
-                <br/>
                 <span class="ignored-method-name">verifyDoctorFilterWithDateFilterOnEventList</span>
                 <br/>
-                <span class="ignored-method-name">verifyAddEventIfTentativeAppointmentAlreadyBookedForTime</span>
-                <br/>
-                <span class="ignored-method-name">verifyUpdateByRoomEvent</span>
+                <span class="ignored-method-name">verifyElementOnEventList</span>
                 <br/>
                 <span class="ignored-method-name">checkFrmDateIsNotLaterToToDate</span>
                 <br/>
+                <span class="ignored-method-name">verifyAddingEventOnLastScannerAvailable</span>
+                <br/>
+                <span class="ignored-method-name">verifyAddingEventOnLastOpearatoryAvailable</span>
+                <br/>
+                <span class="ignored-method-name">verifyHoursMinsutesAndDurationValidation</span>
+                <br/>
+                <span class="ignored-method-name">verifyAllWebElementOnEventAdd</span>
+                <br/>
                 <span class="ignored-method-name">verifyCategoryFilterWithDateAndTypeFilter</span>
+                <br/>
+                <span class="ignored-method-name">verifyByRoomEvent</span>
+                <br/>
+                <span class="ignored-method-name">verifyResetBtnOnEventListing</span>
+                <br/>
+                <span class="ignored-method-name">verifyDeleteByOperatoryEvent</span>
+                <br/>
+                <span class="ignored-method-name">verifyByScannerEvent</span>
+                <br/>
+                <span class="ignored-method-name">verifyDeleteByRoomEvent</span>
+                <br/>
+                <span class="ignored-method-name">verifyFrmAndToDateFilter</span>
+                <br/>
+                <span class="ignored-method-name">verifyAddEventIfAppointmentAlreadyBookedForTime</span>
+                <br/>
+                <span class="ignored-method-name">verifyCancelAndResetBtnWorkingOnAddEvent</span>
                 <br/>
                 <span class="ignored-method-name">verifyUpdateByScannerEvent</span>
                 <br/>
-                <span class="ignored-method-name">verifyDeleteByScannerEvent</span>
+                <span class="ignored-method-name">addingEventForPastTime</span>
                 <br/>
-                <span class="ignored-method-name">verifyEventTypeFilterWithDateFilter</span>
+                <span class="ignored-method-name">verifyAddEventFromEventListingAndRedirection</span>
+                <br/>
+                <span class="ignored-method-name">verifyUpdateByOperatoryEvent</span>
+                <br/>
+                <span class="ignored-method-name">verifyDeleteByScannerEvent</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -335,21 +322,22 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
-                <span class="method-start">5 ms</span>
+                <span class="method-start">35 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">verifyByRoomEvent</span>
-                <span class="method-start">10306 ms</span>
+                <span class="method-name">verifyUpdateByRoomEvent</span>
+                <span class="method-start">10433 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">45777 ms</span>
+                <span class="method-start">48599 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->
     </div> <!-- wrapper -->
   </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
 </html>

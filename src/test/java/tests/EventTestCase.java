@@ -768,7 +768,7 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.enterMinutes(addRoomEventTestData.get("event_mintues"));
 		EventPageActions.selectAmPm(addRoomEventTestData.get("AM_PM"));
 		EventPageActions.enterEventDuration(addRoomEventTestData.get("event_duration"));
-		EventPageActions.enterNotes(addRoomEventTestData.get("event_DateTime"));
+		EventPageActions.enterNotes(addRoomEventTestData.get("event_notes"));
 		EventPageActions.clickOnEventSaveBtn();
 //		EventPageActions.verifyEventAddSuccessMsg ();
 		CommonPageActions.verifyPageTitle(DOCTOR_DASHBOARD_PAGE_TITLE);
@@ -793,7 +793,7 @@ public class EventTestCase extends BaseClass {
 		EventListingPageActions.verifyClinicDisplayOnEventList(addRoomEventTestData.get("event_Title"),
 				addRoomEventTestData.get("event_Clinic"));
 		EventListingPageActions.verifyNotesDisplayOnEventList(addRoomEventTestData.get("event_Title"),
-				addRoomEventTestData.get("event_DateTime"));
+				addRoomEventTestData.get("event_notes"));
 		EventListingPageActions.verifyEditAndDeletBtn(addRoomEventTestData.get("event_Title"));
 		CommonPageActions.backTODoctorDashboard();
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
@@ -809,8 +809,11 @@ public class EventTestCase extends BaseClass {
 	}
 
 	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_ROOM_EVENT_UPDATE, dependsOnMethods = "verifyByRoomEvent")
+			"Regression" }, description = VERIFY_BY_ROOM_EVENT_UPDATE)
+//	, dependsOnMethods = "verifyByRoomEvent"
 	public void verifyUpdateByRoomEvent() {
+		addRoomEventTestData=SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A10", "O10");
+
 		updateRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A11", "O11");
 		logger.log(Status.PASS, VERIFY_BY_ROOM_EVENT_UPDATE);
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
@@ -833,7 +836,7 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.getMinutes(addRoomEventTestData.get("event_mintues"));
 		EventPageActions.getAMPM(addRoomEventTestData.get("AM_PM"));
 		EventPageActions.getDurations(addRoomEventTestData.get("event_duration"));
-		EventPageActions.getEventNotes(addRoomEventTestData.get("event_DateTime"));
+		EventPageActions.getEventNotes(addRoomEventTestData.get("event_notes"));
 
 		EventPageActions.enterTitleName(updateRoomEventTestData.get("event_Title"));
 		EventPageActions.selectClinicInEvent(updateRoomEventTestData.get("event_Clinic"));

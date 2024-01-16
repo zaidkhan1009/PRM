@@ -161,10 +161,9 @@ public class EventListingPageActions extends BaseClass {
         Assert.assertTrue (actualEventClinic.equals ( expectedEventClinic ));
     }
 
-
     public static void verifyNotesDisplayOnEventList(String eventTitle,String expectedEventNotes) {
         BaseClass.waitForPageLoad();
-        String actualEventNotes=driver.findElement(By.xpath("//tr[@data-ng-repeat='record in eventListData']//td[contains(normalize-space(),'"+eventTitle+"')]/following-sibling::td[5]")).getText ().trim ();
+        String actualEventNotes=driver.findElement(By.xpath("//tr[@data-ng-repeat='record in eventListData'][@class='ng-scope']//td[contains(normalize-space(),'"+eventTitle+"')]/following-sibling::td[5]")).getText ().trim ();
         Assert.assertTrue (actualEventNotes.contains ( expectedEventNotes ));
     }
 

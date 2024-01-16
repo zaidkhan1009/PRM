@@ -471,6 +471,7 @@ public class EventPageActions extends BaseClass {
 		Date d = new Date(expectedEventDate);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		expectedEventDate = simpleDateFormat.format(d);
+		System.out.println(expectedEventDate);
 		Assert.assertEquals(actualEventDate, expectedEventDate);
 
 	}
@@ -500,13 +501,13 @@ public class EventPageActions extends BaseClass {
 
 	public static void getHours(String expectedHours) {
 		BaseClass.waitForElementToBeClickable(eventPage.getHours());
-		String actualHours = getEnteredText("Hours");
+		String actualHours = getEnteredText("hours");
 		Assert.assertEquals(actualHours, expectedHours);
 	}
 
 	public static void getMinutes(String expectedMinutes) {
 		BaseClass.waitForElementToBeClickable(eventPage.getMinutes());
-		String actualMinutes = getEnteredText("Minutes");
+		String actualMinutes = getEnteredText("minutes");
 		Assert.assertEquals(actualMinutes, expectedMinutes);
 	}
 
