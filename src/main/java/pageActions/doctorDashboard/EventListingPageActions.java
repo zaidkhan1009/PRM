@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -92,7 +93,7 @@ public class EventListingPageActions extends BaseClass {
         BaseClass.waitForSpinnerToDisappear();
         WebElement ele=driver.findElement(By.xpath("//span[@class='glyphicon glyphicon-chevron-down customComboBtn cursor-pointer']"));
         ele.click();
-        WebElement element=driver.findElement(By.xpath("//ul[@class='menu fnt_cali']/li[text()='"+doctor+"']"));
+        WebElement element=driver.findElement(By.xpath("//ul[@class='menu fnt_cali']/li[contains(text(),'"+doctor+"')]"));
         BaseClass.waitForElementToBeClickable(element);
         element.click();
         BaseClass.waitForPageLoad();
@@ -118,6 +119,8 @@ public class EventListingPageActions extends BaseClass {
         BaseClass.waitForPageLoad();
         BaseClass.waitForSpinnerToDisappear();
         String actualDateTimeOfEvent =driver.findElement(By.xpath("//tr[@data-ng-repeat='record in eventListData']//td[contains(normalize-space(),'"+eventTitle+"')]/preceding-sibling::td[2]")).getText ().trim ();
+        System.out.println("Actual Date "+actualDateTimeOfEvent);
+        System.out.println("Expected Date "+expectedDateTimeOnEventListing);
         Assert.assertTrue (actualDateTimeOfEvent.equals ( expectedDateTimeOnEventListing ));
 
     }
@@ -198,9 +201,14 @@ public class EventListingPageActions extends BaseClass {
         deleteBtn.click();
     }
 
-    public static void clickOnNoBtnDeletePopUp() {
-        BaseClass.waitForElementToBeClickable(eventListingpage.getCancelBtnDelete());
+    public static void clickOnNoBtnDeletePopUp(String eventTitle) {
+    	BaseClass.waitForElementToBeClickable(eventListingpage.getCancelBtnDelete());
         eventListingpage.getCancelBtnDelete().click();
+        try {
+        Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        	e.printStackTrace();
+        }
     }
 
     public static void clickOnYesBtnDeletePopUp() {

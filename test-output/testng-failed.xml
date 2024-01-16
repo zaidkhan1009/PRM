@@ -10,7 +10,7 @@
         <methods>
           <include name="configReport"/>
           <include name="tearDown"/>
-          <include name="verifyHoursMinsutesAndDurationValidation"/>
+          <include name="verifyByRoomEvent"/>
           <include name="setup"/>
         </methods>
       </class> <!-- tests.EventTestCase -->

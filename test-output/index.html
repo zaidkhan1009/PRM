@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyHoursMinsutesAndDurationValidation">verifyHoursMinsutesAndDurationValidation</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyByRoomEvent">verifyByRoomEvent</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -125,35 +125,24 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyHoursMinsutesAndDurationValidation">
-                  </a> <!-- verifyHoursMinsutesAndDurationValidation -->
-                  <span class="method-name">verifyHoursMinsutesAndDurationValidation</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: Unable to locate element: //input[@id=&apos;eventPage.getEventDate()&apos;]//following::ul//table//i[contains(@class,&apos;glyphicon glyphicon-chevron-right&apos;)]
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+                  <a name="verifyByRoomEvent">
+                  </a> <!-- verifyByRoomEvent -->
+                  <span class="method-name">verifyByRoomEvent</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for title to be &quot;Doctor Dashboard&quot;. Current title: &quot;Add Appointment/Event&quot; (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.15.0&apos;, revision: &apos;1d14b5521b&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.9&apos;
 Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [a194d353-97c9-4a41-b652-460645631111, findElement {using=xpath, value=//input[@id=&apos;eventPage.getEventDate()&apos;]//following::ul//table//i[contains(@class,&apos;glyphicon glyphicon-chevron-right&apos;)]}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 121.0, moz:accessibilityChecks: false, moz:buildID: 20231211174248, moz:debuggerAddress: 127.0.0.1:13842, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 44208, moz:profile: C:\Users\MOHAMM~1\AppData\L..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:13842/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: a194d353-97c9-4a41-b652-460645631111
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:200)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:607)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:364)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:358)
-	at base.BaseClass.appointmentDate(BaseClass.java:617)
-	at pageActions.doctorDashboard.EventPageActions.selectDateInEvent(EventPageActions.java:123)
-	at tests.EventTestCase.verifyHoursMinsutesAndDurationValidation(EventTestCase.java:214)
-... Removed 30 stack frames
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 121.0, moz:accessibilityChecks: false, moz:buildID: 20231211174248, moz:debuggerAddress: 127.0.0.1:33981, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 47560, moz:profile: C:\Users\MOHAMM~1\AppData\L..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:33981/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:229)
+	at base.BaseClass.verifyPageTitle(BaseClass.java:271)
+	at pageActions.doctorDashboard.CommonPageActions.verifyPageTitle(CommonPageActions.java:33)
+	at tests.EventTestCase.verifyByRoomEvent(EventTestCase.java:774)
+... Removed 25 stack frames
 </div> <!-- stack-trace -->
                   <em>
-(# Verifying Validation on Hours,Minutes and Duration field)                  </em>
+(#1: Add ByRoom Event #2: Verify Event Details on the Event Listing home Page #3: check on Add Appointment page event Added Room is disbaled)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -175,7 +164,7 @@ Session ID: a194d353-97c9-4a41-b652-460645631111
     &lt;classes&gt;
       &lt;class name=&quot;tests.EventTestCase&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;verifyHoursMinsutesAndDurationValidation&quot;/&gt;
+          &lt;include name=&quot;verifyByRoomEvent&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- tests.EventTestCase --&gt;
     &lt;/classes&gt;
@@ -205,7 +194,7 @@ Session ID: a194d353-97c9-4a41-b652-460645631111
               <span class="test-group-name">Functional</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyHoursMinsutesAndDurationValidation</span>
+                <span class="method-in-group-name">verifyByRoomEvent</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -213,7 +202,7 @@ Session ID: a194d353-97c9-4a41-b652-460645631111
               <span class="test-group-name">Regression</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyHoursMinsutesAndDurationValidation</span>
+                <span class="method-in-group-name">verifyByRoomEvent</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -221,7 +210,7 @@ Session ID: a194d353-97c9-4a41-b652-460645631111
               <span class="test-group-name">Sanity</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyHoursMinsutesAndDurationValidation</span>
+                <span class="method-in-group-name">verifyByRoomEvent</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -243,14 +232,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyHoursMinsutesAndDurationValidation')
+data.setCell(0, 1, 'verifyByRoomEvent')
 data.setCell(0, 2, 'tests.EventTestCase')
-data.setCell(0, 3, 24053);
+data.setCell(0, 3, 35456);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 24 seconds</span>
+              <span class="suite-total-time">Total running time: 35 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -277,8 +266,6 @@ return data;
                 <br/>
                 <span class="ignored-method-name">verifyCancelAndResetBtnWorkingOnAddEvent</span>
                 <br/>
-                <span class="ignored-method-name">verifyByRoomEvent</span>
-                <br/>
                 <span class="ignored-method-name">verifyAddingByDoctorEvent</span>
                 <br/>
                 <span class="ignored-method-name">verifyUpdateDoctorEvent</span>
@@ -296,6 +283,8 @@ return data;
                 <span class="ignored-method-name">verifyElementOnEventList</span>
                 <br/>
                 <span class="ignored-method-name">verifyAddEventFromEventListingAndRedirection</span>
+                <br/>
+                <span class="ignored-method-name">verifyHoursMinsutesAndDurationValidation</span>
                 <br/>
                 <span class="ignored-method-name">verifyDeleteByRoomEvent</span>
                 <br/>
@@ -346,17 +335,17 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
-                <span class="method-start">6 ms</span>
+                <span class="method-start">5 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">verifyHoursMinsutesAndDurationValidation</span>
-                <span class="method-start">11219 ms</span>
+                <span class="method-name">verifyByRoomEvent</span>
+                <span class="method-start">10306 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">35290 ms</span>
+                <span class="method-start">45777 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

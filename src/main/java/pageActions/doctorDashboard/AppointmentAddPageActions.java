@@ -3,6 +3,8 @@ package pageActions.doctorDashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -249,8 +251,13 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void clickOnTentative() {
 		BaseClass.waitForPageLoad();
+		try {
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getTentativeBtn());
 		appointmentPage.getTentativeBtn().click();
+		} catch(NoSuchElementException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void verifyTentativeAfterClickOnEditBtn() {
@@ -517,6 +524,8 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getDateAppointment());
 		BaseClass.appointmentDate(Date, appointmentPage.getDateAppointment(), "date");
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.TAB).perform();
 	}
 
 	public static void selectDoctorFromDropdown(String doctorName) {

@@ -8,15 +8,24 @@
 		<classes>
 			<class name="tests.EventTestCase">
 				<methods>
-					<include name="verifyHoursMinsutesAndDurationValidation" />
+					<include name="verifyByRoomEvent" />
 					<!--<include name="verifyAllWebElementOnAddProductSale" />
 					<include name="checkingWithoutMandatoryFields" />
 					<include name="verifyHoursMinsutesAndDurationValidation" />
-					<include name="behaviourChiefComplaintOnOralExam" />
-					<include name="teethBehaviourOralExamAdd" />
-					<include name="behaviorOfTissueForSingleTeeth" />
-					<include name="addOralExamSingleTeeth" />
-					<include name="addOralExamOfMultipleTeeth" />
+					<include name="verifyAddingByDoctorEvent" />
+					<include name="verifyDocEventIfAlreadyEventOnSameTime" />
+					<include name="verifyUpdateDoctorEvent" />
+					<include name="verifyDeleteDoctorEvent" />
+					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
+					<include name="verifyByOperatoryEvent" />
+					<include name="verifyAddingEventOnLastOpearatoryAvailable" />
+					<include name="verifyUpdateByOperatoryEvent" />
+					<include name="verifyDeleteByOperatoryEvent" />
+					<include name="verifyAddEventIfTentativeAppointmentAlreadyBookedForTime" />
+					<include name="verifyByRoomEvent" />
+					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
+					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
+					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
 					<include name="oralExamEditInputList" />-->
 				</methods>
 			</class>

@@ -102,28 +102,51 @@ public class SheetTest {
 				case "Appointment":
 					for (List<Object> row : values) {
 						mapData.put("patient_name", (String) row.get(1));
+						System.out.println("1:B "+mapData.get("patient_name"));
 						mapData.put("patient_mobile", (String) row.get(2));
+						System.out.println("2:C "+mapData.get("patient_mobile"));
 						mapData.put("email", (String) row.get(3));
+						System.out.println("3:D "+mapData.get("email"));
 						mapData.put("pin_code", (String) row.get(4));
+						System.out.println("4:E "+mapData.get("pin_code"));
 						mapData.put("clinicLocation", (String) row.get(5));
+						//5
 						mapData.put("appointmentDate", (String) row.get(6));
+						//6
 						mapData.put("slot", (String) row.get(7));
+						//7
 						mapData.put("duration", (String) row.get(8));
+						//8
 						mapData.put("doctor", (String) row.get(9));
+						//9
 						mapData.put("doctorNickName", (String) row.get(10));
+						//10
 						mapData.put("notes", (String) row.get(11));
+						//11
 						mapData.put("referral", (String) row.get(12));
+						//12
 						mapData.put("chiefComplaint", (String) row.get(13));
+						//13
 						mapData.put("source", (String) row.get(14));
+						//14
 						mapData.put("referalDetails", (String) row.get(15));
+						//15
 						mapData.put("serviceAddress", (String) row.get(16));
+						//16
 						mapData.put("serviceCity", (String) row.get(17));
+						//17
 						mapData.put("servicePincode", (String) row.get(18));
+						//18
 						mapData.put("serviceState", (String) row.get(19));
+						//19
 						mapData.put("serviceClinic", (String) row.get(20));
+						//20
 						mapData.put("updateSlot", (String) row.get(21));
+						//21
 						mapData.put("updateSlotDuration", (String) row.get(22));
+						System.out.println("W: 22 "+mapData.get("updateSlotDuration"));
 						mapData.put("scanCenter", (String) row.get(23));
+						System.out.println("X: 23 "+mapData.get("scanCenter"));
 					}
 					break;
 
