@@ -18,11 +18,11 @@ public class NewSubscriberPage {
     private WebElement cancelBtn;
     @FindBy(xpath = "//label[contains(text(),'Name')]/following-sibling::div/input[@id='name']")
     private WebElement name;
-    @FindBy(xpath = "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='male']")
+    @FindBy(xpath ="//label[@for='male']/following-sibling::div[@class='stl-chkB-rdB']") // changed the xpath from  "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='male']")
     private WebElement male;
-    @FindBy(xpath = "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='female']")
+    @FindBy(xpath ="//label[@for='female']/following-sibling::div[@class='stl-chkB-rdB']") // changed the xpath from "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='female']")
     private WebElement female;
-    @FindBy(xpath = "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='other']")
+    @FindBy(xpath ="//label[@for='other']/following-sibling::div[@class='stl-chkB-rdB']") // changed the xpath from "//label[contains(text(),'Gender')]/following-sibling::div//input[@id='other']")
     private WebElement other;
     @FindBy(xpath = "//label[contains(text(),'Date of Birth')]/following-sibling::input[@id='dob']")
     private WebElement dob;
@@ -30,7 +30,7 @@ public class NewSubscriberPage {
     private  WebElement email;
     @FindBy(xpath = "//label[contains(text(),'Mobile')]/following-sibling::div//input[@id='mobile']")
     private WebElement mobile;
-    @FindBy(xpath = "//label[contains(text(),'Alternate Contact No.')]/following-sibling::input[@id='alternatePhone']")
+    @FindBy(xpath = "//label[contains(text(),'Alternate Contact No')]/following-sibling::input[@id='alternatePhone']")
     private WebElement alternatePhone;
     @FindBy(xpath = "//label[contains(text(),'Type')]/following-sibling::custom-combo//select[@id='type']")
     private WebElement type;

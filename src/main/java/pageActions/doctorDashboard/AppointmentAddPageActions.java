@@ -519,7 +519,7 @@ public class AppointmentAddPageActions extends BaseClass {
 	}
 
 	public static void selectDoctorFromDropdown(String doctorName) {
-		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForSpinnerToDisappear(); 
 		BaseClass.WaitTillElementIsPresent(appointmentPage.getDoctor());
 		
 		//test block to handle the overlay element
@@ -998,5 +998,10 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	private static boolean fieldReadOnly(WebElement webElement) {
 		return (webElement.isEnabled());
+	}
+
+	public static void clickOnLastPagePatientListing() {
+		// TODO Auto-generated method stub
+		
 	}
 }

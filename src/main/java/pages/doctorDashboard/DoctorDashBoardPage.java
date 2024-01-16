@@ -50,11 +50,14 @@ public class DoctorDashBoardPage {
 	@FindBy(id ="dashBoardSubscriberList")
 	private WebElement subscriberBtn;
 	
-	@FindBy(id ="dashBoardCampSubs")
+	@FindBy(xpath = "//span[@class='cmnicons ccAdd']") //changed the locator from id ="dashBoardCampSubsList")
 	private WebElement dashBoardCampSubs;
 	
 	@FindBy(id="dashBoardProducts")
 	private WebElement dashboardProductSale;
+	
+	@FindBy(id="dashBoardCampSubsList")
+	private WebElement campSubscriberListing;
 	
 	public WebElement getClovelogo() {
 		return clovelogo;
@@ -101,5 +104,8 @@ public class DoctorDashBoardPage {
 	public WebElement getDashboardProductSale() {
 		return dashboardProductSale;
 	}
+	public WebElement getCampSubscriberListing() {
+		return campSubscriberListing;
+	} 
 
 }

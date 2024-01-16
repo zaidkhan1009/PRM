@@ -41,6 +41,7 @@ import org.testng.asserts.SoftAssert;
 import com.aventstack.extentreports.ExtentTest;
 
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
 import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pages.doctorDashboard.DoctorDashBoardPage;
@@ -108,7 +109,13 @@ public class BaseClass extends ExtentReportListener {
 		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 	}
-
+     public static void executionDelay() {
+    	 try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+     }
 	public static void launchDoctorDashboard() {
 
 		appURL = config.getEnvURL();
@@ -131,23 +138,20 @@ public class BaseClass extends ExtentReportListener {
 	public static void doctorDashboardHomePage() {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("dashBoardAppointmentAdd")));
-
 		BaseClass.waitForSpinnerToDisappear();
+		checkPendingActionsReminder();
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("brand_logo")));
+		
 		String actualTitle = driver.getTitle();
 		if (actualTitle.contains("Doctor Dashboard")) {
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
-		} else if (actualTitle.contains("Appointment")) {
-
-			driver.navigate().refresh();
+			BaseClass.waitForSpinnerToDisappear();
+		} else if (actualTitle.contains("Add Appointment")) {
+			CommonPageActions.backToDoctorDashbrd();
 		} else if (actualTitle.contains("Appointment Scheduler Calender")) {
 			CommonPageActions.backToDoctorDashbrd();
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
 		} else {
 			CommonPageActions.backToDoctorDashbrd();
-			DoctorDashBoardPageActions.clickonAppointmentAdd();
 		}
-		AppointmentAddPageActions.toVerifyAppointmentHomePage();
 
 	}
 
@@ -182,12 +186,77 @@ public class BaseClass extends ExtentReportListener {
 			DoctorDashBoardPageActions.clickOnPatientAdd();
 		}
 	}
+	
+public static void openAppointmentListingPage() {
+		
+		BaseClass.waitForSpinnerToDisappear();
+		String actualTitle = driver.getTitle();
+		if (actualTitle.contains("Doctor Dashboard")) {
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		} else if (actualTitle.contains("Appointment/Event Listing")) {
+			driver.navigate().refresh();
+		} else if (actualTitle.contains("Appointment Scheduler Calender")) {
+			CommonPageActions.backToDoctorDashbrd();
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		} else {
+			CommonPageActions.backToDoctorDashbrd();
+			DoctorDashBoardPageActions.clickOnAppListBtn();
+		}
+		
+		waitForSpinnerToDisappear();
+		waitForModalOverlayToDisappear();
+		AppointmentsLisitngPageActions.verifiyAppListHP();
+	}
+
+public static void checkPendingActionsReminder() {
+	
+	try {
+
+		List<WebElement> pendingActionsReminder = driver.findElements(By.xpath("//h4[contains(text(),'Pending Actions')]"));
+
+		// must check if popup is displayed only
+		boolean isNotificationDisplayed = (pendingActionsReminder.get(0).isDisplayed());
+
+		if (isNotificationDisplayed) {
+			
+			List<WebElement> closePendingActionsReminder = driver
+					.findElements(By.xpath("//a[@class='close notActiveSec ui-link']"));
+			List<WebElement> savePendingActionsReminder = driver
+					.findElements(By.xpath("//a[@class='close btn-act-save dueApptSaveDataBtn ui-link']"));
+			
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+			boolean isNotificationPresent = pendingActionsReminder.size() > 0;
+			boolean isSnoozePresent = closePendingActionsReminder.size() > 0;
+			boolean isSavePresent = savePendingActionsReminder.size() > 0;
+			
+			if (isSavePresent) {
+				CommonPageActions.selectNoShowPendingActions();
+			} else {
+				CommonPageActions.closePendingActionsReminder();
+			}
+		}
+	} catch (NoSuchElementException e) {
+		System.out.println("Pending actions notification appeared and couldn't be closed");
+	} catch (IndexOutOfBoundsException e) {
+		System.out.println("Pedning actions notification not appeared and is handled");
+	}
+	
+}
 
 	/************************************************
 	 * 
 	 * Utils - Utilities
 	 * 
 	 ***********************************************/
+
+public static void refreshPageAndWaitTillGettingActive() {
+	
+	driver.navigate().refresh();
+	BaseClass.waitForPageLoad();
+	BaseClass.waitForSpinnerToDisappear();
+	BaseClass.waitForModalOverlayToDisappear();
+}
 
 	public static void pressTabKey(WebDriver driver) {
 		Actions action = new Actions(driver);
@@ -222,7 +291,7 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void visibilityOfListLocated(List<WebElement> ele) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
 	}
 
@@ -351,6 +420,11 @@ public class BaseClass extends ExtentReportListener {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
+	
+	public static void waitForElementToDisappear(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.invisibilityOf(element));
+	}
 
 	public static void WaitTillElementIsPresent(final WebElement ele) {
 		Wait<WebDriver> flWait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(60))
@@ -374,6 +448,11 @@ public class BaseClass extends ExtentReportListener {
 		action.moveToElement(ele);
 		action.perform();
 	}
+	public static void doubleclick(WebElement ele) {
+		Actions act = new Actions(driver);
+
+		act.doubleClick(ele).perform();
+	}
 
 	public static void selectFromDropDownByVisibleText(WebElement ele, String value) {
 
@@ -394,7 +473,7 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void waitForSpinnerToDisappear() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//img[@class='spinner']")));
 
 	}
@@ -413,6 +492,10 @@ public class BaseClass extends ExtentReportListener {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(ele));
 	}
+	public static void visibilityOfAllElements(List<WebElement> ele) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
+	}
 
 	public static void waitToBeClickableAndSendKeys(WebElement element, String value) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -428,9 +511,9 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void waitForElementToBeClickable(WebElement ele) {
 		WebElement element = ele;
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
-	}
+	}  
 
 	public static void executeScript(WebElement ele) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -604,7 +687,7 @@ public class BaseClass extends ExtentReportListener {
 	@AfterClass
 	public void tearDown() throws Exception {
 
-		// driver.quit();
+		 //driver.quit();
 
 	}
 }

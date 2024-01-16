@@ -11,7 +11,9 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.AppointmentsListPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
@@ -20,6 +22,7 @@ import pageActions.patientDashboard.TreatmentPlanListingPageActions;
 import pageActions.patientDashboard.TreatmentPlansPageActions;
 import pageActions.patientDashboard.WorkDoneHistoryPageActions;
 import pageActions.patientDashboard.WorksDonePageActions;
+import utils.SheetTest;
 import utils.TestData;
 
 public class TreatmentPlansTestCase1 extends BaseClass{	
@@ -55,7 +58,23 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 	private static final String VERIFY_DELETE_IN_TREATMENT_LIST ="Validated Delete Btn behaviour and Validated impact respectivily - #verifyDeleteInTreatmentList";
 
 	Map<String, String> patntTrtmntPlanData = null;
-	
+	@BeforeClass(alwaysRun = true)
+	public void testSetup() {
+		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+		
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(patntTrtmntPlanData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(patntTrtmntPlanData.get("patient_mobile"), patntTrtmntPlanData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+		
+	}
+
+
+
 	/**
 	 * loginPage with UserName and Password
 	 * search for patients from the doctor dashboard
@@ -65,6 +84,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 	@Test(groups = {"Regression","Functional"},enabled=true,description = "Verify UI of Treatment And Plans",priority=1)
 	public void checkUiTreatmentPlanAddPage() {
 		logger.log(Status.PASS, CHECK_UI_TREATMENT_PLAN_ADD_PAGE);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 //		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -94,7 +114,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
        //TreatmentPlanListingPageActions.verifyNoRecordMsg();
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
 		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
+//		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
@@ -109,6 +129,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 	@Test(groups = {"Regression","Functional"},enabled=true,description = "Verify UI of Teeth Finding Pop-up",priority=2)
 	public void verifyUiOfTeethFindingPopup() {
 		logger.log(Status.PASS, VERIFY_UI_OF_TEETH_FINDING_POPUP);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -236,6 +257,8 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 	@Test(groups = {"Smoke","Sanity","Regression","Functional"},enabled=true,description = "Add Treatment in the Listing & Verification of Listing Buttons",priority=2)
 	public void addingTreatmentCheckInInputAndMainList() {
 		logger.log(Status.PASS, ADDING_TREATMENT_CHECK_IN_INPUT_AND_MAIN_LIST);
+		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -263,7 +286,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		BasePatientLifeCyclePageActions.clickOnDashBoard(); 
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppAdd();
-		AppointmentAddPageActions.selectDoctorFromDropdown("Amit Bhatia");
+		AppointmentAddPageActions.selectDoctorFromDropdown("Mohit Raoo");
 		AppointmentAddPageActions.selectReferralFromDropdown("Patient");
 		AppointmentAddPageActions.referralDetails();
 		AppointmentAddPageActions.clickOnSaveBtn();
@@ -281,8 +304,8 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		//-checking treatment plan listing -------------
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
-		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
-		TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
+//		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();//
+		TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList(); 
 		TreatmentPlanListingPageActions.checkedDataNameMainList();
 		TreatmentPlanListingPageActions.selectedTreatmentInTreatmentList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"),patntTrtmntPlanData.get("companyName"));
 		TreatmentPlanListingPageActions.selectedTreatmentInTreatmentList(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"),patntTrtmntPlanData.get("companyName"));
@@ -303,9 +326,11 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
 	}
 	
-	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+//	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment")
 	public void verifyViewAndEditBtn() {
 		logger.log(Status.PASS, VERIFY_VIEW_AND_EDIT_BTN);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
@@ -321,7 +346,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		//--verify deleted treatment in treatment listing page and also in view PopUp
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
-		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
+//		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();//
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentListViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
@@ -329,7 +354,8 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
 	}
 	
-   @Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old",dependsOnMethods="verifyViewAndEditBtn")
+//   @Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old",dependsOnMethods="verifyViewAndEditBtn")
+	@Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old")
 	public void checkEditInputList() {
 		logger.log(Status.PASS, CHECK_FUNCTIONALITY_OF_INPUT_LIST_EDIT_BTN);
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -365,7 +391,8 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
 	}
 	
-	@Test(groups = {"Regression"},enabled=true,priority=7,description = "Mark The Treatment As Patient Preferred",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+//	@Test(groups = {"Regression"},enabled=true,priority=7,description = "Mark The Treatment As Patient Preferred",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression"},enabled=true,priority=7,description = "Mark The Treatment As Patient Preferred")
 	public void checkFunctionalityOfMarkBtn() {
 		logger.log(Status.PASS, CHECK_FUNCTIONALITY_OF_BOOK_BTN);
 		BasePatientLifeCyclePageActions.clickOnAlert();

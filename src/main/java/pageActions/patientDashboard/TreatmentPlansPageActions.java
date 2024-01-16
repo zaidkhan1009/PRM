@@ -698,7 +698,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void clickOnTreatments(String shortNameTreatment) {
 		BaseClass.waitForSpinnerToDisappear();
 			List<WebElement> web = driver.findElements(By.xpath("//div[@class='content-trtmnt']"));
-			for (int i = 0; web.size() > i; i++) {
+			for (int i = 0; web.size() > i; i++) { 
 				if (web.get(i).getText().contains(shortNameTreatment)) {
 					web.get(i).click();
 				} else {

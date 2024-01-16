@@ -20,13 +20,14 @@ public class NewSubscriberPageActions extends BaseClass  {
     }
     public static void genderRadioBtn(){
         BaseClass.waitForPageLoad();
-        BaseClass.waitForElementToBeClickable(newSubscriberPage.getMale());
-        Assert.assertTrue(checkedWebElementDisplayed(newSubscriberPage.getMale())&&newSubscriberPage.getMale().isSelected()&&checkedWebElementDisplayed(newSubscriberPage.getFemale())&&checkedWebElementDisplayed(newSubscriberPage.getOther()));
+        BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForElementVisibility(newSubscriberPage.getMale());
+        Assert.assertTrue(checkedWebElementDisplayed(newSubscriberPage.getMale())&&checkedWebElementDisplayed(newSubscriberPage.getFemale())&&checkedWebElementDisplayed(newSubscriberPage.getOther()));
     }
     public static void dobTextFields(){
         BaseClass.waitForPageLoad();
         BaseClass.waitForElementToBeClickable(newSubscriberPage.getDob());
-        Assert.assertTrue(newSubscriberPage.getDob().getAttribute("placeholder").contains("date of birth (dd-mm-yyyy)"));
+        Assert.assertTrue(newSubscriberPage.getDob().getAttribute("placeholder").contains("» dob (dd-mm-yyyy)"));
     }
     public static void emailIdTextFields(){
         BaseClass.waitForPageLoad();

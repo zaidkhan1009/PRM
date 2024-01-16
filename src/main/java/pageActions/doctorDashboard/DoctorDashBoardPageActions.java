@@ -38,15 +38,15 @@ public class DoctorDashBoardPageActions extends BaseClass {
 	}
 
 	public static void clickCampSubscriberAdd() {
-		try {
+
 			BaseClass.waitForPageLoad();
-			Thread.sleep(5000);
+			BaseClass.waitForSpinnerToDisappear();
+			BaseClass.waitForElementToBeClickable(docDashPage.getDashBoardCampSubs());
+			BaseClass.waitForModalOverlayToDisappear();
 			docDashPage.getDashBoardCampSubs().click();
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			BaseClass.waitForPageLoad();
+			BaseClass.waitForSpinnerToDisappear();
+
 	}
 
 	public static void doctorDashboardHomePage() {
@@ -169,12 +169,22 @@ public class DoctorDashBoardPageActions extends BaseClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	public static void clickOnProductSales() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(docDashPage.getDashboardProductSale());
 		docDashPage.getDashboardProductSale().click();
 		BaseClass.waitForSpinnerToDisappear();
+	}
+
+	public static void clickCampSubscriberList() {
+		BaseClass.waitForSpinnerToDisappear(); 
+		BaseClass.waitForElementToBeClickable(docDashPage.getCampSubscriberListing());
+		BaseClass.waitForModalOverlayToDisappear();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
+		docDashPage.getCampSubscriberListing().click();
+		BaseClass.waitForSpinnerToDisappear();
+		
 	}
 }

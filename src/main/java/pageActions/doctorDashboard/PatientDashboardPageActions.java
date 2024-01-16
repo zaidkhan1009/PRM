@@ -191,13 +191,25 @@ public class PatientDashboardPageActions extends BaseClass {
 //			e.printStackTrace();
 //		}
 //	}
+	public static void searchTreatmentPalnpage() {
+		BaseClass.waitToBeClickableAndClick(patientDashboardPage.getappointments());
+		patientDashboardPage.getappointments().click();
+		BaseClass.waitForSpinnerToDisappear();
+//		BaseClass.visibilityOfAllElements(patientDashboardPage.getclickOnPatients());
+		BaseClass.executionDelay();
+		BaseClass.waitToBeClickableAndClick(patientDashboardPage.getclickOnPatients().get(1));
+		System.out.println(patientDashboardPage.getclickOnPatients().get(1).getText());
+		patientDashboardPage.getclickOnPatients().get(1).click();
+		
+		
+	}
 
 	public static void clickOnTreatmentPlanAddBtn() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientDashboardPage.getTreatmentPlanAddBtn(), 4000);
-		BaseClass.waitForModalBackdropToDisappear();
+//		BaseClass.waitForModalBackdropToDisappear();
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
@@ -327,13 +339,12 @@ public class PatientDashboardPageActions extends BaseClass {
 		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementVisibility(patientDashboardPage.getProfileViewBtn(), 4000);
 		try {
-		System.out.println(patientDashboardPage.getProfileViewBtn().isDisplayed());
-		BaseClass.waitForElementToBeClickable(patientDashboardPage.getProfileViewBtn());
-		patientDashboardPage.getProfileViewBtn().click();
-		BaseClass.waitForSpinnerToDisappear();
-		}
-		catch(NoSuchElementException e) {
-			
+			System.out.println(patientDashboardPage.getProfileViewBtn().isDisplayed());
+			BaseClass.waitForElementToBeClickable(patientDashboardPage.getProfileViewBtn());
+			patientDashboardPage.getProfileViewBtn().click();
+			BaseClass.waitForSpinnerToDisappear();
+		} catch (NoSuchElementException e) {
+
 		}
 
 	}

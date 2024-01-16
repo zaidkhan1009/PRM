@@ -91,7 +91,25 @@ public class AppointmentsLisitngPageActions extends BaseClass{
     	BaseClass.selectFromDropDownByVisibleText(clinicAppointmentsPage.getApptStatusDropdownList(), AppStatusType);
     }
     
-    
+public static void clickOnLastPagePatientListing() {
+    	
+    	clinicAppointmentsPage = PageFactory.initElements(driver, AppointmentsLisitngPage.class);
+    	
+    	BaseClass.waitForSpinnerToDisappear();
+    	 try {
+    		 Thread.sleep(2500);
+    		
+    		 
+    	 } catch (InterruptedException e1) {
+             // TODO Auto-generated catch block
+             e1.printStackTrace();
+         }
+    	 BaseClass.waitForPageToBecomeActive();
+//    	 BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+    	 WebElement element = driver.findElement(By.xpath("//div[@class='clearfix topPagination pagingUI']//a[@class='last']"));
+    	 BaseClass.WaitTillElementIsPresent(element);
+	     element.click();
+    }
     
     public static void clickOnSearchBtn() {
     	BaseClass.waitForSpinnerToDisappear();

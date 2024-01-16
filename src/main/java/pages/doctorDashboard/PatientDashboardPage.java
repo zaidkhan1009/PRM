@@ -168,7 +168,7 @@ public class PatientDashboardPage {
 	private WebElement oralExamAddBtn;
 	@FindBy(id = "oeListBtn")
 	private WebElement oralExamListBtn;
-	@FindBy(id = "diagAddBtn")
+	@FindBy(xpath = "//a[@id='diagAddBtn']/span")
 	private WebElement diagnosticsTestAdd;
 	@FindBy(id = "diagListBtn")
 	public WebElement diagnosticsTestList;
@@ -212,6 +212,10 @@ public class PatientDashboardPage {
 	private WebElement allergyAlert;
 	@FindBy(xpath = "//a[@class='inf_flag_blck red']")
 	private WebElement redFlag;
+	@FindBy(xpath = "//*[text()='Appointments']")
+	private WebElement appointments;
+	@FindBy(xpath = "//div[@class='text-center lineHght12 ng-binding']")
+	private List<WebElement> clickOnPatients;
 	
 	/*
 	 * Product Sale Button WebElement within Patient Dashboard
@@ -223,7 +227,12 @@ public class PatientDashboardPage {
 	public WebElement getAppOnPdList() {
 		return appOnPdList;
 	}
-
+	public WebElement getappointments() {
+		return appointments;
+	}
+	public List<WebElement> getclickOnPatients() {
+		return clickOnPatients;
+	}
 	public WebElement getCloseBTn() {
 		return closeBTn;
 	}
@@ -534,7 +543,7 @@ public class PatientDashboardPage {
 
 	public WebElement getTreatmentPlanAddBtn() {
 		return TreatmentPlanAddBtn;
-	}
+	} 
 
 	public WebElement getTreatmentPlanListBtn() {
 		return TreatmentPlanListBtn;

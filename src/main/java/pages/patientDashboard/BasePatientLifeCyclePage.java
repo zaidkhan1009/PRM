@@ -43,7 +43,7 @@ public class BasePatientLifeCyclePage {
 	@FindBy(xpath = "//b[text()='Add New']")
 	private WebElement AddNewBtnOldUi;
 //	@FindBy(xpath = "//div[@class='alertwrp']")
-	@FindBy(className = "alertButt")
+	@FindBy(className = "alert-animate")
 	private WebElement alert;
 	@FindBy(xpath = "//div[@id='patientAlert'][contains(@style,'right: -1px')]")
 	private List <WebElement> alertBody;
@@ -105,7 +105,7 @@ public class BasePatientLifeCyclePage {
 	public WebElement getAddNewBtnOldUi() {
 		return AddNewBtnOldUi;
 	}
-	public WebElement getAlert() {
+	public WebElement getAlert() { 
 		return alert;
 	}
 	public List<WebElement> getAlertBody() {

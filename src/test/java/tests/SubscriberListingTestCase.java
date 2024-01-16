@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseClass;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.NewSubscriberPageActions;
 import pageActions.doctorDashboard.SubscriberListingPageActions;
 
@@ -17,6 +18,8 @@ public class SubscriberListingTestCase extends BaseClass {
 
     @Test(priority = 1)
     public void defaultWebElement(){
+    	CommonPageActions.backTODoctorDashboard();
+    	DoctorDashBoardPageActions.clickSubscriber();
         SubscriberListingPageActions.headerSubscriberListing();
         SubscriberListingPageActions.newSubscriberAddBtn();
         SubscriberListingPageActions.appointmentAddBtn();
@@ -30,7 +33,7 @@ public class SubscriberListingTestCase extends BaseClass {
         SubscriberListingPageActions.miscCallsListBtn();
         SubscriberListingPageActions.dashBoardBtn();
         SubscriberListingPageActions.regionDropDown("Select Region");
-        SubscriberListingPageActions.assigneeDropDown("Select Assignee");
+        SubscriberListingPageActions.assigneeDropDown("Select All");
         SubscriberListingPageActions.stageDropDown("Select Stage");
         SubscriberListingPageActions.details();
         SubscriberListingPageActions.fromDate();
@@ -40,19 +43,22 @@ public class SubscriberListingTestCase extends BaseClass {
         SubscriberListingPageActions.advanceSearchBtn();
         SubscriberListingPageActions.resetBtn();
         SubscriberListingPageActions.openAdvanceFilter();
-        SubscriberListingPageActions.typeDropDown("Select Type");
-        SubscriberListingPageActions.sourceDropDown("Select Source");
+        //SubscriberListingPageActions.typeDropDown("Select Type");
+        SubscriberListingPageActions.sourceDropDown();
         SubscriberListingPageActions.subSource();
         SubscriberListingPageActions.ageing();
         SubscriberListingPageActions.leadTypeDropDown("Select Lead Type");
         SubscriberListingPageActions.campaignDropDown("Select Campaign");
-        SubscriberListingPageActions.findingDropDown("Select Finding");
-        SubscriberListingPageActions.noRecordFound();
+//        SubscriberListingPageActions.findingDropDown("Select Finding");             Function Removed
+//        SubscriberListingPageActions.noRecordFound();
         Assert.assertTrue(CommonPageActions.verification().contains("Subscriber Listing"));
+       CommonPageActions.backTODoctorDashboard();
     }
 
     @Test(priority = 2)
     public void subscriberAddPage(){
+    	CommonPageActions.backTODoctorDashboard();
+        DoctorDashBoardPageActions.clickSubscriber();
         SubscriberListingPageActions.clickSubscriberAddBtn();
         NewSubscriberPageActions.nameTextField();
         NewSubscriberPageActions.genderRadioBtn();
@@ -60,20 +66,20 @@ public class SubscriberListingTestCase extends BaseClass {
         NewSubscriberPageActions.emailIdTextFields();
         NewSubscriberPageActions.mobileTextFields();
         NewSubscriberPageActions.alternateContactNo();
-        NewSubscriberPageActions.typeDropDown("Select Type");
-        NewSubscriberPageActions.stageDropDown("New");
+//        NewSubscriberPageActions.typeDropDown("Select Type"); Function remove
+//        NewSubscriberPageActions.stageDropDown("New");         Function remove
         NewSubscriberPageActions.campaignDropDown("Select Campaign");
         NewSubscriberPageActions.sourceDropDown("Select Source");
-        NewSubscriberPageActions.subSourceTextFields();
-        NewSubscriberPageActions.findingsDropDown();
-        NewSubscriberPageActions.otherFindingTextFields();
-        NewSubscriberPageActions.regionDropDown("Select Region");
+//        NewSubscriberPageActions.subSourceTextFields();  Function Remove
+//        NewSubscriberPageActions.findingsDropDown();      Function remove
+//        NewSubscriberPageActions.otherFindingTextFields();  Function remove
+        NewSubscriberPageActions.zoneDropDown("Select Zone");
         NewSubscriberPageActions.zoneDropDown("Select Zone");
         NewSubscriberPageActions.addFilesBtn();
         NewSubscriberPageActions.saveBtn();
         NewSubscriberPageActions.resetBtn();
         NewSubscriberPageActions.cancelBtn();
-        Assert.assertTrue(CommonPageActions.verification().contains("New Subscriber"));
+        Assert.assertTrue(CommonPageActions.verification().contains("Subscriber"));
     }
 
 }

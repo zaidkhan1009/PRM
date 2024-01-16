@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test name="Default test(failed)">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.AppointmentAddEConsultTestCase">
+      <class name="tests.TreatmentPlansTestCase1">
         <methods>
+          <include name="configReport"/>
           <include name="tearDown"/>
-          <include name="statusOfScripts"/>
+          <include name="checkBehaviourSelectedTreatmentTab"/>
+          <include name="verifyUiOfTeethFindingPopup"/>
+          <include name="verifyViewAndEditBtn"/>
+          <include name="addingTreatmentCheckInInputAndMainList"/>
+          <include name="checkOnWorkDonePageAfterTreatmentStart"/>
           <include name="setup"/>
-          <include name="appointmentEConsultPage"/>
-          <include name="suite"/>
+          <include name="checkFunctionalityOfMarkBtn"/>
+          <include name="checkUiTreatmentPlanAddPage"/>
+          <include name="verifyDeleteInTreatmentList"/>
+          <include name="checkBehaviourOfSaveBtnOnInputList"/>
+          <include name="checkFunctionalityPrintBtn"/>
+          <include name="checkEditInputList"/>
         </methods>
-      </class> <!-- tests.AppointmentAddEConsultTestCase -->
+      </class> <!-- tests.TreatmentPlansTestCase1 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

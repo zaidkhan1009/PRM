@@ -40,25 +40,37 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 
 	/*closing the alert popup*/
 	public static void clickOnAlert() {
-		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageLoad();
 
 		try {
 		boolean isAlertDisplayed = basePatientLifeCyclePage.getAlert().isDisplayed();
 		System.out.println(isAlertDisplayed);
 		if (isAlertDisplayed) {
-		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getAlert(), 4000);
-//		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getAlert());
+//		WebElement web= driver.findElement(By.xpath("//div[@class='modal-backdrop fade']"));
+//		if(web.isDisplayed()) {
+//			System.out.println("Modal backdrop fade "+web.isDisplayed());
+//		BaseClass.waitForElementToDisappear((By.xpath("//div[@class='modal-backdrop fade']")));
+//		}
 //		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
 		BaseClass.waitForUIWidgetOverlayToDisappear();
+		
+//		WebElement ele = driver.findElement(By.xpath("//div[@class='modal fade']"));
+//		if(driver.findElement(By.xpath("//div[@class='modal fade']")).isDisplayed()==true) {
+//		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal fade']"));
+//		}
 		basePatientLifeCyclePage.getAlert().click();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
+		Thread.sleep(1000);
+
 		//BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
 		}
 		}
-		catch(NoSuchElementException e) {
+		catch(NoSuchElementException | InterruptedException e) {
+//			basePatientLifeCyclePage.getAlert().click();
 			System.out.println("Alert not clicked");
 		}
-	}
-	
+	}	
 //	public static void clickOnAlert() {
 //		BaseClass.waitForPageLoad();
 //		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal overlay']"));
@@ -85,6 +97,7 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 	/*clicking on the dashboard button*/
 	
 	public static void clickOnDashBoard() {
+		executionDelay();
 		if(basePatientLifeCyclePage.getDashboardBtn().isDisplayed()) {
 			BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getDashboardBtn());
 			BaseClass.executeScript(basePatientLifeCyclePage.getDashboardBtn());

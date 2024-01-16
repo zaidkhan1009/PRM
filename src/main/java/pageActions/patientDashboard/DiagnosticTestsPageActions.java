@@ -16,10 +16,14 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checkedSuccessAlert() {
 		    BaseClass.waitForSpinnerToDisappear();
 			BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg()));
-			BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
+			BaseClass.waitForElementToDisappear(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg());
+		BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
+			
 	}
 	
-	public static void checkedUpdateSuccessAlert() {
+	
+		
+			public static void checkedUpdateSuccessAlert() {
 	    BaseClass.waitForSpinnerToDisappear();
 	    WebElement wb = driver.findElement((By.xpath("//span[contains(text(),'Investigation(s) added successfully!')]")));
 		BaseClass.softAssert().assertTrue(checkedElementDisplayed(wb));
@@ -73,6 +77,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	
 	public static void clickIopar() {
 		    BaseClass.waitForSpinnerToDisappear();
+		    BaseClass.waitForModalOverlayToDisappear();
 		    BaseClass.waitForPageToBecomeActive();
 			BaseClass.waitForElementVisibility(diagnosticTestsPage.getIoparButton(),4000);
 			diagnosticTestsPage.getIoparButton().click();
@@ -84,6 +89,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForPageToBecomeActive();
 		BaseClass.waitForElementVisibility(diagnosticTestsPage.getImagingButton(),4000);
+		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getImagingButton());
 		diagnosticTestsPage.getImagingButton().click();
 		BaseClass.waitForSpinnerToDisappear();
 	}
@@ -546,8 +552,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 			Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']/.."))
 					.getAttribute("data-ng-class").contains("hide"));
 		} else {
-			WebElement editBtn = driver.findElement(
-					By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']"));
+			WebElement editBtn = driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']"));
 			editBtn.click();
 		}
 	}

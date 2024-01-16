@@ -1,6 +1,5 @@
 package tests;
 
-
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -8,12 +7,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
 import base.BaseClass;
+import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pageActions.patientDashboard.DiagnosticListingPageActions;
@@ -38,10 +41,23 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	private static final String ADD_DIAGNOSTICS = "Validating the Diagnosis Add page and Diagnosis listing page after adding a diagnosis - #addDiagnostics";
 	Map<String, String> patntDiagnosticData = null;
 
+	@BeforeTest
+	public void testSetup() {
+		
+		patntDiagnosticData = SheetTest.prepareData("DiagnosticData","Diagnostic","A2","E2");
+		
+	}
 	
 	@Test(groups = {"Regression"},priority = 1)
 	public void checkedDiagnosticsAddUi() {
 		logger.log(Status.PASS, CHECKED_DIAGNOSTICS_ADD_UI);
+
+		CommonPageActions.backTODoctorDashboard();
+		//DoctorDashBoardPageActions.doctorDashboardHomePage();
+		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
+		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		CommonPageActions.clickOnPatient(patntDiagnosticData.get("patient_mobile"),patntDiagnosticData.get("patient_name"));
 		PatientDashboardPageActions.clickOnDiagnosticsTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
@@ -85,7 +101,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		DiagnosticTestsPageActions.closeDiagnosisPopup();
 		/*----------------Bio-chemical ui------------*/
 		DiagnosticTestsPageActions.clickBiochemicalButton();
-		DiagnosticTestsPageActions.checkedDiagnosisHeader("Diagnosis >> Biochemical");
+		DiagnosticTestsPageActions.checkedDiagnosisHeader("Diagnosis >> Bio- Chemical");
 		DiagnosticTestsPageActions.checked_Save_Close_Notes();
 		DiagnosticTestsPageActions.checkedBioChemicalDiagnosis();
 		DiagnosticTestsPageActions.closeDiagnosisPopup();
@@ -106,6 +122,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		/* First Time Only */
 //		BasePatientLifeCyclePageActions.noRecordMsgDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Diagnostic Listing"));
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/*Added Diagnosis for the IOPAR and Imaging
@@ -115,6 +132,11 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	@Test(groups = {"Smoke","Sanity","Functional","Regression"},priority = 2)
 	public void addDiagnostics() {
 		logger.log(Status.PASS, ADD_DIAGNOSTICS);
+		CommonPageActions.backTODoctorDashboard();
+		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
+		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		CommonPageActions.clickOnPatient(patntDiagnosticData.get("patient_mobile"),patntDiagnosticData.get("patient_name"));
 		PatientDashboardPageActions.clickOnDiagnosticsTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		/*-------------------adding iopar---------------*/
@@ -179,6 +201,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		BasePatientLifeCyclePageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Diagnostic Listing"));
 		BaseClass.softAssert().assertAll();
+		CommonPageActions.backTODoctorDashboard();
 	}
 
 	/*Added Diagnosis for the IOPAR and Imaging
@@ -188,6 +211,11 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	@Test(groups = {"Functional","Regression"},priority = 3)
 	public void editDiagnostics() {
 		logger.log(Status.PASS, ADD_DIAGNOSTICS);
+		CommonPageActions.backTODoctorDashboard();
+		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
+		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		CommonPageActions.clickOnPatient(patntDiagnosticData.get("patient_mobile"),patntDiagnosticData.get("patient_name"));
 		PatientDashboardPageActions.clickOnDiagnosticsTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		DiagnosticTestsPageActions.clickEditBtnInputlist("Imaging");
@@ -233,6 +261,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		BasePatientLifeCyclePageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Diagnostic Listing"));
 		BaseClass.softAssert().assertAll();
+		CommonPageActions.backTODoctorDashboard();
 	}
 	
 	/*Deleted Diagnosis for the IOPAR and Imaging
@@ -242,6 +271,11 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	@Test(groups = {"Functional","Regression"},priority = 4)
 	public void deleteDiagnostics() {
 		logger.log(Status.PASS, ADD_DIAGNOSTICS);
+		CommonPageActions.backTODoctorDashboard();
+		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
+		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		CommonPageActions.clickOnPatient(patntDiagnosticData.get("patient_mobile"),patntDiagnosticData.get("patient_name"));
 		PatientDashboardPageActions.clickOnDiagnosticsTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		DiagnosticTestsPageActions.clickEditBtnInputlist("Imaging");
@@ -258,7 +292,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		DiagnosticTestsPageActions.checkedInvestigation("Imaging", "CBCT");
 		DiagnosticTestsPageActions.checkedDeleteWithInvestigation("Imaging", "OPG");
 		DiagnosticTestsPageActions.checkedDeleteWithInvestigation("Imaging", "CBCT");
-		DiagnosticTestsPageActions.notesDiagnosisInputList("Imaging", "OPG", "Imaging testing CBCT Notes CBCT Notes");
+		DiagnosticTestsPageActions.notesDiagnosisInputList("Imaging", "OPG", "Imaging testing CBCT Notes");
 		DiagnosticTestsPageActions.checkedDeleteBtnInputlist("Imaging");
 		DiagnosticTestsPageActions.checkedEditBtnInputlist("Imaging");
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
@@ -283,9 +317,10 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		DiagnosticListingPageActions.investigationView("Imaging", "OPG");
 		DiagnosticListingPageActions.investigationView("Imaging", "CBCT");
 		DiagnosticListingPageActions.createdByView("Imaging", patntDiagnosticData.get("doctorNickName"));
-		DiagnosticListingPageActions.notesView("Imaging", "Imaging testing CBCT Notes CBCT Notes");
+		DiagnosticListingPageActions.notesView("Imaging", "Imaging testing CBCT Notes");
 		BasePatientLifeCyclePageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Diagnostic Listing"));
 		BaseClass.softAssert().assertAll();
+		CommonPageActions.backTODoctorDashboard();
 	}
 }

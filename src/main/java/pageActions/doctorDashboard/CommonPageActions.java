@@ -1,6 +1,7 @@
 package pageActions.doctorDashboard;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -99,6 +100,7 @@ public class CommonPageActions extends BaseClass {
     	BaseClass.waitForElementToDisappear((By.xpath("//div[@class='ui-widget-overlay']")));
         BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
         commonPage.getSearchClinicDropdown().clear();
+        BaseClass.waitForPageToBecomeActive();
         BaseClass.waitForElementVisibility(commonPage.getSearchClinicDropdown(),4000);
         commonPage.getSearchClinicDropdown().sendKeys(clinic);
         BaseClass.waitForSpinnerToDisappear();
@@ -109,6 +111,35 @@ public class CommonPageActions extends BaseClass {
         BaseClass.hoverOnElement(element);
         element.click();
         BaseClass.waitForPageToBecomeActive();
+        
+        try {
+
+			List<WebElement> pendingActionsReminder = driver
+					.findElements(By.xpath("//h4[contains(text(),'Pending Actions')]"));
+			List<WebElement> closePendingActionsReminder = driver
+					.findElements(By.xpath("//a[@class='close notActiveSec ui-link']"));
+			List<WebElement> savePendingActionsReminder = driver
+					.findElements(By.xpath("//a[@class='close btn-act-save dueApptSaveDataBtn ui-link']"));
+
+			boolean isNotificationDisplayed = pendingActionsReminder.get(0).isDisplayed();
+			
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			
+			boolean isNotificationPresent = pendingActionsReminder.size() > 0;
+			boolean isSnoozePresent = closePendingActionsReminder.size() > 0;
+			boolean isSavePresent = savePendingActionsReminder.size() > 0;
+
+			if (isNotificationDisplayed) {
+				if (isSavePresent) {
+					CommonPageActions.selectNoShowPendingActions();
+				}
+				else {
+					CommonPageActions.closePendingActionsReminder();
+				}
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Pending actions notification appeared and couldn't be closed");
+		}
     }
 
 //    public static void selectClinicFrmHeader(String clinic) {
@@ -181,6 +212,7 @@ public class CommonPageActions extends BaseClass {
 
     public static void clickOnSearchBtn() {
         BaseClass.waitForPageLoad();
+        BaseClass.waitForSpinnerToDisappear();
         BaseClass.waitForElementToBeClickable(commonPage.getSearchBtn());
         try {
             Thread.sleep(4000);

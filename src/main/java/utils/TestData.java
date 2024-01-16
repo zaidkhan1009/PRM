@@ -29,7 +29,7 @@ public class TestData {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return instance;
+        return instance; 
     }
     public String getInputData(String mandatory_Info){
         return properties.getProperty(mandatory_Info);

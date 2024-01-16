@@ -138,21 +138,21 @@ public class SubscriberListingPage {
     private WebElement fromDate;
     @FindBy(id="toDate")
     private WebElement toDate;
-    @FindBy(id="stageRbtn")
+    @FindBy(xpath="//label[@for='stageRbtn']")  // [Sumit Kumar - 3-Jan-24]: changed the locator from : //label[@for='stageRbtn']   "//input[@id='stageRbtn']"
     private WebElement stageRbtn;
-    @FindBy(id="createdRbtn")
+    @FindBy(xpath="//label[@for='createdRbtn']")  // changed the locator from: (id="createdRbtn")
     private WebElement createdRbtn;
-    @FindBy(id="updatedRbtn")
+    @FindBy(xpath="//label[@for='updatedRbtn']") // changed the locator from: (id="updatedRbtn")
     private WebElement updatedRbtn;
     @FindBy(xpath = "//span[@class='cmnicons srch']/../following-sibling::i[text()='Search']")
     private WebElement searchBtn;
-    @FindBy(className = "cmnicons advSerch selctdBtn")
+    @FindBy(xpath = "//span[@class='cmnicons advSerch']")
     private WebElement advanceBtn;
     @FindBy(xpath = "//span[@class='cmnicons rst']/../following-sibling::i[text()='Reset']")
     private WebElement resetBtn;
     @FindBy(id = "type")
     private WebElement type;
-    @FindBy(id = "source")
+    @FindBy(xpath="//button[@class='dropdown-toggle ng-binding btn btn-default']")	//changed the xpath from "id = "source")
     private WebElement source;
     @FindBy(id = "subsource")
     private WebElement subsource;

@@ -4,15 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import utils.TestData;
-
 import base.BaseClass;
 import pages.patientDashboard.DiagnosticListingPage;
-
+import utils.TestData;
 public class DiagnosticListingPageActions extends BaseClass {
 	
 	static DiagnosticListingPage diagnosticListingPage = PageFactory.initElements(driver, DiagnosticListingPage.class);
-
 
 	/*checking the column name at diagnosis listing page*/
 	public static void checkedDataName() {

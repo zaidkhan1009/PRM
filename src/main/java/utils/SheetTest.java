@@ -32,7 +32,7 @@ public class SheetTest {
 			+ "src\\main\\resources\\client_secret.json";
 	private static final String SPREADSHEET_ID = "1FldGLoTmmfPd7L45Ki-pAgobcZru3gflWc1F4aew8aM";
 
-
+ 
 
 	public static Sheets getSheet() throws IOException, GeneralSecurityException {
 		HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -97,7 +97,7 @@ public class SheetTest {
 						mapData.put("edit_patient_mobile", (String) row.get(16));
 					}
 					break;
-
+ 
 				case "Appointment":
 					for (List<Object> row : values) {
 						mapData.put("patient_name", (String) row.get(1));
@@ -173,11 +173,13 @@ public class SheetTest {
 					break;
 
 				case "DiagnosticData":
-					mapData.put("patient_name",values.get(1).get(0).toString());
-					mapData.put("patient_mobile",values.get(1).get(1).toString());
-					mapData.put("doctor",values.get(1).get(2).toString());
-					mapData.put("doctorNickName",values.get(1).get(3).toString());
-					mapData.put("clinicLocation",values.get(1).get(4).toString());
+					for (List<Object> row : values) {
+					mapData.put("patient_name",(String) row.get(0)); // from: values.get(1).get(0).toString()-> to: (String) row.get(1) 
+					mapData.put("patient_mobile", (String) row.get(1)); //values.get(1).get(1).toString());
+					mapData.put("doctor",(String) row.get(2)); // values.get(1).get(2).toString());
+					mapData.put("doctorNickName", (String) row.get(3)); // values.get(1).get(3).toString());
+					mapData.put("clinicLocation", (String) row.get(4)); // values.get(1).get(4).toString());
+					}
 					break;
 
 
