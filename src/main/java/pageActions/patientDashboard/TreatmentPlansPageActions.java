@@ -645,8 +645,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 
 	public static void removeTreatmentFromSelectedTreatmentTab(String treatment) {
 		BaseClass.waitForPageLoad();
-		WebElement web = driver.findElement(By.xpath(
-				"//span[contains(text(),'" + treatment + "')]/following-sibling::div//span[@class='deletebtn']"));
+		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment + "')]/following-sibling::div//span[@class='deletebtn']"));
 		BaseClass.waitForElementToBeClickable(web);
 		web.click();
 	}

@@ -83,17 +83,17 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 	@Test(groups = {"Regression","Functional"},enabled=true,description = "Verify UI of Treatment And Plans",priority=1)
 	public void checkUiTreatmentPlanAddPage() {
 		logger.log(Status.PASS, CHECK_UI_TREATMENT_PLAN_ADD_PAGE);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+		
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
-		//		BasePatientLifeCyclePageActions.clickOnAlert();
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		TreatmentPlansPageActions.verifyHeader();
 		TreatmentPlansPageActions.clickOnFindingsBtn();
-		//		TreatmentPlansPageActions.verifyNoRecordMsg();
+//		TreatmentPlansPageActions.verifyNoRecordMsg();
 		TreatmentPlansPageActions.verifyCreateBtnIsPresent();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
 		TreatmentPlansPageActions.clickOnNewTeethBtn();
 		OralExamsPageActions.verifyAdultsTeeths();
 		TreatmentPlansPageActions.allTeethByQuadrantAndByArchIsPresent();
@@ -103,31 +103,32 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		OralExamsPageActions.clickOnMixed();
 		OralExamsPageActions.verifyMixedTeeths();
 		TreatmentPlansPageActions.allTeethAndByQuadrantIsPresent();
-		//		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+//		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyHeaderOfPage("Treatment Plan Listing");
-		//TreatmentPlanListingPageActions.verifyNoRecordMsg();
+       //TreatmentPlanListingPageActions.verifyNoRecordMsg();
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
+//		TreatmentPlansPageActions.verifyProductAddBtnIsPresent();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
-
+	
 	/**
-	 * Check Teeth Findings All Plans Treatment Groups.
+     * Check Teeth Findings All Plans Treatment Groups.
 	 * Verification of plans based upon groups.
 	 */
 
 	@Test(groups = {"Regression","Functional"},enabled=true,description = "Verify UI of Teeth Finding Pop-up",priority=2)
 	public void verifyUiOfTeethFindingPopup() {
 		logger.log(Status.PASS, VERIFY_UI_OF_TEETH_FINDING_POPUP);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		OralExamsPageActions.clickOnTeethImage("Adult", "43");
@@ -175,86 +176,88 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.verifyTreatments();
 		TreatmentPlansPageActions.closeTreatmentPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plans"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
-
+	
 	/***This Test case is not in work as of now as Edit button is remove from Treatment Pop up Plan*/
+	
+//	@Test(enabled=false,priority=3)
+//	public void checkedOralExamFromTreatmentPopup() {
+//		logger.log(Status.PASS, CHECKED_ORAL_EXAM_FROM_TREATMENT_POPUP);
+//		BasePatientLifeCyclePageActions.clickOnAlert();
+//		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
+//		BasePatientLifeCyclePageActions.clickOnAlert();
+//		OralExamsPageActions.clickOnTeethImage("Adult", "24");
+//		TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
+//		TreatmentPlansPageActions.clickOnOralExamBtn();
+//		OralExamsPageActions.clickOnBuccal();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnDistal();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnMesial();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnOcclusal();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnPalatal();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnAllSurface();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		OralExamsPageActions.clickOnPerio();
+//		TreatmentPlansPageActions.verifyProvisinals();
+//		TreatmentPlansPageActions.verifyIoparBtn();
+//		TreatmentPlansPageActions.clickOnIOPARBtn();
+//		TreatmentPlansPageActions.verifyIOPARNotes();
+//		OralExamsPageActions.verifyToothObservationRemark();
+//		OralExamsPageActions.clickOnSoftTissueOnPopup();
+//		TreatmentPlansPageActions.clickOnLip();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnCheek();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnTongue();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnFloorOfMouth();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnPalate();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnGingiva();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnVestibule();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnFrenum();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnSalivaryGland();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		TreatmentPlansPageActions.clickOnLymphNodes();
+//		OralExamsPageActions.verifySoftProvisinals();
+//		OralExamsPageActions.verifyToothObservationRemark();
+//		OralExamsPageActions.clickOnHardTissueInPopup();
+//		OralExamsPageActions.clickOnMandibularAngle();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnMandibularBody();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnMaxillaryTuberosity();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnPosteriorMaxilla();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnPreMaxilla();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnMaxillarySinus();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnMandibularSymphysis();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.clickOnTMJoint();
+//		OralExamsPageActions.verifyHardProvisionals();
+//		OralExamsPageActions.verifyToothObservationRemark();
+//		TreatmentPlansPageActions.clickOnCloseBtnOralExam();
+//		TreatmentPlansPageActions.closeTreatmentPopup();
+//		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plans"));
+//	}
 
-	//	@Test(enabled=false,priority=3)
-	//	public void checkedOralExamFromTreatmentPopup() {
-	//		logger.log(Status.PASS, CHECKED_ORAL_EXAM_FROM_TREATMENT_POPUP);
-	//		BasePatientLifeCyclePageActions.clickOnAlert();
-	//		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
-	//		BasePatientLifeCyclePageActions.clickOnAlert();
-	//		OralExamsPageActions.clickOnTeethImage("Adult", "24");
-	//		TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
-	//		TreatmentPlansPageActions.clickOnOralExamBtn();
-	//		OralExamsPageActions.clickOnBuccal();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnDistal();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnMesial();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnOcclusal();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnPalatal();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnAllSurface();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		OralExamsPageActions.clickOnPerio();
-	//		TreatmentPlansPageActions.verifyProvisinals();
-	//		TreatmentPlansPageActions.verifyIoparBtn();
-	//		TreatmentPlansPageActions.clickOnIOPARBtn();
-	//		TreatmentPlansPageActions.verifyIOPARNotes();
-	//		OralExamsPageActions.verifyToothObservationRemark();
-	//		OralExamsPageActions.clickOnSoftTissueOnPopup();
-	//		TreatmentPlansPageActions.clickOnLip();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnCheek();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnTongue();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnFloorOfMouth();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnPalate();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnGingiva();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnVestibule();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnFrenum();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnSalivaryGland();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		TreatmentPlansPageActions.clickOnLymphNodes();
-	//		OralExamsPageActions.verifySoftProvisinals();
-	//		OralExamsPageActions.verifyToothObservationRemark();
-	//		OralExamsPageActions.clickOnHardTissueInPopup();
-	//		OralExamsPageActions.clickOnMandibularAngle();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnMandibularBody();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnMaxillaryTuberosity();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnPosteriorMaxilla();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnPreMaxilla();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnMaxillarySinus();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnMandibularSymphysis();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.clickOnTMJoint();
-	//		OralExamsPageActions.verifyHardProvisionals();
-	//		OralExamsPageActions.verifyToothObservationRemark();
-	//		TreatmentPlansPageActions.clickOnCloseBtnOralExam();
-	//		TreatmentPlansPageActions.closeTreatmentPopup();
-	//		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plans"));
-	//	}
-
-	@Test(groups = {"Smoke","Sanity","Regression","Functional"},enabled=true,description = "Add Treatment in the Listing & Verification of Listing Buttons",priority=2)
+	@Test(groups = {"Smoke","Sanity","Regression","Functional"},enabled=true,description = "Add Treatment in the Listing & Verification of Listing Buttons",priority=4)
 	public void addingTreatmentCheckInInputAndMainList() {
 		logger.log(Status.PASS, ADDING_TREATMENT_CHECK_IN_INPUT_AND_MAIN_LIST);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		OralExamsPageActions.clickOnTeethImage("Adult", "24");
@@ -263,29 +266,29 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup1_Plan1"));
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup1_Plan2"));
 		TreatmentPlansPageActions.saveTreatment();
-		BasePatientLifeCyclePageActions.clickOnAlert();
-		TreatmentPlansPageActions.checkedInputListDataName();
-		TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan1"));
-		TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan2"));
+    	BasePatientLifeCyclePageActions.clickOnAlert();
+    	TreatmentPlansPageActions.checkedInputListDataName();
+    	TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan1"));
+    	TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan2"));
 		TreatmentPlansPageActions.checkEditSaveInputList("24");
 		TreatmentPlansPageActions.checkDeleteInputList("24");
 		//-------checking checkbox at input list and start button main list-------
-
-		//		TreatmentPlansPageActions.startCheckBoxInputListNotPresent(); 
+		
+//		TreatmentPlansPageActions.startCheckBoxInputListNotPresent(); 
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-		//      TreatmentPlanListingPageActions.checkStartBtnNotPresent(TODAY_DATE); 
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+//      TreatmentPlanListingPageActions.checkStartBtnNotPresent(TODAY_DATE); 
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppList();
-		AppointmentsListPageActions.appointmentAvailable();
-		BasePatientLifeCyclePageActions.clickOnDashBoard(); 
+        AppointmentsListPageActions.appointmentAvailable();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon(); 
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppAdd();
-		AppointmentAddPageActions.selectDoctorFromDropdown("Amit Bhatia");
+		AppointmentAddPageActions.selectDoctorFromDropdown("Rajesh1 Mishra");
 		AppointmentAddPageActions.selectReferralFromDropdown("Patient");
 		AppointmentAddPageActions.referralDetails();
 		AppointmentAddPageActions.clickOnSaveBtn();
-		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyStartBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.clickOnEditBtn(TODAY_DATE);
@@ -297,7 +300,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.selectedTreamentInIputList(patntTrtmntPlanData.get("planGroup1_Plan2"));
 		TreatmentPlansPageActions.verifyNoRecordMsg();
 		//-checking treatment plan listing -------------
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
@@ -319,12 +322,14 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.verifyHeaderInViewPopup("Treatment Plan View");
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
-
-	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	
+//	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression","Functional"},enabled=true,priority=5,description = "Verify View Edit & Delete Single Treatment")
 	public void verifyViewAndEditBtn() {
 		logger.log(Status.PASS, VERIFY_VIEW_AND_EDIT_BTN);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.verifyTreatmentInViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
@@ -337,7 +342,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.verifyDeleteSuccessMsg();
 		TreatmentPlansPageActions.verifyAfterDelete(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		//--verify deleted treatment in treatment listing page and also in view PopUp
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
@@ -345,9 +350,12 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentListViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
-	}
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 
-	@Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old",dependsOnMethods="verifyViewAndEditBtn")
+	}
+	
+//   @Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old",dependsOnMethods="verifyViewAndEditBtn")
+	@Test(groups = {"Regression","Functional","Sanity"},enabled=true,priority=6,description = "Verify Edit And Add New Treatment Along With Old")
 	public void checkEditInputList() {
 		logger.log(Status.PASS, CHECK_FUNCTIONALITY_OF_INPUT_LIST_EDIT_BTN);
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -357,7 +365,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.clickOnPedo();
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup2_Plan1"));
 		TreatmentPlansPageActions.saveTreatment();
-		TreatmentPlansPageActions.verifyAfterDelete(patntTrtmntPlanData.get("planGroup1_Plan1"));
+     	TreatmentPlansPageActions.verifyAfterDelete(patntTrtmntPlanData.get("planGroup1_Plan1"));
 		TreatmentPlansPageActions.selectedTreamentInIputList(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlansPageActions.selectedTreamentInIputList(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		//--checking in finding-----
@@ -367,7 +375,7 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.selectedTreamentInIputList(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		TreatmentPlansPageActions.verifyNoRecordMsg();
 		//-checking treatment plan listing -------------
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
@@ -381,13 +389,16 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.verifyTreatmentInViewPopup(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
+	
 
 //	@Test(groups = {"Regression"},enabled=true,priority=7,description = "Mark The Treatment As Patient Preferred",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
 	@Test(groups = {"Regression"},enabled=true,priority=7,description = "Mark The Treatment As Patient Preferred")
 	public void checkFunctionalityOfMarkBtn() {
 		logger.log(Status.PASS, CHECK_FUNCTIONALITY_OF_BOOK_BTN);
-//		PatientDashboardPageActions.hideDueWarningPopup();
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.selectTreatmentInTreatmentListPage(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlanListingPageActions.clickOnMarkBtn(TODAY_DATE);
@@ -396,16 +407,21 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.verifyUnbookBtn(TODAY_DATE);
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
 		BaseClass.softAssert().assertAll();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 
-	@Test(groups = {"Regression"},enabled=true,priority=8,description = "Check Functionality For Print Button",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+//	@Test(groups = {"Regression"},enabled=true,priority=8,description = "Check Functionality For Print Button",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression"},enabled=true,priority=8,description = "Check Functionality For Print Button")
 	public void checkFunctionalityPrintBtn() {
 		logger.log(Status.PASS, CHECK_FUNTIONALITY_OF_PRINT_BTN);
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.clickOnPrintBtn(TODAY_DATE);
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 	@Test(groups = {"Regression"},enabled=true,priority=9,description = "Behaviour of Selected Treatment Selction/Deselection")
@@ -441,9 +457,12 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlansPageActions.verifyWithoutTreatmentMsg();
 		TreatmentPlansPageActions.closeTreatmentPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plans"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
-	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=10,dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+//	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=10,dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=10)
 	public void checkBehaviourOfSaveBtnOnInputList() {
 		logger.log(Status.PASS, CHECK_BEHAVIOUR_OF_SAVE_BTN_ON_INPUT_LIST);
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -453,10 +472,12 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.selectTreatmentInTreatmentListPage(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlanListingPageActions.clickOnStartBtn(TODAY_DATE);
 		/*--below is written for Admin loginPage -*/
-		/*TreatmentPlanListingPageActions.verifyHeaderOfDoctorListPopup();
-		TreatmentPlanListingPageActions.selectDoctor("Amit Bhatia");
-		TreatmentPlanListingPageActions.clickOnSaveBtnInDoctorList();*/
+//		TreatmentPlanListingPageActions.verifyHeaderOfDoctorListPopup();
+//		TreatmentPlanListingPageActions.selectDoctor("Rajesh1 Mishra");
+//		TreatmentPlanListingPageActions.clickOnSaveBtnInDoctorList();
 		Assert.assertTrue(CommonPageActions.verification().contains("Works Done"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=11)
@@ -465,43 +486,55 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 
 		PatientDashboardPageActions.hideDueWarningPopup();
 		BasePatientLifeCyclePageActions.clickOnAlert();
-		PatientDashboardPageActions.clickOnWorkDoneAdd();
+		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
+		TreatmentPlanListingPageActions.clickOnEditBtn(TODAY_DATE);
+		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
+		TreatmentPlanListingPageActions.selectTreatmentInTreatmentListPage(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		TreatmentPlanListingPageActions.clickOnStartBtn(TODAY_DATE);
+		/*--below is written for Admin loginPage -*/
+//		TreatmentPlanListingPageActions.verifyHeaderOfDoctorListPopup();
+//		TreatmentPlanListingPageActions.selectDoctor("Rajesh1 Mishra");
+//		TreatmentPlanListingPageActions.clickOnSaveBtnInDoctorList();
+//		PatientDashboardPageActions.clickOnWorkDoneAdd();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Works Done");
-		WorksDonePageActions.checkDateTreatment(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), TODAY_DATE);
-		WorksDonePageActions.checkSourceNo(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "24");
-		WorksDonePageActions.checkedStatusTreatment(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "Started");
-		WorksDonePageActions.checkProgressDropDown(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		WorksDonePageActions.checkSuspededBtn(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		WorksDonePageActions.checkDataName(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
+		WorksDonePageActions.checkDateTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), TODAY_DATE);
+		WorksDonePageActions.checkSourceNo(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "24");
+		WorksDonePageActions.checkedStatusTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "Started");
+		WorksDonePageActions.checkProgressDropDown(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		WorksDonePageActions.checkSuspededBtn(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		WorksDonePageActions.checkDataName(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		WorksDonePageActions.checkBox(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		WorksDonePageActions.modifiedDate(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), TODAY_DATE);
-		WorksDonePageActions.checkDoctorSelected(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), patntTrtmntPlanData.get("doctor"));
-		WorksDonePageActions.checkedClinic(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), patntTrtmntPlanData.get("clinicLocation"));
-		WorksDonePageActions.checkTimeSelected(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "Select Time");
-		WorksDonePageActions.checkedRemarks(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		WorksDonePageActions.checkedAddButton(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
+		WorksDonePageActions.modifiedDate(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), TODAY_DATE);
+		WorksDonePageActions.checkDoctorSelected(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), patntTrtmntPlanData.get("doctor"));
+		WorksDonePageActions.checkedClinic(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), patntTrtmntPlanData.get("clinicLocation"));
+		WorksDonePageActions.checkTimeSelected(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "Select Time");
+		WorksDonePageActions.checkedRemarks(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		WorksDonePageActions.checkedAddButton(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		/*-------------workdone history check all data-----------------*/
 		WorksDonePageActions.clickWorkDoneHistory();
 		WorkDoneHistoryPageActions.checkedInvoiceListBtn();
 		WorkDoneHistoryPageActions.checkLabWorkOrderBtn();
 		WorkDoneHistoryPageActions.checkedPrintBtn();
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
-		WorkDoneHistoryPageActions.checkDateTreatment(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), TODAY_DATE);
-		WorkDoneHistoryPageActions.checkSourceNo(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "24");
-		WorkDoneHistoryPageActions.checkedStatusTreatment(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "In-Progress");
-		WorkDoneHistoryPageActions.checkDataName(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		WorkDoneHistoryPageActions.modifiedDate(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), TODAY_DATE);
-		WorkDoneHistoryPageActions.checkDoctorTreated(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), patntTrtmntPlanData.get("doctor"));
-		WorkDoneHistoryPageActions.checkedClinic(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), patntTrtmntPlanData.get("clinicLocation"));
-		WorkDoneHistoryPageActions.checkSpentTime(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "15");
-		WorkDoneHistoryPageActions.checkStageTreatment(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "Started");
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
+		WorkDoneHistoryPageActions.checkDateTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), TODAY_DATE);
+		WorkDoneHistoryPageActions.checkSourceNo(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "24");
+		WorkDoneHistoryPageActions.checkedStatusTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "In-Progress");
+		WorkDoneHistoryPageActions.checkDataName(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		WorkDoneHistoryPageActions.modifiedDate(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), TODAY_DATE);
+		WorkDoneHistoryPageActions.checkDoctorTreated(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), patntTrtmntPlanData.get("doctor"));
+		WorkDoneHistoryPageActions.checkedClinic(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), patntTrtmntPlanData.get("clinicLocation"));
+		WorkDoneHistoryPageActions.checkSpentTime(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "15");
+		WorkDoneHistoryPageActions.checkStageTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"), "Started");
 		WorkDoneHistoryPageActions.checkPrintButtonDisplayed();
 		Assert.assertTrue(CommonPageActions.verification().contains("Work Done History"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 
-	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=12,description = "Delete The Added Treatment And Verification",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+//	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=12,description = "Delete The Added Treatment And Verification",dependsOnMethods="addingTreatmentCheckInInputAndMainList")
+	@Test(groups = {"Regression","Sanity","Functional"},enabled=true,priority=12,description = "Delete The Added Treatment And Verification")
 	public void verifyDeleteInTreatmentList() {
 		logger.log(Status.PASS, VERIFY_DELETE_IN_TREATMENT_LIST);
 		BasePatientLifeCyclePageActions.clickOnAlert();
@@ -512,14 +545,16 @@ public class TreatmentPlansTestCase1 extends BaseClass{
 		TreatmentPlanListingPageActions.verifyDeleteSuccessMsg();
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.checkNotDeletedTreatment(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
-		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentList(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		TreatmentPlanListingPageActions.checkNotDeletedTreatment(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		TreatmentPlanListingPageActions.verifyViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.verifyPrintBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentListViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.notDeletedTreatmentInView(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
-		TreatmentPlanListingPageActions.verifyAfterDeleteInTreatmentListViewPopup(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
+		TreatmentPlanListingPageActions.notDeletedTreatmentInView(patntTrtmntPlanData.get("planGroup2_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 }

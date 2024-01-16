@@ -9,10 +9,11 @@
       <class name="tests.TreatmentPlansTestCase1">
         <methods>
           <include name="configReport"/>
+          <include name="checkOnWorkDonePageAfterTreatmentStart"/>
           <include name="tearDown"/>
           <include name="setup"/>
           <include name="testSetup"/>
-          <include name="checkFunctionalityOfMarkBtn"/>
+          <include name="verifyDeleteInTreatmentList"/>
         </methods>
       </class> <!-- tests.TreatmentPlansTestCase1 -->
     </classes>

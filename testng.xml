@@ -8,8 +8,8 @@
 		<classes>	
 		<class name="tests.TreatmentPlansTestCase1">
 				<methods>
-						<include name="checkFunctionalityOfMarkBtn"/>
-						
+						<include name="checkOnWorkDonePageAfterTreatmentStart"/>
+						<include name="verifyDeleteInTreatmentList"/>
 						
 				</methods>
 			</class>
