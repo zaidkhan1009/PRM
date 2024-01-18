@@ -85,7 +85,7 @@ public class EventPage {
 	private WebElement timeAlreadyPassErrorMsg;
 	@FindBy(xpath="//div[text()='Max limit reached for event booking by operatory for the time range!']")
 	private WebElement lastOperatoryAvailableErrorMsg;
-	@FindBy(xpath="//div[text()='Max limit reached for event booking by scanner for the time range!']")
+	@FindBy(xpath= "//div[text()='Event cannot be added for last remaining scanner!']") 				// changing the xpath "//div[text()='Max limit reached for event booking by scanner for the time range!']")
 	private WebElement lastScannerAvailableErrorMsg;
 	@FindBy(xpath="//div[text()='Time slot selected for event is already booked!']")
 	private WebElement eventAlreadyBookedForSlotErrorMsg;

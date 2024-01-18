@@ -754,6 +754,7 @@ public class EventTestCase extends BaseClass {
 	public void verifyByRoomEvent() {
 		addRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A10", "O10");
 		logger.log(Status.PASS, VERIFY_BY_ROOM_EVENT);
+
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		BaseClass.waitForPageLoad();
@@ -769,8 +770,8 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.selectAmPm(addRoomEventTestData.get("AM_PM"));
 		EventPageActions.enterEventDuration(addRoomEventTestData.get("event_duration"));
 		EventPageActions.enterNotes(addRoomEventTestData.get("event_DateTime"));
-		EventPageActions.clickOnEventSaveBtn();
-//		EventPageActions.verifyEventAddSuccessMsg ();
+		EventPageActions.clickOnEventSaveBtn(); //
+		EventPageActions.verifyEventAddSuccessMsg();
 		CommonPageActions.verifyPageTitle(DOCTOR_DASHBOARD_PAGE_TITLE);
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickOnAppListBtn();
@@ -796,6 +797,7 @@ public class EventTestCase extends BaseClass {
 				addRoomEventTestData.get("event_DateTime"));
 		EventListingPageActions.verifyEditAndDeletBtn(addRoomEventTestData.get("event_Title"));
 		CommonPageActions.backTODoctorDashboard();
+
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.enterMobileNumber("1112211111");
@@ -808,12 +810,15 @@ public class EventTestCase extends BaseClass {
 
 	}
 
-	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_ROOM_EVENT_UPDATE, dependsOnMethods = "verifyByRoomEvent")
+	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_ROOM_EVENT_UPDATE)
+	// , dependsOnMethods = "verifyByRoomEvent")
 	public void verifyUpdateByRoomEvent() {
+		addRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A10", "O10");
 		updateRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A11", "O11");
 		logger.log(Status.PASS, VERIFY_BY_ROOM_EVENT_UPDATE);
+
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
+
 		DoctorDashBoardPageActions.clickOnAppListBtn();
 		EventListingPageActions.clickOnEventBtn();
 		EventListingPageActions.selectFrmdateInEvent(addRoomEventTestData.get("event_Date"));
@@ -848,6 +853,7 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.clickOnEventSaveBtn();
 		CommonPageActions.verifyPageTitle(EVENTLISTING_PAGE_TITLE);
 		CommonPageActions.backTODoctorDashboard();
+
 		CommonPageActions.selectClinicFrmHeader(updateRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickOnAppListBtn();
 		EventListingPageActions.clickOnEventBtn();
@@ -867,13 +873,16 @@ public class EventTestCase extends BaseClass {
 				updateRoomEventTestData.get("event_notes"));
 		EventListingPageActions.verifyEditAndDeletBtn(updateRoomEventTestData.get("event_Title"));
 		CommonPageActions.backTODoctorDashboard();
+
 		CommonPageActions.selectClinicFrmHeader(addRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.enterMobileNumber("1112211111");
 		AppointmentAddPageActions.selectEConsult();
+
 		EventPageActions.checkRoomIsSelectableOnAddAppt(addRoomEventTestData.get("event_On"),
 				addRoomEventTestData.get("event_Date"), addRoomEventTestData.get("event_duration"),
 				addRoomEventTestData.get("appointmentTimeSlot"));
+
 		CommonPageActions.backTODoctorDashboard();
 		CommonPageActions.selectClinicFrmHeader(updateRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
@@ -885,8 +894,11 @@ public class EventTestCase extends BaseClass {
 	}
 
 	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_ROOM_EVENT_DELETED, dependsOnMethods = "verifyUpdateByRoomEvent")
+			"Regression" }, description = VERIFY_BY_ROOM_EVENT_DELETED)
+			//, dependsOnMethods = "verifyUpdateByRoomEvent")
 	public void verifyDeleteByRoomEvent() {
+		updateRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A11", "O11");
+		updateDoctorEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A3", "O3");
 		logger.log(Status.PASS, VERIFY_BY_ROOM_EVENT_DELETED);
 		CommonPageActions.selectClinicFrmHeader(updateRoomEventTestData.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickOnAppListBtn();
@@ -949,8 +961,9 @@ public class EventTestCase extends BaseClass {
 	 * Listing Check event added Scanner is not available on Add Appointment page
 	 */
 
+	
+	// can't run the test because we are having only 1 scanner we have to get it configured
 	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_SCANNER_EVENT)
-
 	public void verifyByScannerEvent() {
 		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT);
@@ -1006,9 +1019,10 @@ public class EventTestCase extends BaseClass {
 	 *
 	 */
 	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_ADDING_EVENT_ON_LAST_AVAILABLE_SCANNER, dependsOnMethods = "verifyByScannerEvent")
-
+			"Regression" }, description = VERIFY_ADDING_EVENT_ON_LAST_AVAILABLE_SCANNER)
+			//, dependsOnMethods = "verifyByScannerEvent")
 	public void verifyAddingEventOnLastScannerAvailable() {
+		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT_UPDATE);
 		CommonPageActions.selectClinicFrmHeader(addScannerRoomEvent.get("event_Clinic"));
 		DoctorDashBoardPageActions.clickonAppointmentAdd();
@@ -1017,7 +1031,7 @@ public class EventTestCase extends BaseClass {
 		EventPageActions.selectByScannerEvent();
 		EventPageActions.enterTitleName(addScannerRoomEvent.get("event_Title"));
 		EventPageActions.selectClinicInEvent(addScannerRoomEvent.get("event_Clinic"));
-		EventPageActions.selectScanner("Scanner 202");
+		EventPageActions.selectScanner("Scanner 201");
 		EventPageActions.selectEventCategory(addScannerRoomEvent.get("category"));
 		EventPageActions.selectDateInEvent(addScannerRoomEvent.get("event_Date"));
 		EventPageActions.clickOnFullDayCheckBox();
@@ -1035,9 +1049,12 @@ public class EventTestCase extends BaseClass {
 	 * the previous time slot
 	 *
 	 */
+	// can't run the test because we are having only 1 scanner we have to get it configured
 	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_UPDATE, dependsOnMethods = "verifyByScannerEvent")
+			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_UPDATE)
+			//, dependsOnMethods = "verifyByScannerEvent")
 	public void verifyUpdateByScannerEvent() {
+		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
 		updateScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A16", "O16");
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT_UPDATE);
 		CommonPageActions.selectClinicFrmHeader(addScannerRoomEvent.get("event_Clinic"));
@@ -1112,8 +1129,10 @@ public class EventTestCase extends BaseClass {
 	 *
 	 */
 
+	// can't run the test because we are having only 1 scanner we have to get it configured
 	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_DELETED, dependsOnMethods = "verifyUpdateByScannerEvent")
+			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_DELETED)
+			//, dependsOnMethods = "verifyUpdateByScannerEvent")
 	public void verifyDeleteByScannerEvent() {
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT_DELETED);
 		CommonPageActions.selectClinicFrmHeader(updateScannerRoomEvent.get("event_Clinic"));
@@ -1250,8 +1269,8 @@ public class EventTestCase extends BaseClass {
 		logger.log(Status.PASS, CHECK_FRM_DATE_IS_NOT_LATER_TO_TO_DATE);
 		DoctorDashBoardPageActions.clickOnAppListBtn();
 		EventListingPageActions.clickOnEventBtn();
-		EventListingPageActions.selectFrmdateInEvent("03/30/2022");
-		EventListingPageActions.selectTodateInEvent("03/22/2022");
+		EventListingPageActions.selectFrmdateInEvent("01/10/2024");
+		EventListingPageActions.selectTodateInEvent("03/22/2023");
 		EventListingPageActions.clickOnSearch();
 		EventListingPageActions.checkFrmDateIsNotLaterToToDate();
 		CommonPageActions.verifyPageTitle(EVENTLISTING_PAGE_TITLE);

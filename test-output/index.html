@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Suite" class="navigator-link">
-              <span class="suite-name border-failed">Suite</span>
+              <span class="suite-name border-passed">Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" panel-name="group-Suite" class="navigator-link ">
-                    <span>3 groups</span>
+                    <span>1 group</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -91,21 +91,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">1 method,   1 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Suite" class="hide-methods failed suite-Suite"> (hide)</a> <!-- hide-methods failed suite-Suite -->
-                      <a href="#" panel-name="suite-Suite" class="show-methods failed suite-Suite"> (show)</a> <!-- show-methods failed suite-Suite -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Suite" class="hide-methods passed suite-Suite"> (hide)</a> <!-- hide-methods passed suite-Suite -->
+                      <a href="#" panel-name="suite-Suite" class="show-methods passed suite-Suite"> (show)</a> <!-- show-methods passed suite-Suite -->
                     </span>
-                    <div class="method-list-content failed suite-Suite">
+                    <div class="method-list-content passed suite-Suite">
                       <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyByRoomEvent">verifyByRoomEvent</a> <!-- method navigator-link -->
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Suite" title="tests.EventTestCase" class="method navigator-link" hash-for-method="verifyResetBtnOnEventListing">verifyResetBtnOnEventListing</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-Suite -->
+                    </div> <!-- method-list-content passed suite-Suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -117,36 +117,23 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Suite" class="panel Suite">
-          <div class="suite-Suite-class-failed">
+          <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="passed.png"/>
               <span class="class-name">tests.EventTestCase</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyByRoomEvent">
-                  </a> <!-- verifyByRoomEvent -->
-                  <span class="method-name">verifyByRoomEvent</span>
-                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for title to be &quot;Doctor Dashboard&quot;. Current title: &quot;Add Appointment/Event&quot; (tried for 10 second(s) with 500 milliseconds interval)
-Build info: version: &apos;4.15.0&apos;, revision: &apos;1d14b5521b&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.9&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 121.0, moz:accessibilityChecks: false, moz:buildID: 20231211174248, moz:debuggerAddress: 127.0.0.1:33981, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 47560, moz:profile: C:\Users\MOHAMM~1\AppData\L..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:33981/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
-	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:229)
-	at base.BaseClass.verifyPageTitle(BaseClass.java:271)
-	at pageActions.doctorDashboard.CommonPageActions.verifyPageTitle(CommonPageActions.java:33)
-	at tests.EventTestCase.verifyByRoomEvent(EventTestCase.java:774)
-... Removed 25 stack frames
-</div> <!-- stack-trace -->
+                  <a name="verifyResetBtnOnEventListing">
+                  </a> <!-- verifyResetBtnOnEventListing -->
+                  <span class="method-name">verifyResetBtnOnEventListing</span>
                   <em>
-(#1: Add ByRoom Event #2: Verify Event Details on the Event Listing home Page #3: check on Add Appointment page event Added Room is disbaled)                  </em>
+(2: Verify Reset Button woking on Event Listing)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Suite-class-failed -->
+          </div> <!-- suite-Suite-class-passed -->
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -164,7 +151,7 @@ Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
     &lt;classes&gt;
       &lt;class name=&quot;tests.EventTestCase&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;verifyByRoomEvent&quot;/&gt;
+          &lt;include name=&quot;verifyResetBtnOnEventListing&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- tests.EventTestCase --&gt;
     &lt;/classes&gt;
@@ -191,26 +178,10 @@ Session ID: 007dfae7-30cd-4b25-ab55-9d3970532385
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="test-group">
-              <span class="test-group-name">Functional</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
               <span class="test-group-name">Regression</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
-                <br/>
-              </div> <!-- method-in-group -->
-            </div> <!-- test-group -->
-            <div class="test-group">
-              <span class="test-group-name">Sanity</span>
-              <br/>
-              <div class="method-in-group">
-                <span class="method-in-group-name">verifyByRoomEvent</span>
+                <span class="method-in-group-name">verifyResetBtnOnEventListing</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -232,14 +203,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyByRoomEvent')
+data.setCell(0, 1, 'verifyResetBtnOnEventListing')
 data.setCell(0, 2, 'tests.EventTestCase')
-data.setCell(0, 3, 35456);
+data.setCell(0, 3, 22067);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 35 seconds</span>
+              <span class="suite-total-time">Total running time: 22 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -266,11 +237,11 @@ return data;
                 <br/>
                 <span class="ignored-method-name">verifyCancelAndResetBtnWorkingOnAddEvent</span>
                 <br/>
+                <span class="ignored-method-name">verifyByRoomEvent</span>
+                <br/>
                 <span class="ignored-method-name">verifyAddingByDoctorEvent</span>
                 <br/>
                 <span class="ignored-method-name">verifyUpdateDoctorEvent</span>
-                <br/>
-                <span class="ignored-method-name">verifyResetBtnOnEventListing</span>
                 <br/>
                 <span class="ignored-method-name">verifyFrmAndToDateFilter</span>
                 <br/>
@@ -335,17 +306,15 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
-                <span class="method-start">5 ms</span>
+                <span class="method-start">6 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">verifyByRoomEvent</span>
-                <span class="method-start">10306 ms</span>
+                <span class="method-name">verifyResetBtnOnEventListing</span>
+                <span class="method-start">9541 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">45777 ms</span>
+                <span class="method-start">31608 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

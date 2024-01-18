@@ -8,7 +8,7 @@
 		<classes>
 			<class name="tests.EventTestCase">
 				<methods>
-					<include name="verifyByRoomEvent" />
+					<include name="verifyResetBtnOnEventListing" />
 					<!--<include name="verifyAllWebElementOnAddProductSale" />
 					<include name="checkingWithoutMandatoryFields" />
 					<include name="verifyHoursMinsutesAndDurationValidation" />
@@ -23,10 +23,24 @@
 					<include name="verifyDeleteByOperatoryEvent" />
 					<include name="verifyAddEventIfTentativeAppointmentAlreadyBookedForTime" />
 					<include name="verifyByRoomEvent" />
-					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
-					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
-					<include name="verifyAddEventIfAppointmentAlreadyBookedForTime" />
-					<include name="oralExamEditInputList" />-->
+					<include name="verifyUpdateByRoomEvent" />
+					<include name="verifyDeleteByRoomEvent" />
+					<include name="addingEventForPastTime" />
+					<include name="verifyByScannerEvent" />
+					<include name="verifyAddingEventOnLastScannerAvailable" />
+					<include name="verifyUpdateByScannerEvent" />
+					<include name="verifyDeleteByScannerEvent" />
+					<include name="verifyCancelAndResetBtnWorkingOnAddEvent" />
+					<include name="verifyElementOnEventList" />
+					<include name="verifyAddEventFromEventListingAndRedirection" />
+					<include name="verifyFrmAndToDateFilter" />
+					<include name="checkFrmDateIsNotLaterToToDate" />
+					<include name="verifyDoctorFilterWithDateFilterOnEventList" />
+					<include name="verifyEventTypeFilterWithDateFilter" />
+					<include name="verifyCategoryFilterWithDateAndTypeFilter" />
+					<include name="verifyResetBtnOnEventListing" />
+					
+					-->
 				</methods>
 			</class>
 		</classes>

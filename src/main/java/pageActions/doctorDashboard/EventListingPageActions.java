@@ -35,6 +35,7 @@ public class EventListingPageActions extends BaseClass {
         BaseClass.WaitTillElementIsPresent(eventListingpage.getEventToDate());
         BaseClass.waitForSpinnerToDisappear();
         BaseClass.appointmentDate(SelectDate, eventListingpage.getEventToDate(), toDateElementId );
+        BaseClass.waitForSpinnerToDisappear();
     }
 
     public static void selectType(String eventType) {

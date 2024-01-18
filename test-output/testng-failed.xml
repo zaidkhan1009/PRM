@@ -8,9 +8,9 @@
     <classes>
       <class name="tests.EventTestCase">
         <methods>
+          <include name="verifyDoctorFilterWithDateFilterOnEventList"/>
           <include name="configReport"/>
           <include name="tearDown"/>
-          <include name="verifyByRoomEvent"/>
           <include name="setup"/>
         </methods>
       </class> <!-- tests.EventTestCase -->

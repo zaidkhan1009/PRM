@@ -53,6 +53,7 @@ public class EventPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(eventPage.getEventSaveBtn());
 		eventPage.getEventSaveBtn().click();
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 //		
 	}
 
@@ -500,13 +501,13 @@ public class EventPageActions extends BaseClass {
 
 	public static void getHours(String expectedHours) {
 		BaseClass.waitForElementToBeClickable(eventPage.getHours());
-		String actualHours = getEnteredText("Hours");
+		String actualHours = getEnteredText("hours");
 		Assert.assertEquals(actualHours, expectedHours);
 	}
 
 	public static void getMinutes(String expectedMinutes) {
 		BaseClass.waitForElementToBeClickable(eventPage.getMinutes());
-		String actualMinutes = getEnteredText("Minutes");
+		String actualMinutes = getEnteredText("minutes");
 		Assert.assertEquals(actualMinutes, expectedMinutes);
 	}
 
