@@ -1,22 +1,18 @@
 package tests;
 
-import com.aventstack.extentreports.Status;
-import utils.TestData;
-import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import java.util.Map;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.Status;
 
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
 import pageActions.doctorDashboard.DoctorDashBoardPageActions;
-import pageActions.doctorDashboard.MiscellaneousCallListingPageActions;
-import pageActions.doctorDashboard.MiscellaneousCallPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.AppointmentsListPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
@@ -27,6 +23,8 @@ import pageActions.patientDashboard.ReceiptListingPageActions;
 import pageActions.patientDashboard.TreatmentPlanListingPageActions;
 import pageActions.patientDashboard.TreatmentPlansPageActions;
 import pageActions.patientDashboard.WorksDonePageActions;
+import utils.SheetTest;
+import utils.TestData;
 
 public class NewReceiptTestCase extends BaseClass{
 
@@ -59,9 +57,25 @@ public class NewReceiptTestCase extends BaseClass{
 	 * verified patients will redirect at the patient dashboard
 	 */
 
+	@BeforeClass(alwaysRun = true)
+	public void testSetup() {
+		billingData = SheetTest.prepareData("BillingData","Billing","A1","Z");
+		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan","TreatmentPlans","A1","Z");
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(billingData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(billingData.get("patient_mobile"), billingData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+	}
+
+
 	@Test(groups ={"Regression","Sanity","Functional"},enabled= true, priority = 1)
 	public void checkedAdvanceReceiptAndListUI() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
 		NewReceiptPageActions.collectAdvancePayment();
@@ -69,7 +83,7 @@ public class NewReceiptTestCase extends BaseClass{
 		BasePatientLifeCyclePageActions.verifyPatientName(billingData.get("patient_name"));
 		NewReceiptPageActions.checkActionBtnForAdvance();
 		NewReceiptPageActions.checkModesAndTextFields();
-//		NewReceiptPageActions.checkCollectAdvanceAndAddPaymentBtn();
+		//		NewReceiptPageActions.checkCollectAdvanceAndAddPaymentBtn();
 		NewReceiptPageActions.checkAndSelectAllModes(billingData.get("PaymentModeCash"),billingData.get("Amount"), billingData.get("CheqTrnxNo"),billingData.get("Bank Name"));
 		NewReceiptPageActions.checkSubTypeOfModes(billingData.get("PaymentModeCash"));
 		NewReceiptPageActions.checkCash();
@@ -82,9 +96,9 @@ public class NewReceiptTestCase extends BaseClass{
 		NewReceiptPageActions.selectSubType(billingData.get("CardBajaj"));
 		NewReceiptPageActions.checkTxnIdOfSubType(billingData.get("CardBajaj"));
 		NewReceiptPageActions.selectSubType(billingData.get("EMI"));
-		NewReceiptPageActions.checkTxnIdOfSubType(billingData.get("EMI"));
-//		NewReceiptPageActions.checkCheque();
-//		NewReceiptPageActions.checkNetBanking();
+//		NewReceiptPageActions.checkTxnIdOfSubType(billingData.get("EMI"));                  EMI doesn't have txn id 
+		//		NewReceiptPageActions.checkCheque();
+		//		NewReceiptPageActions.checkNetBanking();
 		NewReceiptPageActions.checkAndSelectAllModes(billingData.get("PaymentModeWallet"),billingData.get("Amount"), billingData.get("CheqTrnxNo"),billingData.get("Bank Name"));
 		NewReceiptPageActions.checkSubTypeOfModes(billingData.get("PaymentModeWallet"));
 		NewReceiptPageActions.selectSubType("UPI");
@@ -98,11 +112,14 @@ public class NewReceiptTestCase extends BaseClass{
 		ReceiptListingPageActions.verifyPatientName(billingData.get("patient_name"));
 		ReceiptListingPageActions.checkData();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
 
 	@Test(groups ={"Regression","Functional"},enabled= true, priority = 2)
 	public void checkValidationMsgs() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
 		NewReceiptPageActions.collectAdvancePayment();
@@ -132,11 +149,14 @@ public class NewReceiptTestCase extends BaseClass{
 		PatientDashboardPageActions.clickOnReceiptList();
 		ReceiptListingPageActions.headerOnListPage("Receipt Listing");
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
-	
+
 	@Test(groups ={"Regression","Smoke","Sanity","Functional"},enabled= true, priority = 3)
 	public void collectPayment() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Receipt Listing");
 		NewReceiptPageActions.collectAdvancePayment();
@@ -179,7 +199,7 @@ public class NewReceiptTestCase extends BaseClass{
 		ReceiptListingPageActions.checkTotalAdvance();
 		ReceiptListingPageActions.checkReceiptListingTableHead();
 		ReceiptListingPageActions.checkTotalAdvance();
-//		ReceiptListingPageActions.actionsButton_ReceiptsCreatedDate();
+		//		ReceiptListingPageActions.actionsButton_ReceiptsCreatedDate();
 		ReceiptListingPageActions.receiptDataTable();
 		ReceiptListingPageActions.openViewModal();
 		ReceiptListingPageActions.receiptHeaderInView("Receipt Details");
@@ -188,10 +208,14 @@ public class NewReceiptTestCase extends BaseClass{
 		ReceiptListingPageActions.viewData();
 		ReceiptListingPageActions.closeViewModal();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
+
 	}
 	@Test(groups ={"Regression","Functional"},enabled= true, priority = 4)
 	public void editReceipt() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		ReceiptListingPageActions.headerOnListPage("Receipt Listing");
 		ReceiptListingPageActions.clickEditBtn("Card");
@@ -228,12 +252,15 @@ public class NewReceiptTestCase extends BaseClass{
 		ReceiptListingPageActions.viewData();
 		ReceiptListingPageActions.closeViewModal();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
 
 	@Test(groups ={"Regression","Functional"},enabled= true, priority = 5)
 	public void deleteReceipt() {
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
 		logger.log(Status.PASS, "Test");
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnReceiptList();
 		ReceiptListingPageActions.headerOnListPage("Receipt Listing");
 		ReceiptListingPageActions.clickDeleteBtn("Cash");
@@ -245,12 +272,17 @@ public class NewReceiptTestCase extends BaseClass{
 		ReceiptListingPageActions.clickShowDetails();
 		ReceiptListingPageActions.clickSearchBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
 
 	@Test(groups ={"Regression"},priority = 6)
 	public void createInvoice(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		TreatmentPlansPageActions.clickOnNewTeethBtn();
 		OralExamsPageActions.clickOnTeethImage("Adult", "24");
 		TreatmentPlansPageActions.verifySeletecdTeethOnPopup("24");
 		TreatmentPlansPageActions.clickOnConsultationXRays();
@@ -259,11 +291,11 @@ public class NewReceiptTestCase extends BaseClass{
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup2_Plan2"));
 		TreatmentPlansPageActions.saveTreatment();
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppList();
 		AppointmentsListPageActions.appointmentAvailable();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppAdd();
 		AppointmentAddPageActions.selectDoctorFromDropdown(billingData.get("doctor"));
@@ -281,10 +313,13 @@ public class NewReceiptTestCase extends BaseClass{
 		InvoiceListingPageActions.invoiceDataTable();
 		InvoiceListingPageActions.actionsButton_InvoicesCreatedDate();
 		Assert.assertTrue(CommonPageActions.verification().contains("Invoice Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 	@Test(groups ={"Regression"},priority = 7)
 	public void amountCalculation(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.invoiceListTableColumnName();
 		InvoiceListingPageActions.invoiceDataTable();
@@ -293,14 +328,18 @@ public class NewReceiptTestCase extends BaseClass{
 		NewReceiptPageActions.headerOfPage("New Receipts");
 		BasePatientLifeCyclePageActions.verifyPatientName(billingData.get("patient_name"));
 		NewReceiptPageActions.invoiceTable();
-		NewReceiptPageActions.alertMessages();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
-		PatientDashboardPageActions.clickOnReceiptList();
+//		NewReceiptPageActions.alertMessages();           FUNCTIONALITY REMOVED
+		NewReceiptPageActions.addingReceiptEqualRemainingAmount();
+		NewReceiptPageActions.clickSaveBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
+
 	}
 	@Test(groups ={"Regression","Functional"},priority = 8)
 	public void paymentDetails(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.collectPayment();
 		NewReceiptPageActions.checkAndSelectAllModes("Cash", "100", "NA", "NA");
@@ -341,16 +380,24 @@ public class NewReceiptTestCase extends BaseClass{
 		NewReceiptPageActions.totalReceipt_RemainingAmountDue();
 		Assert.assertTrue(CommonPageActions.verification().contains("New Receipts"));
 		BasePatientLifeCyclePageActions.verifyPatientName(billingData.get("patient_name"));
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		NewReceiptPageActions.yesDeleteReceipt();
 		PatientDashboardPageActions.clickOnReceiptList();
 		Assert.assertTrue(CommonPageActions.verification().contains("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
+	
+	
 	@Test(groups ={"Regression","Functional"},priority = 9)
 	public void amountScenario(){
 		logger.log(Status.PASS, SCRIPTS_STARTED_MSG );
+		
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnInvoiceList();
 		InvoiceListingPageActions.collectPayment();
+		NewReceiptPageActions.checkAndSelectAllModes("Cash", "100", "NA", "NA");
+		NewReceiptPageActions.enterNotes("cash Added");
+		NewReceiptPageActions.saveDraftAmount();
 		NewReceiptPageActions.totalReceipt_RemainingAmountDue();
 		NewReceiptPageActions.invoiceTable();
 		NewReceiptPageActions.totalDue_totalCollection();
@@ -366,5 +413,6 @@ public class NewReceiptTestCase extends BaseClass{
 		NewReceiptPageActions.advanceCreatedNewReceipt();
 		NewReceiptPageActions.clickSaveBtn();
 		Assert.assertTrue(CommonPageActions.verification().equals("Receipt Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
 	}
 }

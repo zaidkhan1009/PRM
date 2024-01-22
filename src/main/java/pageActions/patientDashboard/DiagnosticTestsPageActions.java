@@ -8,38 +8,25 @@ import base.BaseClass;
 import pages.patientDashboard.DiagnosticTestsPage;
 
 public class DiagnosticTestsPageActions extends BaseClass {
-	
-	static DiagnosticTestsPage diagnosticTestsPage = PageFactory.initElements(driver, DiagnosticTestsPage.class);
 
+	static DiagnosticTestsPage diagnosticTestsPage = PageFactory.initElements(driver, DiagnosticTestsPage.class);
 
 	/* Checked diagnosis Added successfully message */
 	public static void checkedSuccessAlert() {
-		    BaseClass.waitForSpinnerToDisappear();
-			BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg()));
-			BaseClass.waitForElementToDisappear(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg());
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.softAssert()
+				.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg()));
+		BaseClass.waitForElementToDisappear(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg());
 		BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
-			
+
 	}
-	
-	
-		
-			public static void checkedUpdateSuccessAlert() {
+
+	public static void checkedUpdateSuccessAlert() {
 	    BaseClass.waitForSpinnerToDisappear();
 	    WebElement wb = driver.findElement((By.xpath("//span[contains(text(),'Investigation(s) added successfully!')]")));
 		BaseClass.softAssert().assertTrue(checkedElementDisplayed(wb));
 		BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
 }
-	
-//	public static void checkedSuccessAlert() {
-//		BaseClass.WaitTillElementIsPresent(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg());
-//		try {
-//			Thread.sleep(1000);
-//			BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisAddSuccessAlertMsg()));
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 
 	/* checked message when saving diagnosis without selecting any diagnosis */
 	public static void withoutDiagnosisAlert() {
@@ -50,11 +37,11 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* checked message when saving IOPAR without selecting any teeth */
 	public static void withoutIoparAlert() {
-		    BaseClass.waitForElementVisibility(diagnosticTestsPage.getIoparToothSelectAlertMsg(), 4000);
-			BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getIoparToothSelectAlertMsg()));
-			BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getIoparToothSelectAlertMsg(), 4000);
+		BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getIoparToothSelectAlertMsg()));
+		BaseClass.waitForElementToDisappear((By.xpath("//span[@class='ng-binding ng-scope']")));
 	}
-	
+
 //	public static void withoutIoparAlert() {
 //		try {
 //			Thread.sleep(1500);
@@ -74,7 +61,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	public static void clickIopar() {
 		    BaseClass.waitForSpinnerToDisappear();
 		    BaseClass.waitForModalOverlayToDisappear();
@@ -93,7 +80,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 		diagnosticTestsPage.getImagingButton().click();
 		BaseClass.waitForSpinnerToDisappear();
 	}
-	
+
 //	public static void clickImaging() {
 //		try {
 //			Thread.sleep(3500);
@@ -106,15 +93,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* clicking on the blood */
 	public static void clickBlood() {
-		    BaseClass.waitForSpinnerToDisappear();
-		    BaseClass.waitForPageToBecomeActive();
-			BaseClass.waitForElementVisibility(diagnosticTestsPage.getBloodButton(),4000);
-			diagnosticTestsPage.getBloodButton().click();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageToBecomeActive();
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getBloodButton(), 4000);
+		diagnosticTestsPage.getBloodButton().click();
 	}
-	
-	
-	
-	
+
 //	public static void clickBlood() {
 //		try {
 //			Thread.sleep(2500);
@@ -127,13 +111,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* clicking on the Urine */
 	public static void clickUrine() {
-            BaseClass.waitForSpinnerToDisappear();
-            BaseClass.waitForPageToBecomeActive();
-			BaseClass.waitForElementVisibility(diagnosticTestsPage.getUrineButton(),4000);
-			diagnosticTestsPage.getUrineButton().click();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageToBecomeActive();
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getUrineButton(), 4000);
+		diagnosticTestsPage.getUrineButton().click();
 	}
-	
-	
+
 //	public static void clickUrine() {
 //		try {
 //			Thread.sleep(1500);
@@ -146,14 +129,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* clicking on the biochemical */
 	public static void clickBiochemicalButton() {
-		    BaseClass.waitForSpinnerToDisappear();
-		    BaseClass.waitForPageToBecomeActive();
-			BaseClass.waitForElementVisibility(diagnosticTestsPage.getBiochemicalButton(),4000);
-			diagnosticTestsPage.getBiochemicalButton().click();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageToBecomeActive();
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getBiochemicalButton(), 4000);
+		diagnosticTestsPage.getBiochemicalButton().click();
 	}
-	
-	
-	
+
 //	public static void clickBiochemicalButton() {
 //		try {
 //			Thread.sleep(1500);
@@ -165,14 +146,14 @@ public class DiagnosticTestsPageActions extends BaseClass {
 //	}
 
 	/* clicking on the Markers */
-	
+
 	public static void clickMarkersButton() {
 		BaseClass.waitForSpinnerToDisappear();
-		 BaseClass.waitForPageToBecomeActive();
-		BaseClass.waitForElementVisibility(diagnosticTestsPage.getMarkersButton(),4000);
-			diagnosticTestsPage.getMarkersButton().click();
+		BaseClass.waitForPageToBecomeActive();
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getMarkersButton(), 4000);
+		diagnosticTestsPage.getMarkersButton().click();
 	}
-	
+
 //	public static void clickMarkersButton() {
 //		try {
 //			Thread.sleep(1500);
@@ -184,12 +165,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 //	}
 
 	/* selecting teeth from the IOPAR popup */
-	
+
 	public static void selectTeeth(String teethType, String teethNo) {
-			WebElement webElement = driver.findElement(By.xpath(
-					"//div[contains(@ng-include,'" + teethType + "IOPAR.shtml')]//span[text()='" + teethNo + "']"));
-			BaseClass.waitForElementToBeClickable(webElement);
-			webElement.click();
+		WebElement webElement = driver.findElement(By
+				.xpath("//div[contains(@ng-include,'" + teethType + "IOPAR.shtml')]//span[text()='" + teethNo + "']"));
+		BaseClass.waitForElementToBeClickable(webElement);
+		webElement.click();
 	}
 //	public static void selectTeeth(String teethType, String teethNo) {
 //		try {
@@ -218,12 +199,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	}
 
 	/* clicking the diagnosticTestsPage.getPedo() */
-	
+
 	public static void clickPedo() {
-		   BaseClass.waitForElementVisibility(diagnosticTestsPage.getPedo(), 4000);
-			diagnosticTestsPage.getPedo().click();
-			WebElement element = driver.findElement((By.xpath("//li[@heading='Pedo']/../..//span[@id='55']")));
-			BaseClass.waitForElementVisibility(element, 4000);
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getPedo(), 4000);
+		diagnosticTestsPage.getPedo().click();
+		WebElement element = driver.findElement((By.xpath("//li[@heading='Pedo']/../..//span[@id='55']")));
+		BaseClass.waitForElementVisibility(element, 4000);
 	}
 //	public static void clickPedo() {
 //		try {
@@ -245,12 +226,13 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* clicking the mixed */
 	public static void clickMixed() {
-		   BaseClass.waitForElementVisibility(diagnosticTestsPage.getMixed(), 4000);
-		    diagnosticTestsPage.getMixed().click();
-			WebElement element = driver.findElement((By.xpath("(//li[@heading='Mixed']/../..//span[@class='tooth18'])[2]")));
-			BaseClass.waitForElementVisibility(element, 4000);	
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getMixed(), 4000);
+		diagnosticTestsPage.getMixed().click();
+		WebElement element = driver
+				.findElement((By.xpath("(//li[@heading='Mixed']/../..//span[@class='tooth18'])[2]")));
+		BaseClass.waitForElementVisibility(element, 4000);
 	}
-	
+
 //	public static void clickMixed() {
 //		try {
 //			Thread.sleep(1500);
@@ -297,16 +279,20 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checked_Trt_oralExam_file_Btn() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getFileButton());
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getOralExamButton()) && checkedElementDisplayed(diagnosticTestsPage.getFileButton())
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getOralExamButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getFileButton())
 				&& checkedElementDisplayed(diagnosticTestsPage.getTreatmentButton()));
 	}
 
 	/* checking the diagnosis boxes appears on the Diagnosis Add page */
 	public static void checkedDiagnosisBox() {
 		BaseClass.waitForElementVisibility(diagnosticTestsPage.getIoparButton(), 4000);
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getIoparButton()) && checkedElementDisplayed(diagnosticTestsPage.getImagingButton())
-				&& checkedElementDisplayed(diagnosticTestsPage.getBloodButton()) && checkedElementDisplayed(diagnosticTestsPage.getUrineButton())
-				&& checkedElementDisplayed(diagnosticTestsPage.getBiochemicalButton()) && checkedElementDisplayed(diagnosticTestsPage.getMarkersButton()));
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getIoparButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getImagingButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBloodButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getUrineButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBiochemicalButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getMarkersButton()));
 	}
 
 	/*
@@ -321,9 +307,11 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* checking the save button, notes fields and close button */
 	public static void checked_Save_Close_Notes() {
-		BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(),4000);
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getSaveButton()) && checkedElementDisplayed(diagnosticTestsPage.getCloseButton())
-				&& checkedElementDisplayed(diagnosticTestsPage.getDiagnosticsNotes()) && checkedElementDisplayed(diagnosticTestsPage.getNotesLimitMsg())
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(), 4000);
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getSaveButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getCloseButton())
+				&& checkedElementDisplayed(diagnosticTestsPage.getDiagnosticsNotes())
+				&& checkedElementDisplayed(diagnosticTestsPage.getNotesLimitMsg())
 				&& diagnosticTestsPage.getDiagnosticsNotes().getAttribute("maxlength").contains("768"));
 	}
 
@@ -331,34 +319,46 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checkedAdultSelected() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getAdult());
-		Assert.assertTrue(diagnosticTestsPage.getSelectedAdult().getAttribute("class").contains("first-nav ng-isolate-scope active")
-				&& checkedElementDisplayed(diagnosticTestsPage.getAdult()) && checkedElementDisplayed(diagnosticTestsPage.getPedo()) && checkedElementDisplayed(diagnosticTestsPage.getMixed()));
+		Assert.assertTrue(diagnosticTestsPage.getSelectedAdult().getAttribute("class").contains(
+				"first-nav ng-isolate-scope active") && checkedElementDisplayed(diagnosticTestsPage.getAdult())
+				&& checkedElementDisplayed(diagnosticTestsPage.getPedo())
+				&& checkedElementDisplayed(diagnosticTestsPage.getMixed()));
 	}
 
 	/* checking the diagnosticTestsPage.getPedo() selected at the iopar */
 	public static void checkedPedoSelected() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getPedo());
-		Assert.assertTrue(diagnosticTestsPage.getSelectedPedo().getAttribute("class").contains("first-nav ng-isolate-scope active")
-				&& checkedElementDisplayed(diagnosticTestsPage.getAdult()) && checkedElementDisplayed(diagnosticTestsPage.getPedo()) && checkedElementDisplayed(diagnosticTestsPage.getMixed()));
+		Assert.assertTrue(diagnosticTestsPage.getSelectedPedo().getAttribute("class").contains(
+				"first-nav ng-isolate-scope active") && checkedElementDisplayed(diagnosticTestsPage.getAdult())
+				&& checkedElementDisplayed(diagnosticTestsPage.getPedo())
+				&& checkedElementDisplayed(diagnosticTestsPage.getMixed()));
 	}
 
 	/* checking the mixed selected at the iopar */
 	public static void checkedMixedSelected() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getMixed());
-		Assert.assertTrue(diagnosticTestsPage.getSelectedMixed().getAttribute("class").contains("first-nav ng-isolate-scope active")
-				&& checkedElementDisplayed(diagnosticTestsPage.getAdult()) && checkedElementDisplayed(diagnosticTestsPage.getPedo()) && checkedElementDisplayed(diagnosticTestsPage.getMixed()));
+		Assert.assertTrue(diagnosticTestsPage.getSelectedMixed().getAttribute("class").contains(
+				"first-nav ng-isolate-scope active") && checkedElementDisplayed(diagnosticTestsPage.getAdult())
+				&& checkedElementDisplayed(diagnosticTestsPage.getPedo())
+				&& checkedElementDisplayed(diagnosticTestsPage.getMixed()));
 	}
 
 	/* checking all Imaging diagnosis */
 	public static void checkedImagingDiagnosis() {
-		BaseClass.waitForSpinnerToDisappear();;
-		BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(),4000);
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getOpg()) && checkedElementDisplayed(diagnosticTestsPage.getLateralCephalogram())
-				&& checkedElementDisplayed(diagnosticTestsPage.getcBCT()) && checkedElementDisplayed(diagnosticTestsPage.getcECT()) && checkedElementDisplayed(diagnosticTestsPage.getBitewing())
-				&& checkedElementDisplayed(diagnosticTestsPage.getOcclusal()) && checkedElementDisplayed(diagnosticTestsPage.getuSG())
-				&& checkedElementDisplayed(diagnosticTestsPage.getSubmentovertex()) && checkedElementDisplayed(diagnosticTestsPage.getpAView())
+		BaseClass.waitForSpinnerToDisappear();
+		;
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(), 4000);
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getOpg())
+				&& checkedElementDisplayed(diagnosticTestsPage.getLateralCephalogram())
+				&& checkedElementDisplayed(diagnosticTestsPage.getcBCT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getcECT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBitewing())
+				&& checkedElementDisplayed(diagnosticTestsPage.getOcclusal())
+				&& checkedElementDisplayed(diagnosticTestsPage.getuSG())
+				&& checkedElementDisplayed(diagnosticTestsPage.getSubmentovertex())
+				&& checkedElementDisplayed(diagnosticTestsPage.getpAView())
 				&& checkedElementDisplayed(diagnosticTestsPage.getOccipetoMental()));
 	}
 
@@ -366,39 +366,62 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checkedBloodDiagnosis() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getSaveButton());
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getmCH()) && checkedElementDisplayed(diagnosticTestsPage.getmPV()) && checkedElementDisplayed(diagnosticTestsPage.getmCV())
-				&& checkedElementDisplayed(diagnosticTestsPage.getmCHC()) && checkedElementDisplayed(diagnosticTestsPage.getbT_CT())
-				&& checkedElementDisplayed(diagnosticTestsPage.getHematocrit()) && checkedElementDisplayed(diagnosticTestsPage.getHemoglobin())
-				&& checkedElementDisplayed(diagnosticTestsPage.getPlatletCount()) && checkedElementDisplayed(diagnosticTestsPage.getpT_INR())
-				&& checkedElementDisplayed(diagnosticTestsPage.getrBC()) && checkedElementDisplayed(diagnosticTestsPage.getwBC()) && checkedElementDisplayed(diagnosticTestsPage.getrBS())
-				&& checkedElementDisplayed(diagnosticTestsPage.gettLC()) && checkedElementDisplayed(diagnosticTestsPage.getdLC()) && checkedElementDisplayed(diagnosticTestsPage.getHbA1C())
-				&& checkedElementDisplayed(diagnosticTestsPage.getBloodSugarFasting()) && checkedElementDisplayed(diagnosticTestsPage.getBloodSugarPP()));
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getmCH())
+				&& checkedElementDisplayed(diagnosticTestsPage.getmPV())
+				&& checkedElementDisplayed(diagnosticTestsPage.getmCV())
+				&& checkedElementDisplayed(diagnosticTestsPage.getmCHC())
+				&& checkedElementDisplayed(diagnosticTestsPage.getbT_CT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getHematocrit())
+				&& checkedElementDisplayed(diagnosticTestsPage.getHemoglobin())
+				&& checkedElementDisplayed(diagnosticTestsPage.getPlatletCount())
+				&& checkedElementDisplayed(diagnosticTestsPage.getpT_INR())
+				&& checkedElementDisplayed(diagnosticTestsPage.getrBC())
+				&& checkedElementDisplayed(diagnosticTestsPage.getwBC())
+				&& checkedElementDisplayed(diagnosticTestsPage.getrBS())
+				&& checkedElementDisplayed(diagnosticTestsPage.gettLC())
+				&& checkedElementDisplayed(diagnosticTestsPage.getdLC())
+				&& checkedElementDisplayed(diagnosticTestsPage.getHbA1C())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBloodSugarFasting())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBloodSugarPP()));
 	}
 
 	/* checking all Urine diagnosis */
 	public static void checkedUrineDiagnosis() {
-		BaseClass.waitForSpinnerToDisappear();;
+		BaseClass.waitForSpinnerToDisappear();
+		;
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getSaveButton());
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getUrineRoutine()) && checkedElementDisplayed(diagnosticTestsPage.getUrineMicroscopic()));
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getUrineRoutine())
+				&& checkedElementDisplayed(diagnosticTestsPage.getUrineMicroscopic()));
 	}
 
 	/* checking all Bio chemical diagnosis */
 	public static void checkedBioChemicalDiagnosis() {
-		BaseClass.waitForSpinnerToDisappear();;
+		BaseClass.waitForSpinnerToDisappear();
+		;
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getSaveButton());
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getlFT()) && checkedElementDisplayed(diagnosticTestsPage.getaLP()) && checkedElementDisplayed(diagnosticTestsPage.getaLT())
-				&& checkedElementDisplayed(diagnosticTestsPage.getaSt()) && checkedElementDisplayed(diagnosticTestsPage.getBilirubin()) && checkedElementDisplayed(diagnosticTestsPage.getgGT())
-				&& checkedElementDisplayed(diagnosticTestsPage.getColour()) && checkedElementDisplayed(diagnosticTestsPage.getDensity()) && checkedElementDisplayed(diagnosticTestsPage.getpH())
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getlFT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getaLP())
+				&& checkedElementDisplayed(diagnosticTestsPage.getaLT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getaSt())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBilirubin())
+				&& checkedElementDisplayed(diagnosticTestsPage.getgGT())
+				&& checkedElementDisplayed(diagnosticTestsPage.getColour())
+				&& checkedElementDisplayed(diagnosticTestsPage.getDensity())
+				&& checkedElementDisplayed(diagnosticTestsPage.getpH())
 				&& checkedElementDisplayed(diagnosticTestsPage.getAlbumin()));
 	}
 
 	/* checking all Markers diagnosis */
 	public static void checkedMarkersDiagnosis() {
-		BaseClass.waitForSpinnerToDisappear();;
+		BaseClass.waitForSpinnerToDisappear();
+		;
 		BaseClass.waitForElementToBeClickable(diagnosticTestsPage.getSaveButton());
-		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getC_RP()) && checkedElementDisplayed(diagnosticTestsPage.getViralAntibodies())
-				&& checkedElementDisplayed(diagnosticTestsPage.getBiopsy()) && checkedElementDisplayed(diagnosticTestsPage.getCulture_Sensitivity())
-				&& checkedElementDisplayed(diagnosticTestsPage.getThroatSwab()) && checkedElementDisplayed(diagnosticTestsPage.getpCR()));
+		Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getC_RP())
+				&& checkedElementDisplayed(diagnosticTestsPage.getViralAntibodies())
+				&& checkedElementDisplayed(diagnosticTestsPage.getBiopsy())
+				&& checkedElementDisplayed(diagnosticTestsPage.getCulture_Sensitivity())
+				&& checkedElementDisplayed(diagnosticTestsPage.getThroatSwab())
+				&& checkedElementDisplayed(diagnosticTestsPage.getpCR()));
 	}
 
 	/* checking all column name at diagnosis Add page */
@@ -418,8 +441,8 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	/* checking the category name at input list */
 	public static void checkedCategory(String category) {
 		BaseClass.waitForPageLoad();
-		Assert.assertTrue(checkedElementDisplayed(driver
-				.findElement(By.xpath("//table[@id='diagnoInputList']//td[text()='" + category + "']"))));
+		Assert.assertTrue(checkedElementDisplayed(
+				driver.findElement(By.xpath("//table[@id='diagnoInputList']//td[text()='" + category + "']"))));
 	}
 
 	/* checking the investigation at input list */
@@ -435,12 +458,13 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	}
 
 	/* selecting the diagnosis */
-	public static void selectDiagnosis(String diagnosis) {		
-			WebElement webElement = driver.findElement(By.xpath("//span[@class ='ng-binding' and contains(text(),'"+diagnosis+"')]"));
-			BaseClass.waitForElementVisibility(webElement, 4000);
-			webElement.click();
+	public static void selectDiagnosis(String diagnosis) {
+		WebElement webElement = driver
+				.findElement(By.xpath("//span[@class ='ng-binding' and contains(text(),'" + diagnosis + "')]"));
+		BaseClass.waitForElementVisibility(webElement, 4000);
+		webElement.click();
 	}
-	
+
 //	public static void selectDiagnosis(String diagnosis) {
 //		try {
 //			Thread.sleep(1500);
@@ -454,14 +478,14 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* check Investigation is selected at the time of Diagnostic Edit */
 	public static void checkSelectedInvestigation(String investigation) {
-	        BaseClass.waitForSpinnerToDisappear();
-	        BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(),4000);
-			WebElement webElement = driver.findElement(By.xpath("//div[contains(@data-ng-class,'selected')]/span[text()='"+investigation+"']"));
-			BaseClass.waitForElementToBeClickable(webElement);
-			webElement.isSelected();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementVisibility(diagnosticTestsPage.getSaveButton(), 4000);
+		WebElement webElement = driver.findElement(
+				By.xpath("//div[contains(@data-ng-class,'selected')]/span[text()='" + investigation + "']"));
+		BaseClass.waitForElementToBeClickable(webElement);
+		webElement.isSelected();
 	}
-	
-	
+
 //	public static void checkSelectedInvestigation(String investigation) {
 //		try {
 //			Thread.sleep(1500);
@@ -477,12 +501,12 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checkedDeleteWithInvestigation(String category, String investigation) {
 		BaseClass.waitForPageLoad();
 		if (category.equals("IOPAR")) {
-			Assert.assertTrue(checkedElementDisplayed(driver
-					.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//div[text()='"
+			Assert.assertTrue(checkedElementDisplayed(
+					driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//div[text()='"
 							+ investigation + "']/following-sibling::div[@class='actnsVertIcns DiagDelInvest']"))));
 		} else {
-			Assert.assertTrue(checkedElementDisplayed(driver
-					.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='"
+			Assert.assertTrue(checkedElementDisplayed(
+					driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='"
 							+ investigation + "']/following-sibling::div[@class='actnsVertIcns DiagDelInvest']"))));
 		}
 	}
@@ -502,7 +526,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 			deleteBtn.click();
 		}
 	}
-	
+
 	/* checking the notes at the input listing */
 	public static void notesDiagnosisInputList(String category, String investigation, String notes) {
 		BaseClass.waitForPageLoad();
@@ -529,7 +553,8 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	/* click the Delete button at input list for diagnosis */
 	public static void clickDeleteBtnInputlist(String category) {
 		BaseClass.waitForPageLoad();
-		WebElement deleteBtn = driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Delete']"));
+		WebElement deleteBtn = driver
+				.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Delete']"));
 		deleteBtn.click();
 	}
 
@@ -537,7 +562,9 @@ public class DiagnosticTestsPageActions extends BaseClass {
 	public static void checkedEditBtnInputlist(String category) {
 		BaseClass.waitForPageLoad();
 		if (category.equals("IOPAR")) {
-			Assert.assertTrue(driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']/.."))
+			Assert.assertTrue(driver
+					.findElement(
+							By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']/.."))
 					.getAttribute("data-ng-class").contains("hide"));
 		} else {
 			Assert.assertTrue(checkedElementDisplayed(driver.findElement(
@@ -553,26 +580,34 @@ public class DiagnosticTestsPageActions extends BaseClass {
 					.getAttribute("data-ng-class").contains("hide"));
 		} else {
 			WebElement editBtn = driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']"));
+			//WebElement editBtn = driver.findElement(By.xpath("//td[text()='" + category + "']/following-sibling::td//span[text()='Edit']"));
+
 			editBtn.click();
 		}
 	}
-	
-	/* check delete Message against Investigation and from main action button*/
-	public static void checkMsgOnDeleteModal(String delete){
+
+	/* check delete Message against Investigation and from main action button */
+	public static void checkMsgOnDeleteModal(String delete) {
 		BaseClass.waitForPageLoad();
-		if(delete.equals("Investigation")) 
-			Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDeleteInvestigationMsg())); 
+		if (delete.equals("Investigation"))
+			Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDeleteInvestigationMsg()));
 		else
 			Assert.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDeleteCategoryMsg()));
 	}
-	
-	/* click on Yes button shown after click on Delete button at input list for diagnosis */
+
+	/*
+	 * click on Yes button shown after click on Delete button at input list for
+	 * diagnosis
+	 */
 	public static void clickYesDeleteBtn() {
 		BaseClass.waitForPageLoad();
 		diagnosticTestsPage.getYesDeleteBtn().click();
 	}
-	
-	/* click on No button shown after click on Delete button at input list for diagnosis */
+
+	/*
+	 * click on No button shown after click on Delete button at input list for
+	 * diagnosis
+	 */
 	public static void clickNoDeleteBtn() {
 		BaseClass.waitForPageLoad();
 		diagnosticTestsPage.getNoDeleteBtn().click();
@@ -580,10 +615,11 @@ public class DiagnosticTestsPageActions extends BaseClass {
 
 	/* Checked diagnosis Added successfully message */
 	public static void checkedSuccessDeleteAlert() {
-		    BaseClass.WaitTillElementIsPresent(diagnosticTestsPage.getDiagnosisDeleteSuccessAlertMsg());
-			BaseClass.softAssert().assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisDeleteSuccessAlertMsg()));
+		BaseClass.WaitTillElementIsPresent(diagnosticTestsPage.getDiagnosisDeleteSuccessAlertMsg());
+		BaseClass.softAssert()
+				.assertTrue(checkedElementDisplayed(diagnosticTestsPage.getDiagnosisDeleteSuccessAlertMsg()));
 	}
-	
+
 //	public static void checkedSuccessDeleteAlert() {
 //		BaseClass.WaitTillElementIsPresent(diagnosticTestsPage.getDiagnosisDeleteSuccessAlertMsg());
 //		try {
@@ -594,7 +630,7 @@ public class DiagnosticTestsPageActions extends BaseClass {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	private static boolean checkedElementDisplayed(WebElement webElement) {
 		return (webElement.isDisplayed());
 	}

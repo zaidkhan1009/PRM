@@ -33,8 +33,14 @@ public class BasePatientLifeCyclePage {
 	private WebElement filesList;
 	@FindBy(id = "invoicesList")
 	private WebElement invoicesList;
-	@FindBy(xpath = "//span[@class='cmnicons dashB']")
+	@FindBy(xpath = "//a[@id='patientDashboardBtn']")
 	private WebElement DashboardBtn;
+	@FindBy(xpath = "//span[@class='cmnicons dashB']")
+	private WebElement commonDashboardBtn;
+	
+	public WebElement getCommonDashboardBtn() {
+		return commonDashboardBtn;
+	}
 
 	@FindBy(xpath = "(//span[@class='cmnicons dashB'])[2]")
 	private WebElement DashboardBtnReceipt;
@@ -42,8 +48,7 @@ public class BasePatientLifeCyclePage {
 	private WebElement AddNewBtn;
 	@FindBy(xpath = "//b[text()='Add New']")
 	private WebElement AddNewBtnOldUi;
-//	@FindBy(xpath = "//div[@class='alertwrp']")
-	@FindBy(className = "alert-animate")
+	@FindBy(className = "alertButt")
 	private WebElement alert;
 	@FindBy(xpath = "//div[@id='patientAlert'][contains(@style,'right: -1px')]")
 	private List <WebElement> alertBody;

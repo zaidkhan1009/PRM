@@ -38,7 +38,7 @@ public class     MiscellaneousCallListingPage {
 	private WebElement dispDrpDwn;
 	@FindBy(id="caller Name")
 	private WebElement callerNameDrpDwn;
-	@FindBy(id="details")
+	@FindBy(xpath="//input[@id='details']")
 	private WebElement detailsTxtBx;
 	@FindBy(id="fromDate")
 	private WebElement fromDateBtn;

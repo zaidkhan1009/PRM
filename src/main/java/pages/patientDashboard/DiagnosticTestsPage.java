@@ -22,7 +22,7 @@ public class DiagnosticTestsPage {
 	private WebElement bloodButton;
 	@FindBy(xpath = "//button[contains(text(),'Urine')]")
 	private WebElement urineButton;
-	@FindBy(xpath = "//button[contains(text(),'Bio- Chemical')]")
+	@FindBy(xpath = "//button[contains(text(),'Biochemical')]")
 	private WebElement biochemicalButton;
 	@FindBy(xpath = "//button[contains(text(),'Markers')]")
 	private WebElement markersButton;

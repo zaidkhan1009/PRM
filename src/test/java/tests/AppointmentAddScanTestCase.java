@@ -256,4 +256,147 @@ public class AppointmentAddScanTestCase extends BaseClass {
 		AppointmentsLisitngPageActions.strikeOff(patntAppnmntData.get("patient_name"));
 		CommonPageActions.backTODoctorDashboard();
 	}
+
+	@Test(groups = { "Regression", "Smoke", "Sanity",
+			"Functional" }, enabled = true, description = "Verify Book Tentative Appointments", priority = 4)
+	public void bookTentativeAppointment() throws ParseException, java.text.ParseException, bsh.ParseException {
+		logger.log(Status.PASS, "Book Tentative Appointment");
+//    AppointmentAddPageActions.clickOnCancelBtn();
+		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
+		DoctorDashBoardPageActions.clickOnAppListBtn();
+		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
+		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
+		AppointmentsLisitngPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.appointmentStatus(patntAppnmntData.get("patient_name"), "New");
+		AppointmentsLisitngPageActions.appointmentType(patntAppnmntData.get("patient_name"), "Confirmed");
+		AppointmentsLisitngPageActions.type(patntAppnmntData.get("patient_name"), "in-Clinic");
+		AppointmentsLisitngPageActions.verifyClinic(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("clinicLocation"));
+		AppointmentsLisitngPageActions.checkDoctorName(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("doctor"));
+		AppointmentsLisitngPageActions.viewButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.editButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.deleteButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.clickEditButton(patntAppnmntData.get("patient_name"));
+		AppointmentAddPageActions.getTextPatientMobile(patntAppnmntData.get("patient_mobile"));
+		AppointmentAddPageActions.getTextPatientName(patntAppnmntData.get("patient_name"));
+		AppointmentAddPageActions.patientIDAfterAutoSelect();
+		AppointmentAddPageActions.doctorSelected(patntAppnmntData.get("doctor"));
+		AppointmentAddPageActions.clinicSelected(patntAppnmntData.get("clinicLocation"));
+		AppointmentAddPageActions.slotSelected(patntAppnmntData.get("slot"));
+		AppointmentAddPageActions.sourceSelected("Select Source");
+		AppointmentAddPageActions.referralSelected(patntAppnmntData.get("referral"));
+		AppointmentAddPageActions.getReferralDetails(patntAppnmntData.get("referalDetails"));
+		AppointmentAddPageActions.getNotes(patntAppnmntData.get("notes"));
+		AppointmentAddPageActions.clickOnTentative();
+		AppointmentAddPageActions.clickOnSaveBtn();
+		AppointmentsLisitngPageActions.appointmentStatus(patntAppnmntData.get("patient_name"), "New");
+		AppointmentsLisitngPageActions.type(patntAppnmntData.get("patient_name"), "in-Clinic");
+		AppointmentsLisitngPageActions.appointmentType(patntAppnmntData.get("patient_name"), "Tentative");
+		AppointmentsLisitngPageActions.verifyClinic(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("clinicLocation"));
+		AppointmentsLisitngPageActions.checkDoctorName(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("doctor"));
+		AppointmentsLisitngPageActions.viewButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.editButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.openViewModal(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("slot"));
+		AppointmentsLisitngPageActions.patientIdView();
+		AppointmentsLisitngPageActions.tentativeHeaderView();
+		AppointmentsLisitngPageActions.patientNameView(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.emailIdView(patntAppnmntData.get("email"));
+		AppointmentsLisitngPageActions.mobileNumView(patntAppnmntData.get("patient_mobile"));
+		AppointmentsLisitngPageActions.clinicNameView(patntAppnmntData.get("clinicLocation"));
+		AppointmentsLisitngPageActions.DateOfAppView();
+		AppointmentsLisitngPageActions.durationView(patntAppnmntData.get("duration"));
+		AppointmentsLisitngPageActions.doctorView(patntAppnmntData.get("doctor"));
+		AppointmentsLisitngPageActions.operatoriesView();
+		AppointmentsLisitngPageActions.referralView(patntAppnmntData.get("referral"));
+		AppointmentsLisitngPageActions.referralDetails(patntAppnmntData.get("referalDetails"));
+		AppointmentsLisitngPageActions.sourceView(patntAppnmntData.get("source"));
+//      appointmentsListingPage.chiefComplaintView(patntAppnmntData.get("chiefComplaint"));
+		AppointmentsLisitngPageActions.notesView(patntAppnmntData.get("notes"));
+		AppointmentsLisitngPageActions.closeViewModal();
+		AppointmentsLisitngPageActions.clickEditButton(patntAppnmntData.get("patient_name"));
+		AppointmentAddPageActions.verifyTentativeAfterClickOnEditBtn();
+		AppointmentAddPageActions.verifyMandatoryFieldsOnEdit();
+		Assert.assertTrue(CommonPageActions.verification().contains("Appointment"));
+	}
+
+	@Test(groups = { "Regression", "Smoke", "Sanity",
+			"Functional" }, enabled = true, description = "Add Scan Clinic Appointment", priority = 5)
+	public void bookNewAppointmentScanClinic() throws ParseException, java.text.ParseException, bsh.ParseException {
+		logger.log(Status.PASS, BOOK_NEW_APPOINTMENT_E_CONSULT);
+		AppointmentAddPageActions.selectScan();
+		AppointmentAddPageActions.selectClinicFromDropdown(patntAppnmntData.get("scanCenter"));
+		AppointmentAddPageActions.enterPatientName(patntAppnmntData.get("patient_name"));
+		AppointmentAddPageActions.enterMobileNumber(patntAppnmntData.get("patient_mobile"));
+		AppointmentAddPageActions.enterEmailAddress(patntAppnmntData.get("email"));
+//    AppointmentAddPageActions.selectClinicFromDropdown(patntAppnmntData.get("scanCenter"));
+//    AppointmentAddPageActions.appointmentDate(patntAppnmntData.get("appointmentDate"));
+		AppointmentAddPageActions.selectTimeSlotFromDropdown(patntAppnmntData.get("slot"));
+		AppointmentAddPageActions.enterTimeDuration(patntAppnmntData.get("duration"));
+		AppointmentAddPageActions.selectDoctorFromDropdown(patntAppnmntData.get("doctor"));
+		AppointmentAddPageActions.selectReferralFromDropdown(patntAppnmntData.get("referral"));
+		AppointmentAddPageActions.enterReferralDetails(patntAppnmntData.get("referalDetails"));
+		AppointmentAddPageActions.clickOnChiefComplaints(patntAppnmntData.get("chiefComplaint"));
+		AppointmentAddPageActions.enterNote(patntAppnmntData.get("notes"));
+		AppointmentAddPageActions.selectClinicServiceType();
+		AppointmentAddPageActions.selectServiceClinic("Amanora");
+		AppointmentAddPageActions.clickOnSaveBtn();
+		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
+		DoctorDashBoardPageActions.clickOnAppListBtn();
+		AppointmentsLisitngPageActions.clickOnLastPage();
+		AppointmentsLisitngPageActions.appointmentStatus(patntAppnmntData.get("patient_name"), "New");
+		AppointmentsLisitngPageActions.type(patntAppnmntData.get("patient_name"), "Scan");
+		AppointmentsLisitngPageActions.appointmentType(patntAppnmntData.get("patient_name"), "Confirmed");
+		AppointmentsLisitngPageActions.verifyClinic(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("scanCenter"));
+		AppointmentsLisitngPageActions.checkDoctorName(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("doctor"));
+		AppointmentsLisitngPageActions.verifyServiceType(patntAppnmntData.get("patient_name"), "@Clinic");
+		AppointmentsLisitngPageActions.verifyServiceLocation(patntAppnmntData.get("patient_name"), "B20");
+		AppointmentsLisitngPageActions.viewButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.editButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.deleteButton(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.openViewModal(patntAppnmntData.get("patient_name"),
+				patntAppnmntData.get("slot"));
+		AppointmentsLisitngPageActions.patientIdView();
+		AppointmentsLisitngPageActions.patientNameView(patntAppnmntData.get("patient_name"));
+		AppointmentsLisitngPageActions.emailIdView(patntAppnmntData.get("email"));
+		AppointmentsLisitngPageActions.mobileNumView(patntAppnmntData.get("patient_mobile"));
+		AppointmentsLisitngPageActions.clinicNameView(patntAppnmntData.get("scanCenter"));
+//    AppointmentsLisitngPageActions.DateOfAppView();
+		AppointmentsLisitngPageActions.durationView(patntAppnmntData.get("duration"));
+		AppointmentsLisitngPageActions.doctorView(patntAppnmntData.get("doctor"));
+		AppointmentsLisitngPageActions.referralView(patntAppnmntData.get("referral"));
+		AppointmentsLisitngPageActions.referralDetails(patntAppnmntData.get("referalDetails"));
+		AppointmentsLisitngPageActions.sourceView(patntAppnmntData.get("source"));
+//    AppointmentsLisitngPageActions.chiefComplaintViewpatntAppnmntData.get("chiefComplaint"));
+		AppointmentsLisitngPageActions.notesView(patntAppnmntData.get("notes"));
+		AppointmentsLisitngPageActions.closeViewModal();
+		AppointmentsLisitngPageActions.clickOnPatient(patntAppnmntData.get("patient_name"));
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.clickOnAppList();
+		AppointmentsListPageActions.checkAppointmentTime(patntAppnmntData.get("appointmentDate"),
+				patntAppnmntData.get("slot"));
+//    AppointmentsListPageActions.chiefComplaintpatntAppnmntData.get("chiefComplaint"));
+		AppointmentsListPageActions.type("Scan");
+		AppointmentsListPageActions.appointmentType("Confirmed");
+		AppointmentsListPageActions.clinicName("Amanora");
+		AppointmentsListPageActions.doctorName(patntAppnmntData.get("doctor"));
+		AppointmentsListPageActions.checkViewBtn();
+		AppointmentsListPageActions.checkEditBtn();
+		AppointmentsListPageActions.checkDeleteBtn();
+		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		ChiefComplaintAddPageActions.verifyChiefComplaintsInputList("NA");
+		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
+		ChiefComplaintListingPageActions.chiefComplaintInMainList("NA");
+		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+	}
 }

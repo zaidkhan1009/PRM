@@ -40,7 +40,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.asserts.SoftAssert;
 import com.aventstack.extentreports.ExtentTest;
-
 import pageActions.doctorDashboard.AppointmentAddPageActions;
 import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
@@ -73,7 +72,6 @@ public class BaseClass extends ExtentReportListener {
 		launchDoctorDashboard();
 		doLogin();
 		doctorDashboardHomePage();
-
 	}
 
 	@BeforeTest
@@ -84,14 +82,22 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void launchBrowser() {
+
 		browser = config.getBrowser();
+
 		if (browser.equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();
-		} else if (browser.equalsIgnoreCase("firefox")) {
+		}
+
+		else if (browser.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
-		} else if (browser.equalsIgnoreCase("ie") || (browser.equalsIgnoreCase("edge"))) {
+		}
+
+		else if (browser.equalsIgnoreCase("ie") || (browser.equalsIgnoreCase("edge"))) {
 			driver = new EdgeDriver();
-		} else {
+		}
+
+		else {
 			System.out.println("Incorrect option - Launching Chrome browser for safety");
 			driver = new ChromeDriver();
 		}
@@ -310,7 +316,8 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void visibilityOfListLocated(List<WebElement> ele) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
 	}
 
@@ -421,8 +428,7 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void waitForPageToBecomeActive() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(
-				ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='modal-backdrop fade  in']")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='modal-backdrop fade  in']")));
 	}
 
 	public static void selectFromDropDownByIndex(WebElement ele, int index) {
@@ -476,18 +482,8 @@ public class BaseClass extends ExtentReportListener {
 
 	public static void selectFromDropDownByVisibleText(WebElement ele, String value) {
 
-		// boolean isElementPresent = false;
-
+		boolean isElementPresent = false;
 		waitForElementVisibility(ele);
-		waitForElementToBeClickable(ele);
-		waitForModalOverlayToDisappear();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		new Select(ele).selectByVisibleText(value);
 	}
 
@@ -502,9 +498,8 @@ public class BaseClass extends ExtentReportListener {
 	}
 
 	public static void waitForSpinnerToDisappear() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//img[@class='spinner']")));
-
 	}
 
 	public static void waitForSpinnerToDisappearOnDoctorDashboard() {
@@ -517,14 +512,14 @@ public class BaseClass extends ExtentReportListener {
 		wait.until(ExpectedConditions.visibilityOf(ele));
 	}
 
+	public static void visibilityOfAllElements(List<WebElement> ele) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
+	}
+	
 	public static void waitForElementVisibility(WebElement ele) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(ele));
-	}
-
-	public static void visibilityOfAllElements(List<WebElement> ele) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
 	}
 
 	public static void waitToBeClickableAndSendKeys(WebElement element, String value) {
@@ -549,6 +544,7 @@ public class BaseClass extends ExtentReportListener {
 	public static void waitForElementToBeClickable(String xpathLocator) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathLocator)));
+
 	}
 
 	public static void executeScript(WebElement ele) {

@@ -53,8 +53,7 @@ public class EventPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(eventPage.getEventSaveBtn());
 		eventPage.getEventSaveBtn().click();
 		BaseClass.waitForPageLoad();
-		BaseClass.waitForSpinnerToDisappear();
-//		
+		BaseClass.waitForSpinnerToDisappear();	
 	}
 
 	public static void verifyEventAddSuccessMsg() {
@@ -86,7 +85,7 @@ public class EventPageActions extends BaseClass {
 	 * Verifying By Default By doctor Event Type is selected
 	 */
 	public static void verifyDefaultSelectedEventType() {
-		//BaseClass.waitForElementToBeClickable(eventPage.getEventByDoctor());
+		BaseClass.waitForElementToBeClickable(eventPage.getEventByDoctor());
 		Assert.assertTrue(eventPage.getEventByDoctor().isSelected());
 
 	}
@@ -118,6 +117,7 @@ public class EventPageActions extends BaseClass {
 	 * Select Date on Event Add/Edit Screen
 	 */
 	public static void selectDateInEvent(String SelectDate) {
+
 		String element_id = "eventDate";
 		BaseClass.waitForPageLoad();
 		BaseClass.WaitTillElementIsPresent(eventPage.getEventDate());
@@ -202,9 +202,7 @@ public class EventPageActions extends BaseClass {
 	 */
 	private static boolean verifyAllCommonWebElementOnAddEvent() {
 		BaseClass.waitForPageLoad();
-		
 		WebElement checkDoctor = driver.findElement(By.xpath("//li[@class='ng-scope advDis']"));
-		
 		boolean flag = checkDoctor.isDisplayed();
 		/*
 		 * eventPage.getEventByDoctor().isDisplayed() &&
@@ -460,7 +458,6 @@ public class EventPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(eventPage.getTitle());
 		String actualEventTitle = getEnteredText("title");
 		Assert.assertEquals(expectedEventTitle, actualEventTitle);
-
 	}
 
 	/*
@@ -770,6 +767,9 @@ public class EventPageActions extends BaseClass {
 
 			}
 		}
+
+		checkDoctorIsDisableOrSelectableInAddAppt(eventDoctor, eventDate, eventDuration, eventStartTime, "disabled");
+
 	}
 
 	public static void checkDisableEnableOfOperatoryOnAddAppointment(String eventDate, String eventDuration,
@@ -838,7 +838,9 @@ public class EventPageActions extends BaseClass {
 	 * checking the Operatory for which Event is added/Update and delete is coming
 	 * disable or selectable on Add Appointment Screen
 	 */
+
 	public static void checkEventAddedOperatoryIsDisable(String eventAddedOperatory, String eventDate, String eventDuration, String eventStartTime) {
+
 		checkDisableEnableOfOperatoryOnAddAppointment(eventDate, eventDuration, eventStartTime, "booked-event",
 				getEventAddedWebElement(eventAddedOperatory, "Operatory"));
 	}

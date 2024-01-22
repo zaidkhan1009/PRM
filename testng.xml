@@ -2,6 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 	<listeners>
+<<<<<<< HEAD
 		<listener class-name="utils.TreatmentPlansTestCase1" />
 	</listeners>
 	<test name="Test">
@@ -68,3 +69,24 @@
 </class>
 
 -->
+=======
+		<listener class-name="utils.ExtentReportListener" />
+	</listeners>
+	<test name="Test">	
+		<classes>	
+		<class name="tests.TreatmentPlansTestCase1">
+				<methods>
+						<include name="checkOnWorkDonePageAfterTreatmentStart"/>
+						<include name="verifyDeleteInTreatmentList"/>
+						
+				</methods>
+			</class>
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+	'Commented code for debug or other purpose'
+
+<include name="appointmentEConsultPage" />
+Suite -->
+>>>>>>> origin/shrey

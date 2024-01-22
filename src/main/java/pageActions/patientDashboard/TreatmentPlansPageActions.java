@@ -13,22 +13,23 @@ import pages.patientDashboard.OralExamsPage;
 import pages.patientDashboard.TreatmentPlansPage;
 import java.util.List;
 
-public class TreatmentPlansPageActions extends BaseClass{
+public class TreatmentPlansPageActions extends BaseClass {
 
 	static TreatmentPlansPage treatmentPlansPage = PageFactory.initElements(driver, TreatmentPlansPage.class);
-	static OralExamsPage oralExamsPage  = PageFactory.initElements(driver, OralExamsPage.class);
-	
+	static OralExamsPage oralExamsPage = PageFactory.initElements(driver, OralExamsPage.class);
+
 	public static void startCheckBoxInputListNotPresent() {
 		BaseClass.waitForSpinnerToDisappear();
-		if(treatmentPlansPage.getCheckBoxInputList().size() > 0) {
-			System.out.println("Patient alreday has/have"+treatmentPlansPage.getCheckBoxInputList().size()+"old treatmentPlansPage.getTreatments()");
-			Reporter.log("Patient alreday has/have\"+treatmentPlansPage.getCheckBoxInputList().size()+\"old treatmentPlansPage.getTreatments()");
-		}
-		else {
+		if (treatmentPlansPage.getCheckBoxInputList().size() > 0) {
+			System.out.println("Patient alreday has/have" + treatmentPlansPage.getCheckBoxInputList().size()
+					+ "old treatmentPlansPage.getTreatments()");
+			Reporter.log(
+					"Patient alreday has/have\"+treatmentPlansPage.getCheckBoxInputList().size()+\"old treatmentPlansPage.getTreatments()");
+		} else {
 			Assert.assertEquals(treatmentPlansPage.getCheckBoxInputList().size(), 0);
 		}
 	}
-	
+
 	public static void selectedTreamentInIputList(String fullName) {
 		BaseClass.waitForPageLoad();
 		int j = 0;
@@ -37,7 +38,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 				if (!treatmentPlansPage.getTreatmentsDetail().get(i).getAttribute("class").contains("deleted")) {
 					Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getTreatmentsInputList().get(i))
 							&& checkedWebElementDisplayed(treatmentPlansPage.getTreatmentTypeInputList().get(i - j))
-							&& (treatmentPlansPage.getUnitPriceNetPriceInputlist().size() == treatmentPlansPage.getTreatmentsInputList().size() * 2)
+							&& (treatmentPlansPage.getUnitPriceNetPriceInputlist()
+									.size() == treatmentPlansPage.getTreatmentsInputList().size() * 2)
 							&& checkedWebElementDisplayed(treatmentPlansPage.getDiscountTypeInputList().get(i - j))
 							&& checkedWebElementDisplayed(treatmentPlansPage.getDiscountInputList().get(i - j))
 							&& checkedWebElementDisplayed(treatmentPlansPage.getAmountPayInputList().get(i))
@@ -91,16 +93,19 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getCovidUpdateAlert());
 		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getCovidUpdateAlert()));
 	}
-	
-	
+
 	public static void checkedInputListDataName() {
-		    BaseClass.waitForSpinnerToDisappear();
-			BaseClass.WaitTillElementIsPresent(treatmentPlansPage.getSourceInputList());
-			Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getSourceInputList()) && checkedWebElementDisplayed(treatmentPlansPage.getStartInputList())
-					&& checkedWebElementDisplayed(treatmentPlansPage.getTreatmentInputList()) && checkedWebElementDisplayed(treatmentPlansPage.getTypeInputList())
-					&& checkedWebElementDisplayed(treatmentPlansPage.getUnitCostInputList()) && checkedWebElementDisplayed(treatmentPlansPage.getNetAmtInputList())
-					&& checkedWebElementDisplayed(treatmentPlansPage.getCouponInputList()) && checkedWebElementDisplayed(treatmentPlansPage.getCouponBasisInputList())
-					&& checkedWebElementDisplayed(treatmentPlansPage.getActionInputList()));
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.WaitTillElementIsPresent(treatmentPlansPage.getSourceInputList());
+		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getSourceInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getStartInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getTreatmentInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getTypeInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getUnitCostInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getNetAmtInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getCouponInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getCouponBasisInputList())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getActionInputList()));
 	}
 
 //	public static void checkedInputListDataName() {
@@ -121,16 +126,16 @@ public class TreatmentPlansPageActions extends BaseClass{
 
 	public static void checkEditSaveInputList(String teethNo) {
 		BaseClass.waitForPageLoad();
-		Assert.assertTrue(checkedWebElementDisplayed(driver
-				.findElement(By.xpath("//table[@id='treatmentplanedittable']//span[text()='" + teethNo
+		Assert.assertTrue(checkedWebElementDisplayed(
+				driver.findElement(By.xpath("//table[@id='treatmentplanedittable']//span[text()='" + teethNo
 						+ "']/../following-sibling::td//a[contains(@ng-click,'openTreatmentEditPopup')]")))
 				&& checkedWebElementDisplayed(treatmentPlansPage.getSaveBtnOnInputList()));
 	}
 
 	public static void checkDeleteInputList(String teethNo) {
 		BaseClass.waitForPageLoad();
-		Assert.assertTrue(checkedWebElementDisplayed(driver
-				.findElement(By.xpath("//table[@id='treatmentplanedittable']//span[text()='" + teethNo
+		Assert.assertTrue(checkedWebElementDisplayed(
+				driver.findElement(By.xpath("//table[@id='treatmentplanedittable']//span[text()='" + teethNo
 						+ "']/../following-sibling::td//a[contains(@ng-click,'treatmentToothGroupDelete')]")))
 				&& checkedWebElementDisplayed(treatmentPlansPage.getSaveBtnOnInputList()));
 	}
@@ -150,14 +155,16 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void allTeethByQuadrantAndByArchIsPresent() {
 //		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getAllTeethBtn());
-		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getAllTeethBtn()) && checkedWebElementDisplayed(treatmentPlansPage.getByArchBtn())
+		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getAllTeethBtn())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getByArchBtn())
 				&& checkedWebElementDisplayed(treatmentPlansPage.getByQuadrantBtn()));
 	}
 
 	public static void allTeethAndByQuadrantIsPresent() {
 //		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getAllTeethBtn());
-		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getAllTeethBtn()) && checkedWebElementDisplayed(treatmentPlansPage.getByQuadrantBtn()));
+		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getAllTeethBtn())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getByQuadrantBtn()));
 	}
 
 	public static void verifyNoRecordMsg() {
@@ -189,19 +196,20 @@ public class TreatmentPlansPageActions extends BaseClass{
 		}
 		treatmentPlansPage.getYesOnMultiselect().click();
 	}
-	
+
 	public static void clickOnNewTeethBtn() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForPageToBecomeActive();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getNewTeeth());
 		BaseClass.waitForModalOverlayToDisappear();
+		BaseClass.waitForPageLoad();
 		treatmentPlansPage.getNewTeeth().click();
 	}
-	
+
 	public static void clickOnFindingsBtn() {
 		BaseClass.waitForPageToBecomeActive();
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(treatmentPlansPage.getFindings(),4000);
+		BaseClass.waitForElementVisibility(treatmentPlansPage.getFindings(), 4000);
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getFindings());
 		treatmentPlansPage.getFindings().click();
 	}
@@ -223,7 +231,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getTreatmentGroups());
 		treatmentPlansPage.getTreatmentGroups().click();
 	}
-	
+
 	public static void clickOnOralExamBtn() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getOralExamBtn());
@@ -373,14 +381,12 @@ public class TreatmentPlansPageActions extends BaseClass{
 		}
 
 	}
-	
+
 	public static void verifyTreatments() {
-    BaseClass.waitForSpinnerToDisappear();
-	BaseClass.visibilityOfListLocated(treatmentPlansPage.getTreatments());
-	Assert.assertTrue(treatmentPlansPage.getTreatments().size() > 0);
-}
-	
-	
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.visibilityOfListLocated(treatmentPlansPage.getTreatments());
+		Assert.assertTrue(treatmentPlansPage.getTreatments().size() > 0);
+	}
 
 //	public static void verifyTreatments() {
 //		BaseClass.waitForPageLoad();
@@ -397,21 +403,23 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void checkWebElementsOfPopup() {
 //		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getSearchBox());
-		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getTreatmentGroups()) && checkedWebElementDisplayed(treatmentPlansPage.getSearchBox())
-				&& checkedWebElementDisplayed(treatmentPlansPage.getSaveBtn()) && checkedWebElementDisplayed(treatmentPlansPage.getCloseBtn())
+		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getTreatmentGroups())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getSearchBox())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getSaveBtn())
+				&& checkedWebElementDisplayed(treatmentPlansPage.getCloseBtn())
 				&& treatmentPlansPage.getTitleOfPopup().getText().contains("Findings"));
 	}
-	
+
 	public static void saveTreatment() {
-		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtn(),4000);
+		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtn(), 4000);
 		treatmentPlansPage.getSaveBtn().click();
 		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(treatmentPlansPage.getTypeInputList(), 4000);
 	}
-	
+
 	public static void saveTreatmentWithMessage() {
-		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtn(),4000);
+		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtn(), 4000);
 		treatmentPlansPage.getSaveBtn().click();
 	}
 
@@ -427,10 +435,10 @@ public class TreatmentPlansPageActions extends BaseClass{
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	public static void closeTreatmentPopup() {
-			treatmentPlansPage.getCloseBtn().click();
-			BaseClass.waitForSpinnerToDisappear();
+		treatmentPlansPage.getCloseBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 //	public static void closeTreatmentPopup() {
@@ -442,7 +450,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	public static void verifySeletecdTeethOnPopup(String teeth) {
 		BaseClass.waitForSpinnerToDisappear();
 		try {
@@ -451,9 +459,9 @@ public class TreatmentPlansPageActions extends BaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue(checkedWebElementDisplayed(driver
-					.findElement(By.xpath("//div[@id='tgrouppopupheader']//span[contains(text(),'" + teeth + "')]")))
-					&& treatmentPlansPage.getTitleOfPopup().getText().contains("Findings"));
+		Assert.assertTrue(checkedWebElementDisplayed(
+				driver.findElement(By.xpath("//div[@id='tgrouppopupheader']//span[contains(text(),'" + teeth + "')]")))
+				&& treatmentPlansPage.getTitleOfPopup().getText().contains("Findings"));
 	}
 
 //	public static void verifySeletecdTeethOnPopup(String teeth) {
@@ -487,7 +495,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void verifyWithoutTreatmentMsg() {
 		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getWithoutTreatmentMsg()));
 	}
@@ -510,26 +518,29 @@ public class TreatmentPlansPageActions extends BaseClass{
 	}
 
 	public static void selectedSoftTissueProvisionalDisplayedBelow() {
-		
+
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(oralExamsPage.getToothSitePerio());
-		Assert.assertTrue(treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 1 || treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 2
-				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 3 || treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 4
-				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 5 || treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 6
-				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 7 || treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 8
-				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 9 || treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 10);
+		Assert.assertTrue(treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 1
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 2
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 3
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 4
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 5
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 6
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 7
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 8
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 9
+				|| treatmentPlansPage.getProvisionalRemoveBtnSoftTissue().size() == 10);
 	}
 
 	public static void clickOnSoftTissueProvisinals() {
 		BaseClass.waitForPageLoad();
 		try {
 			Thread.sleep(2000);
-			driver
-					.findElement(By.xpath("(//div[contains(@ng-click,'softDiagno.ProvisionalDiagnostic.bsId')])[1]"))
+			driver.findElement(By.xpath("(//div[contains(@ng-click,'softDiagno.ProvisionalDiagnostic.bsId')])[1]"))
 					.click();
 		} catch (StaleElementReferenceException | InterruptedException e) {
-			driver
-					.findElement(By.xpath("(//div[contains(@ng-click,'softDiagno.ProvisionalDiagnostic.bsId')])[1]"))
+			driver.findElement(By.xpath("(//div[contains(@ng-click,'softDiagno.ProvisionalDiagnostic.bsId')])[1]"))
 					.click();
 		}
 	}
@@ -623,8 +634,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void verifyIOPARNotes() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getIOPARNotes());
-		Assert.assertTrue(
-				checkedWebElementDisplayed(treatmentPlansPage.getIOPARNotes()) && treatmentPlansPage.getIOPARNotes().getAttribute("maxlength").contains("768"));
+		Assert.assertTrue(checkedWebElementDisplayed(treatmentPlansPage.getIOPARNotes())
+				&& treatmentPlansPage.getIOPARNotes().getAttribute("maxlength").contains("768"));
 	}
 
 	public static void clickOnIOPARBtn() {
@@ -651,9 +662,9 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(web);
 		web.click();
 	}
-	
+
 	public static void clickOnSaveBtnTreatmentInputList() {
-		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtnOnInputList(),4000);
+		BaseClass.waitForElementVisibility(treatmentPlansPage.getSaveBtnOnInputList(), 4000);
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getSaveBtnOnInputList());
 		treatmentPlansPage.getSaveBtnOnInputList().click();
 		BaseClass.waitForSpinnerToDisappear();
@@ -675,7 +686,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void clickOnEditBtnTreatmentInputList() {
 		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(treatmentPlansPage.getEditBtnTreatmentInputList(),4000);
+		BaseClass.waitForElementVisibility(treatmentPlansPage.getEditBtnTreatmentInputList(), 4000);
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getEditBtnTreatmentInputList());
 		treatmentPlansPage.getEditBtnTreatmentInputList().click();
 	}
@@ -696,17 +707,17 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getYesForDelete());
 		treatmentPlansPage.getYesForDelete().click();
 	}
-	
+
 	public static void clickOnTreatments(String shortNameTreatment) {
 		BaseClass.waitForSpinnerToDisappear();
-			List<WebElement> web = driver.findElements(By.xpath("//div[@class='content-trtmnt']"));
-			for (int i = 0; web.size() > i; i++) { 
-				if (web.get(i).getText().contains(shortNameTreatment)) {
-					web.get(i).click();
-				} else {
-					continue;
-				}
+		List<WebElement> web = driver.findElements(By.xpath("//div[@class='content-trtmnt']"));
+		for (int i = 0; web.size() > i; i++) {
+			if (web.get(i).getText().contains(shortNameTreatment)) {
+				web.get(i).click();
+			} else {
+				continue;
 			}
+		}
 	}
 
 //	public static void clickOnTreatments(String shortNameTreatment) {
@@ -735,7 +746,11 @@ public class TreatmentPlansPageActions extends BaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		WebElement ele = driver.findElement(By.xpath("//span[contains(normalize-space(),'"+treatment+"')]"));
+
+		//WebElement ele = driver.findElement(By.xpath("//span[text()='" + treatment+ "']/../following-sibling::span[@class='price-trtmnt ng-binding bridgeTrt bridgeTrtchk']"));
+
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 	}
 
@@ -762,7 +777,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getFindings());
 		for (int i = 0; treatmentPlansPage.getTreatmentsInputList().size() > i; i++) {
 			if (treatmentPlansPage.getTreatmentsInputList().get(i).getText().contains(treatment)) {
-				Assert.assertTrue(treatmentPlansPage.getTreatmentsDetail().get(i).getAttribute("class").contains("deleted"));
+				Assert.assertTrue(
+						treatmentPlansPage.getTreatmentsDetail().get(i).getAttribute("class").contains("deleted"));
 				break;
 			} else {
 				continue;
@@ -791,8 +807,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForPageLoad();
 		try {
 			Thread.sleep(1000);
-			WebElement web = driver
-					.findElement(By.xpath("//a/span[contains(text(),'" + provisinals + "')]"));
+			WebElement web = driver.findElement(By.xpath("//a/span[contains(text(),'" + provisinals + "')]"));
 			BaseClass.waitForElementToBeClickable(web);
 			Assert.assertTrue(checkedWebElementDisplayed(web));
 		} catch (InterruptedException e) {
@@ -818,10 +833,9 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void verifyTissuesInFinding(String teethNo, String Tissues) {
 		BaseClass.waitForPageLoad();
 		String str = "toothBind tooth" + teethNo;
-		WebElement web = driver
-				.findElement(By.xpath("//div[contains(@class,'" + str
-						+ "')]//ancestor::div[@id='softTissue_left']/following-sibling::div//span[contains(text(),'"
-						+ Tissues + "')]"));
+		WebElement web = driver.findElement(By.xpath("//div[contains(@class,'" + str
+				+ "')]//ancestor::div[@id='softTissue_left']/following-sibling::div//span[contains(text(),'" + Tissues
+				+ "')]"));
 		BaseClass.waitForElementToBeClickable(web);
 		Assert.assertTrue(checkedWebElementDisplayed(web));
 	}
@@ -829,10 +843,9 @@ public class TreatmentPlansPageActions extends BaseClass{
 	public static void verifyProvisionalsInFinding(String teethNo, String provisinals) {
 		BaseClass.waitForPageLoad();
 		String str = "toothBind tooth" + teethNo;
-		WebElement web = driver
-				.findElement(By.xpath("//div[contains(@class,'" + str
-						+ "')]//ancestor::div[@id='softTissue_left']/following-sibling::div//span[contains(text(),'"
-						+ provisinals + "')]"));
+		WebElement web = driver.findElement(By.xpath("//div[contains(@class,'" + str
+				+ "')]//ancestor::div[@id='softTissue_left']/following-sibling::div//span[contains(text(),'"
+				+ provisinals + "')]"));
 		BaseClass.waitForElementToBeClickable(web);
 		Assert.assertTrue(checkedWebElementDisplayed(web));
 	}
@@ -854,7 +867,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForElementToBeClickable(web);
 		BaseClass.executeScript(web);
 	}
-	
+
 	public static void intiallyBothPriceSameDiscount(String fullname) {
 		BaseClass.waitForPageLoad();
 		String netAmountPrice, amountPayablePrice;
@@ -869,7 +882,6 @@ public class TreatmentPlansPageActions extends BaseClass{
 			}
 		}
 	}
-	
 
 //	public static void intiallyBothPriceSameDiscount(String fullname) {
 //		BaseClass.waitForPageLoad();
@@ -997,7 +1009,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForPageLoad();
 		for (int i = 0; treatmentPlansPage.getTreatmentsInputList().size() > i; i++) {
 			if (treatmentPlansPage.getTreatmentsInputList().get(i).getText().contains(fullname)) {
-				BaseClass.selectFromDropDownByIndex(treatmentPlansPage.getDiscountTypeInputList().get(i), 0);;
+				BaseClass.selectFromDropDownByIndex(treatmentPlansPage.getDiscountTypeInputList().get(i), 0);
+				;
 				break;
 			}
 		}
@@ -1007,7 +1020,8 @@ public class TreatmentPlansPageActions extends BaseClass{
 		BaseClass.waitForPageLoad();
 		for (int i = 0; treatmentPlansPage.getTreatmentsInputList().size() > i; i++) {
 			if (treatmentPlansPage.getTreatmentsInputList().get(i).getText().contains(fullname)) {
-				BaseClass.selectFromDropDownByIndex(treatmentPlansPage.getDiscountTypeInputList().get(i), 1);;
+				BaseClass.selectFromDropDownByIndex(treatmentPlansPage.getDiscountTypeInputList().get(i), 1);
+				;
 				break;
 			}
 		}

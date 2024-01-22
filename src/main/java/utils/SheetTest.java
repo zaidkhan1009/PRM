@@ -32,8 +32,6 @@ public class SheetTest {
 			+ "src\\main\\resources\\client_secret.json";
 	private static final String SPREADSHEET_ID = "1FldGLoTmmfPd7L45Ki-pAgobcZru3gflWc1F4aew8aM";
 
- 
-
 	public static Sheets getSheet() throws IOException, GeneralSecurityException {
 		HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(SERVICE_ACCOUNT_FILE_PATH))
@@ -67,10 +65,7 @@ public class SheetTest {
 		final String range = sheetName+"!"+rowRange+":"+colName;
 		ValueRange response = getSheet().spreadsheets().values().get(SPREADSHEET_ID, range).execute();
 		List<List<Object>> values = response.getValues();
-		
-		// Print value
-		System.out.println("Map Data");
-		System.out.println(values);
+
 		
 		Map<String, String> mapData = new HashMap<String, String>();
 		if (values == null || values.isEmpty()) {
@@ -98,6 +93,7 @@ public class SheetTest {
 						mapData.put("edit_patient_mobile", (String) row.get(16));
 					}
 					break;
+
  
 				case "Appointment":
 					for (List<Object> row : values) {
@@ -270,6 +266,7 @@ public class SheetTest {
 						break;
 					}
 
+
 				case "WorkDoneData":
 					mapData.put("patient_name",values.get(1).get(0).toString());
 					mapData.put("patient_mobile",values.get(1).get(1).toString());
@@ -373,36 +370,3 @@ public class SheetTest {
 		return null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

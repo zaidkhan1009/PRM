@@ -1,19 +1,13 @@
 package tests;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.Map;
+
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import com.aventstack.extentreports.Status;
 
 import base.BaseClass;
-import utils.SheetTest;
-import utils.TestData;
 import bsh.ParseException;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
 import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
@@ -21,7 +15,8 @@ import pageActions.doctorDashboard.CommonPageActions;
 import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.EventListingPageActions;
 import pageActions.doctorDashboard.EventPageActions;
-import pages.doctorDashboard.DoctorDashBoardPage;
+import utils.SheetTest;
+import utils.TestData;
 
 public class EventTestCase extends BaseClass {
 
@@ -893,9 +888,8 @@ public class EventTestCase extends BaseClass {
 
 	}
 
-	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_ROOM_EVENT_DELETED)
-			//, dependsOnMethods = "verifyUpdateByRoomEvent")
+	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_ROOM_EVENT_DELETED)
+	// , dependsOnMethods = "verifyUpdateByRoomEvent")
 	public void verifyDeleteByRoomEvent() {
 		updateRoomEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A11", "O11");
 		updateDoctorEventTestData = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A3", "O3");
@@ -961,8 +955,8 @@ public class EventTestCase extends BaseClass {
 	 * Listing Check event added Scanner is not available on Add Appointment page
 	 */
 
-	
-	// can't run the test because we are having only 1 scanner we have to get it configured
+	// can't run the test because we are having only 1 scanner we have to get it
+	// configured
 	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_SCANNER_EVENT)
 	public void verifyByScannerEvent() {
 		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
@@ -1018,9 +1012,8 @@ public class EventTestCase extends BaseClass {
 	 * Scanner by above @test
 	 *
 	 */
-	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_ADDING_EVENT_ON_LAST_AVAILABLE_SCANNER)
-			//, dependsOnMethods = "verifyByScannerEvent")
+	@Test(groups = { "Functional", "Regression" }, description = VERIFY_ADDING_EVENT_ON_LAST_AVAILABLE_SCANNER)
+	// , dependsOnMethods = "verifyByScannerEvent")
 	public void verifyAddingEventOnLastScannerAvailable() {
 		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT_UPDATE);
@@ -1049,10 +1042,10 @@ public class EventTestCase extends BaseClass {
 	 * the previous time slot
 	 *
 	 */
-	// can't run the test because we are having only 1 scanner we have to get it configured
-	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_UPDATE)
-			//, dependsOnMethods = "verifyByScannerEvent")
+	// can't run the test because we are having only 1 scanner we have to get it
+	// configured
+	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_SCANNER_EVENT_UPDATE)
+	// , dependsOnMethods = "verifyByScannerEvent")
 	public void verifyUpdateByScannerEvent() {
 		addScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A15", "O15");
 		updateScannerRoomEvent = SheetTest.prepareData(MODULE_NAME, TEST_DATA_SHEET_NAME, "A16", "O16");
@@ -1129,10 +1122,10 @@ public class EventTestCase extends BaseClass {
 	 *
 	 */
 
-	// can't run the test because we are having only 1 scanner we have to get it configured
-	@Test(groups = { "Functional",
-			"Regression" }, description = VERIFY_BY_SCANNER_EVENT_DELETED)
-			//, dependsOnMethods = "verifyUpdateByScannerEvent")
+	// can't run the test because we are having only 1 scanner we have to get it
+	// configured
+	@Test(groups = { "Functional", "Regression" }, description = VERIFY_BY_SCANNER_EVENT_DELETED)
+	// , dependsOnMethods = "verifyUpdateByScannerEvent")
 	public void verifyDeleteByScannerEvent() {
 		logger.log(Status.PASS, VERIFY_BY_SCANNER_EVENT_DELETED);
 		CommonPageActions.selectClinicFrmHeader(updateScannerRoomEvent.get("event_Clinic"));

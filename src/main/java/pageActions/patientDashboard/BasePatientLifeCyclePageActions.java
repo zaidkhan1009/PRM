@@ -10,6 +10,8 @@ import org.sikuli.script.Pattern;
 import org.testng.Assert;
 import utils.TestData;
 import base.BaseClass;
+import pageActions.doctorDashboard.PatientDashboardPageActions;
+import pages.doctorDashboard.PatientDashboardPage;
 import pages.patientDashboard.BasePatientLifeCyclePage;
 
 /*
@@ -70,28 +72,18 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 //			basePatientLifeCyclePage.getAlert().click();
 			System.out.println("Alert not clicked");
 		}
-	}	
-//	public static void clickOnAlert() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal overlay']"));
-//		try {
-//			Thread.sleep(8000);
-//			basePatientLifeCyclePage.getAlert().click();
-//			Thread.sleep(2000);
-//		} catch (InterruptedException| NoSuchElementException e) {
-//			// TODO Auto-generated catch block
-//			try {
-//				Thread.sleep(8000);
-//			} catch (InterruptedException interruptedException) {
-//				interruptedException.printStackTrace();
-//			}
-//		}
-//	}
-//	
+
+	}
+	
 	/*checked the dashboard button present*/
 	public static void dashBoardBtnVerify() {
 		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getDashboardBtn(),4000);
 		Assert.assertTrue(checkedElementDisplayed(basePatientLifeCyclePage.getDashboardBtn()));
+	}
+	
+	public static void commonDashBoardBtnVerify() {
+		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getCommonDashboardBtn(),4000);
+		Assert.assertTrue(checkedElementDisplayed(basePatientLifeCyclePage.getCommonDashboardBtn()));
 	}
 
 	/*clicking on the dashboard button*/
@@ -136,17 +128,18 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 			}
 	}
 	
-	
-//	public static void clickOnDashBoard() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getDashboardBtn());
-//		BaseClass.executeScript(basePatientLifeCyclePage.getDashboardBtn());
-//		try {
-//			Thread.sleep(4000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public static void clickOnDashBoardCommon() {
+		BaseClass.waitForElementVisibility(basePatientLifeCyclePage.getCommonDashboardBtn(), 4000);
+		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getCommonDashboardBtn());
+		BaseClass.executeScript(basePatientLifeCyclePage.getCommonDashboardBtn());
+		BaseClass.waitForModalOverlayToDisappear();
+		BaseClass.waitForSpinnerToDisappear();
+		 try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	}
 
 	/*checked add new button at listing page*/
 	public static void verifyAddNewBtn() {
@@ -165,6 +158,9 @@ public class BasePatientLifeCyclePageActions extends BaseClass {
 	/*clicking at the add new button*/
 	public static void clickOnAddNewBtn() {
 		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(basePatientLifeCyclePage.getAddNewBtn());
 		basePatientLifeCyclePage.getAddNewBtn().click();
 		BaseClass.waitForSpinnerToDisappear();

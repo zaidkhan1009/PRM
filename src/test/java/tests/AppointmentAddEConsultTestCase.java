@@ -82,6 +82,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, MANDATORY_FIELDS); // Status
 		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.selectEConsult();
 		AppointmentAddPageActions.checkAppointmenteConsult();
 		AppointmentAddPageActions.enterMobileNumber(patntAppnmntData.get("patient_mobile"));
@@ -133,8 +134,8 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	public void bookNewAppointmentEConsult() throws ParseException, java.text.ParseException, bsh.ParseException {
 
 		logger.log(Status.PASS, BOOK_NEW_APPOINTMENT_E_CONSULT); // Status
-
 		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.selectEConsult();
 		AppointmentAddPageActions.checkAppointmenteConsult();
 		AppointmentAddPageActions.enterPatientName(patntAppnmntData.get("patient_name"));
@@ -210,6 +211,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
 		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickOnAppListBtn();
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();
@@ -262,7 +264,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, EDIT_APPOINTMENT); // Status
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
-		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickOnAppListBtn();
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();
@@ -305,8 +307,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	public void verifyAlreadyBookedDoctorSlot() {
 
 		logger.log(Status.PASS, VERIFY_ALREADY_BOOKED_DOCTOR_SLOT); // Status
-
-		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.enterPatientName(patntAppnmntData.get("patient_name"));
 		AppointmentAddPageActions.enterMobileNumber(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.enterEmailAddress(patntAppnmntData.get("email"));
@@ -329,8 +330,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	public void validateAutoSelectPatientFromSuggestion() {
 
 		logger.log(Status.PASS, VALIDATE_AUTO_SELECT_PATIENT_FROM_SUGGESTION); // Status
-
-		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
 		AppointmentAddPageActions.autoSelectMobile(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.getTextPatientMobile(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.getTextPatientName(patntAppnmntData.get("patient_name"));
@@ -349,9 +349,9 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Regression", "Sanity",
 			"Functional" }, enabled = true, description = "Verify Appointment Deletion", priority = 9)
 	public void deleteAppointment() {
-		
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
-		BaseClass.openAddAppointmentPage();
+		DoctorDashBoardPageActions.clickOnAppListBtn();
+
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();

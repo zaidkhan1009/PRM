@@ -4,6 +4,7 @@
   <test thread-count="5" name="Default test(failed)">
     <classes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <class name="tests.TreatmentPlansTestCase1">
         <methods>
           <include name="configReport"/>
@@ -33,6 +34,23 @@
         </methods>
       </class> <!-- tests.LabWorkOrderListingTestCase1 -->
 >>>>>>> umar
+=======
+      <class name="tests.ChiefComplaintTestCase">
+        <methods>
+          <include name="configReport"/>
+          <include name="testSetup"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="appointmentWithOutChiefComplaintImpactInChiefComplaintList"/>
+          <include name="chiefComplaintListHomePage"/>
+          <include name="VerifyDeleteBTnCCAddPage"/>
+          <include name="addCCWithoutAppSameDay"/>
+          <include name="ChiefComplaintAddPageActions"/>
+          <include name="chiefComplaintByClinicWise"/>
+          <include name="painPopupElementAndBehaviour"/>
+        </methods>
+      </class> <!-- tests.ChiefComplaintTestCase -->
+>>>>>>> origin/shrey
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

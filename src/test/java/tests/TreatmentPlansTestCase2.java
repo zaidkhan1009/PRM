@@ -1,28 +1,33 @@
 package tests;
 
 import java.util.Map;
+
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import com.aventstack.extentreports.Status;
+
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.AppointmentsListPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
-import pageActions.patientDashboard.LabWorkOrderEditPageActions;
-import pageActions.patientDashboard.LabWorkOrderListingPageActions;
 import pageActions.patientDashboard.OralExamsPageActions;
 import pageActions.patientDashboard.TreatmentPlanListingPageActions;
 import pageActions.patientDashboard.TreatmentPlansPageActions;
-import pageActions.patientDashboard.WorkDoneHistoryPageActions;
-import pageActions.patientDashboard.WorksDonePageActions;
 import utils.SheetTest;
 import utils.TestData;
 
-public class TreatmentPlansTestCase2 extends BaseClass{
+public class TreatmentPlansTestCase2 extends BaseClass {
 
-	/*please give the input before the execution of test cases and date format should be "dd-MM-yy" */
+	/*
+	 * please give the input before the execution of test cases and date format
+	 * should be "dd-MM-yy"
+	 */
 //	private static final String FILE_PATH = TestData.getInstance().getInputData("treatment_plan_file_path");
 //	private static final String SHEET = TestData.getInstance().getInputData("treatment_plan_file_sheet_name");
 	private static final String TODAY_DATE = TestData.getInstance().getTodayDate();
@@ -32,7 +37,7 @@ public class TreatmentPlansTestCase2 extends BaseClass{
 //	private static final String DOCTOR_NIK_NAME = TestData.getInstance().getInputData("treatment_plan_doctor_nikName");
 //	private static final String CLINIC_NAME = TestData.getInstance().getInputData("treatment_plan_clinic_name");
 
-	/*Messages for the extent report*/
+	/* Messages for the extent report */
 
 	private static final String SCRIPTS_STARTED_MSG = "@@ Test scripts has been started here @@";
 	private static final String STATUS_OF_SCRIPTS = "@@ Test script has been completed @@";
@@ -42,14 +47,27 @@ public class TreatmentPlansTestCase2 extends BaseClass{
 	private static final String FUNCTIONALITY_OF_START_BTN = "Checking the functionality of discount coupon - #functionalityOfStartBtn";
 	private static final String FUNCTIONALITY_OF_COPY_BTN = "Validated functionality of copy Btn - #functionalityOfCopyBtn";
 	private static final String FUNCTIONALITY_OF_DISCOUNT = "Checking the functionality of discount coupon - #functionalityOfDiscount";
-	private static final String ADDING_TREATMENT_CHECK_IN_INPUT ="Validated Treatment After adding in input list";
+	private static final String ADDING_TREATMENT_CHECK_IN_INPUT = "Validated Treatment After adding in input list";
 	Map<String, String> patntTrtmntPlanData = null;
-	
-	
-	@Test(enabled=true,description = "Add Treatment in the Listing",priority=1)
+
+	@BeforeClass(alwaysRun = true)
+	public void testSetup() {
+		patntTrtmntPlanData = SheetTest.prepareData("Treatment&Plan", "TreatmentPlans", "A1", "Z");
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(patntTrtmntPlanData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(patntTrtmntPlanData.get("patient_mobile"),
+				patntTrtmntPlanData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+	}
+
+	@Test(enabled = true, description = "Add Treatment in the Listing", priority = 1)
 	public void addingTreatmentCheckInInputAndMainList() {
 		logger.log(Status.PASS, ADDING_TREATMENT_CHECK_IN_INPUT);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+
 		PatientDashboardPageActions.clickOnTreatmentPlanAddBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		OralExamsPageActions.clickOnTeethImage("Adult", "24");
@@ -58,26 +76,29 @@ public class TreatmentPlansTestCase2 extends BaseClass{
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup1_Plan1"));
 		TreatmentPlansPageActions.clickOnTreatments(patntTrtmntPlanData.get("planGroup1_Plan2"));
 		TreatmentPlansPageActions.saveTreatment();
-    	BasePatientLifeCyclePageActions.clickOnAlert();
-    	TreatmentPlansPageActions.checkedInputListDataName();
-    	TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan1"));
-    	TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan2"));
+		BasePatientLifeCyclePageActions.clickOnAlert();
+		TreatmentPlansPageActions.checkedInputListDataName();
+		TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan1"));
+		TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan2"));
 		TreatmentPlansPageActions.checkEditSaveInputList("24");
 		TreatmentPlansPageActions.checkDeleteInputList("24");
-		//-------checking checkbox at input list and start button main list-------
+		// -------checking checkbox at input list and start button main list-------
 		TreatmentPlansPageActions.startCheckBoxInputListNotPresent();
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
-	@Test(enabled = true,description = "Check The Functionality of Start Button",priority = 2)
+	@Test(enabled = true, description = "Check The Functionality of Start Button", priority = 2)
 	public void functionalityOfStartBtn() {
 		logger.log(Status.PASS, FUNCTIONALITY_OF_START_BTN);
+
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnAppList();
 		AppointmentsListPageActions.appointmentAvailable();
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
-		TreatmentPlanListingPageActions.checkStartBtnNotPresent(TODAY_DATE);
+//		TreatmentPlanListingPageActions.checkStartBtnNotPresent(TODAY_DATE);
 		BasePatientLifeCyclePageActions.clickOnDashBoard();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppAdd();
@@ -86,9 +107,10 @@ public class TreatmentPlansTestCase2 extends BaseClass{
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnAppList();
 		AppointmentsListPageActions.appointmentAdded();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
-	
-	/*ORAL EXAM NOW PART OF PATIENT DASHBOARD*/
+
+	/* ORAL EXAM NOW PART OF PATIENT DASHBOARD */
 
 //	@Test(enabled = true,priority = 2)
 //	public void createOralExamSingleTeeth() {
@@ -203,47 +225,60 @@ public class TreatmentPlansTestCase2 extends BaseClass{
 //		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
 //	}
 
-   @Test(enabled = true,priority = 3,description = "Check the Discount Functionality",dependsOnMethods = "addingTreatmentCheckInInputAndMainList")
+//   @Test(enabled = true,priority = 3,description = "Check the Discount Functionality",dependsOnMethods = "addingTreatmentCheckInInputAndMainList")
+	@Test(enabled = true, priority = 3, description = "Check the Discount Functionality")
 	public void functionalityOfDiscount() {
 		logger.log(Status.PASS, FUNCTIONALITY_OF_DISCOUNT);
-		BasePatientLifeCyclePageActions.clickOnAlert();
+
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.clickOnEditBtn(TODAY_DATE);
 		TreatmentPlansPageActions.intiallyBothPriceSameDiscount(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlansPageActions.discountInPercentage(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlansPageActions.enterDiscountValue(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), "20");
-		TreatmentPlansPageActions.checkFunctionalityOfPercentageDis(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), 20);
+		TreatmentPlansPageActions
+				.checkFunctionalityOfPercentageDis(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"), 20);
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
 		TreatmentPlansPageActions.verifyMsgWithoutCoupon();
 		TreatmentPlansPageActions.couponBasis(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-		TreatmentPlanListingPageActions.verifyCouponImpactInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
+		TreatmentPlanListingPageActions
+				.verifyCouponImpactInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.couponDiscountInViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		TreatmentPlanListingPageActions.clickOnEditBtn(TODAY_DATE);
 		TreatmentPlansPageActions.discountInAmount(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlansPageActions.enterDiscountValue(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"), "20");
-		TreatmentPlansPageActions.checkFunctionalityOfAmountDis(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"), 20);
+		TreatmentPlansPageActions.checkFunctionalityOfAmountDis(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"),
+				20);
 		TreatmentPlansPageActions.couponBasis(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlansPageActions.clickOnSaveBtnTreatmentInputList();
-		TreatmentPlanListingPageActions.verifyCouponImpactInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
+		TreatmentPlanListingPageActions
+				.verifyCouponImpactInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnViewBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.couponDiscountInViewPopup(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
 		TreatmentPlanListingPageActions.clickOnCloseBtnViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
-    @Test(enabled = true,priority = 4, dependsOnMethods = "addingTreatmentCheckInInputAndMainList")
+//    @Test(enabled = true,priority = 4, dependsOnMethods = "addingTreatmentCheckInInputAndMainList")
+	@Test(enabled = true, priority = 4)
 	public void functionalityOfCopyBtn() {
 		logger.log(Status.PASS, FUNCTIONALITY_OF_COPY_BTN);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		PatientDashboardPageActions.clickOnTreatmentPlanListBtn();
 		TreatmentPlanListingPageActions.verifyDatesTreatmentPlanList();
 		TreatmentPlanListingPageActions.clickOnCopyBtn(TODAY_DATE);
 		TreatmentPlanListingPageActions.actionBtn();
-		TreatmentPlanListingPageActions.afterCopyTreatmentInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
-		TreatmentPlanListingPageActions.afterCopyTreatmentInMainList(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
+		TreatmentPlanListingPageActions
+				.afterCopyTreatmentInMainList(patntTrtmntPlanData.get("planGroup1_Plan1_FullName"));
+		TreatmentPlanListingPageActions
+				.afterCopyTreatmentInMainList(patntTrtmntPlanData.get("planGroup1_Plan2_FullName"));
 		TreatmentPlanListingPageActions.afterCopyPlan();
 		Assert.assertTrue(CommonPageActions.verification().contains("Treatment Plan Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 }

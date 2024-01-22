@@ -2,7 +2,6 @@ package pageActions.patientDashboard;
 
 import base.BaseClass;
 import pages.patientDashboard.CovidAppointmentNewUI;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -11,9 +10,7 @@ import org.testng.Assert;
 public class CovidAppointmentNewUIPageActions extends BaseClass {
     
 	static CovidAppointmentNewUI covidAppointmentNewUI = PageFactory.initElements(driver, CovidAppointmentNewUI.class);
-
-
-    
+	
     //Reusable function
     //closing the covid form modal
     public static void closeCovidForm() {
@@ -26,17 +23,45 @@ public class CovidAppointmentNewUIPageActions extends BaseClass {
             e.printStackTrace();
         }
     }
+    
+    public static void closeCovidFormPD() {
+        BaseClass.waitForPageLoad();
+        try {
+            BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getCancelCovidFormBtnPD());
+            covidAppointmentNewUI.getCancelCovidFormBtnPD().click();
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void saveCovidForm() {
         BaseClass.waitForPageLoad();
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getSaveCovidFormBtn());
         covidAppointmentNewUI.getSaveCovidFormBtn().click();
     }
+    
+    public static void saveCovidFormPD() {
+        BaseClass.waitForPageLoad();
+        BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getSaveCovidFormBtnPD());
+        covidAppointmentNewUI.getSaveCovidFormBtnPD().click();
+        BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForPageLoad();
+    }
 
     //checking patient name and patient id
     public static void patientNameCovidForm(String patient) {
+    	BaseClass.waitForPageLoad();
+    	BaseClass.waitForSpinnerToDisappear();
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getHeaderCovidForm());
         Assert.assertTrue(checkedWebElementDisplayed(covidAppointmentNewUI.getHeaderCovidForm()) && covidAppointmentNewUI.getPatientName().getText().contains(patient) && !(covidAppointmentNewUI.getPatientMobile().getText().contains("NA") || covidAppointmentNewUI.getPatientMobile().getText().contains("null")));
+    }
+    
+    public static void patientNameCovidFormPD(String patient) {
+    	BaseClass.waitForPageLoad();
+    	BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getHeaderCovidFormPD());
+        Assert.assertTrue(checkedWebElementDisplayed(covidAppointmentNewUI.getHeaderCovidFormPD()) && covidAppointmentNewUI.getPatientName().getText().contains(patient) && !(covidAppointmentNewUI.getPatientMobile().getText().contains("NA") || covidAppointmentNewUI.getPatientMobile().getText().contains("null")));
     }
 
     //checking action button
@@ -106,13 +131,13 @@ public class CovidAppointmentNewUIPageActions extends BaseClass {
         Assert.assertTrue(checkedWebElementDisplayed(covidAppointmentNewUI.getCovidQue_12()) && checkedWebElementDisplayed(covidAppointmentNewUI.getGreenBtnCovidQue_12()) && checkedWebElementDisplayed(covidAppointmentNewUI.getYellowBtnCovidQue_12()) && checkedWebElementDisplayed(covidAppointmentNewUI.getRedBtnCovidQue_12()));
     }
 
-    public void remarksTextFields() {
+    public static void remarksTextFields() {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getRemarksTextFields());
         Assert.assertTrue(checkedWebElementDisplayed(covidAppointmentNewUI.getRemarksTextFields()) && checkedWebElementDisplayed(covidAppointmentNewUI.getMaxCarMsg()));
     }
 
     //selecting the options
-    public void yesOption(int count) {
+    public static void yesOption(int count) {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getYesBtnCovidQue_2());
         switch (count) {
             case 3:
@@ -172,7 +197,7 @@ public class CovidAppointmentNewUIPageActions extends BaseClass {
         }
     }
 
-    public void noOptionSelected(int count) {
+    public static void noOptionSelected(int count) {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getNoBtnCovidQue_2());
         switch (count) {
             case 2:
@@ -229,7 +254,7 @@ public class CovidAppointmentNewUIPageActions extends BaseClass {
         }
     }
 
-    public void selectedFirstQuestion(String symptoms) {
+    public static void selectedFirstQuestion(String symptoms) {
         BaseClass.waitForPageLoad();
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getHighFever());
         switch (symptoms) {
@@ -255,37 +280,38 @@ public class CovidAppointmentNewUIPageActions extends BaseClass {
         Assert.assertTrue(covidAppointmentNewUI.getLowProbability().getAttribute("class").contains("active"));
     }
 
-    public void patientTemperature() {
+    public static void patientTemperature() {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_10());
         String temperature = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;", covidAppointmentNewUI.getTextFieldsCovidQue_10());
         Assert.assertTrue(temperature.isEmpty());
     }
 
-    public void patientOximeter() {
+    public static void patientOximeter() {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_11());
         String oximeter = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;", covidAppointmentNewUI.getTextFieldsCovidQue_11());
         Assert.assertTrue(oximeter.isEmpty());
     }
 
-    public void setPatientTemperature(String temperature) {
+    public static void setPatientTemperature(String temperature) {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_10());
         covidAppointmentNewUI.getTextFieldsCovidQue_10().clear();
         covidAppointmentNewUI.getTextFieldsCovidQue_10().sendKeys(temperature);
     }
 
-    public void setPatientOximeter(String oximeter) {
+    public static void setPatientOximeter(String oximeter) {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_11());
         covidAppointmentNewUI.getTextFieldsCovidQue_11().clear();
         covidAppointmentNewUI.getTextFieldsCovidQue_11().sendKeys(oximeter);
     }
 
-    public void checkPatientTemperature(String temp) {
+    public static void checkPatientTemperature(String temp) {
+    	BaseClass.waitForSpinnerToDisappear();
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_10());
         String temperature = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;", covidAppointmentNewUI.getTextFieldsCovidQue_10());
         Assert.assertEquals(temperature, temp);
     }
 
-    public void checkPatientOximeter(String oximeter) {
+    public static void checkPatientOximeter(String oximeter) {
         BaseClass.waitForElementToBeClickable(covidAppointmentNewUI.getTextFieldsCovidQue_11());
         String ximeterLevel = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;", covidAppointmentNewUI.getTextFieldsCovidQue_11());
         Assert.assertEquals(ximeterLevel, oximeter);

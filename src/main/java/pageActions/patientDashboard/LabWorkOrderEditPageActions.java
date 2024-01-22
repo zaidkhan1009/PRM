@@ -2,7 +2,6 @@ package pageActions.patientDashboard;
 
 import java.awt.AWTException;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;

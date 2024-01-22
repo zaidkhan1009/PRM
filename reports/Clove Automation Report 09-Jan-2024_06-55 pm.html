@@ -35,7 +35,11 @@
 <a href="#"><span class="badge badge-primary"></span></a>
 </li>
 <li class="m-r-10">
+<<<<<<< HEAD
 <a href="#"><span class="badge badge-primary">Jan 9, 2024 06:55:43 pm</span></a>
+=======
+<a href="#"><span class="badge badge-primary">Jan 9, 2024 06:55:53 pm</span></a>
+>>>>>>> origin/shrey
 </li>
 </ul>
 </div>
@@ -87,7 +91,11 @@
           <div class="test-detail">
             <p class="name">Test</p>
             <p class="text-sm">
+<<<<<<< HEAD
               <span>6:55:44 pm</span> / <span>00:00:00:000</span>
+=======
+              <span>6:55:53 pm</span> / <span>00:00:16:165</span>
+>>>>>>> origin/shrey
               <span class="badge pass-bg log float-right">Pass</span>
             </p>
           </div>
@@ -96,25 +104,55 @@
 <div class="p-v-10">
 <div class="info">
 <h5 class="test-status text-pass">Test</h5>
+<<<<<<< HEAD
 <span class='badge badge-success'>01.09.2024 6:55:44 pm</span>
 <span class='badge badge-danger'>01.09.2024 6:55:44 pm</span>
 <span class='badge badge-default'>00:00:00:000</span>
+=======
+<span class='badge badge-success'>01.09.2024 6:55:53 pm</span>
+<span class='badge badge-danger'>01.09.2024 6:56:10 pm</span>
+<span class='badge badge-default'>00:00:16:165</span>
+>>>>>>> origin/shrey
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
 </div>
 </div>
+<<<<<<< HEAD
 </div>          </div>
+=======
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:56:10 pm</td>
+        <td>
+          @@ Test scripts has been started here @@
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+>>>>>>> origin/shrey
         </li>
         <li class="test-item"  status="fail" test-id="2"
           author=""
           tag=""
           device="">
           <div class="test-detail">
+<<<<<<< HEAD
             <p class="name">campSubsAddPage</p>
             <p class="text-sm">
               <span>6:56:01 pm</span> / <span>00:00:07:924</span>
+=======
+            <p class="name">collectPayment</p>
+            <p class="text-sm">
+              <span>6:56:10 pm</span> / <span>00:01:03:084</span>
+>>>>>>> origin/shrey
               <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
@@ -122,10 +160,17 @@
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
+<<<<<<< HEAD
 <h5 class="test-status text-fail">campSubsAddPage</h5>
 <span class='badge badge-success'>01.09.2024 6:56:01 pm</span>
 <span class='badge badge-danger'>01.09.2024 6:56:09 pm</span>
 <span class='badge badge-default'>00:00:07:924</span>
+=======
+<h5 class="test-status text-fail">collectPayment</h5>
+<span class='badge badge-success'>01.09.2024 6:56:10 pm</span>
+<span class='badge badge-danger'>01.09.2024 6:57:13 pm</span>
+<span class='badge badge-default'>00:01:03:084</span>
+>>>>>>> origin/shrey
 &middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
@@ -138,13 +183,18 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log fail-bg">Fail</span></td>
+<<<<<<< HEAD
         <td>6:56:09 pm</td>
+=======
+        <td>6:57:13 pm</td>
+>>>>>>> origin/shrey
         <td>
           Test Failed
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log fail-bg">Fail</span></td>
+<<<<<<< HEAD
         <td>6:56:09 pm</td>
         <td>
           <textarea readonly class="code-block">java.lang.Error: Unresolved compilation problem: 
@@ -153,6 +203,20 @@
 	at pages.patientDashboard.CampSubscriberPage.getFindingsBox(CampSubscriberPage.java:412)
 	at pageActions.patientDashboard.CampSubscriberPageActions.findingBox(CampSubscriberPageActions.java:365)
 	at tests.CampSubscriberTestCase.campSubsAddPage(CampSubscriberTestCase.java:110)
+=======
+        <td>6:57:13 pm</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: expected [7820] but found [330]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:980)
+	at org.testng.Assert.assertEquals(Assert.java:956)
+	at org.testng.Assert.assertEquals(Assert.java:990)
+	at pageActions.patientDashboard.ReceiptListingPageActions.checkTotalAdvance(ReceiptListingPageActions.java:120)
+	at tests.NewReceiptTestCase.collectPayment(NewReceiptTestCase.java:215)
+>>>>>>> origin/shrey
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -212,12 +276,20 @@
 <span class="meta">
 <span class='badge log badge-danger'>1</span>
 </span>
+<<<<<<< HEAD
 <p class="name">java.lang.Error</p>
+=======
+<p class="name">java.lang.AssertionError</p>
+>>>>>>> origin/shrey
 <p class="duration text-sm">1 tests</p>
 </div>
 <div class="test-contents d-none">
 <div class="info">
+<<<<<<< HEAD
 <h4>java.lang.Error</h4>
+=======
+<h4>java.lang.AssertionError</h4>
+>>>>>>> origin/shrey
 <span status="fail" class='badge log badge-danger'>1 failed</span>
 </div>
 <table class='table table-sm mt-4'>
@@ -231,9 +303,15 @@
 <tbody>
 <tr class="tag-test-status" status="fail">
 <td><span class="badge log fail-bg">Fail</span></td>
+<<<<<<< HEAD
 <td>18:56:01 pm</td>
 <td>
 <a href="#" class="linked" test-id='2' id='2'>campSubsAddPage</a>
+=======
+<td>18:56:10 pm</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>collectPayment</a>
+>>>>>>> origin/shrey
 </td>
 </tr>
 </tbody>
@@ -253,13 +331,21 @@
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
+<<<<<<< HEAD
 <h3>Jan 9, 2024 06:55:43 pm</h3>
+=======
+<h3>Jan 9, 2024 06:55:53 pm</h3>
+>>>>>>> origin/shrey
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
+<<<<<<< HEAD
 <h3>Jan 9, 2024 06:56:09 pm</h3>
+=======
+<h3>Jan 9, 2024 06:57:13 pm</h3>
+>>>>>>> origin/shrey
 </div></div>
 </div>
 <div class="col-md-3">
@@ -310,9 +396,15 @@
 </div>
 </div>
 <div class="card-footer">
+<<<<<<< HEAD
 <div><small data-tooltip='0%'><b>0</b> events passed</small></div>
 <div>
 <small data-tooltip='100%'><b>2</b> events failed,
+=======
+<div><small data-tooltip='33%'><b>1</b> events passed</small></div>
+<div>
+<small data-tooltip='66%'><b>2</b> events failed,
+>>>>>>> origin/shrey
 <b data-tooltip='%'>0</b> others
 </small>
 </div>
@@ -329,7 +421,11 @@
 </div></div>
 <script>
 var timeline = {
+<<<<<<< HEAD
 "Test":0,"campSubsAddPage":7.924
+=======
+"Test":16.165,"collectPayment":63.084
+>>>>>>> origin/shrey
 };
 </script>
 <div class="row">
@@ -373,7 +469,11 @@ warningGrandChild: 0,
 skipGrandChild: 0,
 infoGrandChild: 0,
 eventsCount: 5,
+<<<<<<< HEAD
 passEvents: 0,
+=======
+passEvents: 1,
+>>>>>>> origin/shrey
 failEvents: 2,
 warningEvents: 0,
 skipEvents: 0,

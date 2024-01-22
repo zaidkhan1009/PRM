@@ -106,6 +106,5 @@ public class DoctorDashBoardPage {
 	}
 	public WebElement getCampSubscriberListing() {
 		return campSubscriberListing;
-	} 
-
+	}
 }

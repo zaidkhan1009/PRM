@@ -7,6 +7,7 @@ import org.testng.Assert;
 import base.BaseClass;
 import pages.patientDashboard.DiagnosticListingPage;
 import utils.TestData;
+
 public class DiagnosticListingPageActions extends BaseClass {
 	
 	static DiagnosticListingPage diagnosticListingPage = PageFactory.initElements(driver, DiagnosticListingPage.class);

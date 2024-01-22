@@ -4,10 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import base.BaseClass;
 import pages.patientDashboard.OralExamsPage;
-
 import java.util.List;
 
 /**
@@ -595,7 +593,6 @@ public class OralExamsPageActions extends BaseClass {
 		oralExamsPage.getTMJointOnPopup().click();
 	}
 
-
 	public static void clickOnHardTissueInPopup() {
 		BaseClass.waitForElementVisibility(oralExamsPage.getHardTissueOnPopUp(),4000);
 		BaseClass.waitForModalOverlayToDisappear();
@@ -646,6 +643,8 @@ public class OralExamsPageActions extends BaseClass {
 		driver.findElement(By.xpath("//*[text()='New Teeth']")).click();
 		
 		if (toothType.equals("Adult")) {
+			BaseClass.waitForElementToBeClickable(oralExamsPage.getAdult());
+			BaseClass.waitForModalOverlayToDisappear();
 			driver.findElement(By.xpath("//div[@id='adult']//span[contains(@class,'" + toothNO + "')]")).click();
 		} else if (toothType.equals("Pedo")) {
 			oralExamsPage.getPedo().click();

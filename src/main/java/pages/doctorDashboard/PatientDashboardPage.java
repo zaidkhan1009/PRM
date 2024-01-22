@@ -11,8 +11,13 @@ import java.util.List;
  *
  */
 public class PatientDashboardPage {
-
-
+	@FindBy(xpath = "//h4[text()='Covid-19 Declaration']")
+	private WebElement headerCovidForm;
+	
+	public WebElement getHeaderCovidForm() {
+		return headerCovidForm;
+	}
+	
 	@FindBy(id = "patientDasbboardALId")
 	private WebElement appOnPdList;
 	@FindBy(xpath = "//div[@id='profileview']//button[@class='close']")

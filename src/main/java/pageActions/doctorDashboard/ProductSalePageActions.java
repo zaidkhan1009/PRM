@@ -1,7 +1,6 @@
 package pageActions.doctorDashboard;
 
 import com.aventstack.extentreports.Status;
-
 import base.BaseClass;
 import pages.doctorDashboard.Login;
 import pages.doctorDashboard.ProductSalePage;
@@ -13,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -296,49 +294,35 @@ public class ProductSalePageActions extends BaseClass {
 	}
 
 	public static boolean verifyProductListingData() {
+		BaseClass.waitTillInvisiblityOfElement(productSalePage.getLoader());
+		boolean isAllDetailsCorrectOnListing = false;
+		BaseClass.visibilityOfListLocated(productSalePage.getListOfProduct());
+		for (int i = 0; i < productSalePage.getListOfProduct().size(); i++) {
+			String name = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//div[@class='product-info']/h5")).getText().trim();
+			String companyName = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//div[@class='company_name ng-binding ng-scope']")).getText().trim();
+			String price = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//span[contains(@class,'discounted_price ng-binding')]")).getText().trim();
+			WebElement defaultQtyCount = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//span[contains(@class,'product-quantity ng-binding')]"));
+			WebElement addedQtySign = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//span[contains(@class,'qtyBtns pos')]"));
+			WebElement removeQtySign = productSalePage.getListOfProduct().get(i)
+					.findElement(By.xpath("//span[contains(@class,'qtyBtns neg disabled')]"));
 
-		
-			boolean isAllDetailsCorrectOnListing = false;
-			try {
-			WebElement noRecFound = driver.findElement(By.xpath("//i[text()='No Product Found!']"));
-			boolean checkNoRecords = noRecFound.isDisplayed();
-			if (checkNoRecords) {
-				isAllDetailsCorrectOnListing=true;
-			} else {
-				BaseClass.waitTillInvisiblityOfElement(productSalePage.getLoader());
-				
-				BaseClass.visibilityOfListLocated(productSalePage.getListOfProduct());
-				for (int i = 0; i < productSalePage.getListOfProduct().size(); i++) {
-					String name = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//div[@class='product-info']/h5")).getText().trim();
-					String companyName = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//div[@class='company_name ng-binding ng-scope']")).getText().trim();
-					String price = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//span[contains(@class,'discounted_price ng-binding')]")).getText()
-							.trim();
-					WebElement defaultQtyCount = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//span[contains(@class,'product-quantity ng-binding')]"));
-					WebElement addedQtySign = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//span[contains(@class,'qtyBtns pos')]"));
-					WebElement removeQtySign = productSalePage.getListOfProduct().get(i)
-							.findElement(By.xpath("//span[contains(@class,'qtyBtns neg disabled')]"));
+			boolean isNameDisplayed = !(name.equalsIgnoreCase("NA") || name.equalsIgnoreCase("Null"));
+			boolean isCompanyNameDisplayed = !(companyName.equalsIgnoreCase("NA")
+					|| companyName.equalsIgnoreCase("Null"));
+			boolean isPriceDisplayed = !(price.equalsIgnoreCase("NA") || price.equalsIgnoreCase("NUll"));
+			boolean isAddedQtySignDisplayed = addedQtySign.isDisplayed();
+			boolean isRemoveQtySignDisplayed = removeQtySign.isDisplayed();
+			boolean defaultQtyCountDisplayedIsZero = Integer.valueOf(defaultQtyCount.getText()) == 0;
 
-					boolean isNameDisplayed = !(name.equalsIgnoreCase("NA") || name.equalsIgnoreCase("Null"));
-					boolean isCompanyNameDisplayed = !(companyName.equalsIgnoreCase("NA")
-							|| companyName.equalsIgnoreCase("Null"));
-					boolean isPriceDisplayed = !(price.equalsIgnoreCase("NA") || price.equalsIgnoreCase("NUll"));
-					boolean isAddedQtySignDisplayed = addedQtySign.isDisplayed();
-					boolean isRemoveQtySignDisplayed = removeQtySign.isDisplayed();
-					boolean defaultQtyCountDisplayedIsZero = Integer.valueOf(defaultQtyCount.getText()) == 0;
-
-					isAllDetailsCorrectOnListing = isNameDisplayed && isCompanyNameDisplayed && isPriceDisplayed
-							&& isAddedQtySignDisplayed && isRemoveQtySignDisplayed && defaultQtyCountDisplayedIsZero;
-				}
-			}
-
-		} catch (NoSuchElementException e) {
-			System.out.println("No records found on Products list");
+			isAllDetailsCorrectOnListing = isNameDisplayed && isCompanyNameDisplayed && isPriceDisplayed
+					&& isAddedQtySignDisplayed && isRemoveQtySignDisplayed && defaultQtyCountDisplayedIsZero;
 		}
+
 		return isAllDetailsCorrectOnListing;
 	}
 
@@ -1065,5 +1049,4 @@ public class ProductSalePageActions extends BaseClass {
 			throw new RuntimeException(e);
 		}
 	}
-
 }

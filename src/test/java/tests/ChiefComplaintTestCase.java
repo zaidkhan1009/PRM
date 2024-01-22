@@ -10,12 +10,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.Status;
-
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
 import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
+import pageActions.doctorDashboard.CommonPageActions;
+import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pageActions.patientDashboard.AppointmentsListPageActions;
 import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
@@ -56,6 +57,19 @@ public class ChiefComplaintTestCase extends BaseClass {
 	 * dashboard verified patients will redirect at the patient dashboard
 	 */
 
+	@BeforeClass(alwaysRun = true)
+    public void testSetup() {
+		patntChiefCmplntData = SheetTest.prepareData("ChiefComplaint", "PatientChiefComplaint", "A2", "H2");
+		CommonPageActions.selectClinicFrmHeader("Hinjewadi");
+		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		CommonPageActions.enterMobileNo(patntChiefCmplntData.get("patient_mobile"));
+		CommonPageActions.clickOnSearchBtn();
+		AppointmentsLisitngPageActions.clickOnLastPagePatientListing();
+
+		CommonPageActions.clickOnPatient(patntChiefCmplntData.get("patient_mobile"), patntChiefCmplntData.get("patient_name"));
+		PatientDashboardPageActions.hideDueWarningPopup();
+	}
+
 	
 	@Test(groups = {
 			"Regression" }, enabled = true, description = "Verify Chief Complaint Listing & Elements", priority = 1)
@@ -65,24 +79,28 @@ public class ChiefComplaintTestCase extends BaseClass {
 		BasePatientLifeCyclePageActions.headerOnListPage("Chief Complaint Listing");
 		BasePatientLifeCyclePageActions.verifyPatientName(patntChiefCmplntData.get("patient_name"));
 		BasePatientLifeCyclePageActions.verifyAddNewBtn();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
+
 //	ChiefComplaintListingPageActions.verifyNoRecordFoundMessage();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
-//	BasePatientLifeCyclePageActions.clickOnAlert();
+		BasePatientLifeCyclePageActions.clickOnAlert();
 		BasePatientLifeCyclePageActions.headerOnAddPage("Chief Complaints");
 		BasePatientLifeCyclePageActions.verifyPatientName(patntChiefCmplntData.get("patient_name"));
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		BasePatientLifeCyclePageActions.webElementOfLeftNavigator();
 		BasePatientLifeCyclePageActions.openCloseLeftNavigator();
 		ChiefComplaintAddPageActions.VerifyChiefCompliantBoxes();
-		BasePatientLifeCyclePageActions.dashBoardBtnVerify();
+		BasePatientLifeCyclePageActions.commonDashBoardBtnVerify();
 		ChiefComplaintAddPageActions.verifyOralExamBtn();
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaints"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 //	/*adding chief complaints for the patient without having chief complaints at the same day
@@ -93,11 +111,15 @@ public class ChiefComplaintTestCase extends BaseClass {
 			"Regression" }, enabled = true, description = "Add Verify & Delete Chief Complaint without Appointment", priority = 2)
 	public void addCCWithoutAppSameDay() {
 		logger.log(Status.PASS, ADD_CCWITHOUT_APP_SAME_DAY);
+		PatientDashboardPageActions.hideDueWarningPopup();
+
 		PatientDashboardPageActions.clickOnAppList();
 		AppointmentsListPageActions.appointmentAvailable();
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
+		ChiefComplaintAddPageActions.verifyOralExamBtn();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		ChiefComplaintAddPageActions.clickOnChiefComplaint("Bleeding Gums");
 		ChiefComplaintAddPageActions.chiefComplaintAddSuccessMsg();
@@ -109,7 +131,9 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintAddPageActions.actionBtnInputList("Bleeding Gums");
 		ChiefComplaintAddPageActions.clickOnDeleteBtn("Bleeding Gums");
 		ChiefComplaintAddPageActions.deletedChiefComplaintInInputList("Bleeding Gums");
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -119,6 +143,8 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.deletedChiefComplaintInView("Bleeding Gums");
 		ChiefComplaintListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 	/*
@@ -130,16 +156,18 @@ public class ChiefComplaintTestCase extends BaseClass {
 			"Regression" }, enabled = true, description = "Book Appointment With Chief Complaint", priority = 3)
 	public void appointmentWithOutChiefComplaintImpactInChiefComplaintList() {
 		logger.log(Status.PASS, APPOINTMENT_WITH_OUT_CHIEF_COMPLAINT_IMPACT_IN_CHIEF_COMPLAINT_LIST);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnAppAdd();
 		AppointmentAddPageActions.selectDoctorFromDropdown(patntChiefCmplntData.get("doctor"));
 		AppointmentAddPageActions.selectReferralFromDropdown("Patient");
 		AppointmentAddPageActions.enterReferralDetails("self");
-		AppointmentAddPageActions.clickOnChiefComplaints("Tooth Decay");
+		AppointmentAddPageActions.clickOnChiefComplaints("Pain");
 		AppointmentAddPageActions.clickOnSaveBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		ChiefComplaintListingPageActions.chiefComplaintInMainList("Tooth Decay");
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+        BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 //	/*checked chief complaints add and chief complaint listing page default screen
@@ -149,7 +177,9 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Sanity", "Functional", "Regression" }, enabled = true, priority = 4)
 	public void ChiefComplaintAddPageActions() {
 		logger.log(Status.PASS, CHIEF_COMPLAINT_ADD_PAGE_FIRST_TIME);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
+		ChiefComplaintAddPageActions.verifyOralExamBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		ChiefComplaintAddPageActions.clickOnChiefComplaint("Discolored Tooth");
 		ChiefComplaintAddPageActions.chiefComplaintAddSuccessMsg();
@@ -159,7 +189,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintAddPageActions.periodsBehaviour("Discolored Tooth", 0, 0, "NA");
 		ChiefComplaintAddPageActions.notesInputList("Discolored Tooth", "NA");
 		ChiefComplaintAddPageActions.actionBtnInputList("Discolored Tooth");
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -169,8 +199,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.locationMainList("Discolored Tooth", "NA");
 		ChiefComplaintListingPageActions.intensityMainList("Discolored Tooth", "NA");
 		ChiefComplaintListingPageActions.periodsInMainList("Discolored Tooth", 0, 0, "NA");
-		ChiefComplaintListingPageActions.chiefComplaintcreatedBy("Discolored Tooth",
-				patntChiefCmplntData.get("doctorNickName"));
+		ChiefComplaintListingPageActions.chiefComplaintcreatedBy("Discolored Tooth",patntChiefCmplntData.get("doctorNickName"));
 		ChiefComplaintListingPageActions.notesMainList("Discolored Tooth", "NA");
 		BasePatientLifeCyclePageActions.clickViewBtn(patntChiefCmplntData.get("clinicLocation"));
 		ChiefComplaintListingPageActions.verifyDateInView();
@@ -184,6 +213,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.notesInView("Discolored Tooth", "NA");
 		ChiefComplaintListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 //	/*checked the all webelement of the popup of the pain,Sensitivity and other
@@ -195,7 +225,9 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Functional", "Regression" }, enabled = true, priority = 5)
 	public void painPopupElementAndBehaviour() {
 		logger.log(Status.PASS, PAIN_POPUP_ELEMENT_AND_BEHAVIOUR);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
+		ChiefComplaintAddPageActions.verifyOralExamBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		ChiefComplaintAddPageActions.clickOnChiefComplaint("Pain");
 		ChiefComplaintAddPageActions.checkedPopupElement();
@@ -216,7 +248,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintAddPageActions.periodsBehaviour("Pain", 4, 12, "Value");
 		ChiefComplaintAddPageActions.notesInputList("Pain", "notes testing");
 		ChiefComplaintAddPageActions.actionBtnInputList("Pain");
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -240,6 +272,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.notesInView("Pain", "notes testing");
 		ChiefComplaintListingPageActions.closeViewPopup();
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
 
 	/*
@@ -255,7 +288,9 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Functional", "Regression" }, enabled = true, priority = 6)
 	public void VerifyDeleteBTnCCAddPage() {
 		logger.log(Status.PASS, VERIFY_DELETE_BTN_CCADD_PAGE);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnChiefComplaintAddBtn();
+		ChiefComplaintAddPageActions.verifyOralExamBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		ChiefComplaintAddPageActions.clickOnChiefComplaint("Plaque");
 		ChiefComplaintAddPageActions.chiefComplaintAddSuccessMsg();
@@ -265,7 +300,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintAddPageActions.periodsBehaviour("Plaque", 0, 0, "NA");
 		ChiefComplaintAddPageActions.notesInputList("Plaque", "NA");
 		ChiefComplaintAddPageActions.actionBtnInputList("Plaque");
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -277,8 +312,9 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.periodsInMainList("Plaque", 0, 0, "NA");
 		ChiefComplaintListingPageActions.notesMainList("Plaque", "NA");
 		BasePatientLifeCyclePageActions.clickEditBtn(patntChiefCmplntData.get("clinicLocation"));
+		ChiefComplaintAddPageActions.verifyOralExamBtn();
 		BasePatientLifeCyclePageActions.clickOnAlert();
-		ChiefComplaintAddPageActions.actionBtnInputList("Plaque");
+		ChiefComplaintAddPageActions.actionBtnInputList("Plaque");	
 		ChiefComplaintAddPageActions.clickEditInInputList("Plaque");
 		ChiefComplaintAddPageActions.chiefComplaintsInputEdit("Plaque");
 		ChiefComplaintAddPageActions.cancelInputListEdit("Plaque");
@@ -288,7 +324,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintAddPageActions.saveInputListEdit("Plaque");
 		ChiefComplaintAddPageActions.actionBtnInputList("Plaque");
 		ChiefComplaintAddPageActions.notesInputList("Plaque", "notes testing");
-		BasePatientLifeCyclePageActions.clickOnDashBoard();
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		PatientDashboardPageActions.clickOnChiefComplaintlistBtn();
 		BasePatientLifeCyclePageActions.verifyDates();
@@ -300,6 +336,8 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.periodsInMainList("Plaque", 0, 0, "NA");
 		ChiefComplaintListingPageActions.notesMainList("Plaque", "notes testing");
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
+
 	}
 
 //	/*added chief complaints in other clinic by adding Appointment with a chief complaints
@@ -308,6 +346,7 @@ public class ChiefComplaintTestCase extends BaseClass {
 	@Test(groups = { "Functional", "Regression" }, enabled = true, priority = 7)
 	public void chiefComplaintByClinicWise() {
 		logger.log(Status.PASS, CHIEF_COMPLAINT_BY_CLINIC_WISE);
+		PatientDashboardPageActions.hideDueWarningPopup();
 		PatientDashboardPageActions.clickOnAppAdd();
 		AppointmentAddPageActions
 				.selectClinicFromDropdown(TestData.getInstance().getInputData("chief_complaint_another_clinic_name"));
@@ -325,6 +364,6 @@ public class ChiefComplaintTestCase extends BaseClass {
 		ChiefComplaintListingPageActions.periodsInMainList("Discolored Tooth", 0, 0, "NA");
 		ChiefComplaintListingPageActions.notesMainList("Discolored Tooth", "NA");
 		Assert.assertTrue(CommonPageActions.verification().contains("Chief Complaint Listing"));
+		BasePatientLifeCyclePageActions.clickOnDashBoardCommon();
 	}
-
 }

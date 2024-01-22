@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Patient Registration">
+<<<<<<< HEAD
 	<listeners>
 		<listener class-name="utils.ExtentReportListener" />
 	</listeners>
@@ -9,6 +10,13 @@
 			<class name="tests.PatientRegistrationTestCase">
 				<methods>
 					<include name="createNewPatient" />
+=======
+	<test name="Test">
+		<classes>
+			<class name="tests.WorksDoneTestCase">
+				<methods>
+					<include name="checkedWorkDoneAddAndHistoryNoTreatment" />
+>>>>>>> origin/shrey
 				</methods>
 			</class>
 		</classes>

@@ -7,6 +7,7 @@
   <test thread-count="5" name="Test(failed)">
     <classes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <class name="tests.DiagnosticTestsTestCase">
         <methods>
           <include name="configReport"/>
@@ -26,6 +27,18 @@
         </methods>
       </class> <!-- tests.EventTestCase -->
 >>>>>>> umar
+=======
+      <class name="tests.TreatmentPlansTestCase1">
+        <methods>
+          <include name="configReport"/>
+          <include name="checkOnWorkDonePageAfterTreatmentStart"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="testSetup"/>
+          <include name="verifyDeleteInTreatmentList"/>
+        </methods>
+      </class> <!-- tests.TreatmentPlansTestCase1 -->
+>>>>>>> origin/shrey
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

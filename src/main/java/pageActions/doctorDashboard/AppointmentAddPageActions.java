@@ -11,13 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import com.aventstack.extentreports.Status;
-
 import base.BaseClass;
 import pages.doctorDashboard.AppointmentAddPage;
 import pages.doctorDashboard.Login;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -194,6 +191,7 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void covidStatusUpdate() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getCovidUpdateSuccessMsg());
 		Assert.assertTrue(checkWebElementDisplayed(appointmentPage.getCovidUpdateSuccessMsg()));
 	}
@@ -202,6 +200,7 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getGreenCovidPatient());
 		Assert.assertTrue(checkWebElementDisplayed(appointmentPage.getGreenCovidPatient()));
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 	public static void patientCovidRed() {
@@ -211,6 +210,7 @@ public class AppointmentAddPageActions extends BaseClass {
 	}
 
 	public static void openCovidForm() {
+		BaseClass.waitForModalOverlayToDisappear();
 		try {
 			BaseClass.waitForElementToBeClickable(appointmentPage.getCovidFormBtn());
 			appointmentPage.getCovidFormBtn().click();
@@ -258,6 +258,13 @@ public class AppointmentAddPageActions extends BaseClass {
 		} catch(NoSuchElementException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void covidAlertMsgRedAutoSuggestion() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(appointmentPage.getCovidFlagAlertMsg());
+		Assert.assertTrue(appointmentPage.getCovidFlagAlertMsg().getText()
+				.contains("Appointment Booking is blocked for"));
 	}
 
 	public static void verifyTentativeAfterClickOnEditBtn() {
@@ -529,23 +536,49 @@ public class AppointmentAddPageActions extends BaseClass {
 	}
 
 	public static void selectDoctorFromDropdown(String doctorName) {
-		BaseClass.waitForSpinnerToDisappear(); 
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.WaitTillElementIsPresent(appointmentPage.getDoctor());
+		
+		//test block to handle the overlay element
+		
 		try {
-		BaseClass.waitForModalOverlayToDisappear();
-		appointmentPage.getDoctor().click();
-		BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), doctorName.trim());
+		
+		boolean isElementPresent = 
+				(driver.findElements(By.xpath("//div[contains(@class='ui-widget-overlay')]")).size()>0);
+		
+		if(isElementPresent)
+		{
+			BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
+		}
+
 		}
 		
-		catch (InvalidSelectorException e) {
+		catch(InvalidSelectorException e) {
 			
+			Robot robot = null;
 			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e1) {
+				robot = new Robot();
+			} catch (AWTException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			robot.keyPress(KeyEvent.VK_TAB);
+			
+			
 		}
+		
+		//commenting the below to handle it in above block
+		
+		//BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
+
+
+//        try {
+//			Thread.sleep(4000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+		appointmentPage.getDoctor().click();
+		BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), doctorName.trim());
 	}
 
 	public static void doctorSelected(String doctor_selected) {
@@ -628,17 +661,6 @@ public class AppointmentAddPageActions extends BaseClass {
 		return time;
 	}
 
-//    public void selectTimeSlotFromDropdown(String timeslt) {
-//        BaseClass.waitForPageLoad();
-//        loginPage.WaitTillElementIsPresent(appointmentPage.getTimeSlot());
-//        try {
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//        loginPage.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), timeslt);
-//    }
-
 	public static void enterNote(String note) {
 		BaseClass.waitForPageLoad();
 		appointmentPage.getNotes().clear();
@@ -696,21 +718,14 @@ public class AppointmentAddPageActions extends BaseClass {
 		appointmentPage.getSaveBtn().click();
 		BaseClass.waitForPageToBecomeActive();
 //        loginPage.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
-	}
+		BaseClass.waitForElementToDisappear(By.xpath("//div[text()='Patient Covid-19 Declaration saved successfully!']"));
+		BaseClass.waitForElementToBeClickable(appointmentPage.getSaveBtn());
+		appointmentPage.getSaveBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
+//		BaseClass.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
 
-//    public void clickOnSaveBtn() {
-//    	BaseClass.waitForSpinnerToDisappear();
-//        loginPage.WaitTillElementIsPresent(appointmentPage.getSaveBtn());
-//        appointmentPage.getSaveBtn().click();
-//        loginPage.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
-//        try {
-//            Thread.sleep(4000);
-//            appointmentPage.getSaveBtn().click();
-//            Thread.sleep(4000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
+	}
 
 	public static void clickOnCancelBtn() {
 		BaseClass.waitForSpinnerToDisappear();
@@ -721,8 +736,9 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void clickOnAppResetBtn() {
 		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForModalOverlayToDisappear();
+//    	loginPage.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
 		BaseClass.waitForElementToBeClickable(appointmentPage.getAppResetBtn());
+//        loginPage.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		appointmentPage.getAppResetBtn().click();
 	}
 
@@ -981,7 +997,6 @@ public class AppointmentAddPageActions extends BaseClass {
 	}
 
 	public static void clickOnLastPagePatientListing() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }

@@ -3,7 +3,6 @@ package pageActions.doctorDashboard;
 import base.BaseClass;
 import pages.doctorDashboard.Login;
 import pages.doctorDashboard.SubscriberListingPage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -72,6 +71,7 @@ public class SubscriberListingPageActions extends BaseClass {
         BaseClass.waitForElementToBeClickable(subscriberListingPage.getAssignee());
         Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getAssignee()));
 //        &&BaseClass.firstSelectedOption(subscriberListingPage.getAssignee()).contains(firstOption)
+        Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getAssignee())&&BaseClass.firstSelectedOption(subscriberListingPage.getAssignee()).contains(firstOption));
     }
     public static void stageDropDown(String firstOption){
         BaseClass.waitForPageLoad();
@@ -97,6 +97,8 @@ public class SubscriberListingPageActions extends BaseClass {
         BaseClass.waitForSpinnerToDisappear();
         BaseClass.waitForElementToBeClickable(subscriberListingPage.getStageRbtn());
         Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getStageRbtn())&&checkedWebElementDisplayed(subscriberListingPage.getCreatedRbtn())&&checkedWebElementDisplayed(subscriberListingPage.getUpdatedRbtn()));
+        BaseClass.waitForElementToBeClickable(subscriberListingPage.getStageRbtn());
+        Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getStageRbtn())&&checkedWebElementDisplayed(subscriberListingPage.getStageRbtn())&&checkedWebElementDisplayed(subscriberListingPage.getUpdatedRbtn()));
     }
     public static void searchBtn(){
         BaseClass.waitForPageLoad();
@@ -132,11 +134,13 @@ public class SubscriberListingPageActions extends BaseClass {
         BaseClass.waitForElementToBeClickable(subscriberListingPage.getSource());
         Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getSource())&&BaseClass.firstSelectedOption(subscriberListingPage.getSource()).contains(firstOption));
     }
+
     public static void sourceDropDown(){
         BaseClass.waitForPageLoad();
         BaseClass.waitForElementToBeClickable(subscriberListingPage.getSource());
         Assert.assertTrue(checkedWebElementDisplayed(subscriberListingPage.getSource()));
         }
+
     public static void subSource(){
         BaseClass.waitForPageLoad();
         BaseClass.waitForElementToBeClickable(subscriberListingPage.getSubsource());

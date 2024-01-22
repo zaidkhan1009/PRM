@@ -184,6 +184,7 @@ public class MiscellaneousCallPageActions extends BaseClass  {
 	public static void clickOnCancelBtn(){
 		BaseClass.waitForPageLoad();
 		miscellaneousCallPage.getCancelBtn().click();
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
 	}
 

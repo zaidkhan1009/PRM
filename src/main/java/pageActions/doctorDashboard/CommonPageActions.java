@@ -26,7 +26,7 @@ import java.util.List;
 public class CommonPageActions extends BaseClass {
 
 	static CommonPage commonPage = PageFactory.initElements(driver, CommonPage.class);
-    
+
     public static void selectNoShowPendingActions() {
     	
     	List<WebElement> tableBlock = driver.findElements(By.xpath("//table[@id='dueAppointmentTable']"));
@@ -137,28 +137,6 @@ public class CommonPageActions extends BaseClass {
 		}
 	}
 
-	public static void backToDoctorDashbrd() {
-		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
-		BaseClass.waitForModalOverlayToDisappear();
-		BaseClass.waitForUIWidgetOverlayToDisappear();
-
-		commonPage.getLogo().click();
-
-		BaseClass.waitForSpinnerToDisappear();
-	}
-
-	public static void backTODoctorDashboard() {
-		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
-		BaseClass.waitForSpinnerToDisappearOnDoctorDashboard();
-		BaseClass.waitForElementVisibility(commonPage.getLogo(), 6000);
-		BaseClass.waitForElementToBeClickable(commonPage.getLogo());
-		BaseClass.waitForUIWidgetOverlayToDisappear();
-		BaseClass.waitForModalOverlayToDisappear();
-		commonPage.getLogo().click();
-	}
-
 	public static void clickOnlogOut() {
 		BaseClass.waitForPageLoad();
 		try {
@@ -168,15 +146,34 @@ public class CommonPageActions extends BaseClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}  
+    
+    public static void backToDoctorDashbrd(){
+    	BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
+        BaseClass.waitForModalOverlayToDisappear();
+        //BaseClass.waitForModalBackdropToDisappear();
+        try {
+        	Thread.sleep(2000);
+        	commonPage.getLogo().click();
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        
+    }
 
-//    public static void clickOnSearchBtn() {
-//        BaseClass.waitForPageLoad();
-//        BaseClass.waitForSpinnerToDisappear();
-//        BaseClass.waitForElementVisibility(commonPage.getSearchBtn(), 4000);
-////        BaseClass.waitForElementToBeClickable(commonPage.getSearchBtn());
-//        commonPage.getSearchBtn().click();
-//    }
+    public static void backTODoctorDashboard() {
+    	BaseClass.waitForPageLoad();
+    	BaseClass.waitForSpinnerToDisappear();
+    	
+        BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
+    	BaseClass.waitForSpinnerToDisappearOnDoctorDashboard();
+        BaseClass.waitForElementVisibility(commonPage.getLogo(), 6000);
+        BaseClass.waitForElementToBeClickable(commonPage.getLogo());
+        commonPage.getLogo().click();
+    }
 
     public static void clickOnSearchBtn() {
         BaseClass.waitForPageLoad();
@@ -186,95 +183,56 @@ public class CommonPageActions extends BaseClass {
             Thread.sleep(4000);
             BaseClass.waitForUIWidgetOverlayToDisappear();
             commonPage.getSearchBtn().click();
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+    
+  
+    public static void enterMobileNo(String patientMobileNum) {
+        BaseClass.waitForPageLoad();
+        BaseClass.waitForElementToBeClickable(commonPage.getSearchBox());
+        commonPage.getSearchBox().sendKeys(patientMobileNum);
+    }
+    
 
-	public static void enterMobileNo(String patientMobileNum) {
-		BaseClass.waitForPageLoad();
-		BaseClass.waitForElementToBeClickable(commonPage.getSearchBox());
-		commonPage.getSearchBox().sendKeys(patientMobileNum);
-	}
+    public static void clickOnPatient(String mobile_no, String patient_name) {
+        BaseClass.waitForSpinnerToDisappear();
+        BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
+        try {
+            Thread.sleep(3000);
+        }
+        catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+      //td[contains(text(),'1111111113')]/preceding-sibling::td[1]//a[contains(text(),'01dec-4363')]
+           WebElement patientElement = driver.findElement(By.xpath("//td[contains(text(),'" + mobile_no
+                    + "')]/preceding-sibling::td[1]//a[contains(text(),'" + patient_name + "')]"));
+           BaseClass.waitForElementVisibility(patientElement, 4000);
+           BaseClass.waitForModalOverlayToDisappear();
+           patientElement.click();
+try {
+	Thread.sleep(2000);
+}catch (InterruptedException e) {
+    e.printStackTrace();
+}
+    }
 
-//    public static void clickOnPatient(String mobile_no, String patient_name) {
+    public static void editPatient(String patient, String mobile) {
+        BaseClass.waitForPageLoad();
+        try {
+            Thread.sleep(7000);
+            driver.findElement(By.xpath("//a[contains(text(),'" + patient + "')]/ancestor::td/following-sibling::td[contains(text(),'" + mobile + "')]/following-sibling::td//span[@class='actn-icn edit']")).click();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static String verification() {
 //        BaseClass.waitForSpinnerToDisappear();
-//        WebElement patientName =   driver.findElement(By.xpath("//td[contains(text(),'" + mobile_no
-//                    + "')]/preceding-sibling::td//a[contains(text(),'" + patient_name + "')]"));
-//        BaseClass.waitForElementVisibility(patientName, 4000);
-//        patientName.click();
-//       }
-
-	public static void clickOnPatient(String mobile_no, String patient_name) {
-
-		System.out.println(mobile_no);
-		System.out.println(patient_name);
-
-		try {
-			Thread.sleep(2000);
-			BaseClass.waitForPageLoad();
-			BaseClass.waitForSpinnerToDisappear();
-			BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
-			BaseClass.waitForElementToBeClickable(commonPage.getLogo());
-
-			WebElement patientElement = driver.findElement(By.xpath("//td[contains(text(),'" + mobile_no
-					+ "')]/preceding-sibling::td//a[contains(text(),'" + patient_name + "')]"));
-			BaseClass.waitForElementVisibility(patientElement, 4000);
-			BaseClass.waitForModalOverlayToDisappear();
-			patientElement.click();
-			BaseClass.waitForPageLoad();
-			BaseClass.waitForSpinnerToDisappear();
-			BaseClass.waitForElementVisibility(commonPage.getLogo(), 4000);
-
-			List<WebElement> amountOverduePopup = driver.findElements(By.xpath("//p[@class='modalConfirmTxt'][contains(text(),'amount overdue,')]"));
-
-			boolean isAmountOverduePopupDisplayed = (amountOverduePopup.get(0).isDisplayed());
-			if (isAmountOverduePopupDisplayed) {
-			BaseClass.waitForElementToBeClickable("//button[@id='dueYes']");
-			driver.findElement(ByXPath.xpath("//button[@id='dueYes']")).click();
-			}
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void editPatient(String patient, String mobile) {
-		BaseClass.waitForPageLoad();
-		try {
-			Thread.sleep(7000);
-			driver.findElement(By.xpath(
-					"//a[contains(text(),'" + patient + "')]/ancestor::td/following-sibling::td[contains(text(),'"
-							+ mobile + "')]/following-sibling::td//span[@class='actn-icn edit']"))
-					.click();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static String verification() {
-//        BaseClass.waitForSpinnerToDisappear();
-		return driver.getTitle();
-	}
-
-//    public static void verifyPageTitle(String expectedTitle) {
-//    	BaseClass.verifyPageTitle(expectedTitle);
-//    }
-
-//    public String verification() {
-//        BaseClass.waitForPageLoad();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return BaseClass.getTitle();
-//    }
-
+        return driver.getTitle();
+    }
 }

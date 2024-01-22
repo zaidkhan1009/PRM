@@ -17,9 +17,9 @@ import pageActions.patientDashboard.OralExamListingPageActions;
 import pageActions.patientDashboard.OralExamsPageActions;
 import utils.SheetTest;
 
-public class OralExamsTestCase extends BaseClass{
-	
-	/*input data for validation*/
+public class OralExamsTestCase extends BaseClass {
+
+	/* input data for validation */
 //	private static final String PATIENT_NAME= TestData.getInstance().getInputData("oral_exam_patient_name");
 //	private static final String MOBILE_NUMBER = TestData.getInstance().getInputData("oral_exam_patient_mobile");
 //	private static final String DOCTOR_NIK_NAME = TestData.getInstance().getInputData("oral_exam_doctor_nikName");
@@ -39,18 +39,17 @@ public class OralExamsTestCase extends BaseClass{
 	private static final String ORAL_EXAM_EDIT_INPUT_LIST = " Validated oral Exam Edit from Input List - #oralExamEditInputList";
 	Map<String, String> patntOralExamData = null;
 
-
 	@BeforeMethod
 	public void testSetup() {
-		
-		patntOralExamData = SheetTest.prepareData("OralExamData","OralExam","A1","Z");
+
+		patntOralExamData = SheetTest.prepareData("OralExamData", "OralExam", "A1", "Z");
 		CommonPageActions.selectClinicFrmHeader(patntOralExamData.get("clinicLocation"));
 		CommonPageActions.enterMobileNo(patntOralExamData.get("patient_mobile"));
 		CommonPageActions.clickOnSearchBtn();
-		CommonPageActions.clickOnPatient(patntOralExamData.get("patient_mobile"),patntOralExamData.get("patient_name"));
-		Assert.assertTrue(CommonPageActions.verification().contains("Patient Dashboard"));	
-		
-		
+		CommonPageActions.clickOnPatient(patntOralExamData.get("patient_mobile"),
+				patntOralExamData.get("patient_name"));
+		Assert.assertTrue(CommonPageActions.verification().contains("Patient Dashboard"));
+
 	}
 
 	@Test(enabled = true, priority = 1)
@@ -517,7 +516,7 @@ public class OralExamsTestCase extends BaseClass{
 		OralExamListingPageActions.checkedDataName();
 		OralExamListingPageActions.verifyProvisinalsMultipleTeethOralExamList("44", "45", 6);
 		OralExamListingPageActions.verifyNoteOralExamList("44", "it is for testing");
-		OralExamListingPageActions.verifyCreatedByInOralExamList("44",patntOralExamData.get("doctorNickName"));
+		OralExamListingPageActions.verifyCreatedByInOralExamList("44", patntOralExamData.get("doctorNickName"));
 		BasePatientLifeCyclePageActions.clickViewBtn(patntOralExamData.get("clinicLocation"));
 		BasePatientLifeCyclePageActions.headerViewPopup("Oral Exam View");
 		OralExamListingPageActions.checkedViewDataName();

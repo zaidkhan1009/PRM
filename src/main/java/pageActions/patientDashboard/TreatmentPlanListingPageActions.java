@@ -510,7 +510,7 @@ public class TreatmentPlanListingPageActions extends BaseClass{
 
 	public static void actionBtn() {
 		   BaseClass.waitForSpinnerToDisappear();
-		   BaseClass.waitForElementToDisappear((By.xpath("//span[contains(text(),'Treatment plan copied successfully!'])")));
+		   BaseClass.waitForElementToDisappear((By.xpath("//span[contains(text(),'Treatment plan copied successfully!')]")));
 			List<WebElement> web = driver
 					.findElements(By.xpath("//div[@id='treatmentlistingtable']//a[contains(@class,'btn btn-wrp')]"));
 			BaseClass.visibilityOfListLocated(web);

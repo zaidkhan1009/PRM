@@ -1,17 +1,13 @@
 package pages.patientDashboard;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import base.BaseClass;
-
 import java.util.List;
 
-public class CampSubscriberPage extends BaseClass{
+public class CampSubscriberPage {
     
     //WebElement of camp subscriber add
-    @FindBy(xpath ="//h1[text()='Camp Subscriber(s)']")
+    @FindBy(xpath = "//h1[text()='Camp Subscriber(s)']")
     private WebElement headerPage;
     @FindBy(xpath = "//strong[contains(text(),'Creation Date :')]/span")
     private WebElement creationDate;
@@ -51,7 +47,7 @@ public class CampSubscriberPage extends BaseClass{
     private WebElement selectCampaignErr;
     @FindBy(xpath = "//div[contains(@class,'error')]")
     private WebElement selectSubscriberSourceErr;
-    @FindBy(xpath = "//div[text()='Enter sub-source']")
+    @FindBy(xpath = "//div[text()='Enter Sub-Source']")
     private WebElement enterSubSourceErr;
     //WebElement camp Add page
     @FindBy(xpath = "//div[contains(@class,'sideNavigation')]//span[@class='cmnicons aprsv']")
@@ -135,16 +131,8 @@ public class CampSubscriberPage extends BaseClass{
     private WebElement intrstLevelHigh;
     @FindBy(xpath = "//label[text()='Low'] ")
     private WebElement intrstLevelHighText;
-    @FindBy(xpath = "//div[@class='enq_btns ng-scope']/span")
+    @FindBy(xpath = "//div[@class='content']/span")
     private List<WebElement> findingsBox;
-    @FindBy(xpath = "//label[@class='ng-binding']")
-    private List<WebElement> intrestLeval;
-    @FindBy(xpath = "//input[@class='ng-scope']")
-    private List<WebElement> otherInfo;
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement save;
-    @FindBy(xpath = "//textarea[@id='notes']")
-    private WebElement note;
     @FindBy(xpath = "//span[text()='Membership(s)']")
     private WebElement membershipHeader;
     @FindBy(xpath = "//label[text()='Membership']")
@@ -181,7 +169,7 @@ public class CampSubscriberPage extends BaseClass{
     @FindBy(id = "type")
     private WebElement subTypeDropDown;
     @FindBy(xpath = "//div[contains(@class,'error')]")
-    private List<WebElement> errorMsg;
+    private WebElement errorMsg;
     //camp subscriber add page input listing
     @FindBy(xpath = "//th[text()='Name/Patient Id']")
     private WebElement namePatientId;
@@ -234,42 +222,9 @@ public class CampSubscriberPage extends BaseClass{
     private WebElement subSubSourceView;
     @FindBy(xpath = "//div[contains(text(),'Camp Info')]/following-sibling::div//b[text()='Findings']/../following-sibling::div")
     private WebElement subFindingsView;
-    @FindBy(xpath= "//label[contains(text(),'Primary Enquiry')]")
-    private WebElement PrimaryEnquiry;
-    @FindBy(xpath= "//span[contains(text(),'Braces')]")
-    private WebElement Braces; 
-    @FindBy(xpath= "//label[@for='alltooth']")
-    private WebElement allTeeth; 
-    @FindBy(xpath="//label[@for='secondary_Enq']")
-    private WebElement SecondaryEnquiry;
-    @FindBy(xpath="//*[@ng-click='selectMatch($index)']")
-    private WebElement dropDown;
     
-	public WebElement getdropDown() {
-		return dropDown; 
-	}
-	public WebElement getPrimaryEnquiry() {
-		return PrimaryEnquiry; 
-	}
-	public WebElement getSecondaryEnquiry() {
-		return SecondaryEnquiry;
-	}
-	public WebElement getAllTeeth() {
-		return allTeeth;
-	}
-	public List<WebElement> getintrestLeval() {
-		return intrestLeval;
-	}
-	public List<WebElement> getotherInfo() {
-		return otherInfo;
-	}
-	public WebElement getsave() {
-		return save;
-	}
-	public WebElement getnote() {
-		return note;
-	}
-	///
+    
+    
 	public WebElement getHeaderPage() {
 		return headerPage;
 	}
@@ -507,7 +462,7 @@ public class CampSubscriberPage extends BaseClass{
 	public WebElement getSubTypeDropDown() {
 		return subTypeDropDown;
 	}
-	public List<WebElement> getErrorMsg() {
+	public WebElement getErrorMsg() {
 		return errorMsg;
 	}
 	public WebElement getNamePatientId() {

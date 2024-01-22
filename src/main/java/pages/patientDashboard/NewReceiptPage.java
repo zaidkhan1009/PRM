@@ -295,10 +295,6 @@ public class NewReceiptPage {
 		return saveBtn;
 	}
 
-	/*
-	 * public WebElement getSearchBtn() { return searchBtn; }
-	 */
-
 	public WebElement getAddBtn() {
 		return addBtn;
 	}

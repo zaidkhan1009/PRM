@@ -8,7 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import base.BaseClass;
 import pages.doctorDashboard.Login;
 import pages.doctorDashboard.PatientRegistrationPage;
@@ -678,6 +677,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAlternateMobileNO(String alterNateMoblieNum) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientRegistrationPage.getAlternateContact(), 5000);
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAlternateContact());
 		patientRegistrationPage.getAlternateContact().clear();
@@ -695,6 +695,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAlterContactName(String alterNateContactName) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAlternateName());
 		patientRegistrationPage.getAlternateName().clear();
 		patientRegistrationPage.getAlternateName().sendKeys(alterNateContactName);
@@ -702,6 +703,7 @@ public class PatientRegistrationPageActions extends BaseClass  {
 
 	public static void enterAge(String Age) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getAge());
 		patientRegistrationPage.getAge().clear();
 		patientRegistrationPage.getAge().sendKeys(Age);
@@ -737,6 +739,9 @@ public class PatientRegistrationPageActions extends BaseClass  {
 	public static void selectGenderMale(String gender) {
     	BaseClass.waitForPageLoad();
 		BaseClass.waitForElementVisibility(patientRegistrationPage.getGenderMale(),5000);
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(patientRegistrationPage.getGenderMale());
 		BaseClass.hoverOnElement(patientRegistrationPage.getGenderMale());
 		if(gender.equals("Male"))
 		{

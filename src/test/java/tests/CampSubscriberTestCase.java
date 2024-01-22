@@ -105,7 +105,7 @@ public class CampSubscriberTestCase extends BaseClass {
 		CampSubscriberPageActions.enterEmail("dental@gmail.com");
 		CampSubscriberPageActions.notificationsSelected();
 		CampSubscriberPageActions.fileUploadBtn();
-		CampSubscriberPageActions.enquiryDetails("Braces","High","Brand","Implant","Medium");
+//		CampSubscriberPageActions.enquiryDetails("Braces","High","Brand","Implant","Medium");
 		
 //		CampSubscriberPageActions.interestLevel();// This filed remove 
 //		CampSubscriberPageActions.checkedFindings();// This Filed Remove
@@ -182,39 +182,35 @@ public class CampSubscriberTestCase extends BaseClass {
 		CampSubscriberPageActions.clickNextBtn();
 		CampSubscriberPageActions.headerNewSubscriber();
 		 
-		CampSubscriberPageActions.enquiryDetails("Braces","High","Brand","Implant","Medium");
-//        CampSubscriberPageActions.enterName("test21345");
-//        CampSubscriberPageActions.enterAge("16");
-//        CampSubscriberPageActions.enterMobile("1111111111");
-//        CampSubscriberPageActions.clickSaveBtn();
-//		BaseClass.scrollPage(700);//
-////		CampSubscriberPageActions.inputListColumn();
-//		CampSubscriberPageActions.nameInputList("test21345");
-//		CampSubscriberPageActions.mobileEmailInput("1111111111", "NA");
-//		CampSubscriberPageActions.findingsInput("NA");
-//		CampSubscriberPageActions.membershipInput("NA");
-//		CampSubscriberPageActions.paymentModeInput("NA");
-//		CampSubscriberPageActions.amountInput("NA");
-//		CampSubscriberPageActions.viewInput();
+//		CampSubscriberPageActions.enquiryDetails("Braces","High","Brand","Implant","Medium");
+
+        BaseClass.scrollPage(700);
+        CampSubscriberPageActions.inputListColumn();
+        CampSubscriberPageActions.nameInputList("test21345");
+        CampSubscriberPageActions.mobileEmailInput("1111111111","NA");
+        CampSubscriberPageActions.findingsInput("NA");
+        CampSubscriberPageActions.membershipInput("NA");
+        CampSubscriberPageActions.paymentModeInput("NA");
+        CampSubscriberPageActions.amountInput("NA");
+        CampSubscriberPageActions.viewInput();
 //        CampSubscriberPageActions.editInput();
 //        CampSubscriberPageActions.deleteInput();
-//		CampSubscriberPageActions.openView("test21345");// Remove
-//		CampSubscriberPageActions.headerViewModal();// Remove
-//		CampSubscriberPageActions.creationDateView();// Remove
-//		CampSubscriberPageActions.nameSubView("test21345");// Remove
-//		CampSubscriberPageActions.mobileSubView("1111111111");// Remove
-//		CampSubscriberPageActions.emailSubView("NA");// Remove
-//		CampSubscriberPageActions.genderSubView("Male");// Remove
-//		CampSubscriberPageActions.ageSubView("16"); // Remove
-//		CampSubscriberPageActions.typeSubView("Outbound");// /Function remove
-//		CampSubscriberPageActions.regionSubView("Maharashtra");
-//		CampSubscriberPageActions.zoneSubView("Pune");
-//		CampSubscriberPageActions.campaignSubView("Others");
-//		CampSubscriberPageActions.sourceSubView("Other-NA");
-//		CampSubscriberPageActions.subSourceSubView("Sub-source");
-//		CampSubscriberPageActions.findingsSubView("NA");
-//		CampSubscriberPageActions.closeViewModal();
-//		Assert.assertTrue(CommonPageActions.verification().contains("Camp Subscriber"));
-	}
-
+        CampSubscriberPageActions.openView("test21345");
+        CampSubscriberPageActions.headerViewModal();
+        CampSubscriberPageActions.creationDateView();
+        CampSubscriberPageActions.nameSubView("test21345");
+        CampSubscriberPageActions.mobileSubView("1111111111");
+        CampSubscriberPageActions.emailSubView("NA");
+        CampSubscriberPageActions.genderSubView("Male");
+        CampSubscriberPageActions.ageSubView("16");
+        CampSubscriberPageActions.typeSubView("Outbound");
+        CampSubscriberPageActions.regionSubView("Maharashtra");
+        CampSubscriberPageActions.zoneSubView("Pune");
+        CampSubscriberPageActions.campaignSubView("CSR");
+        CampSubscriberPageActions.sourceSubView("Facebook");
+        CampSubscriberPageActions.subSourceSubView("Sub-source32");
+        CampSubscriberPageActions.findingsSubView("NA");
+        CampSubscriberPageActions.closeViewModal();
+        Assert.assertTrue(CommonPageActions.verification().contains("Camp Subscriber"));
+    }
 }

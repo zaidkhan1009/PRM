@@ -3,7 +3,6 @@ package pageActions.doctorDashboard;
 import base.BaseClass;
 import pages.doctorDashboard.AppointmentAddPage;
 import pages.doctorDashboard.FeedbackAddPage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -167,6 +166,8 @@ public class FeedbackAddPageActions extends BaseClass {
             JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
             Object obj = javascriptExecutor.executeScript("return document.getElementById('feedbackDt').value;");
             String str = (String) obj;
+            System.out.println("Date is : "+str);
+            System.out.println("expected :"+expected);
             Assert.assertTrue(str.contains(expected));
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -1,11 +1,12 @@
 package pageActions.doctorDashboard;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import base.BaseClass;
+import pageActions.patientDashboard.BasePatientLifeCyclePageActions;
 import pages.doctorDashboard.Login;
 import pages.doctorDashboard.PatientDashboardPage;
 
@@ -23,6 +24,7 @@ public class PatientDashboardPageActions extends BaseClass {
 
 	public static void checkPatientRedFlag() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getRedFlag());
 		Assert.assertTrue(checkedWebElementDisplayed(patientDashboardPage.getRedFlag()));
 	}
@@ -39,6 +41,7 @@ public class PatientDashboardPageActions extends BaseClass {
 
 	public static void openCovidForm() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getGreenFlagEdit());
 		patientDashboardPage.getGreenFlagEdit().click();
 	}
@@ -52,27 +55,16 @@ public class PatientDashboardPageActions extends BaseClass {
 		}
 		if (patientDashboardPage.getAmountDuePopup().isDisplayed()) {
 			patientDashboardPage.getDueWarningYes().click();
+			BaseClass.waitForSpinnerToDisappear();
+		}
+		else {
+			BasePatientLifeCyclePageActions.clickOnAlert();
 		}
 	}
 
-//	public static void hideDueWarningPopup() {
-//		BaseClass.waitForPageLoad();
-//		if(patientDashboardPage.getAmountDuePopup().isDisplayed()) {
-//			try {
-//				Thread.sleep(5500);
-//				patientDashboardPage.getDueWarningYes().click();
-//				//			for (WebElement ele:patientDashboardPage.getDueWarningYes()) {
-//				//				patientDashboardPage.getDueWarningYes().get(0).click();
-//				//			}
-//				Thread.sleep(3000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-
 	public static void clickOnFilesAdd() {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForModalBackdropToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getFilesAddBtn());
 		try {
 			patientDashboardPage.getFilesAddBtn().click();
@@ -137,23 +129,18 @@ public class PatientDashboardPageActions extends BaseClass {
 	}
 
 	public static void clickOnWorkDoneAdd() {
+
 		BaseClass.waitForElementVisibility(patientDashboardPage.getWorkDoneAddBtn(), 4000);
 		patientDashboardPage.getWorkDoneAddBtn().click();
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
-	}
+		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal-backdrop fade']"));
+		BaseClass.waitForPageLoad();
 
-//	public static void clickOnWorkDoneAdd() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToBeClickable(patientDashboardPage.getWorkDoneAddBtn());
-//		try {
-//			patientDashboardPage.getWorkDoneAddBtn().click();
-//			Thread.sleep(6000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+		BaseClass.waitForElementVisibility(patientDashboardPage.getWorkDoneAddBtn(), 4000);
+		patientDashboardPage.getWorkDoneAddBtn().click();
+//		BaseClass.waitForSpinnerToDisappear();
+	}
 
 	public static void clickOnWorkDoneHistory() {
 		BaseClass.waitForPageLoad();
@@ -181,17 +168,6 @@ public class PatientDashboardPageActions extends BaseClass {
 		}
 	}
 
-//	public static void clickOnTreatmentPlanListBtn() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToBeClickable(patientDashboardPage.getTreatmentPlanListBtn());
-//		try {
-//			patientDashboardPage.getTreatmentPlanListBtn().click();
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	public static void searchTreatmentPalnpage() {
 		BaseClass.waitToBeClickableAndClick(patientDashboardPage.getappointments());
 		patientDashboardPage.getappointments().click();
@@ -206,30 +182,22 @@ public class PatientDashboardPageActions extends BaseClass {
 	}
 
 	public static void clickOnTreatmentPlanAddBtn() {
-		BaseClass.waitForPageLoad();
+
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientDashboardPage.getTreatmentPlanAddBtn(), 4000);
 //		BaseClass.waitForModalBackdropToDisappear();
 		try {
-			Thread.sleep(1000);
+
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 		patientDashboardPage.getTreatmentPlanAddBtn().click();
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
+		driver.navigate().refresh();
 	}
 
-//	public static void clickOnTreatmentPlanAddBtn() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToBeClickable(patientDashboardPage.getTreatmentPlanAddBtn());
-//		try {
-//			patientDashboardPage.getTreatmentPlanAddBtn().click();
-//			Thread.sleep(5000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public static void clickOnOralExamAdd() {
 		BaseClass.waitForPageLoad();
@@ -282,6 +250,8 @@ public class PatientDashboardPageActions extends BaseClass {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		patientDashboardPage.getChiefComplaintAddBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 	public static void clickOnChiefComplaintlistBtn() {
@@ -290,19 +260,6 @@ public class PatientDashboardPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getChiefComplaintListBtn());
 		patientDashboardPage.getChiefComplaintListBtn().click();
 	}
-
-//	public static void clickOnChiefComplaintlistBtn() {
-//		BaseClass.waitForPageLoad();
-//		BaseClass.waitForElementToBeClickable(patientDashboardPage.getChiefComplaintListBtn());
-//		try {
-//			Thread.sleep(2000);
-//			patientDashboardPage.getChiefComplaintListBtn().click();
-//			Thread.sleep(6000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 
 	public static void clickOnDiagnosticsTestAdd() {
 		BaseClass.waitForPageLoad();
@@ -320,7 +277,8 @@ public class PatientDashboardPageActions extends BaseClass {
 
 	public static void clickOnPrescriptionTestAdd() {
 		BaseClass.waitForPageLoad();
-		BaseClass.WaitTillElementIsPresent(patientDashboardPage.getPrescriptionTestAdd());
+//		BaseClass.WaitTillElementIsPresent(patientDashboardPage.getPrescriptionTestAdd());
+		BaseClass.waitForElementToBeClickable(patientDashboardPage.getPrescriptionTestAdd());
 		patientDashboardPage.getPrescriptionTestAdd().click();
 		driver.navigate().refresh();
 	}
@@ -351,8 +309,11 @@ public class PatientDashboardPageActions extends BaseClass {
 			BaseClass.waitForSpinnerToDisappear();
 		} catch (NoSuchElementException e) {
 
+		System.out.println(patientDashboardPage.getProfileViewBtn().isDisplayed());
+		BaseClass.waitForElementToBeClickable(patientDashboardPage.getProfileViewBtn());
+		patientDashboardPage.getProfileViewBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
 		}
-
 	}
 
 	public static void clickProfileEditBtn() {

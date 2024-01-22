@@ -129,11 +129,27 @@ public class OralExamsPage {
 	// ------------------------webelement of hard tissue in popup---
 	@FindBy(xpath = "//div[@id='toothViewPopup']//a[text()='Hard Tissue']")
 	private WebElement HardTissueOnPopUp;
-
+	@FindBy(xpath = "//span[text()='Mandibular Angle']")
+	private WebElement MandibularAngle;
+	@FindBy(xpath = "//div[@ng-click='addToothHardTissue(hTissues.id, hTissues.title)']//span[text()='Mandibular Body']")
+	private WebElement MandibularBody;
+	@FindBy(xpath = "//span[text()='Maxillary Tuberosity']")
+	private WebElement MaxillaryTuberosity;
+	@FindBy(xpath = "//span[text()='Posterior Maxilla']")
+	private WebElement PosteriorMaxilla;
+	@FindBy(xpath = "//span[text()='Pre-Maxilla']")
+	private WebElement PreMaxilla;
+	@FindBy(xpath = "//span[text()='Maxillary Sinus']")
+	private WebElement MaxillarySinus;
+	@FindBy(xpath = "//span[text()='Mandibular Symphysis']")
+	private WebElement MandibularSymphysis;
+	@FindBy(xpath = "//span[text()='TM Joint']")
+	private WebElement TMJoint;
 	@FindBy(xpath = "//div[contains(@ng-click,'hDiadgnos.ProvisionalDiagnostic.id')]")
 	private List<WebElement> HardProvisinalsInPopup;
 	@FindBy(xpath = "//div[contains(@ng-click,'removeToothHardTissueItems')]//a[@class='remove-button']")
 	private List<WebElement> provisionalRemoveBtnHardTissue;
+
 	
 	//-----------------------------------------------------------------------------------------------------
 	@FindBy(xpath = "//h5[text()='Mandibular Angle']" ) // changed the xpath from "//span[text()='Mandibular Angle']")
@@ -153,23 +169,7 @@ public class OralExamsPage {
 	@FindBy(xpath = "//h5[text()='TM Joint']")
 	private WebElement TMJointOnPopup;
 	//-----------------------------------------------------------------------------------------------------
-	@FindBy(xpath = "//span[text()='Mandibular Angle']" ) // changed the xpath from "//span[text()='Mandibular Angle']")
-	private WebElement MandibularAngle;
-	@FindBy(xpath = "//span[text()='Mandibular Body']")
-	private WebElement MandibularBody ;
-	@FindBy(xpath = "//span[text()='Maxillary Tuberosity']")
-	private WebElement MaxillaryTuberosity ;
-	@FindBy(xpath = "//span[text()='Posterior Maxilla']")
-	private WebElement PosteriorMaxilla ;
-	@FindBy(xpath = "//span[text()='Pre-Maxilla']")
-	private WebElement PreMaxilla ;
-	@FindBy(xpath = "//span[text()='Maxillary Sinus']")
-	private WebElement MaxillarySinus ;
-	@FindBy(xpath = "//span[text()='Mandibular Symphysis']")
-	private WebElement MandibularSymphysis ;
-	@FindBy(xpath = "//span[text()='TM Joint']")
-	private WebElement TMJoint ;
-	
+
 	// ---------------webelment of chief complaints on oral page-------------------
 	@FindBy(xpath = "//span[@alt='Edit added chief complaint(s)']")
 	private WebElement chiefComplaintEditBtn;
@@ -231,8 +231,6 @@ public class OralExamsPage {
 	public WebElement getTMJointOnPopup() {
 		return TMJointOnPopup;
 	}
-	
-	
 	public WebElement getTeeth() {
 		return teeth;
 	}

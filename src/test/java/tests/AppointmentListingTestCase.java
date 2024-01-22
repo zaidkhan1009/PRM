@@ -12,6 +12,16 @@ import pageActions.doctorDashboard.CommonPageActions;
 import pageActions.doctorDashboard.DoctorDashBoardPageActions;
 import utils.ExcelReader;
 import utils.TestData;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+
+/**
+ * 
+ * @author Ajit
+ *
+ */
 
 public class AppointmentListingTestCase extends BaseClass {
 
@@ -36,11 +46,11 @@ public class AppointmentListingTestCase extends BaseClass {
 	private static final String DATE_FILTER_ALONG_WITH_APP_TYPE = "2: AppointmentList #5:Date filter working fine with App Type filter";
 	private static final String NO_RECORD_FOUND_MSG_VERIFICATION = "2: AppointmentList #67:noRecordFound Message is displayed on no data";
 
-	//
 	@BeforeMethod
 	public void testSetup() {
 		DoctorDashBoardPageActions.openAppointmentListingPage();
 	}
+
 
 	@Test(description = VERIFY_ALL_ELEMENT_ON_APP_LIST_HP, enabled = true, priority = 1)
 	public void verifyAllElementOnAppListHp() {
@@ -64,9 +74,9 @@ public class AppointmentListingTestCase extends BaseClass {
 		logger.log(Status.PASS, VERIFY_DOCTOR_FILTER);
 		//AppointmentsLisitngPageActions.selectDoctorFRmDrpDwn(ExcelReader.readExcelData(FILE_PATH, SHEET, 1, 3)); //changed the method since the element is not dropdown
 		AppointmentsLisitngPageActions.selectDoctor(ExcelReader.readExcelData(FILE_PATH, SHEET, 1, 3));
-		
 		AppointmentsLisitngPageActions.doctorTypeFilter(ExcelReader.readExcelData(FILE_PATH, SHEET, 1, 4));
 		Assert.assertTrue(CommonPageActions.verification().contains("Appointment/Event Listing"));
+
 	}
 
 	@Test(description = CHECKED_FRM_DATE_IS_BEFORE_AFTER_DATE, enabled = true, priority = 4)
@@ -94,6 +104,7 @@ public class AppointmentListingTestCase extends BaseClass {
 		AppointmentsLisitngPageActions.dateFilter(ExcelReader.readExcelData(FILE_PATH, SHEET, 3, 1),
 				ExcelReader.readExcelData(FILE_PATH, SHEET, 3, 2));
 		Assert.assertTrue(CommonPageActions.verification().contains("Appointment/Event Listing"));
+
 	}
 
 	@Test(description = VERIFY_VIEW_BTN_BEHAVIOUR, enabled = true, priority = 6)

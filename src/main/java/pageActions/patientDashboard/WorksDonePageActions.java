@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import base.BaseClass;
 import pageActions.doctorDashboard.PatientDashboardPageActions;
 import pages.patientDashboard.WorksDonePage;
@@ -20,7 +19,7 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void closeAppoitmentPopup() {
 		BaseClass.waitForPageLoad();
-		if (worksDonePage.getAppointmentCloseBtn().isDisplayed()) {
+		if(worksDonePage.getAppointmentCloseBtn().isDisplayed()){
 			try {
 				BaseClass.hoverOnElement(worksDonePage.getAppointmentCloseBtn());
 				worksDonePage.getAppointmentCloseBtn().click();
@@ -32,10 +31,9 @@ public class WorksDonePageActions extends BaseClass {
 	}
 
 	public static void checkedTreatmentStartMsgDisplayed() {
-		BaseClass.waitForElementVisibility(worksDonePage.getSuccessTreatmentStartMsg(), 4000);
-		BaseClass.softAssert().assertTrue(checkedElementDisplayed(worksDonePage.getSuccessTreatmentStartMsg()));
-		BaseClass.waitForElementToDisappear(
-				(By.xpath("//span[contains(text(),'Selected treatment(s) Workdone started successfully')]")));
+		    BaseClass.waitForElementVisibility(worksDonePage.getSuccessTreatmentStartMsg(),4000);
+			BaseClass.softAssert().assertTrue(checkedElementDisplayed(worksDonePage.getSuccessTreatmentStartMsg()));
+			BaseClass.waitForElementToDisappear((By.xpath("//span[contains(text(),'Selected treatment(s) Workdone started successfully')]")));
 	}
 
 	public static void checkedInvoiceListBtn() {
@@ -58,6 +56,7 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void checkLabWorkOrderBtn() {
 		BaseClass.waitForPageLoad();
+		BaseClass.WaitTillElementIsPresent(worksDonePage.getLabWorkOrderAddBtn());
 		Assert.assertTrue(checkedElementDisplayed(worksDonePage.getLabWorkOrderAddBtn()));
 	}
 
@@ -80,12 +79,15 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void checkedAddAllBtn() {
 		BaseClass.WaitTillElementIsPresent(worksDonePage.getAddAllBtn());
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForElementToBeClickable(worksDonePage.getAddAllBtn());
 		Assert.assertTrue(checkedElementDisplayed(worksDonePage.getAddAllBtn()));
 	}
 
 	public static void checkedAddAllBtnNotPresent() {
 		BaseClass.waitForPageLoad();
-		Assert.assertTrue(driver.findElements(By.xpath("//i[text()='Add All']")).size() == 0);
+		Assert.assertTrue(driver.findElements(By.xpath("//i[text()='Add All']")).size()==0);
 	}
 
 	public static void checkedPrintBtn() {
@@ -99,28 +101,17 @@ public class WorksDonePageActions extends BaseClass {
 				driver.findElement(By.xpath("//i[text()='Print']/..")).getAttribute("class").contains("hide"));
 	}
 
-	public static void checkProgressDropDown(String treatment) {
+	public static void checkProgressDropDown(String treatment){
 		BaseClass.waitForPageLoad();
-		Assert.assertTrue(checkedElementDisplayed(driver.findElement(
-				By.xpath("//span[contains(text(),'" + treatment + "')]/../..//select[@data-ng-model='value']"))));
+		Assert.assertTrue(checkedElementDisplayed(driver.findElement(By.xpath("//span[contains(text(),'"+treatment+"')]/../..//select[@data-ng-model='value']"))));
 	}
 
 	public static void clickWorkDoneHistory() {
+		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(worksDonePage.getHistoryBtn(), 4000);
 		worksDonePage.getHistoryBtn().click();
 		BaseClass.waitForSpinnerToDisappear();
-	}
-
-//	public static void clickWorkDoneHistory() {
-//		try {
-//			BaseClass.waitForPageLoad();
-//			BaseClass.waitForElementToBeClickable(worksDonePage.getHistoryBtn());
-//			worksDonePage.getHistoryBtn().click();
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	}
+}
 
 	public static void checkedUserName(String patientName) {
 		BaseClass.waitForPageLoad();
@@ -172,13 +163,15 @@ public class WorksDonePageActions extends BaseClass {
 		}
 	}
 
+
 	public boolean checkTreatmentStagePresentAndEnable(WebElement trtmntStage) {
 		boolean isStageEnabled = false;
-		if (trtmntStage.isEnabled()) {
-			isStageEnabled = true;
-		}
+				if(trtmntStage.isEnabled()) {
+					isStageEnabled = true;
+				}
 		return isStageEnabled;
 	}
+
 
 	public static int getAlignerCount(WebElement stagWebElement) {
 		int totalStages;
@@ -186,20 +179,6 @@ public class WorksDonePageActions extends BaseClass {
 		totalStages = Integer.parseInt(totalStageswithPara.split(" ")[0]);
 		return totalStages;
 	}
-
-//	public boolean checkTreatmentStagePresentAndEnable(String treatmentPlan,String treatmentStage) {
-//		boolean isStageEnabled = false;
-//		WebElement stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'"+treatmentPlan+"')]/following::div[@class='custom-combo-new']//child::select"));
-//		List<WebElement> treatmentOptions = ((PCDriver) driver).getDropdwnOptions(stagedrpDwn);
-//		for(WebElement trtmntStage:treatmentOptions) {
-//			if(trtmntStage.getText().trim().contains(treatmentStage.trim())){
-//				if(trtmntStage.isEnabled()) {
-//					isStageEnabled = true;
-//				}
-//			}
-//		}
-//		return isStageEnabled;
-//	}
 
 	public static void checkPlan(String treatmentPlan) {
 		BaseClass.waitForSpinnerToDisappear();
@@ -221,68 +200,64 @@ public class WorksDonePageActions extends BaseClass {
 		}
 	}
 
-	public static void verifyUIAndaddWorkDoneForAlignerTreatment(String treatmentPlan, String archType,
-			String clinicalNotes) {
-		BaseClass.waitForSpinnerToDisappear();
-		BaseClass.waitForElementVisibility(worksDonePage.getInvoiceListBtn(), 4000);
-		WebElement stagedrpDwn;
-		List<WebElement> treatmentOptions;
-		boolean stageIsEnabled = true;
-		int memoryIndex = 1;
+	public static void verifyUIAndaddWorkDoneForAlignerTreatment(String treatmentPlan, String archType, String clinicalNotes) {
+	    BaseClass.waitForSpinnerToDisappear();
+	    BaseClass.waitForElementVisibility(worksDonePage.getInvoiceListBtn(), 4000);
+	    WebElement stagedrpDwn;
+	    List<WebElement> treatmentOptions;
+	    boolean stageIsEnabled =true;
+	    int memoryIndex =1;
 		String stageName = "";
-		stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan
-				+ "')]/following::div[@class='custom-combo-new']//child::select"));
-		treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
-		switch (archType) {
-		case "Single":
-			for (int i = memoryIndex; i < treatmentOptions.size(); i++) {
-				try {
-					stageIsEnabled = treatmentOptions.get(memoryIndex).isEnabled();
-				} catch (StaleElementReferenceException e) {
-					stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan
-							+ "')]/following::div[@class='custom-combo-new']//child::select"));
-					treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
-				}
-				stageName = treatmentOptions.get(memoryIndex).getText().trim();
-				if (stageIsEnabled) {
-					if ((stageName.matches(".*[0-9].*") && stageName.contains("left"))) {
-						try {
-							BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryIndex);
-							WebElement alignerElement = treatmentOptions.get(memoryIndex);
-							BaseClass.waitForElementVisibility(worksDonePage.getLowerArchLbl(), 4000);
-							int totalStages = getAlignerCount(alignerElement);
-							String halfStageString = Integer.toString((totalStages / 2));
-							worksDonePage.getLowerArchInputTxt().clear();
-							worksDonePage.getLowerArchInputTxt().sendKeys(halfStageString);
-							selectDoctor(treatmentPlan, "Sup Head");
-							selectTime(treatmentPlan, "15");
-							enterRemarks(treatmentPlan, clinicalNotes);
-							clickOnAdd(treatmentPlan);
-							memoryIndex++;
-							addWorkDoneForAligner(treatmentPlan, Integer.toString(totalStages).trim(), memoryIndex);
-							break;
-						} catch (StaleElementReferenceException e) {
-							stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan
-									+ "')]/following::div[@class='custom-combo-new']//child::select"));
-							treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
-						}
-					} else {
-						try {
-							BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryIndex);
-							memoryIndex++;
-							selectDoctor(treatmentPlan, "Sup Head");
-							selectTime(treatmentPlan, "15");
-							enterRemarks(treatmentPlan, clinicalNotes);
-							clickOnAdd(treatmentPlan);
-							closeAppoitmentPopup();
-						} catch (Exception e) {
-							System.err.println("Error occurred while processing stage: " + stageName);
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
+        stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan + "')]/following::div[@class='custom-combo-new']//child::select"));
+     	treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
+	    switch (archType) {
+	        case "Single":
+	            for (int i=memoryIndex;i<treatmentOptions.size();i++) {
+	            	try {
+	            		 stageIsEnabled = treatmentOptions.get(memoryIndex).isEnabled();
+	            	}
+	            	  catch (StaleElementReferenceException e) {
+	                  	 stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan + "')]/following::div[@class='custom-combo-new']//child::select"));
+	                	 treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
+	                  }
+	            	stageName = treatmentOptions.get(memoryIndex).getText().trim();
+	                if (stageIsEnabled) {
+	                    if ((stageName.matches(".*[0-9].*") && stageName.contains("left"))) {
+	                        try {
+	                        	BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryIndex);
+	                            WebElement alignerElement =  treatmentOptions.get(memoryIndex);
+	                            BaseClass.waitForElementVisibility(worksDonePage.getLowerArchLbl(), 4000);
+	                            int totalStages = getAlignerCount(alignerElement);
+	                            String halfStageString = Integer.toString((totalStages / 2));
+	                            worksDonePage.getLowerArchInputTxt().clear();
+	                            worksDonePage.getLowerArchInputTxt().sendKeys(halfStageString);
+	                            selectDoctor(treatmentPlan, "Sup Head");
+	                            selectTime(treatmentPlan, "15");
+	                            enterRemarks(treatmentPlan, clinicalNotes);
+	                            clickOnAdd(treatmentPlan);
+	                            memoryIndex++;
+	   	                	    addWorkDoneForAligner(treatmentPlan, Integer.toString(totalStages).trim(),memoryIndex);  
+	   	                	    break;
+	                        } catch (StaleElementReferenceException e) {
+	   	                  	 stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmentPlan + "')]/following::div[@class='custom-combo-new']//child::select"));
+		                	 treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
+		                  }
+	                    } else {
+	                            try {
+	                                BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryIndex);
+	                                memoryIndex++;
+	                                selectDoctor(treatmentPlan, "Sup Head");
+	                                selectTime(treatmentPlan, "15");
+	                                enterRemarks(treatmentPlan, clinicalNotes);
+	                                clickOnAdd(treatmentPlan);
+	                                closeAppoitmentPopup();             
+	                            }   catch (Exception e) {
+	                                System.err.println("Error occurred while processing stage: " + stageName);
+	                                e.printStackTrace();                                
+	                            }    
+	                    }                }
+	            }
+	    }
 	}
 
 	public static void addWorkDoneForAligner(String treatmntPlan, String totalStages, int memoryCount) {
@@ -290,42 +265,40 @@ public class WorksDonePageActions extends BaseClass {
 		String latestStageName = null;
 		WebElement stagedrpDwn;
 		List<WebElement> treatmentOptions;
-		stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmntPlan
-				+ "')]/following::div[@class='custom-combo-new']//child::select"));
-		treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
-		latestStageName = treatmentOptions.get(memoryCount).getText();
-		if (latestStageName.contains("left")) {
-			WebElement alignerElement = treatmentOptions.get(memoryCount);
-			int newTotalStages = getAlignerCount(alignerElement);
-			clickOnEdit(treatmntPlan);
-			String totStageString = Integer.toString((newTotalStages));
-			worksDonePage.getLowerArchInputTxt().clear();
-			worksDonePage.getLowerArchInputTxt().sendKeys(totStageString);
-		}
-		try {
-			isStageEnabled = treatmentOptions.get(memoryCount).isEnabled();
-			System.out.println(isStageEnabled);
-		} catch (StaleElementReferenceException e) {
-			stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmntPlan
-					+ "')]/following::div[@class='custom-combo-new']//child::select"));
+			stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'"+treatmntPlan+"')]/following::div[@class='custom-combo-new']//child::select"));
 			treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
-		}
-		latestStageName = treatmentOptions.get(memoryCount).getText();
-		BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryCount);
-		selectDoctor(treatmntPlan, "Sup Head");
-		selectTime(treatmntPlan, "15");
-		enterRemarks(treatmntPlan, "AlignerStageWorkDoneAdded");
-		clickOnAdd(treatmntPlan);
-		memoryCount++;
-		if (memoryCount != treatmentOptions.size()) {
-			addWorkDoneForAligner(treatmntPlan, totalStages, memoryCount);
-		}
+			latestStageName = treatmentOptions.get(memoryCount).getText();
+			if(latestStageName.contains("left")) {
+				WebElement alignerElement =  treatmentOptions.get(memoryCount);
+	        	  int newTotalStages = getAlignerCount(alignerElement);
+	        	  clickOnEdit(treatmntPlan);
+                  String totStageString = Integer.toString((newTotalStages));
+                  worksDonePage.getLowerArchInputTxt().clear();
+                  worksDonePage.getLowerArchInputTxt().sendKeys(totStageString);
+			}	
+			try {
+				isStageEnabled = treatmentOptions.get(memoryCount).isEnabled();
+				System.out.println(isStageEnabled);
+			}catch (StaleElementReferenceException e) {
+	             stagedrpDwn = driver.findElement(By.xpath("//span[contains(text(),'" + treatmntPlan + "')]/following::div[@class='custom-combo-new']//child::select"));
+	           	 treatmentOptions = BaseClass.getDropdwnOptions(stagedrpDwn);
+	             }
+			latestStageName = treatmentOptions.get(memoryCount).getText();
+			BaseClass.selectFromDropDownByIndex(stagedrpDwn, memoryCount);
+			selectDoctor(treatmntPlan,"Sup Head");
+			selectTime(treatmntPlan,"15");
+			enterRemarks(treatmntPlan,"AlignerStageWorkDoneAdded");
+			clickOnAdd(treatmntPlan);
+			memoryCount++;      
+			if(memoryCount != treatmentOptions.size()) {
+			addWorkDoneForAligner(treatmntPlan,totalStages,memoryCount);
+			}
 	}
 
 	public static void selectStages(String treatment, String stage) {
 		BaseClass.waitForPageLoad();
-		WebElement web = driver.findElement(
-				By.xpath("//span[contains(text(),'" + treatment + "')]/../..//select[@data-ng-model='value']"));
+		WebElement web = driver
+				.findElement(By.xpath("//span[contains(text(),'" + treatment + "')]/../..//select[@data-ng-model='value']"));
 		BaseClass.selectFromDropDownByVisibleText(web, stage);
 	}
 
@@ -343,15 +316,18 @@ public class WorksDonePageActions extends BaseClass {
 		List<WebElement> dateTime = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Date/Time']"));
 		List<WebElement> trtDentist = driver.findElements(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//th[text()='Trt. Dentist']"));
+				+ "')]/../../following-sibling::div//th[text()='Trt. Dentist/Specialist']"));
+
 		List<WebElement> clinicName = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Clinic Name']"));
 		List<WebElement> time = driver.findElements(By
 				.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Time']"));
 		List<WebElement> trtStage = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Trt. Stage']"));
-		List<WebElement> notes = driver.findElements(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//th[contains(text(),'Clinical Notes')]"));
+
+		List<WebElement> notes = driver.findElements(By.xpath(
+				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[contains(text(),'Clinical Notes')]"));
+
 		List<WebElement> action = driver.findElements(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//th[text()='Action']"));
 		for (int i = 0; dateTime.size() > i; i++) {
@@ -380,8 +356,7 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void checkDoctorTreated(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
-		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
-				+ "')]/../../following-sibling::div//select[@id='Doctor']/../../../div"));
+		WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment+ "')]/../../following-sibling::div//select[@id='Doctor']/../div"));
 		Assert.assertTrue(web.getText().trim().equalsIgnoreCase(doctor));
 	}
 
@@ -389,12 +364,23 @@ public class WorksDonePageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		WebElement web = driver.findElement(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
+		BaseClass.waitForElementVisibility(web, 4000);
+
 		Select sel = new Select(web);
 		Assert.assertTrue(sel.getFirstSelectedOption().getText().trim().equalsIgnoreCase(doctor));
 	}
 
 	public static void selectDoctor(String treatment, String doctor) {
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 		WebElement web = driver.findElement(By.xpath(
 				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='Doctor']"));
 		Select sel = new Select(web);
@@ -407,11 +393,18 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void checkedClinic(String treatment, String clinic) {
 		BaseClass.waitForPageLoad();
-		List<WebElement> webElements = driver.findElements(By.xpath("//span[contains(text(),'" + treatment + "')]"));
-		for (int i = 1; i <= webElements.size(); i++) {
-			String text = driver.findElement(By.xpath(
-					"(//span[contains(text(),'" + treatment + "')])[" + i + "]/../../..//td[@class='ng-binding'][1]"))
-					.getText().trim();
+		/*
+		 * List<WebElement> webElements =
+		 * driver.findElements(By.xpath("//span[contains(text(),'" + treatment +
+		 * "')]")); for (int i = 1; i <= webElements.size(); i++) { String text =
+		 * driver.findElement(By.xpath( "(//span[contains(text(),'" + treatment +
+		 * "')])[" + i + "]/../../..//td[@class='ng-binding'][1]")) .getText().trim();
+		 */
+		List<WebElement> webElements = driver.findElements(
+		By.xpath("//span[contains(text(),'" + treatment + "')]"));
+		for (int i = 1;i<=webElements.size();i++) {
+			String text = driver.findElement(By.xpath("(//span[contains(text(),'"+treatment+"')])["+i+"]/../../..//td[@class='ng-binding'][1]")).getText().trim();
+
 			Assert.assertEquals(clinic, text);
 		}
 	}
@@ -433,7 +426,6 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void selectTime(String treatment, String timeSlotSelected) {
 		BaseClass.waitForPageLoad();
-
 		try {
 
 			WebElement web = driver.findElement(By.xpath(
@@ -454,6 +446,11 @@ public class WorksDonePageActions extends BaseClass {
 		} catch (NoSuchElementException e) {
 			System.out.println("Handled locators");
 		}
+
+		BaseClass.waitForElementToDisappear(By.xpath("//div[@class='modal overlay show']"));
+		WebElement web = driver.findElement(By.xpath(
+				"//span[contains(text(),'" + treatment + "')]/../../following-sibling::div//select[@id='time']"));
+		BaseClass.selectFromDropDownByVisibleText(web, timeSlotSelected);
 	}
 
 	public static void checkedRemarks(String treatment) {
@@ -476,6 +473,9 @@ public class WorksDonePageActions extends BaseClass {
 				.findElement(By.xpath("//span[contains(text(),'" + treatment
 						+ "')]/../../following-sibling::div//tr//div[contains(@class,'notesWorkDone')]"))
 				.getText().contains(remarks));
+		WebElement web = driver.findElement(
+				By.xpath("//span[contains(text(),'" + treatment + "')]/following::textarea[@data-ng-model ='workLogList.remarks']"));
+		web.sendKeys(remarks);
 	}
 
 	public static void checkedAddButton(String treatment) {
@@ -489,8 +489,10 @@ public class WorksDonePageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		List<WebElement> web = driver.findElements(By.xpath("//span[contains(text(),'" + treatment
 				+ "')]/../../following-sibling::div//span[@class='actn-icn add']"));
+
 		Assert.assertEquals(web.size(), 0);
 	}
+
 
 	public static void clickOnAdd(String treatment) {
 		BaseClass.waitForPageLoad();
@@ -498,6 +500,7 @@ public class WorksDonePageActions extends BaseClass {
 				+ "')]/../../following-sibling::div//span[@class='actn-icn add']"));
 		web.click();
 		BaseClass.waitForSpinnerToDisappear();
+
 	}
 
 	public static void checkStatus(String treatment, String status) {
@@ -506,8 +509,10 @@ public class WorksDonePageActions extends BaseClass {
 				By.xpath("//span[contains(text(),'" + treatment + "')]/../../following-sibling::div/table/tbody/tr"));
 		for (int i = 1; webElements.size() > i; i++) {
 			int j = i + 1;
-			WebElement web = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
-					+ "')]/../../following-sibling::div/table/tbody/tr[" + j + "]/td[6]"));
+			
+			WebElement web = driver.findElement(
+					By.xpath("//span[contains(text(),'"+treatment+"')]/../../following-sibling::div/table/tbody/tr[" + j
+							+ "]/td[6]"));
 			Assert.assertTrue(web.getText().trim().contains(status));
 			break;
 		}
@@ -529,9 +534,9 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void clickOnEdit(String treatment) {
 		BaseClass.waitForPageLoad();
-		WebElement edit = driver.findElement(By.xpath(
-				"//span[contains(text(),'" + treatment + "')]/../..//following-sibling::span[@class='actn-icn edit']"));
-		edit.click();
+		WebElement edit = driver.findElement(By.xpath("//span[contains(text(),'" + treatment
+				+ "')]/../..//following-sibling::span[@class='actn-icn edit']"));
+	  edit.click();
 	}
 
 	public static void clickOnSaveAlignerPulledIn(String treatment) {
@@ -553,12 +558,12 @@ public class WorksDonePageActions extends BaseClass {
 
 	public static void clickSuspendBtn(String teethNo) {
 		BaseClass.waitForPageLoad();
-		WebElement ele = driver.findElement(By.xpath("//span[contains(text(),'" + teethNo
-				+ "')]/../following-sibling::div//span[@class='actn-icn suspend']"));
+		WebElement ele = driver.findElement(By.xpath("//span[contains(text(),'"+teethNo+"')]/../following-sibling::div//span[@class='actn-icn suspend']"));
 		ele.click();
 	}
 
 	/* Select the Reason after click on ReTreat button from Reason Dropdown field */
+
 	public static void selectRequire(String reasonValue) {
 		BaseClass.waitForPageLoad();
 		try {
@@ -584,6 +589,9 @@ public class WorksDonePageActions extends BaseClass {
 			BaseClass.waitForPageLoad();
 			BaseClass.waitForPageToBecomeActive();
 			BaseClass.waitForSpinnerToDisappear();
+			Thread.sleep(7000);
+			Assert.assertTrue(checkedElementDisplayed(worksDonePage.getLwoBtnWorkDone()));
+			worksDonePage.getLwoBtnWorkDone().click();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -593,6 +601,9 @@ public class WorksDonePageActions extends BaseClass {
 		return (element.isDisplayed());
 	}
 
+	// new method created by shrey sharma to collect payment using collectPay btn on
+	// Work done add page bcz of implementation of criteria to complete payment
+	// before completing the trt
 	public static void completePaymentToCompleteTrt() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
@@ -603,6 +614,7 @@ public class WorksDonePageActions extends BaseClass {
 			e.printStackTrace();
 		}
 		WebElement ele = driver.findElement(By.xpath("//a[@data-ng-click='redirectRcptType($event)']"));
+
 		System.out.println("Payment collect : " + ele.getText().trim());
 		if (ele.getText().trim().contains("Collect Pay")) {
 
@@ -619,6 +631,22 @@ public class WorksDonePageActions extends BaseClass {
 		} else
 			System.out.println("Payment already collected");
 
+		System.out.println("Payment collect : "+ele.getText().trim());
+		if(ele.getText().trim().contains("Collect Pay")) {
+		
+		BaseClass.WaitTillElementIsPresent(worksDonePage.getCollectPaymentBtn());
+		worksDonePage.getCollectPaymentBtn().click();
+		BaseClass.waitForSpinnerToDisappear();
+		NewReceiptPageActions.addingReceiptEqualRemainingAmount();
+		NewReceiptPageActions.clickSaveBtn();
+		
+		BasePatientLifeCyclePageActions.clickOnDashBoardReceiptPage();
+		BasePatientLifeCyclePageActions.clickOnAlert();
+
+		PatientDashboardPageActions.clickOnWorkDoneAdd();
+		}
+		else
+			System.out.println("Payment already collected");
 	}
 
 }

@@ -9,9 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.Status;
-
 import base.BaseClass;
 import pageActions.doctorDashboard.AppointmentAddPageActions;
 import pageActions.doctorDashboard.AppointmentsLisitngPageActions;
@@ -42,16 +40,14 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	Map<String, String> patntDiagnosticData = null;
 
 	@BeforeTest
-	public void testSetup() {
-		
+	public void testSetup() {	
 		patntDiagnosticData = SheetTest.prepareData("DiagnosticData","Diagnostic","A2","E2");
-		
 	}
+
 	
 	@Test(groups = {"Regression"},priority = 1)
 	public void checkedDiagnosticsAddUi() {
 		logger.log(Status.PASS, CHECKED_DIAGNOSTICS_ADD_UI);
-
 		CommonPageActions.backTODoctorDashboard();
 		//DoctorDashBoardPageActions.doctorDashboardHomePage();
 		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
@@ -101,7 +97,7 @@ public class DiagnosticTestsTestCase extends BaseClass {
 		DiagnosticTestsPageActions.closeDiagnosisPopup();
 		/*----------------Bio-chemical ui------------*/
 		DiagnosticTestsPageActions.clickBiochemicalButton();
-		DiagnosticTestsPageActions.checkedDiagnosisHeader("Diagnosis >> Bio- Chemical");
+		DiagnosticTestsPageActions.checkedDiagnosisHeader("Diagnosis >> Biochemical");
 		DiagnosticTestsPageActions.checked_Save_Close_Notes();
 		DiagnosticTestsPageActions.checkedBioChemicalDiagnosis();
 		DiagnosticTestsPageActions.closeDiagnosisPopup();
@@ -132,11 +128,12 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	@Test(groups = {"Smoke","Sanity","Functional","Regression"},priority = 2)
 	public void addDiagnostics() {
 		logger.log(Status.PASS, ADD_DIAGNOSTICS);
-		CommonPageActions.backTODoctorDashboard();
+
 		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
 		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
 		CommonPageActions.clickOnSearchBtn();
 		CommonPageActions.clickOnPatient(patntDiagnosticData.get("patient_mobile"),patntDiagnosticData.get("patient_name"));
+
 		PatientDashboardPageActions.clickOnDiagnosticsTestAdd();
 		BasePatientLifeCyclePageActions.clickOnAlert();
 		/*-------------------adding iopar---------------*/
@@ -211,7 +208,6 @@ public class DiagnosticTestsTestCase extends BaseClass {
 	@Test(groups = {"Functional","Regression"},priority = 3)
 	public void editDiagnostics() {
 		logger.log(Status.PASS, ADD_DIAGNOSTICS);
-		CommonPageActions.backTODoctorDashboard();
 		CommonPageActions.selectClinicFrmHeader(patntDiagnosticData.get("clinicLocation"));
 		CommonPageActions.enterMobileNo(patntDiagnosticData.get("patient_mobile"));
 		CommonPageActions.clickOnSearchBtn();

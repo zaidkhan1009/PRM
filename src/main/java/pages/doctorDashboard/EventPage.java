@@ -47,11 +47,11 @@ public class EventPage {
 	private WebElement eventSaveBtn;
 	@FindBy(xpath="//ul[@data-spy='affix']//i[text()='Cancel']")
 	private WebElement cancelBtn;
-	@FindBy(xpath = "//span[normalize-space()='Event added successfully!']")
+	@FindBy(className = "//span[normalize-space()='Event added successfully!']")
 	private WebElement eventAddSuccessMsg;
-	@FindBy(xpath = "//span[normalize-space()='Event updated successfully!']")
+	@FindBy(className = "//span[normalize-space()='Event updated successfully!']")
 	private WebElement eventUpdateSuccessMsg;
-	@FindBy(xpath = "//span[normalize-space()='Event deleted successfully!']")
+	@FindBy(className = "//span[normalize-space()='Event deleted successfully!']")
 	private WebElement eventDeleteSuccessMsg;
 	@FindBy(xpath="//label[normalize-space()='Full Day Event']")
 	private WebElement fulldayBtn;

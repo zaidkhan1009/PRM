@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.Reporter;
 import base.BaseClass;
@@ -29,31 +31,8 @@ public class AppointmentsLisitngPageActions extends BaseClass {
 	static AppointmentsLisitngPage clinicAppointmentsPage = PageFactory.initElements(driver,
 			AppointmentsLisitngPage.class);
 
-	public static void openGreenFlag(String patient) {
-		BaseClass.waitForPageLoad();
-		try {
-			WebElement web = driver.findElement(By.xpath("//span[contains(@data-pname,'" + patient + "')]"));
-			web.click();
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void verifyErrorMessage() {
-		BaseClass.waitForPageLoad();
-		BaseClass.waitForElementToBeClickable(clinicAppointmentsPage.getReasonErrorMsg());
-		Assert.assertTrue(checkIfElementDisplayed(clinicAppointmentsPage.getReasonErrorMsg()));
-	}
-
-	public static void intiateData() {
-		BaseClass.waitForPageLoad();
-		BaseClass.waitForElementToBeClickable(clinicAppointmentsPage.getFirstButton());
-		clinicAppointmentsPage.getFirstButton().click();
-	}
-
 	public static void enterFromDate(String SelectDate) {
-//        loginPage.waitForPageLoad();
+		// loginPage.waitForPageLoad();
 		// New code start
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForElementVisibility(clinicAppointmentsPage.getFromDateTxt());
@@ -81,7 +60,7 @@ public class AppointmentsLisitngPageActions extends BaseClass {
 		}
 
 		BaseClass.waitForPageToBecomeActive();
-// New Code End
+		// New Code End
 		// datepicker.selectDateofAppCal(SelectDate,
 		// clinicAppointmentsPage.getFromDateTxt());
 	}
@@ -124,26 +103,96 @@ public class AppointmentsLisitngPageActions extends BaseClass {
 		BaseClass.selectFromDropDownByVisibleText(clinicAppointmentsPage.getAppTypeDrpDwn(), AppType);
 		BaseClass.waitForPageLoad();
 	}
-    
-public static void clickOnLastPagePatientListing() {
-    	
-    	clinicAppointmentsPage = PageFactory.initElements(driver, AppointmentsLisitngPage.class);
-    	
-    	BaseClass.waitForSpinnerToDisappear();
-    	 try {
-    		 Thread.sleep(2500);
-    		
-    		 
-    	 } catch (InterruptedException e1) {
-             // TODO Auto-generated catch block
-             e1.printStackTrace();
-         }
-    	 BaseClass.waitForPageToBecomeActive();
+
+	public static void openGreenFlag(String patient) {
+		BaseClass.waitForPageLoad();
+		try {
+			WebElement web = driver.findElement(By.xpath("//span[normalize-space(text())='" + patient
+					+ "']/../../../following-sibling::span/span[contains(@class,'green')]"));
+			web.click();
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void verifyErrorMessage() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(clinicAppointmentsPage.getReasonErrorMsg());
+		Assert.assertTrue(checkIfElementDisplayed(clinicAppointmentsPage.getReasonErrorMsg()));
+	}
+
+	public static void intiateData() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(clinicAppointmentsPage.getFirstButton());
+		clinicAppointmentsPage.getFirstButton().click();
+	}
+
+//    public static void clickOnSearchBtn() {
+//        loginPage.waitForPageLoad();
+//        loginPage.waitForElementToBeClickable(clinicAppointmentsPage.getSearchBtn());
+//        try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e1) {
+//			e1.printStackTrace();
+//		}
+//        clinicAppointmentsPage.getSearchBtn().click();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+	public static void doctorTypeFilter(String DoctorName) {
+		BaseClass.waitForElementToBeEnable(By.id("clinicApptAllListTable_next"));
+		int appointments_Size = clinicAppointmentsPage.getTimeSlotApp().size();
+		List<WebElement> filterDoctor = driver.findElements(By.xpath("//td[contains(text(),'" + DoctorName + "')]"));
+		int input_Doctor_Filter = filterDoctor.size();
+		boolean flag = true;
+		while (flag) {
+			try {
+				boolean flag1;
+				if (flag1 = (appointments_Size == input_Doctor_Filter)) {
+					if (!clinicAppointmentsPage.getNextBtn().getAttribute("class").contains("disabled")) {
+						clinicAppointmentsPage.getNextBtn().click();
+						BaseClass.waitForElementToBeEnable(By.id("clinicApptAllListTable_next"));
+					}
+				} else {
+					Assert.assertTrue(flag1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			flag = !clinicAppointmentsPage.getNextBtn().getAttribute("class").contains("disabled");
+			if (!flag) {
+				List<WebElement> filterDoctor1 = driver
+						.findElements(By.xpath("//td[contains(text(),'" + DoctorName + "')]"));
+				int input_Doctor_Filter1 = filterDoctor1.size();
+				Assert.assertTrue(clinicAppointmentsPage.getTimeSlotApp().size() == input_Doctor_Filter1);
+			}
+		}
+	}
+
+	public static void clickOnLastPagePatientListing() {
+
+		clinicAppointmentsPage = PageFactory.initElements(driver, AppointmentsLisitngPage.class);
+
+		BaseClass.waitForSpinnerToDisappear();
+		try {
+			Thread.sleep(2500);
+
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		BaseClass.waitForPageToBecomeActive();
 //    	 BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
-    	 WebElement element = driver.findElement(By.xpath("//div[@class='clearfix topPagination pagingUI']//a[@class='last']"));
-    	 BaseClass.WaitTillElementIsPresent(element);
-	     element.click();
-    }
+		WebElement element = driver
+				.findElement(By.xpath("//div[@class='clearfix topPagination pagingUI']//a[@class='last']"));
+		BaseClass.WaitTillElementIsPresent(element);
+		element.click();
+	}
 
 	public static void selectAppStatusType(String AppStatusType) {
 		BaseClass.waitForPageLoad();
@@ -160,7 +209,6 @@ public static void clickOnLastPagePatientListing() {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForPageToBecomeActive();
 	}
-
 
 //    public static void clickOnSearchBtn() {
 //        loginPage.waitForPageLoad();
@@ -180,7 +228,8 @@ public static void clickOnLastPagePatientListing() {
 
 	public static boolean verifiyAppListHP() {
 		BaseClass.waitForPageLoad();
-		boolean flag = driver.getTitle().contains("Clinic Appointments") || driver.getTitle().contains("Appointment/Event Listing");
+		boolean flag = driver.getTitle().contains("Clinic Appointments")
+				|| driver.getTitle().contains("Appointment/Event Listing");
 		return flag;
 	}
 
@@ -265,54 +314,6 @@ public static void clickOnLastPagePatientListing() {
 				e.printStackTrace();
 			}
 			flag = false;
-		}
-	}
-
-	public static void doctorTypeFilter(String DoctorName) {
-
-		boolean noRecords = true;
-		try {
-			Thread.sleep(2000);
-			WebElement noRecordFound = driver
-					.findElement(By.xpath("//i[@class='ng-binding'][text()='No Record Found!']"));
-			noRecords = noRecordFound.isDisplayed();
-
-		} catch (NoSuchElementException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		if (!noRecords) {
-
-			BaseClass.waitForElementToBeEnable(By.id("clinicApptAllListTable_next"));
-			int appointments_Size = clinicAppointmentsPage.getTimeSlotApp().size();
-			List<WebElement> filterDoctor = driver
-					.findElements(By.xpath("//td[contains(text(),'" + DoctorName + "')]"));
-			int input_Doctor_Filter = filterDoctor.size();
-			boolean flag = true;
-			while (flag) {
-				try {
-					boolean flag1;
-					if (flag1 = (appointments_Size == input_Doctor_Filter)) {
-						if (!clinicAppointmentsPage.getNextBtn().getAttribute("class").contains("disabled")) {
-							clinicAppointmentsPage.getNextBtn().click();
-							BaseClass.waitForElementToBeEnable(By.id("clinicApptAllListTable_next"));
-						}
-					} else {
-						Assert.assertTrue(flag1);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				flag = !clinicAppointmentsPage.getNextBtn().getAttribute("class").contains("disabled");
-				if (!flag) {
-					List<WebElement> filterDoctor1 = driver
-							.findElements(By.xpath("//td[contains(text(),'" + DoctorName + "')]"));
-					int input_Doctor_Filter1 = filterDoctor1.size();
-					Assert.assertTrue(clinicAppointmentsPage.getTimeSlotApp().size() == input_Doctor_Filter1);
-				}
-			}
 		}
 	}
 
@@ -589,27 +590,28 @@ public static void clickOnLastPagePatientListing() {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForPageLoad();
 
-		List<WebElement> timeSlot = driver.findElements(By.xpath("//td[contains(@class,'text-left revisionBlock ng-scope')]"));
+		List<WebElement> timeSlot = driver
+				.findElements(By.xpath("//td[contains(@class,'text-left revisionBlock ng-scope')]"));
 		System.out.println("------------------------------------------------");
-		
+
 		int timeSlotCount = timeSlot.size();
 		System.out.println("timeSlotCount " + timeSlotCount);
-		
-		int confirmedCount = (clinicAppointmentsPage.getConfirmed().size()/2);
+
+		int confirmedCount = (clinicAppointmentsPage.getConfirmed().size() / 2);
 		System.out.println("confirmedCount :" + confirmedCount);
 
 		System.out.println("------------------------------------------------");
 
 		int noShowCount = (clinicAppointmentsPage.getNoShowStatus().size() / 2);
 		System.out.println("noShowCount " + noShowCount);
-		
-		int newShowCount = (clinicAppointmentsPage.getNewStatus().size()/2);
+
+		int newShowCount = (clinicAppointmentsPage.getNewStatus().size() / 2);
 		System.out.println("newShowCount " + newShowCount);
 
-		int followOnCount = (clinicAppointmentsPage.getFollowOnStatus().size()/2);
+		int followOnCount = (clinicAppointmentsPage.getFollowOnStatus().size() / 2);
 		System.out.println("followOnCount " + followOnCount);
 
-		int repeatCount = (clinicAppointmentsPage.getRepeatOnStatus().size()/2);
+		int repeatCount = (clinicAppointmentsPage.getRepeatOnStatus().size() / 2);
 		System.out.println("repeatCount " + repeatCount);
 
 		System.out.println("------------------------------------------------");
@@ -621,17 +623,18 @@ public static void clickOnLastPagePatientListing() {
 			while (flag) {
 				boolean flag1, flag2;
 
-				//if (flag1 = (clinicAppointmentsPage.getTimeSlotApp().size() == (clinicAppointmentsPage.getConfirmed().size() - 1))
-						
-				if (flag1 = (timeSlotCount==confirmedCount)
-						&& (clinicAppointmentsPage.getConfirmed().size() == (clinicAppointmentsPage.getNewStatus().size()
-							+ clinicAppointmentsPage.getFollowOnStatus().size()
-							+ clinicAppointmentsPage.getRepeatOnStatus().size()))) {
+				// if (flag1 = (clinicAppointmentsPage.getTimeSlotApp().size() ==
+				// (clinicAppointmentsPage.getConfirmed().size() - 1))
+
+				if (flag1 = (timeSlotCount == confirmedCount) && (clinicAppointmentsPage.getConfirmed()
+						.size() == (clinicAppointmentsPage.getNewStatus().size()
+								+ clinicAppointmentsPage.getFollowOnStatus().size()
+								+ clinicAppointmentsPage.getRepeatOnStatus().size()))) {
 					for (int i = 0; i < confirmedCount; i++) {
 
 						BaseClass.highlightElement(clinicAppointmentsPage.getConfirmed().get(i));
 						BaseClass.highlightElement(clinicAppointmentsPage.getViewBtn().get(i));
-						
+
 						flag2 = checkIfElementDisplayed(clinicAppointmentsPage.getViewBtn().get(i))
 								&& checkIfElementDisplayed(clinicAppointmentsPage.getConfirmed().get(i));
 						Assert.assertTrue(flag2);
@@ -926,7 +929,7 @@ public static void clickOnLastPagePatientListing() {
 	}
 
 	public static void noRecordFoundMsg() {
-		BaseClass.waitForElementVisibility(clinicAppointmentsPage.getNoRecordFoundMsg());
+		BaseClass.waitForElementToBeClickable(clinicAppointmentsPage.getNoRecordFoundMsg());
 		Assert.assertTrue(clinicAppointmentsPage.getNoRecordFoundMsg().isDisplayed());
 	}
 
@@ -938,20 +941,6 @@ public static void clickOnLastPagePatientListing() {
 		element.click();
 		BaseClass.waitForPageToBecomeActive();
 	}
-
-//    public static void clickOnPatient(String patient) {
-//        loginPage.waitForPageLoad();
-//        try {
-//            Thread.sleep(3000);
-//            WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient + "')]"));
-//            loginPage.waitForElementToBeClickable(element);
-//            element.click();
-//            Thread.sleep(4000);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
 
 	public static void verifyWebElementDeletePopup() {
 		BaseClass.waitForPageLoad();
@@ -993,19 +982,6 @@ public static void clickOnLastPagePatientListing() {
 		System.out.println("The Attribute Class Name Is" + " " + element.getAttribute("class"));
 		Assert.assertTrue(element.getAttribute("class").contains("dis-inline-blk ng-scope deleted"));
 	}
-
-//    public static void strikeOff(String patient) {
-//        loginPage.waitForPageLoad();
-//        try {
-//            Thread.sleep(3500);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient + "')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        Assert.assertTrue(element.getAttribute("class").contains("strikeOff"));
-//    }
 
 	public static void appointmentStatus(String patient, String status) {
 		BaseClass.waitForSpinnerToDisappear();
@@ -1063,27 +1039,12 @@ public static void clickOnLastPagePatientListing() {
 		Assert.assertTrue(element.isDisplayed());
 	}
 
-//    public static void type(String patient, String appointmentType) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../..//following-sibling::td/span[contains(text(),'" + appointmentType + "')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        Assert.assertTrue(element.isDisplayed());
-//    }
-
 	public static void verifyClinic(String patient, String clinic) {
 		WebElement element = driver
 				.findElement(By.xpath("//span[@class='dis-inline-blk ng-scope']" + "//span[contains(text(),'" + patient
 						+ "')]" + "/../../../../../..//td[contains(text(),'" + clinic + "')]"));
 		Assert.assertTrue(element.isDisplayed());
 	}
-
-//    public static void verifyClinic(String patient, String clinic) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../..//following-sibling::td[contains(text(),'" + clinic + "')]"));
-//        Assert.assertTrue(element.isDisplayed());
-//    }
 
 	public static void verifyServiceType(String patient, String servicename) {
 		WebElement element = driver
@@ -1109,22 +1070,6 @@ public static void clickOnLastPagePatientListing() {
 		Assert.assertTrue(element.isDisplayed());
 	}
 
-//    public static void checkDoctorName(String patient, String doctor) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[@class='dis-inline-blk ng-scope']"
-//        		+ "//span[contains(text(),'"+patient+"')]"
-//        		+ "/../../../../../..//span[contains(text(),'"+doctor+"')]"));
-//        loginPage.waitForElementToBeClickable(web);
-//        Assert.assertTrue(web.isDisplayed());
-//    }
-
-//    public static void checkDoctorName(String patient, String doctor) {
-//        loginPage.waitForPageLoad();
-//        WebElement web = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient + "')]/../../../following-sibling::td[contains(text(),'" + doctor + "')]"));
-//        loginPage.waitForElementToBeClickable(web);
-//        Assert.assertTrue(web.isDisplayed());
-//    }
-
 	public static void viewButton(String patient) {
 		WebElement element = driver
 				.findElement(By.xpath("//span[@class='dis-inline-blk ng-scope']" + "//span[contains(text(),'" + patient
@@ -1132,14 +1077,6 @@ public static void clickOnLastPagePatientListing() {
 		BaseClass.waitForElementToBeClickable(element);
 		Assert.assertTrue(element.isDisplayed());
 	}
-
-//    public static void viewButton(String patient) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../..//following-sibling::td//span[contains(@class,'actn-icn view')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        Assert.assertTrue(element.isDisplayed());
-//    }
 
 	public static void openViewModal(String patient, String time) throws bsh.ParseException, ParseException {
 		String twelveHourTime = BaseClass.convert24HourFormatTo12HourFormat(time).split(" ")[0];
@@ -1149,14 +1086,6 @@ public static void clickOnLastPagePatientListing() {
 		element.click();
 	}
 
-//    public static void openViewModal(String patient) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient + "')]/../../..//following-sibling::td//span[contains(@class,'actn-icn view')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        element.click();
-////      loginPage.switchToFrame(viewFrame);
-//    }
-
 	public static void editButton(String patient) {
 		BaseClass.waitForSpinnerToDisappear();
 		WebElement element = driver
@@ -1165,14 +1094,6 @@ public static void clickOnLastPagePatientListing() {
 		BaseClass.waitForElementVisibility(element, 4000);
 		Assert.assertTrue(element.isDisplayed());
 	}
-
-//    public static void editButton(String patient) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../../following-sibling::td//span[contains(@class,'actn-icn edit')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        Assert.assertTrue(element.isDisplayed());
-//    }
 
 	public static void clickEditButton(String patient) {
 		BaseClass.waitForSpinnerToDisappear();
@@ -1184,20 +1105,6 @@ public static void clickOnLastPagePatientListing() {
 
 	}
 
-//    public static void clickEditButton(String patient) {
-//        loginPage.waitForPageLoad();
-//        try {
-//            Thread.sleep(1500);
-//            WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                    + "')]/../../../following-sibling::td//span[contains(@class,'actn-icn edit')]"));
-//            loginPage.waitForElementToBeClickable(element);
-//            element.click();
-//            Thread.sleep(3500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 	public static void deleteButton(String patient) {
 		BaseClass.waitForPageLoad();
 		WebElement element = driver
@@ -1206,14 +1113,6 @@ public static void clickOnLastPagePatientListing() {
 		BaseClass.waitForElementToBeClickable(element);
 		Assert.assertTrue(element.isDisplayed());
 	}
-
-//    public static void deleteButton(String patient) {
-//        loginPage.waitForPageLoad();
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../../following-sibling::td//span[contains(@class,'actn-icn delete')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        Assert.assertTrue(element.isDisplayed());
-//    }
 
 	public static void clickDeleteButton(String patient) {
 		BaseClass.waitForSpinnerToDisappear();
@@ -1224,35 +1123,22 @@ public static void clickOnLastPagePatientListing() {
 		element.click();
 	}
 
-//    public static void clickDeleteButton(String patient) {
-//        loginPage.waitForPageLoad();
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        WebElement element = loginPage.getDriver().findElement(By.xpath("//span[contains(text(),'" + patient
-//                + "')]/../../../following-sibling::td//span[contains(@class,'actn-icn delete')]"));
-//        loginPage.waitForElementToBeClickable(element);
-//        element.click();
-//    }
-
 	public static void verifyAfterEditAtAppList(String patient, String timeSlot) {
 		BaseClass.waitForPageLoad();
-		String slotDate=null;
-		String slotTime=null;
-		
+		String slotDate = null;
+		String slotTime = null;
+
 		String slot[] = timeSlot.split(" ");
-		
-		//WebElement element = driver.findElement(By.xpath("//span[contains(text(),'" + patient + "')]/../../../preceding-sibling::td"));
-		WebElement element = driver.findElement(By.xpath("//span[contains(text(),'" + patient + "')]/../../../../../td[@class='text-left revisionBlock ng-scope deleted']/span"));
+
+		// WebElement element = driver.findElement(By.xpath("//span[contains(text(),'" +
+		// patient + "')]/../../../preceding-sibling::td"));
+		WebElement element = driver.findElement(By.xpath("//span[contains(text(),'" + patient
+				+ "')]/../../../../../td[@class='text-left revisionBlock ng-scope deleted']/span"));
 		BaseClass.waitForElementToBeClickable(element);
-		
-		System.out.println("sheet time :"+timeSlot);
-		System.out.println("appl. time :"+element.getText());
-		
-		
+
+		System.out.println("sheet time :" + timeSlot);
+		System.out.println("appl. time :" + element.getText());
+
 		Assert.assertTrue(element.getText().trim().contains(timeSlot));
 	}
 
@@ -1269,52 +1155,43 @@ public static void clickOnLastPagePatientListing() {
 		String timeText = (getTimeText.split("2023")[1]).trim();
 		try {
 			String getTimein12hrFormat = BaseClass.convert24HourFormatTo12HourFormat(time);
-			boolean Flag = getTimein12hrFormat.equalsIgnoreCase(timeText);
-			Assert.assertEquals(true, Flag);
-			System.out.println(getDateText);
-//			String getddFormat = loginPage.convertFormatingDate(date);
-//			Assert.assertEquals(getDateText, getddFormat);
-		} catch (ParseException e) {
+		}catch(ParseException e){
 			e.printStackTrace();
 		}
 	}
 
 	public static void clickFeedbackBtn(String patientName) {
-		BaseClass.waitForSpinnerToDisappear();
-		try {
-			Thread.sleep(5000);
-			WebElement feedbackButton = driver.findElement(By.xpath("//td//span[contains(text(),'" + patientName
-					+ "')]//../../../../../following-sibling::td//div//span[@class='actn-icn feedback']"));
-			feedbackButton.click();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    	BaseClass.waitForSpinnerToDisappear();
+        try {
+            Thread.sleep(5000);
+           WebElement feedbackButton= driver.findElement(By.xpath("//td//span[contains(text(),'"+patientName+"')]//../../../../../following-sibling::td//div//span[@class='actn-icn feedback']"));
+           feedbackButton.click();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public static void checkFeedbackBtnDisable(String toDate) {
-		BaseClass.waitForPageLoad();
-		try {
-			Thread.sleep(2000);
-			Assert.assertTrue(driver.findElements(By.xpath(
-					"//td[contains(text(),'" + toDate + "')]/following-sibling::td//span[@id='dashBoardFBList']"))
-					.size() == 0);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    	BaseClass.waitForPageLoad();
+        try {
+            Thread.sleep(2000);
+            Assert.assertTrue(driver.findElements(By.xpath("//td[contains(text(),'" + toDate + "')]/following-sibling::td//span[@id='dashBoardFBList']")).size() == 0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private static boolean checkIfNoShow(WebElement noShowButton, WebElement iconExpiredButton,
-			WebElement checkInButton) {
-		return (checkIfElementDisplayed(noShowButton)
-				&& (checkIfElementDisplayed(iconExpiredButton) || checkIfElementDisplayed(checkInButton)));
-	}
+	private static boolean checkIfNoShow(WebElement noShowButton, WebElement iconExpiredButton, WebElement checkInButton) {
+        return (checkIfElementDisplayed(noShowButton)
+                && (checkIfElementDisplayed(iconExpiredButton) || checkIfElementDisplayed(checkInButton)));
+    }
 
 	private static boolean checkIfConfirmed(WebElement deleteButton, WebElement editButton) {
-		return (checkIfElementDisplayed(deleteButton) && checkIfElementDisplayed(editButton));
-	}
+        return (checkIfElementDisplayed(deleteButton) && checkIfElementDisplayed(editButton));
+    }
 
 	private static boolean checkIfElementDisplayed(WebElement webElement) {
-		return (webElement != null && webElement.isDisplayed());
-	}
+        return (webElement != null && webElement.isDisplayed());
+    }
 
 }

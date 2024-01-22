@@ -141,10 +141,8 @@ public class AppointmentsLisitngPage {
 	private WebElement reasonErrorMsg;
 	@FindBy(xpath="//span[@class='actn-icn edit']/../../../div[1]")
 	private WebElement viewAction;
-	
 //    @FindBy(xpath = "//iframe[contains(@id,'fancybox-frame')]")
 //    private WebElement viewFrame;
-	
 	@FindBy(id = "tentative")
 	private WebElement tentativeHeaderView;
 	
@@ -161,7 +159,6 @@ public class AppointmentsLisitngPage {
 	public WebElement getViewAction() {
 		return viewAction;
 	}
-	
 	public WebElement getPatientName() {
 		return patientName;
 	}
