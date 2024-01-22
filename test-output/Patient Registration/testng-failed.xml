@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Patient Registration]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="utils.ExtentReportListener"/>
+  </listeners>
+  <test name="Test(failed)">
+    <classes>
+      <class name="tests.PatientRegistrationTestCase">
+        <methods>
+          <include name="createNewPatient"/>
+          <include name="configReport"/>
+          <include name="tearDown"/>
+          <include name="testSetup"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.PatientRegistrationTestCase -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Patient Registration] -->

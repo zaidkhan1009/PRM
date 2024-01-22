@@ -47,11 +47,11 @@ public class EventPage {
 	private WebElement eventSaveBtn;
 	@FindBy(xpath="//ul[@data-spy='affix']//i[text()='Cancel']")
 	private WebElement cancelBtn;
-	@FindBy(className = "//span[normalize-space()='Event added successfully!']")
+	@FindBy(xpath = "//span[normalize-space()='Event added successfully!']")
 	private WebElement eventAddSuccessMsg;
-	@FindBy(className = "//span[normalize-space()='Event updated successfully!']")
+	@FindBy(xpath = "//span[normalize-space()='Event updated successfully!']")
 	private WebElement eventUpdateSuccessMsg;
-	@FindBy(className = "//span[normalize-space()='Event deleted successfully!']")
+	@FindBy(xpath = "//span[normalize-space()='Event deleted successfully!']")
 	private WebElement eventDeleteSuccessMsg;
 	@FindBy(xpath="//label[normalize-space()='Full Day Event']")
 	private WebElement fulldayBtn;
@@ -85,7 +85,7 @@ public class EventPage {
 	private WebElement timeAlreadyPassErrorMsg;
 	@FindBy(xpath="//div[text()='Max limit reached for event booking by operatory for the time range!']")
 	private WebElement lastOperatoryAvailableErrorMsg;
-	@FindBy(xpath="//div[text()='Max limit reached for event booking by scanner for the time range!']")
+	@FindBy(xpath= "//div[text()='Event cannot be added for last remaining scanner!']") 				// changing the xpath "//div[text()='Max limit reached for event booking by scanner for the time range!']")
 	private WebElement lastScannerAvailableErrorMsg;
 	@FindBy(xpath="//div[text()='Time slot selected for event is already booked!']")
 	private WebElement eventAlreadyBookedForSlotErrorMsg;

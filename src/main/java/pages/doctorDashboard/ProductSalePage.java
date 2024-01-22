@@ -11,7 +11,7 @@ public class ProductSalePage {
 
     @FindBy(xpath = "//div[@class='modal overlay']")
     private WebElement loader;
-    @FindBy(xpath = "//span[@class='title']/span[text()='Product Sales']")
+    @FindBy(xpath = "//span[@class='title']/span[contains(text(),'Products')]")  // changed the xpath from "//span[@class='title']/span[text()='Product Sales']")
     private WebElement productSalesTab;
     @FindBy(xpath = "//span[@class='title' and text()='Edit Products']")
     private WebElement editProductSalesTab;

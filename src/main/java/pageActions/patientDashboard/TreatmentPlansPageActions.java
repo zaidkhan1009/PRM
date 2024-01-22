@@ -192,7 +192,9 @@ public class TreatmentPlansPageActions extends BaseClass{
 	
 	public static void clickOnNewTeethBtn() {
 		BaseClass.waitForSpinnerToDisappear();
+		BaseClass.waitForPageToBecomeActive();
 		BaseClass.waitForElementToBeClickable(treatmentPlansPage.getNewTeeth());
+		BaseClass.waitForModalOverlayToDisappear();
 		treatmentPlansPage.getNewTeeth().click();
 	}
 	
@@ -733,8 +735,7 @@ public class TreatmentPlansPageActions extends BaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement ele = driver.findElement(By.xpath("//span[text()='" + treatment
-				+ "']/../following-sibling::span[@class='price-trtmnt ng-binding bridgeTrt bridgeTrtchk']"));
+		WebElement ele = driver.findElement(By.xpath("//span[contains(normalize-space(),'"+treatment+"')]"));
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 	}
 

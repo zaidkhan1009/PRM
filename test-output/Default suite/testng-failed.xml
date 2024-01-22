@@ -3,6 +3,7 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="tests.TreatmentPlansTestCase1">
         <methods>
           <include name="configReport"/>
@@ -21,6 +22,17 @@
           <include name="checkEditInputList"/>
         </methods>
       </class> <!-- tests.TreatmentPlansTestCase1 -->
+=======
+      <class name="tests.LabWorkOrderListingTestCase1">
+        <methods>
+          <include name="configReport"/>
+          <include name="tearDown"/>
+          <include name="testSetup"/>
+          <include name="setup"/>
+          <include name="completePaymentAndCheckLWOStatus"/>
+        </methods>
+      </class> <!-- tests.LabWorkOrderListingTestCase1 -->
+>>>>>>> umar
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

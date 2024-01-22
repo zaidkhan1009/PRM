@@ -82,7 +82,10 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 			Assert.assertTrue(checkedWebElementDisplayed(ele));
 		}
 		else {
-			WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//span[@class='inactiveArrow']"));
+			WebElement ele = driver.findElement(By.xpath("//div[@class='textDataVisualizer tdvTooth ng-binding'][contains(text(),'"+teethNo+"')]/../../td/div/span/span[contains(text(),'"+revision+"')]/../../../../../tr/td/span[contains(@class,'inactiveArrow')]"));					
+					
+		// "//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//span[@class='inactiveArrow']"));
+			
 			Assert.assertTrue(checkedWebElementDisplayed(ele));
 		}
 	}
@@ -94,10 +97,14 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 		WebElement ele1 = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::tr[@class='ng-scope']//td[@class='wrd-brk-all ng-binding']/preceding-sibling::td/div[@class='text-center ng-binding']"));
 		String str = ele1.getText();
 		String split = str.substring(0,8);
-		String split1 = str.substring(8);
+		String split1 = str.substring(9);
 		String revisionDateTime = split+" "+split1.trim();
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 
+		System.out.println("revisionDateTime : "+ revisionDateTime);
+		System.out.println("startDateTime : "+ startDateTime);
+		System.out.println("endDateTime : "+ endDateTime);
+		
 		try {
 			SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yy H:mm a");
 			Date dateTime = fmt.parse(revisionDateTime);
@@ -127,9 +134,11 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	/*-- Checking the Source in Main List --*/
 	public static void checkSourceMainList(String teethNo) {
 		BaseClass.waitForPageLoad();
-		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::table[@class='table labTable ng-scope']//th[text()='Source']"));
-		WebElement ele1 = driver.findElement(By.xpath("//tr[@class='ng-scope']//td[contains(@class,'wrd-brk-all')]/div[contains(text(),'"+teethNo+"')]"));
-		String str = ele1.getText();
+		
+		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]"));
+		// changeing the xpath from driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::table[@class='table labTable ng-scope']//th[text()='Source']"));
+		//WebElement ele1 = driver.findElement(By.xpath("//tr[@class='ng-scope']//td[contains(@class,'wrd-brk-all')]/div[contains(text(),'"+teethNo+"')]"));
+		String str = ele.getText();
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 		Assert.assertTrue(str.contains(teethNo));
 	}
@@ -138,7 +147,9 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	public static void checkSourceForSuspAndRetreatMainList(String teethNo) {
 		BaseClass.waitForPageLoad();
 		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::table[@class='table labTable ng-scope']//th[text()='Source']"));
-		WebElement ele1 = driver.findElement(By.xpath("//tr[@class='ng-scope']//td[contains(@class,'wrd-brk-all')]//span[contains(text(),'"+teethNo+"')]"));
+		WebElement ele1 = driver.findElement(By.xpath("//span[@class='txtRed txt_strikeOff ng-binding'][contains(text(),'12')]"));
+				
+		// changing the xpath of the locator to identify the source ("//tr[@class='ng-scope']//td[contains(@class,'wrd-brk-all')]//span[contains(text(),'"+teethNo+"')]"));
 		String str = ele1.getText();
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 		if(ele1.getAttribute("class").contains("txtRed")) {
@@ -190,12 +201,18 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 		Assert.assertEquals(split, revision);
 		Assert.assertEquals(exp_reason, reason);
+		
+		
 	}
 
 	/*-- Checking the InActive Revision and Reason in Main List --*/
 	public static void checkInActiveRevisionReasonMainList(String teethNo,String revision,String reason) {
 		BaseClass.waitForPageLoad();
-		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//div[@class='revisionBlock text-center ng-binding']"));
+		WebElement ele = driver.findElement(By.xpath("(//div[contains(text(),'"+teethNo+"')]/../../td/div/span/span[contains(text(),'"+revision+"')]/../..)[1]"));
+				
+		// "//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//div[@class='revisionBlock text-center ng-binding']"));
+		
+		
 		String str = ele.getText();
 		String split = str.substring(0,10);
 		String split1 = str.substring(10);
@@ -219,10 +236,14 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	/*-- Checking the Status and Date in Main List --*/
 	public static void checkStatusDateMainList(String teethNo,String status,String startDateTime,String endDateTime ) {
 		BaseClass.waitForPageLoad();
-		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::table[@class='table labTable ng-scope']//th[text()='Status/Date']"));
-		WebElement ele1 = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::tr[@class='ng-scope']//div[@class='text-center ng-binding']//span[text()='"+status+"']/.."));
-		String str = ele1.getText();
-		String[] split = str.split("\\R");
+		
+		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/../../td/div/span[text()='"+status+"']/.."));
+		String str = ele.getText();
+//		changed the xpath of the locator from below line
+//		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::table[@class='table labTable ng-scope']//th[text()='Status/Date']"));
+//		WebElement ele1 = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::tr[@class='ng-scope']//div[@class='text-center ng-binding']//span[text()='"+status+"']/.."));
+//		String str = ele1.getText();
+		String[] split = str.split("\\n");
 		Assert.assertEquals(split[0],status);
 		String actual_DateTime = split[1];
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
@@ -279,6 +300,7 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 		WebElement viewBtn = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/ancestor::tr[@class='ng-scope']//span[@class='actn-icn view']"));
 		Assert.assertTrue(checkedWebElementDisplayed(viewBtn));
 		viewBtn.click();
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 	/*click on View When Rework button is present in LWO listing*/
@@ -316,7 +338,10 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	/*Check View button for InActive LWO show in LWO listing*/
 	public static void checkInActiveViewBtn(String teethNo,String revision) {
 		BaseClass.waitForPageLoad();
-		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//span[@class='actn-icn view']"));
+		WebElement ele = driver.findElement(By.xpath("//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/../../../../../tr/td/div/a[@data-ng-click='view(labRecords.LabWorkOrder.id, labRecords.lwostage)']"));
+				
+		// "//div[contains(text(),'"+teethNo+"')]/../following-sibling::td//span[contains(text(),'"+revision+"')]/ancestor::tr[@class='ng-scope labInActive']//span[@class='actn-icn view']"));
+		
 		Assert.assertTrue(checkedWebElementDisplayed(ele));
 	}
 
@@ -651,6 +676,9 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	public static void checkStatusEnableInView(String statusName) {
 		BaseClass.waitForPageLoad();
 		try {
+			if(statusName.equalsIgnoreCase("Payable To Lab")) {
+				statusName="Payable";
+			}
 			Thread.sleep(3000);
 			WebElement ele = driver.findElement(By.xpath("(//div[text()='"+statusName+"']/..//div[@class='glyphicon glyphicon-ok'])[1]"));
 			Assert.assertTrue(checkedWebElementDisplayed(ele));
@@ -663,6 +691,12 @@ public class LabWorkOrderListingPageActions extends BaseClass {
 	/*-- Verifying All Status whose are Enable in View --*/
 	public static void verifyStatusInView(String statusName,String startDateTime,String endDateTime) {
 		BaseClass.waitForPageLoad();
+		
+		
+		//WebElement ele = driver.findElement(By.xpath("((//div[text()='"+statusName+"']/../following-sibling::div[@class='pos three'])[1]/div)[3]"));		
+			if(statusName.equalsIgnoreCase("Payable To Lab")) {
+				statusName="Payable";
+			}
 		WebElement ele = driver.findElement(By.xpath("(//div[text()='"+statusName+"']/following-sibling::div[@class='graphTxtBtm ng-binding'])[1]"));
 		String str = ele.getText();
 		try {

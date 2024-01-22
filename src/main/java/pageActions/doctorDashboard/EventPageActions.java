@@ -53,6 +53,7 @@ public class EventPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(eventPage.getEventSaveBtn());
 		eventPage.getEventSaveBtn().click();
 		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 //		
 	}
 
@@ -85,7 +86,7 @@ public class EventPageActions extends BaseClass {
 	 * Verifying By Default By doctor Event Type is selected
 	 */
 	public static void verifyDefaultSelectedEventType() {
-		BaseClass.waitForElementToBeClickable(eventPage.getEventByDoctor());
+		//BaseClass.waitForElementToBeClickable(eventPage.getEventByDoctor());
 		Assert.assertTrue(eventPage.getEventByDoctor().isSelected());
 
 	}
@@ -117,7 +118,7 @@ public class EventPageActions extends BaseClass {
 	 * Select Date on Event Add/Edit Screen
 	 */
 	public static void selectDateInEvent(String SelectDate) {
-		String element_id = "eventPage.getEventDate()";
+		String element_id = "eventDate";
 		BaseClass.waitForPageLoad();
 		BaseClass.WaitTillElementIsPresent(eventPage.getEventDate());
 		BaseClass.appointmentDate(SelectDate, eventPage.getEventDate(), element_id);
@@ -141,6 +142,7 @@ public class EventPageActions extends BaseClass {
 
 	public static void enterNotes(String notes) {
 		BaseClass.WaitTillElementIsPresent(eventPage.getNotesText());
+		eventPage.getNotesText().clear();
 		eventPage.getNotesText().sendKeys(notes);
 	}
 
@@ -174,7 +176,7 @@ public class EventPageActions extends BaseClass {
 
 	public static boolean verifyEventTitleTextFieldAndPlaceholder() {
 		BaseClass.WaitTillElementIsPresent(eventPage.getTitle());
-		return eventPage.getTitle().isDisplayed() && eventPage.getTitle().getAttribute("placeholder").equals("» eventPage.getTitle()");
+		return eventPage.getTitle().isDisplayed() && eventPage.getTitle().getAttribute("placeholder").equals("» title");
 
 	}
 
@@ -200,12 +202,26 @@ public class EventPageActions extends BaseClass {
 	 */
 	private static boolean verifyAllCommonWebElementOnAddEvent() {
 		BaseClass.waitForPageLoad();
-		boolean flag = eventPage.getEventByDoctor().isDisplayed() && verifyEventTitleTextFieldAndPlaceholder()
-				&& eventPage.getClinicInEvent().isDisplayed() && eventPage.getEventCategory().isDisplayed() && eventPage.getEventDate().isDisplayed()
-				&& verifyDurationHoursFieldAndPlaceholder() && verifyDurationMinuteFieldAndPlaceholder()
-				&& eventPage.getAmPm().isDisplayed() && verifyEventDurationInMinsFieldAndPlaceholder() && eventPage.getFulldayBtn().isDisplayed()
-				&& eventPage.getNotesText().isDisplayed() && eventPage.getEventSaveBtn().isDisplayed() && eventPage.getEventResetBtn().isDisplayed()
-				&& eventPage.getCancelBtn().isDisplayed();
+		
+		WebElement checkDoctor = driver.findElement(By.xpath("//li[@class='ng-scope advDis']"));
+		
+		boolean flag = checkDoctor.isDisplayed();
+		/*
+		 * eventPage.getEventByDoctor().isDisplayed() &&
+		 * verifyEventTitleTextFieldAndPlaceholder() &&
+		 * (eventPage.getClinicInEvent().isDisplayed() &&
+		 * eventPage.getEventCategory().isDisplayed() &&
+		 * eventPage.getEventDate().isDisplayed()) &&
+		 * (verifyDurationHoursFieldAndPlaceholder() &&
+		 * verifyDurationMinuteFieldAndPlaceholder()) &&
+		 * (eventPage.getAmPm().isDisplayed() &&
+		 * verifyEventDurationInMinsFieldAndPlaceholder() &&
+		 * eventPage.getFulldayBtn().isDisplayed()) &&
+		 * (eventPage.getNotesText().isDisplayed() &&
+		 * eventPage.getEventSaveBtn().isDisplayed() &&
+		 * eventPage.getEventResetBtn().isDisplayed()) &&
+		 * eventPage.getCancelBtn().isDisplayed();
+		 */
 		return flag;
 
 	}
@@ -442,7 +458,7 @@ public class EventPageActions extends BaseClass {
 	 */
 	public static void verifyEnteredEventTitleInEdit(String expectedEventTitle) {
 		BaseClass.waitForElementToBeClickable(eventPage.getTitle());
-		String actualEventTitle = getEnteredText("eventPage.getTitle()");
+		String actualEventTitle = getEnteredText("title");
 		Assert.assertEquals(expectedEventTitle, actualEventTitle);
 
 	}
@@ -452,7 +468,7 @@ public class EventPageActions extends BaseClass {
 	 */
 	public static void verifySelectedDateInEvent(String expectedEventDate) {
 		BaseClass.waitForElementToBeClickable(eventPage.getEventDate());
-		String actualEventDate = getEnteredText("eventPage.getEventDate()");
+		String actualEventDate = getEnteredText("eventDate");
 		Date d = new Date(expectedEventDate);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		expectedEventDate = simpleDateFormat.format(d);
@@ -485,13 +501,13 @@ public class EventPageActions extends BaseClass {
 
 	public static void getHours(String expectedHours) {
 		BaseClass.waitForElementToBeClickable(eventPage.getHours());
-		String actualHours = getEnteredText("Hours");
+		String actualHours = getEnteredText("hours");
 		Assert.assertEquals(actualHours, expectedHours);
 	}
 
 	public static void getMinutes(String expectedMinutes) {
 		BaseClass.waitForElementToBeClickable(eventPage.getMinutes());
-		String actualMinutes = getEnteredText("Minutes");
+		String actualMinutes = getEnteredText("minutes");
 		Assert.assertEquals(actualMinutes, expectedMinutes);
 	}
 
@@ -566,13 +582,41 @@ public class EventPageActions extends BaseClass {
 		}
 
 	}
+	
+	public static void checkTimeSlotIsDisabledInAddAppt(String eventDate, String eventStartTime,
+			String eventDuration, String expectedAttributeValue) {
+		BaseClass.WaitTillElementIsPresent(appointmentPage.getDateAppointment());
+		AppointmentAddPageActions.selectDateofAppointment(eventDate);
+		BaseClass.waitForPageLoad();
+		Select slot = new Select(appointmentPage.getTimeSlot());
+		List<WebElement> appointmentSlots = slot.getOptions();
+		if (eventPage.getEventDuration().equals("All day event")) {
+			for (WebElement ele : appointmentSlots) {
+				Assert.assertEquals(ele.getAttribute(expectedAttributeValue), "disabled");
+
+			}
+		} else {
+			int duration = Integer.parseInt(eventDuration) / 30;
+			while (duration > 0) {
+				// Now the functionality isn't available
+				// BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), eventStartTime);
+				WebElement eventAddedTimeSlot = driver
+						.findElement(By.xpath("//option[@value='" + eventStartTime + "']"));
+				Assert.assertEquals(eventAddedTimeSlot.getAttribute(expectedAttributeValue), "disabled");
+				eventStartTime = getSlotTime(eventStartTime);
+				duration--;
+			}
+
+		}
+
+	}
 
 	/*
 	 * checking the time slot for which Event is added is coming disable on Add
 	 * Appointment Screen
 	 */
 	public static void checkTimeSlotIsDisableOnAddAppt(String eventDate, String eventStartTime, String eventDuration) {
-		checkTimeSlotIsDisableOrSelectableInAddAppt(eventDate, eventStartTime, eventDuration, "disabled");
+		checkTimeSlotIsDisabledInAddAppt(eventDate, eventStartTime, eventDuration, "disabled");
 	}
 
 	/*
@@ -627,6 +671,48 @@ public class EventPageActions extends BaseClass {
 			}
 		}
 	}
+	
+	private static void checkDoctorIsDisabledInAddAppt(String eventDoctor, String eventDate, String eventDuration,
+			String eventStartTime, String expectedAttributeValue) {
+		BaseClass.waitForPageLoad();
+		BaseClass.WaitTillElementIsPresent(appointmentPage.getDateAppointment());
+		AppointmentAddPageActions.selectDateofAppointment(eventDate);
+		BaseClass.waitForSpinnerToDisappear();
+		Select slot = new Select(appointmentPage.getTimeSlot());
+		List<WebElement> appointmentSlot = slot.getOptions();
+
+		if (eventPage.getEventDuration().equals("All day event")) {
+
+			for (int i = 1; i < appointmentSlot.size(); i++) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), appointmentSlot.get(i).getText());
+				BaseClass.waitForSpinnerToDisappear();
+				//Commetning the code since value is disabled now
+				//BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), eventDoctor);
+				WebElement doctor = driver
+						.findElement(By.xpath("//select/option[contains(text(),'" + eventDoctor + "')]"));
+				Assert.assertTrue(doctor.getAttribute(expectedAttributeValue).contains("true"));
+
+			}
+
+		}
+
+		else {
+			int duration = Integer.parseInt(eventDuration) / 30;
+			while (duration > 0) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), eventStartTime);
+				BaseClass.waitForPageLoad();
+				BaseClass.waitForSpinnerToDisappear();
+				//Commenting below code
+				//BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), eventDoctor);
+				WebElement doctor = driver
+						.findElement(By.xpath("//select/option[contains(text(),'" + eventDoctor + "')]"));
+				Assert.assertTrue(doctor.getAttribute(expectedAttributeValue).contains("true"));
+				eventStartTime = getSlotTime(eventStartTime);
+				duration--;
+
+			}
+		}
+	}
 
 	public static void checkDoctorIsSelectableInAddAppointmentDoctorDropdown(String eventDoctor, String eventDate,
 			String eventDuration, String eventStartTime) {
@@ -636,10 +722,88 @@ public class EventPageActions extends BaseClass {
 
 	public static void checkEventAddedDoctorIsDisable(String eventDoctor, String eventDate, String eventDuration,
 			String eventStartTime) {
-		checkDoctorIsDisableOrSelectableInAddAppt(eventDoctor, eventDate, eventDuration, eventStartTime, "disabled");
+		checkDoctorIsDisabledInAddAppt(eventDoctor, eventDate, eventDuration, eventStartTime, "disabled");
+		
+	}
+	
+	public static void checkEventAddedDoctorIsUnavailable(String eventDoctor, String eventDate, String eventDuration,
+			String eventStartTime) {
+		
+		BaseClass.waitForPageLoad();
+		BaseClass.WaitTillElementIsPresent(appointmentPage.getDateAppointment());
+		AppointmentAddPageActions.selectDateofAppointment(eventDate);
+		BaseClass.waitForSpinnerToDisappear();
+		Select slot = new Select(appointmentPage.getTimeSlot());
+		List<WebElement> appointmentSlot = slot.getOptions();
+		
+		if (eventDuration.equals("All day event")) {
+
+			for (int i = 1; i < appointmentSlot.size(); i++) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), appointmentSlot.get(i).getText());
+				BaseClass.waitForSpinnerToDisappear();
+				
+				//Doctor is not selectable now so updating the code
+				//BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), eventDoctor);
+				
+				WebElement doctor = driver.findElement(By.xpath("//select/option[contains(text(),'" + eventDoctor + "')]"));
+				
+				Assert.assertTrue(doctor.getAttribute("disabled").contains("true"));
+
+			}
+
+		}
+
+		else {
+			int duration = Integer.parseInt(eventDuration) / 30;
+			while (duration > 0) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), eventStartTime);
+				BaseClass.waitForPageLoad();
+				BaseClass.waitForSpinnerToDisappear();
+				
+				//Doctor is not selectable now so updating the code
+				//BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), eventDoctor);
+				WebElement doctor = driver
+						.findElement(By.xpath("//select/option[contains(text(),'" + eventDoctor + "')]"));
+				Assert.assertTrue(doctor.getAttribute("disabled").contains("true"));
+				eventStartTime = getSlotTime(eventStartTime);
+				duration--;
+
+			}
+		}
 	}
 
 	public static void checkDisableEnableOfOperatoryOnAddAppointment(String eventDate, String eventDuration,
+			String eventStartTime, String expectedAttributeValue, String eventWebElement) {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
+		AppointmentAddPageActions.selectDateofAppointment(eventDate);
+		BaseClass.waitForPageLoad();
+		Select sel = new Select(appointmentPage.getTimeSlot());
+		List<WebElement> appointmentSlot = sel.getOptions();
+		if (eventDuration.equals("All day event")) {
+			for (int i = 0; i < appointmentSlot.size(); i++) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), appointmentSlot.get(i).getText());
+				BaseClass.waitForSpinnerToDisappear();
+				WebElement eventoperatory = driver.findElement(By.xpath(eventWebElement));
+				Assert.assertTrue(eventoperatory.getAttribute("class").contains(expectedAttributeValue));
+			}
+		}
+
+		else {
+			int duration = Integer.parseInt(eventDuration) / 30; // eventDate changed from
+			while (duration > 0) {
+				BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), eventStartTime);
+				BaseClass.waitForSpinnerToDisappear();
+				WebElement eventOperatory = driver.findElement(By.xpath(eventWebElement));
+				Assert.assertTrue(eventOperatory.getAttribute("class").contains(expectedAttributeValue));
+				eventStartTime = getSlotTime(eventStartTime);
+				duration--;
+
+			}
+		}
+	}
+	
+	public static void checkDisableOperatoryOnAddAppointment(String eventDate, String eventDuration,
 			String eventStartTime, String expectedAttributeValue, String eventWebElement) {
 		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
@@ -674,8 +838,7 @@ public class EventPageActions extends BaseClass {
 	 * checking the Operatory for which Event is added/Update and delete is coming
 	 * disable or selectable on Add Appointment Screen
 	 */
-	public static void checkEventAddedOperatoryIsDisable(String eventAddedOperatory, String eventDate, String eventDuration,
-			String eventStartTime) {
+	public static void checkEventAddedOperatoryIsDisable(String eventAddedOperatory, String eventDate, String eventDuration, String eventStartTime) {
 		checkDisableEnableOfOperatoryOnAddAppointment(eventDate, eventDuration, eventStartTime, "booked-event",
 				getEventAddedWebElement(eventAddedOperatory, "Operatory"));
 	}

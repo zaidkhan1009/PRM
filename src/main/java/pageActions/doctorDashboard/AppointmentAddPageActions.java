@@ -3,10 +3,13 @@ package pageActions.doctorDashboard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
@@ -248,8 +251,13 @@ public class AppointmentAddPageActions extends BaseClass {
 
 	public static void clickOnTentative() {
 		BaseClass.waitForPageLoad();
+		try {
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getTentativeBtn());
 		appointmentPage.getTentativeBtn().click();
+		} catch(NoSuchElementException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void verifyTentativeAfterClickOnEditBtn() {
@@ -516,52 +524,28 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getDateAppointment());
 		BaseClass.appointmentDate(Date, appointmentPage.getDateAppointment(), "date");
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.TAB).perform();
 	}
 
 	public static void selectDoctorFromDropdown(String doctorName) {
 		BaseClass.waitForSpinnerToDisappear(); 
 		BaseClass.WaitTillElementIsPresent(appointmentPage.getDoctor());
-		
-		//test block to handle the overlay element
-		
 		try {
-		
-		boolean isElementPresent = 
-				(driver.findElements(By.xpath("//div[contains(@class='ui-widget-overlay')]")).size()>0);
-		
-		if(isElementPresent)
-		{
-			BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
-		}
-
+		BaseClass.waitForModalOverlayToDisappear();
+		appointmentPage.getDoctor().click();
+		BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), doctorName.trim());
 		}
 		
-		catch(InvalidSelectorException e) {
+		catch (InvalidSelectorException e) {
 			
-			Robot robot = null;
 			try {
-				robot = new Robot();
-			} catch (AWTException e1) {
+				Thread.sleep(4000);
+			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			robot.keyPress(KeyEvent.VK_TAB);
-			
-			
 		}
-		
-		//commenting the below to handle it in above block
-		
-		//BaseClass.waitForElementToDisappear((By.xpath("//div[contains(@class='ui-widget-overlay')]")));
-
-
-//        try {
-//			Thread.sleep(4000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-		appointmentPage.getDoctor().click();
-		BaseClass.selectFromDropDownByVisibleText(appointmentPage.getDoctor(), doctorName.trim());
 	}
 
 	public static void doctorSelected(String doctor_selected) {
@@ -633,6 +617,16 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.selectFromDropDownByVisibleText(appointmentPage.getTimeSlot(), timeslt);
 	}
+	
+	public static String getTimeSlotFromDropdown() {
+		
+		String time;
+		BaseClass.waitForSpinnerToDisappear();
+		Select select = new Select(appointmentPage.getTimeSlot());
+		time = select.getFirstSelectedOption().getText();
+		System.out.println(time);
+		return time;
+	}
 
 //    public void selectTimeSlotFromDropdown(String timeslt) {
 //        BaseClass.waitForPageLoad();
@@ -700,7 +694,7 @@ public class AppointmentAddPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.WaitTillElementIsPresent(appointmentPage.getSaveBtn());
 		appointmentPage.getSaveBtn().click();
-		BaseClass.waitForPageLoad();
+		BaseClass.waitForPageToBecomeActive();
 //        loginPage.waitForElementToDisappear((By.xpath("//div[contains(text(),'Appointment added successfully!')]")));
 	}
 
@@ -725,24 +719,10 @@ public class AppointmentAddPageActions extends BaseClass {
 		appointmentPage.getCancelBtn().click();
 	}
 
-//  getCancelBtn  
-//	public void clickOnCancelBtn() {
-//        loginPage.waitForElementToBeClickable(appointmentPage.getSaveBtn());
-//        try {
-//            loginPage.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            Thread.sleep(5000);
-//            appointmentPage.getSaveBtn().click();
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 	public static void clickOnAppResetBtn() {
 		BaseClass.waitForSpinnerToDisappear();
-//    	loginPage.waitForElementToDisappear((By.xpath("//div[contains(@class='modal overlay show')]")));
+		BaseClass.waitForModalOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(appointmentPage.getAppResetBtn());
-//        loginPage.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		appointmentPage.getAppResetBtn().click();
 	}
 

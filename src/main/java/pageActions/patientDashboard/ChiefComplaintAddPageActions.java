@@ -22,8 +22,11 @@ public class ChiefComplaintAddPageActions extends BaseClass {
 	/*checking chief complaint at the input listing*/
 	public static void verifyChiefComplaintsInputList(String ChiefComplaints) {
 		BaseClass.waitForPageLoad();
-		WebElement element = driver
-				.findElement(By.xpath("//td[contains(text(),'" + ChiefComplaints + "')]"));
+		WebElement element = driver.findElement(By.xpath("//div[@class='brdrBox']/div/div/button[contains(text(),'"+ChiefComplaints+"')]"));
+				
+				//div[@class='brdrBox']/div/div/button[contains(text(),'Other')]
+		
+		//driver.findElement(By.xpath("//td[contains(text(),'" + ChiefComplaints + "')]"));
 		Assert.assertTrue(checkedElementDisplayed(element));
 	}
 

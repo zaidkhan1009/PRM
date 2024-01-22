@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
@@ -179,6 +180,36 @@ at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:204)
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- tests.DiagnosticTestsTestCase -->
+=======
+<testng-results ignored="29" total="30" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-01-18T10:25:02Z" name="Suite" finished-at="2024-01-18T10:25:34Z" duration-ms="31770">
+    <groups>
+      <group name="Regression">
+        <method signature="EventTestCase.verifyResetBtnOnEventListing()[pri:0, instance:tests.EventTestCase@63c5efee]" name="verifyResetBtnOnEventListing" class="tests.EventTestCase"/>
+      </group> <!-- Regression -->
+    </groups>
+    <test started-at="2024-01-18T10:25:02Z" name="Test" finished-at="2024-01-18T10:25:34Z" duration-ms="31770">
+      <class name="tests.EventTestCase">
+        <test-method is-config="true" signature="configReport()[pri:0, instance:tests.EventTestCase@63c5efee]" started-at="2024-01-18T15:55:02Z" name="configReport" finished-at="2024-01-18T15:55:02Z" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configReport -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.EventTestCase@63c5efee]" started-at="2024-01-18T15:55:02Z" name="setup" finished-at="2024-01-18T15:55:12Z" duration-ms="9526" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyResetBtnOnEventListing()[pri:0, instance:tests.EventTestCase@63c5efee]" started-at="2024-01-18T15:55:12Z" name="verifyResetBtnOnEventListing" description="2: Verify Reset Button woking on Event Listing" finished-at="2024-01-18T15:55:34Z" duration-ms="22067" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyResetBtnOnEventListing -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.EventTestCase@63c5efee]" started-at="2024-01-18T15:55:34Z" name="tearDown" finished-at="2024-01-18T15:55:34Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.EventTestCase -->
+>>>>>>> umar
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

@@ -546,6 +546,55 @@ public class OralExamsPageActions extends BaseClass {
 		BaseClass.waitForElementToBeClickable(oralExamsPage.getTMJoint());
 		oralExamsPage.getTMJoint().click();
 	}
+	
+	public static void clickOnMandibularAngleOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getMandibularAngleOnPopup());
+		oralExamsPage.getMandibularAngleOnPopup().click();
+	}
+
+	public static void clickOnMandibularBodyOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getMandibularBodyOnPopup());
+		oralExamsPage.getMandibularBodyOnPopup().click();
+	}
+
+	public static void clickOnMaxillaryTuberosityOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getMaxillaryTuberosityOnPopup());
+		oralExamsPage.getMaxillaryTuberosityOnPopup().click();
+	}
+
+	public static void clickOnPosteriorMaxillaOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getPosteriorMaxillaOnPopup());
+		oralExamsPage.getPosteriorMaxillaOnPopup().click();
+	}
+
+	public static void clickOnPreMaxillaOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getPreMaxillaOnPopup());
+		oralExamsPage.getPreMaxillaOnPopup().click();
+	}
+
+	public static void clickOnMaxillarySinusOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getMaxillarySinusOnPopup());
+		oralExamsPage.getMaxillarySinusOnPopup().click();
+	}
+
+	public static void clickOnMandibularSymphysisOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getMandibularSymphysisOnPopup());
+		oralExamsPage.getMandibularSymphysisOnPopup().click();
+	}
+
+	public static void clickOnTMJointOnPopup() {
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForElementToBeClickable(oralExamsPage.getTMJointOnPopup());
+		oralExamsPage.getTMJointOnPopup().click();
+	}
+
 
 	public static void clickOnHardTissueInPopup() {
 		BaseClass.waitForElementVisibility(oralExamsPage.getHardTissueOnPopUp(),4000);

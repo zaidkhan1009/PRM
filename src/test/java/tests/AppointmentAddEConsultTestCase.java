@@ -81,7 +81,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	public void mandatoryFields() {
 
 		logger.log(Status.PASS, MANDATORY_FIELDS); // Status
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		BaseClass.openAddAppointmentPage();
 		AppointmentAddPageActions.selectEConsult();
 		AppointmentAddPageActions.checkAppointmenteConsult();
 		AppointmentAddPageActions.enterMobileNumber(patntAppnmntData.get("patient_mobile"));
@@ -134,7 +134,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, BOOK_NEW_APPOINTMENT_E_CONSULT); // Status
 
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		BaseClass.openAddAppointmentPage();
 		AppointmentAddPageActions.selectEConsult();
 		AppointmentAddPageActions.checkAppointmenteConsult();
 		AppointmentAddPageActions.enterPatientName(patntAppnmntData.get("patient_name"));
@@ -151,7 +151,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 		AppointmentAddPageActions.clickOnChiefComplaints(patntAppnmntData.get("chiefComplaint"));
 		AppointmentAddPageActions.enterNote(patntAppnmntData.get("notes"));
 		AppointmentAddPageActions.clickOnSaveBtn();
-//      CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
+		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
 		CommonPageActions.backToDoctorDashbrd();
 		DoctorDashBoardPageActions.clickOnAppListBtn();
 		AppointmentsLisitngPageActions.clickOnLastPage();
@@ -209,7 +209,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 		logger.log(Status.PASS, EDIT_APPOINTMENT); // Status
 
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
-		DoctorDashBoardPageActions.clickOnAppListBtn();
+		BaseClass.openAddAppointmentPage();
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();
@@ -262,7 +262,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, EDIT_APPOINTMENT); // Status
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
-		DoctorDashBoardPageActions.clickOnAppListBtn();
+		BaseClass.openAddAppointmentPage();
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();
@@ -306,7 +306,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, VERIFY_ALREADY_BOOKED_DOCTOR_SLOT); // Status
 
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		BaseClass.openAddAppointmentPage();
 		AppointmentAddPageActions.enterPatientName(patntAppnmntData.get("patient_name"));
 		AppointmentAddPageActions.enterMobileNumber(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.enterEmailAddress(patntAppnmntData.get("email"));
@@ -330,7 +330,7 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 
 		logger.log(Status.PASS, VALIDATE_AUTO_SELECT_PATIENT_FROM_SUGGESTION); // Status
 
-		DoctorDashBoardPageActions.clickonAppointmentAdd();
+		BaseClass.openAddAppointmentPage();
 		AppointmentAddPageActions.autoSelectMobile(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.getTextPatientMobile(patntAppnmntData.get("patient_mobile"));
 		AppointmentAddPageActions.getTextPatientName(patntAppnmntData.get("patient_name"));
@@ -349,8 +349,9 @@ public class AppointmentAddEConsultTestCase extends BaseClass {
 	@Test(groups = { "Smoke", "Regression", "Sanity",
 			"Functional" }, enabled = true, description = "Verify Appointment Deletion", priority = 9)
 	public void deleteAppointment() {
+		
 //		CommonPageActions.selectClinicFrmHeader(patntAppnmntData.get("clinicLocation"));
-		DoctorDashBoardPageActions.clickOnAppListBtn();
+		BaseClass.openAddAppointmentPage();
 		AppointmentsLisitngPageActions.enterToDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.enterFromDate(patntAppnmntData.get("appointmentDate"));
 		AppointmentsLisitngPageActions.clickOnSearchBtn();

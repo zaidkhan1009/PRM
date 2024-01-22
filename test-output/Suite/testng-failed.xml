@@ -6,6 +6,7 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="tests.DiagnosticTestsTestCase">
         <methods>
           <include name="configReport"/>
@@ -15,6 +16,16 @@
           <include name="checkedDiagnosticsAddUi"/>
         </methods>
       </class> <!-- tests.DiagnosticTestsTestCase -->
+=======
+      <class name="tests.EventTestCase">
+        <methods>
+          <include name="verifyDoctorFilterWithDateFilterOnEventList"/>
+          <include name="configReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.EventTestCase -->
+>>>>>>> umar
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

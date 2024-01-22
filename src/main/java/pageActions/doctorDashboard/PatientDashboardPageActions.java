@@ -139,6 +139,7 @@ public class PatientDashboardPageActions extends BaseClass {
 	public static void clickOnWorkDoneAdd() {
 		BaseClass.waitForElementVisibility(patientDashboardPage.getWorkDoneAddBtn(), 4000);
 		patientDashboardPage.getWorkDoneAddBtn().click();
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
 	}
 
@@ -205,6 +206,7 @@ public class PatientDashboardPageActions extends BaseClass {
 	}
 
 	public static void clickOnTreatmentPlanAddBtn() {
+		BaseClass.waitForPageLoad();
 		BaseClass.waitForSpinnerToDisappear();
 		BaseClass.waitForElementVisibility(patientDashboardPage.getTreatmentPlanAddBtn(), 4000);
 //		BaseClass.waitForModalBackdropToDisappear();
@@ -214,7 +216,8 @@ public class PatientDashboardPageActions extends BaseClass {
 			throw new RuntimeException(e);
 		}
 		patientDashboardPage.getTreatmentPlanAddBtn().click();
-		driver.navigate().refresh();
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 //	public static void clickOnTreatmentPlanAddBtn() {
@@ -249,6 +252,7 @@ public class PatientDashboardPageActions extends BaseClass {
 		BaseClass.waitForSpinnerToDisappear();
 //		BaseClass.waitForPageToBecomeActive();
 //		BaseClass.waitForPageLoad();
+		BaseClass.waitForUIWidgetOverlayToDisappear();
 		BaseClass.waitForElementToBeClickable(patientDashboardPage.getAppOnPdList());
 		patientDashboardPage.getAppOnPdList().click();
 	}
@@ -331,6 +335,8 @@ public class PatientDashboardPageActions extends BaseClass {
 		BaseClass.waitForPageLoad();
 		BaseClass.WaitTillElementIsPresent(patientDashboardPage.getLabWorkOrderBtn());
 		patientDashboardPage.getLabWorkOrderBtn().click();
+		BaseClass.waitForPageLoad();
+		BaseClass.waitForSpinnerToDisappear();
 	}
 
 	/*---------------------reusable method-----------------------*/
